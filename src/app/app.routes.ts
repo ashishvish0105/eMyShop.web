@@ -7,6 +7,7 @@ import { ResetPassword } from './Auth/components/reset-password/reset-password';
 import { OTPVerificationComponent } from './Auth/components/otpverification/otpverification.component';
 import { MainRestaurant } from './stores/restorent/main-restaurant/main-restaurant';
 import { MainLayout } from './shared/layout/main-layout/main-layout';
+import { UploadProduct } from './stores/restorent/components/upload-product/upload-product';
 
 export const routes: Routes = [
   {
@@ -59,6 +60,13 @@ export const routes: Routes = [
         path: 'restorent',
         component: MainRestaurant,
         title: 'main restaurant page',
+        children: [
+          {
+            path: 'upload-product',
+            component: UploadProduct,
+            title: 'upload product page',
+          },
+        ],
       },
     ],
   }
