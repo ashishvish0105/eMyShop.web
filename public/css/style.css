@@ -1,0 +1,34 @@
+/* Tailwind input — used by the CLI to generate `public/css/output.css` */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add project-wide custom styles below */
+
+:root {
+    --color-primary: #13ec37;
+}
+
+
+/* Fallback utilities for `primary` (keeps template classes semantic) */
+
+.bg-primary {
+    background-color: var(--color-primary);
+}
+
+.text-primary {
+    color: var(--color-primary);
+}
+
+.focus\:ring-primary:focus {
+    --tw-ring-color: color-mix(in oklab, var(--color-primary) 50%, transparent);
+}
+
+
+/* escaped class name to match Tailwind-style `shadow-primary/20` utility */
+
+.shadow-primary\/20 {
+    --tw-shadow-color: color-mix(in oklab, var(--color-primary) 20%, transparent);
+    box-shadow: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+}
