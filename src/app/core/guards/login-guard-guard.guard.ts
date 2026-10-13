@@ -24,6 +24,7 @@ export const loginGuardGuardGuard: CanActivateFn = (route, state) => {
   //     isauth =res;
   //   });
   if (currentUserObjData) {
+    debugger;
     if (!currentUserObjData.password && !currentUserObjData.password) {
       if (
         currentUserObjData.password != '' &&
@@ -32,6 +33,7 @@ export const loginGuardGuardGuard: CanActivateFn = (route, state) => {
         router.navigate(['/']);
       }
     }else{
+      debugger;
       router.navigate(['/','home','product']);
     }
   }  return true;

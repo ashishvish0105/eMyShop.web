@@ -20,6 +20,17 @@ export interface ILoginPayload {
 export interface ILoginApiResponseModel extends IApiResponseModel<ILoginPayload> {}
 
 export interface Ilogintype {
+  superAdmin:string;
+  admin: string;
+  manager: string;
+  productManager: string;
+  orderManager: string;
+  inventoryManager: string;
+  customerSupport: string;
+  accountant: string;
+  deliveryManager: string;
   customer: string;
   seller: string;
 }
+
+

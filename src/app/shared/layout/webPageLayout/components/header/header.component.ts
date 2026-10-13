@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { access } from 'fs';
 import { logintype } from '../../../../../constVariable/user.const';
+import { localStorageObjName } from '../../../../../constVariable/localStorageObjName.const';
 import { LocalStarageService } from '../../../../../services/local-starage.service';
 import { PhaceOneHeaderComponent } from './components/phace-one-header/phace-one-header.component';
 
@@ -49,8 +49,21 @@ export class HeaderComponent implements OnInit {
   constructor(private _LocalStarageService:LocalStarageService) {}
 
   ngOnInit() {
-    const userType = this._LocalStarageService.getLocalStorage('CurrentUser');
-    switch (userType.loginType) {
+    const userRoles: unknown = this._LocalStarageService.getObjLocalStorage(
+      localStorageObjName.userRoles,
+    );
+    const legacyUser = this._LocalStarageService.getObjLocalStorage(
+      localStorageObjName.currentUserObj,
+    );
+    const loginType = Array.isArray(userRoles)
+      && userRoles.some(
+        (role): role is string =>
+          typeof role === 'string' && role.toLowerCase() === logintype.customer,
+      )
+      ? logintype.customer
+      : legacyUser?.loginType;
+
+    switch (loginType) {
       case logintype.seller:
         this.displayMenu = this.menuNameList.filter((menu: any) => {
           if (menu.access === logintype.seller) {

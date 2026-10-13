@@ -15,7 +15,7 @@ export class SimpleHeaderComponent {
   logoName: string = 'eMyshop';
   @ViewChild('headerScroll') headerScroll!: ElementRef;
   activeItemName: string = '';
-  // menuName:string[]=["Home","Pages","Project","Models","Casting","Blog","Contact"];
+
   menuNameList: any = [
     {
       menuId: 1,

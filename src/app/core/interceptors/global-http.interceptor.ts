@@ -13,6 +13,7 @@ export const globalHttpInterceptor: HttpInterceptorFn = (request, next) => {
   const storageService = inject(LocalStarageService);
   const token = storageService.getObjLocalStorage(localStorageObjName.accessToken);
   const isPublicAuthRequest = /\/auth\/(login|register)\/?$/i.test(request.url);
+
   const authenticatedRequest = token && request.url.startsWith(environment.BaseUrl) && !isPublicAuthRequest
     ? request.clone({ setHeaders: { Authorization: `Bearer ${token}` } })
     : request;

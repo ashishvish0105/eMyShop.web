@@ -57,6 +57,7 @@ export class LoginComponent implements OnInit {
       password: this.login.get('password')?.value
     }).subscribe({
       next: (response) => {
+        debugger;
         if (!response.payload?.accessToken) {
           this.snackBar.open(response.message || 'Login failed. Please check your credentials.', 'Close', {
             duration: 5000
@@ -66,8 +67,13 @@ export class LoginComponent implements OnInit {
 
         this.localStarageService.setObjLocalStorage(localStorageObjName.accessToken, response.payload.accessToken);
         const roles = response.payload.user?.roles ?? [];
+
         this.localStarageService.setObjLocalStorage(localStorageObjName.userRoles, roles);
+
         const returnUrl = this.activatedRoute.snapshot.queryParamMap.get('returnUrl');
+
+        console.log('Return URL:', returnUrl);
+debugger;
         if (!this.authGuardService.login(roles, returnUrl ?? undefined)) {
           this.snackBar.open('Your account does not have a supported role. Please contact an administrator.', 'Close', {
             duration: 5000

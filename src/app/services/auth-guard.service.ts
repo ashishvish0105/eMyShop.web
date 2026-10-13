@@ -28,19 +28,27 @@ export class AuthGuardService {
   constructor() {}
 
   login(roles: string[], returnUrl?: string): boolean {
-    this.autharize.next(true);
-    const normalizedRoles = roles.map(role => role.toLowerCase());
+    const normalizedRoles = roles.map((role) => role.trim().toLowerCase());
+
     if (normalizedRoles.some(role => SELLER_ROLES.has(role))) {
-      const safeReturnUrl = returnUrl?.startsWith('/seller-Account') ? returnUrl : '/seller-Account/dashboard';
+      this.autharize.next(true);
+      const safeReturnUrl = returnUrl?.startsWith('/seller-Account')
+        ? returnUrl
+        : '/seller-Account/dashboard';
       this.router.navigateByUrl(safeReturnUrl);
       return true;
     }
 
     if (normalizedRoles.includes(logintype.customer)) {
-      this.router.navigate(['/', 'home']);
+      this.autharize.next(true);
+      const safeReturnUrl = returnUrl?.startsWith('/home')
+        ? returnUrl
+        : '/home/products';
+      this.router.navigateByUrl(safeReturnUrl);
       return true;
     }
 
+    this.autharize.next(false);
     this.localStarageService.removeItemLocalStorage(localStorageObjName.accessToken);
     this.localStarageService.removeItemLocalStorage(localStorageObjName.userRoles);
     this.router.navigate(['/login']);
