@@ -1,0 +1,41 @@
+.eMy-progressBar {
+    width: 100%;
+    .eMy-progressBar-top {
+        $progressfontSize: 14px;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+        .eMy-progressBar-top-left {
+            .eMy-progressBar-top-left-title {
+                font-size: $progressfontSize;
+                font-family: Inter;
+                line-height: 1.2;
+                color: #333;
+            }
+        }
+        .eMy-progressBar-top-right {
+            .eMy-progressBar-top-right-value {
+                font-size: calc($progressfontSize - 2px);
+                line-height: 1.2;
+                font-family: Inter;
+                color: #333;
+            }
+        }
+    }
+    .eMy-progress-status {
+        height: 10px;
+        background-color: #e0e0e0;
+        border-radius: 5px;
+        overflow: hidden;
+        width: 100%;
+        position: relative;
+        .eMy-progress-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background-color: black;
+        }
+    }
+}

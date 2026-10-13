@@ -1,0 +1,52 @@
+<app-section-title TitleName="Registeration" Description="if join our enverment and with more flexiable or more reable service we are providing you if few thinks"></app-section-title>
+<form class="mt-4" [formGroup]="registration" (ngSubmit)="register()" novalidate>
+    <div class="mb-3">
+        <label for="userName" class="form-label">UserName</label>
+        <input type="text" id="userName" formControlName="userName" class="form-control"
+            [class.is-invalid]="registration.controls.userName.touched && registration.controls.userName.invalid">
+        @if (registration.controls.userName.touched && registration.controls.userName.hasError('required')) {
+        <small class="validation-error">Username is required.</small>
+        } @else if (registration.controls.userName.touched && registration.controls.userName.hasError('maxlength')) {
+        <small class="validation-error">Username must be 100 characters or fewer.</small>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="registerEmail" class="form-label">Email </label>
+        <input type="email" id="registerEmail" formControlName="email" class="form-control"
+            [class.is-invalid]="registration.controls.email.touched && registration.controls.email.invalid">
+        @if (registration.controls.email.touched && registration.controls.email.hasError('required')) {
+        <small class="validation-error">Email is required.</small>
+        } @else if (registration.controls.email.touched && registration.controls.email.hasError('email')) {
+        <small class="validation-error">Enter a valid email address.</small>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="registerPassword" class="form-label">Password </label>
+        <input type="password" id="registerPassword" formControlName="password" class="form-control"
+            [class.is-invalid]="registration.controls.password.touched && registration.controls.password.invalid">
+        @if (registration.controls.password.touched && registration.controls.password.hasError('required')) {
+        <small class="validation-error">Password is required.</small>
+        } @else if (registration.controls.password.touched && registration.controls.password.hasError('minlength')) {
+        <small class="validation-error">Password must be at least 8 characters.</small>
+        } @else if (registration.controls.password.touched && registration.controls.password.hasError('maxlength')) {
+        <small class="validation-error">Password must be 128 characters or fewer.</small>
+        } @else if (registration.controls.password.touched && registration.controls.password.hasError('pattern')) {
+        <small class="validation-error">Password must include a number and a special character.</small>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="confirmPassword" class="form-label">Confirm Password </label>
+        <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control"
+            [class.is-invalid]="registration.controls.confirmPassword.touched && (registration.controls.confirmPassword.invalid || registration.hasError('passwordMismatch'))">
+        @if (registration.controls.confirmPassword.touched && registration.controls.confirmPassword.hasError('required')) {
+        <small class="validation-error">Confirm password is required.</small>
+        } @else if (registration.controls.confirmPassword.touched && registration.hasError('passwordMismatch')) {
+        <small class="validation-error">Passwords do not match.</small>
+        }
+    </div>
+    <app-button buttonName="asBtnPrimary" buttonType="submit" buttonText="Sing up"></app-button>
+</form>
+<div class="d-flex align-items-center pt-4">
+    <p class="mb-0">you are allready register to click here</p>
+    <a class="ms-3 text-capitalize" routerLink="/auth/login">sign in</a>
+</div>

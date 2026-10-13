@@ -1,0 +1,60 @@
+<header #headerScroll>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="brand-name comman-navbar-item comman-font">
+                <span class="brand-logo" routerLink="/">{{ logoName }}</span>
+            </div>
+            <div class="collapse navbar-collapse comman-font" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    @for (item of displayMenu; track $index) {
+                    <li class="nav-item" [class.active]="activeItemName === item.routerLink" (click)="activeMenuItem(item.routerLink)">
+                        <span class="nav-link">{{ item.menuName}}</span>
+                    </li>
+                    }
+                </ul>
+            </div>
+            <div class="profile-box-wrapper">
+                <div class="profile-box comman-navbar-item comman-font">
+                    <button class="btn btn-icon" (click)="toggleProfileDetail()">
+                        <i class="fa-solid fa-user"></i>
+                    </button>
+                </div>
+                <ng-container *ngTemplateOutlet="profileLoginDetail"></ng-container>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<ng-template #profileLoginDetail>
+    @if(isProfileModelOpen){
+    <div class="profile-login-detail">
+        <div class="profile-login-relative">
+            <div class="profile-login-detail-header">
+                <h5 class="profile-lable">Profile Details</h5>
+                <button class="btn btn-icon close-btn" (click)="toggleProfileDetail()">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+            </div>
+            <div class="profile-detail-with-logout">
+                <div class="profile-details">
+                    <span class="profile-image">
+                        {{ userDetail.userName.toString().split('')[0] }}
+                        <!-- <img src="/cscImage/csc-1.webp" alt=""> -->
+                    </span>
+                    <!-- <div class="profile-info-with-btn"> -->
+                    <div class="profile-info">
+                        <h6 class="profile-title">{{ userDetail.userName }}</h6>
+                        <!-- <p class="profile-roll">{{ userDetail.userRoll }}</p> -->
+                    </div>
+                    <app-button buttonName="asBtnPrimary" [smallSize]="true" buttonText="Sign Out" (click)="userLogOute()"></app-button>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="btn-group d-flex gap-3">
+            <app-button buttonName="asBtnPrimary" class="text-nowrap" [smallSize]="true" buttonText="View Profile" routerLink="/user/profile"></app-button>
+            <app-button buttonName="asBtnPrimary" [smallSize]="true" buttonText="Log Out" (click)="userLogOute()"></app-button>
+        </div> -->
+    </div>
+    }
+
+</ng-template>

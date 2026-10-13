@@ -1,0 +1,75 @@
+<section class="mb-4">
+    <!-- <app-icon-with-section-title></app-icon-with-section-title> -->
+</section>
+
+
+<section class="section eshop-spaceB-50">
+    <div class="row form-group flex-wrap">
+        <div class=" col-12 align-self-center">
+            <!-- <app-section-title TitleName="We are provices" Description="here ve are provide verius type of cyber and goverment yojana so on."></app-section-title> -->
+            <div class="row">
+                <div class="col-md-12">
+                    <form [formGroup]="servicesForm">
+                        <fieldset>
+                            <legend>Basic Infomation :</legend>
+                            <div class="row basicInfo mx-0">
+                                <div class="col-md-4 mb-3">
+                                    <label for="Name" class="form-label">UserName <span class="required">*</span></label>
+                                    <input type="text" id="Name" formControlName="UserName" class="form-control" [class.requiredInput]="this.servicesForm.get('UserName')?.invalid && IsValidForm" placeholder="Please enter userName"> @if(this.servicesForm.get('UserName')?.invalid
+                                    && IsValidForm){
+                                    <p class="text-capitalize" style="font-size: 16px;color: red;">please enter email</p>
+                                    }
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="Name" class="form-label">Email </label>
+                                    <input type="email" id="Name" formControlName="Email" class="form-control" placeholder="Please inter Email">
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="Name" class="form-label">Select Service <span class="required">*</span></label>
+                                    <select class="form-control text-capitalize" formControlName="ServicesType" [class.requiredInput]="this.servicesForm.get('ServicesType')?.invalid && IsValidForm">
+                                  <option value="0" [selected]="0 == SelectedServiceType">select services</option>
+                                    @for (item of serviceList; track $index) {
+                                      <option [value]="item.servicesId" [selected]="item.servicesId == SelectedServiceType">{{ item.ServicesName }}</option>
+                                    }
+                                </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                        @if(IsAddServicesForm() ==true) {
+                        <fieldset>
+                            <legend>{{ formHeaadingName }} Information :</legend>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="firstName" class="form-label">First Name </label>
+                                    <input type="text" id="firstName" formControlName="FirstName" class="form-control" [class.requiredInput]="this.servicesForm.get('FirstName')?.invalid && IsValidForm" placeholder="Please enter firstName" />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="MidelName" class="form-label">middle Name </label>
+                                    <input type="text" id="firstName" formControlName="MiddleName" class="form-control" [class.requiredInput]="this.servicesForm.get('MiddleName')?.invalid && IsValidForm" placeholder="Please enter middleName">
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="firstName" class="form-label">Last Name </label>
+                                    <input type="text" id="firstName" formControlName="LastName" class="form-control" [class.requiredInput]="this.servicesForm.get('LastName')?.invalid && IsValidForm" placeholder="Please enter lastName">
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="MidelName" class="form-label">Mobile no </label>
+                                    <input type="text" id="firstName" formControlName="MobileNo" class="form-control" [class.requiredInput]="this.servicesForm.get('MobileNo')?.invalid && IsValidForm" placeholder="Please enter middleName">
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="firstName" class="form-label">Adrress </label>
+                                    <input type="text" id="firstName" formControlName="Address" class="form-control" [class.requiredInput]="this.servicesForm.get('Address')?.invalid && IsValidForm" placeholder="Please enter lastName">
+                                </div>
+                                <div class="col-12 mb-5">
+                                    <label for="message" class="form-label">Message</label>
+                                    <textarea id="Message" class="form-control" formControlName="Message"></textarea>
+                                </div>
+                            </div>
+                            <app-button buttonName="asBtnPrimary" buttonType="submit" (click)="addServicesFormSubmit()" buttonText="Submit"></app-button>
+                        </fieldset>
+                        }
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

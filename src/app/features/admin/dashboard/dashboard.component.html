@@ -1,0 +1,33 @@
+<div class="eMy-dashboard-containt">
+    <div class="eMy-section-title-withbuttons-containt">
+        <!-- <app-section-title-withbuttons></app-section-title-withbuttons> -->
+        <app-section-title-withbuttons sectionTitle="Dashboard Overview" description="Monitor your store performance in real-time."></app-section-title-withbuttons>
+    </div>
+    <div class="eMy-summary-card-container">
+        @for (item of summaryCards; track $index) {
+        <app-summary-card [SummaryTitle]="item.title" [SummaryValue]="item.value" [currencyType]="item.currencyType" [perstageWiseTrand]="item.perstageWiseTrand" [iconName]="item.iconName" [iconBgColorCode]="item.iconBgColorCode"></app-summary-card>
+        }
+    </div>
+    <div class="eMy-summary-card-container">
+        <div class="eMy-summary-card-left">
+            <app-title-with-item titleName="Revenue Trends">
+                <app-line-chart slot="item"></app-line-chart>
+            </app-title-with-item>
+        </div>
+        <div class="eMy-summary-card-right">
+            <app-title-with-item titleName="Top Categories">
+                <div slot="item" class="eMy-proressBarGroup">
+                    <app-progress-bar [progressPercentage]="40" progressBgColor="#004ac6" progressTitle="Electronics"></app-progress-bar>
+                    <app-progress-bar [progressPercentage]="80" progressBgColor="#b4c5ff" progressTitle="Apparel"></app-progress-bar>
+                    <app-progress-bar [progressPercentage]="50" progressBgColor="#545f73" progressTitle="Home & Kitchen"></app-progress-bar>
+                </div>
+                <div slot="item" class="eMy-unlockInventoryDetailed eMy-mt-6">
+                    <h4 class="eMy-lable">Unlock Detailed Inventory Insights & Forecasts</h4>
+                </div>
+            </app-title-with-item>
+        </div>
+    </div>
+    <div class="eMy-table-with-title-container">
+        <app-table-with-title titleName="Recent Orders" [tableColumnNamas]="tableColumnNamas" [tableData]="orders"></app-table-with-title>
+    </div>
+</div>

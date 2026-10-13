@@ -1,0 +1,103 @@
+.heading-box {
+    // border-radius: 20px;
+    // border: 1px solid red;
+    margin-bottom: 30px;
+    // padding: 15px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    .heading-name {
+        padding: 0 45px;
+        margin-bottom: 0;
+        text-transform: capitalize;
+        font-size: 36px;
+        font-weight: 500;
+        line-height: 46px;
+        display: inline-block;
+        position: relative;
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 5px;
+            width: 30px;
+            border-radius: 5px;
+            background-color: #384959;
+            z-index: 1;
+        }
+        &::after {
+            left: auto;
+            right: 0;
+        }
+    }
+}
+
+.table-box {
+    border-radius: 20px;
+    overflow: hidden;
+    // border: 1px solid gray;
+    .as-table {
+        thead {
+            background-color: #384959;
+            color: white;
+            height: 50px;
+            tr {
+                border-color: #384959;
+            }
+        }
+        width: 100%;
+        tr {
+            border-bottom: 1px solid gray;
+            td,
+            th {
+                font-size: 16px;
+                line-height: 40px;
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            th {
+                font-weight: 500;
+                font-size: 18px;
+                letter-spacing: 1px;
+            }
+        }
+    }
+}
+
+.searching-box {
+    max-width: 400px;
+    width: 100%;
+    position: relative;
+    margin-left: auto;
+    .icon-btn {
+        display: inline-block;
+        border: none;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        background-color: transparent;
+        font-size: 20px;
+        padding-left: 15px;
+        color: #384959;
+    }
+    .search-input {
+        border: none;
+        border-bottom: 1px solid #384959;
+        width: 100%;
+        font-size: 16px;
+        line-height: 45px;
+        padding-left: 50px;
+        padding-right: 15px;
+        color: gray;
+        &:focus {
+            outline: none;
+        }
+        &::placeholder {
+            color: #384959;
+        }
+    }
+}

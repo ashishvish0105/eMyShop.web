@@ -1,0 +1,47 @@
+.outer-style {
+    border: 1px solid gray;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 15px 30px;
+    display: inline-block;
+    max-width: 500px;
+    width: 100%;
+}
+
+.app-boxStyle {
+    .app-title {
+        font-weight: 500;
+        letter-spacing: 0.5px;
+    }
+    .top-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 30px;
+        border-bottom: 1px solid gray;
+        padding-bottom: 8px;
+    }
+}
+
+.as-btn {
+    border: 1px solid black;
+    text-transform: capitalize;
+    &.btn-sm {
+        padding: 5px 15px;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+}
+
+.barWithAddButton {
+    &.outer-style {
+        display: block;
+        max-width: unset;
+    }
+}
+
+.box-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}

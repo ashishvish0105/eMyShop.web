@@ -1,0 +1,13 @@
+<div class="eMy-progressBar">
+    <div class="eMy-progressBar-top">
+        <div class="eMy-progressBar-top-left">
+            <span class="eMy-progressBar-top-left-title">{{progressTitle}}</span>
+        </div>
+        <div class="eMy-progressBar-top-right">
+            <span class="eMy-progressBar-top-right-value">{{ progressNumber ??progressPercentage | number:'1.0-0'  }}</span>
+        </div>
+    </div>
+    <div class="eMy-progress-status">
+        <span class="eMy-progress-fill" [style.backgroundColor]="progressBgColor" [style.width]="progressPercentage +'%'"></span>
+    </div>
+</div>

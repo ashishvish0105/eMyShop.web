@@ -1,0 +1,18 @@
+@switch (infoWithImg) { @default {
+<div class="infoWithImgHover">
+    <div class="image-box">
+        <img [src]="dataSourcePayload.itemImagePath" alt="Not available category img">
+    </div>
+    <div class="info-box">
+        <h6 class="imageTilte">{{ dataSourcePayload.itemName }}</h6>
+        <p class="imageDescription">{{ dataSourcePayload.itemdescription}}</p>
+        <div class="d-flex gap-3 mt-auto">
+            <!-- <button class="editButton" (click)="editButton()"> edit</button>
+            <button class="editButton" (click)="DeleteButton()"> Delete</button> -->
+            <app-button buttonName="asBtnPrimary" (click)="editButton(dataSourcePayload)" [smallSize]="true" buttonText="edit"></app-button>
+            <app-button buttonName="asBtnDanger" (click)="deleteButton(dataSourcePayload)" [smallSize]="true" buttonText="delete"></app-button>
+        </div>
+    </div>
+</div>
+
+} }

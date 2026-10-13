@@ -1,0 +1,471 @@
+<div class="container-fluid py-3">
+    <app-breadcumb breadcumbType="withoutTitle" CurrentPathTitle="Preview Product"></app-breadcumb>
+    <div class="d-flex justify-content-between align-items-start mb-3">
+        <div>
+
+            <div class="d-flex align-items-center gap-2">
+                <h1 class="h5 mb-0 fw-semibold">
+                    {{ product.name }}
+                </h1>
+
+                <span class="badge bg-primary-subtle text-secondary px-3 py-2 fw-normal">
+          {{ product.status }}
+        </span>
+            </div>
+
+            <p class="small text-secondary mb-0 mt-1">
+                Last updated Aug 8, 2026
+            </p>
+        </div>
+
+        <div class="d-flex align-items-center gap-2">
+
+            <button type="button" class="btn btn-outline-secondary" (click)="duplicateProduct()">
+        <span class="me-1">⧉</span>
+        Duplicate
+      </button>
+
+            <button type="button" class="btn btn-outline-secondary">
+        ...
+      </button>
+
+            <button type="button" class="btn btn-primary" (click)="editProduct()">
+        <span class="me-1">✎</span>
+        Edit Product
+      </button>
+
+        </div>
+    </div>
+
+    <div class="row g-3">
+
+        <!-- MEDIA -->
+        <div class="col-12 col-lg-5">
+
+            <div class="card h-100">
+                <div class="card-body p-3 d-flex flex-column">
+
+                    <div class="product-main-image position-relative border rounded overflow-hidden">
+
+                        <img [src]="images()[selectedImage()].url" [alt]="images()[selectedImage()].alt" class="img-fluid product-image" />
+
+                        <button type="button" class="btn btn-light btn-sm rounded-circle position-absolute top-0 end-0 m-2 shadow-sm">
+              ⌕
+            </button>
+
+                        <span class="badge bg-white text-secondary position-absolute bottom-0 end-0 m-2 shadow-sm">
+              {{ selectedImage() + 1 }} / {{ images().length }}
+            </span>
+
+                    </div>
+
+
+                    <!-- Thumbnails -->
+
+                    <div class="d-flex gap-2 mt-2 flex-wrap">
+
+                        @for (image of images(); track image.id; let i = $index) {
+
+                        <button type="button" class="btn p-1 product-thumbnail" [class.border-primary]="selectedImage() === i" [class.border-2]="selectedImage() === i" (click)="selectImage(i)">
+
+                <img
+                  [src]="image.url"
+                  [alt]="image.alt"
+                  class="w-100 h-100 object-fit-cover rounded"
+                />
+
+              </button> }
+
+                        <button type="button" class="btn btn-outline-secondary product-thumbnail" (click)="addProductImage()">
+              ▧
+            </button>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT INFO -->
+        <div class="col-12 col-lg-7">
+
+            <div class="card h-100">
+                <div class="card-body p-3">
+
+                    <!-- Description -->
+
+                    <div>
+                        <h3 class="h6 fw-medium mb-2">
+                            Description
+                        </h3>
+
+                        <p class="text-secondary mb-0">
+                            {{ product.description }}
+                        </p>
+                    </div>
+
+
+                    <!-- Rating -->
+
+                    <div class="d-flex align-items-center gap-2 mt-3">
+
+                        <div class="d-flex gap-1 text-warning fs-5">
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                        </div>
+
+                        <strong class="small">
+              {{ product.rating }}
+            </strong>
+
+                        <a href="javascript:void(0)" class="small text-primary text-decoration-none">
+              {{ product.reviews }} Reviews
+            </a>
+
+                    </div>
+
+
+                    <hr class="my-3">
+
+
+                    <!-- Pricing / Organization -->
+
+                    <div class="row g-4">
+
+                        <!-- Pricing -->
+
+                        <div class="col-12 col-md-6">
+
+                            <label class="small text-secondary fw-medium d-block mb-2">
+                PRICING
+              </label>
+
+                            <div class="d-flex align-items-center gap-2">
+
+                                <strong>
+                  ${{ product.price.toFixed(2) }}
+                </strong>
+
+                                <del class="small text-secondary">
+                  ${{ product.oldPrice.toFixed(2) }}
+                </del>
+
+                                <span class="badge bg-danger-subtle text-danger">
+                  {{ product.discount }}% OFF
+                </span>
+
+                            </div>
+
+                            <div class="small text-secondary mt-2">
+                                Cost per item: ${{ product.costPerItem.toFixed(2) }}
+
+                                <a href="javascript:void(0)" class="text-primary text-decoration-none ms-2">
+                  View margin
+                </a>
+                            </div>
+
+                        </div>
+
+
+                        <!-- Organization -->
+
+                        <div class="col-12 col-md-6">
+
+                            <label class="small text-secondary fw-medium d-block mb-2">
+                ORGANIZATION
+              </label>
+
+                            <div class="d-flex justify-content-between small mb-2">
+                                <span class="text-secondary">
+                  Category
+                </span>
+
+                                <strong class="fw-medium">
+                  {{ product.category }}
+                </strong>
+                            </div>
+
+                            <div class="d-flex justify-content-between small mb-2">
+                                <span class="text-secondary">
+                  Brand
+                </span>
+
+                                <strong class="fw-medium">
+                  {{ product.brand }}
+                </strong>
+                            </div>
+
+                            <div class="d-flex flex-wrap gap-1 mt-2">
+
+                                @for (tag of tags; track tag.name) {
+
+                                <span class="badge border text-secondary bg-white px-3 py-2 fw-normal">
+                    {{ tag.name }}
+
+                    <button
+                      type="button"
+                      class="btn btn-sm p-0 ms-1 text-secondary border-0">
+                      ×
+                    </button>
+                  </span> }
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ====================================================== -->
+    <!-- INVENTORY / SALES -->
+    <!-- ====================================================== -->
+
+    <div class="row g-3 mt-0">
+
+        <!-- INVENTORY -->
+
+        <div class="col-12 col-md-6">
+
+            <div class="card h-100">
+                <div class="card-body p-3">
+
+                    <h3 class="small fw-medium text-secondary mb-3">
+                        INVENTORY DETAILS
+                    </h3>
+
+                    <div class="row small mb-2">
+                        <span class="col-3 text-secondary">
+              SKU
+            </span>
+
+                        <strong class="col-9 fw-medium">
+              {{ product.id }}
+            </strong>
+                    </div>
+
+                    <div class="row small mb-2">
+                        <span class="col-3 text-secondary">
+              Barcode
+            </span>
+
+                        <strong class="col-9 fw-medium">
+              {{ product.barcode }}
+            </strong>
+                    </div>
+
+                    <div class="row small">
+                        <span class="col-3 text-secondary">
+              Available
+            </span>
+
+                        <strong class="col-9 fw-medium text-success">
+              <span class="d-inline-block rounded-circle bg-success me-1"
+                    style="width: 5px; height: 5px;">
+              </span>
+
+              {{ product.available }} in stock
+            </strong>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- SALES CHANNELS -->
+
+        <div class="col-12 col-md-6">
+
+            <div class="card h-100">
+                <div class="card-body p-3">
+
+                    <h3 class="small fw-medium text-secondary mb-3">
+                        SALES CHANNELS
+                    </h3>
+
+
+                    <!-- Online Store -->
+
+                    <div class="d-flex align-items-center mb-3">
+
+                        <div class="bg-light rounded p-2 me-3 fs-4 text-secondary">
+                            ▦
+                        </div>
+
+                        <div class="flex-grow-1">
+                            <strong class="d-block small fw-medium">
+                Online Store
+              </strong>
+
+                            <span class="small text-secondary">
+                {{ onlineStoreVisible() ? 'Visible' : 'Hidden' }}
+              </span>
+                        </div>
+
+                        <app-button buttonName="switchBtn"></app-button>
+
+                    </div>
+
+
+                    <!-- POS -->
+
+                    <div class="d-flex align-items-center">
+
+                        <div class="bg-light rounded p-2 me-3 fs-4 text-secondary">
+                            ▤
+                        </div>
+
+                        <div class="flex-grow-1">
+                            <strong class="d-block small fw-medium">
+                Point of Sale
+              </strong>
+
+                            <span class="small text-secondary">
+                {{ pointOfSaleVisible() ? 'Visible' : 'Hidden' }}
+              </span>
+                        </div>
+
+                        <app-button buttonName="switchBtn"></app-button>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ====================================================== -->
+    <!-- TABS -->
+    <!-- ====================================================== -->
+
+    <ul class="nav nav-tabs mt-3">
+
+        <li class="nav-item">
+            <button class="nav-link active">
+        Specifications
+      </button>
+        </li>
+
+        <li class="nav-item">
+            <button class="nav-link">
+        Inventory History
+      </button>
+        </li>
+
+        <li class="nav-item">
+            <button class="nav-link">
+        Activity Timeline
+      </button>
+        </li>
+
+    </ul>
+
+
+    <!-- ====================================================== -->
+    <!-- BOTTOM CONTENT -->
+    <!-- ====================================================== -->
+
+    <div class="row g-3 mt-0">
+
+        <!-- SPECIFICATIONS -->
+
+        <div class="col-12 col-lg-8">
+
+            <div class="card">
+
+                @for (specification of specifications; track specification.label) {
+
+                <div class="row border-bottom py-2 px-3 small">
+
+                    <span class="col-4 col-md-3 text-secondary">
+              {{ specification.label }}
+            </span>
+
+                    <strong class="col-8 col-md-9 fw-medium">
+              {{ specification.value }}
+            </strong>
+
+                </div>
+
+                }
+
+            </div>
+
+        </div>
+
+
+        <!-- STOCK SUMMARY -->
+
+        <div class="col-12 col-lg-4">
+
+            <div class="card h-100">
+                <div class="card-body p-3">
+
+                    <h3 class="small fw-semibold mb-3">
+                        Stock Summary
+                    </h3>
+
+                    <app-progress-bar progressTitle="Available" [progressNumber]="product.available" [progressPercentage]="availablePercentage" progressBgColor="#18bd82">
+                    </app-progress-bar>
+
+                    <app-progress-bar progressTitle="Sold" [progressNumber]="product.sold" [progressPercentage]="soldPercentage" progressBgColor="#18bd82">
+                    </app-progress-bar>
+
+                    <app-progress-bar progressTitle="Reserved" [progressNumber]="product.reserved" [progressPercentage]="reservedPercentage" progressBgColor="#f39c12">
+                    </app-progress-bar>
+
+
+                    <hr class="my-3">
+
+
+                    <div class="d-flex justify-content-between small">
+
+                        <span class="text-secondary">
+              Total Lifetime
+            </span>
+
+                        <strong>
+              {{ totalLifetime }}
+            </strong>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="emy-btn-group mt-4">
+        <app-title-with-item sectionTitleName="withoutTitle" class="d-block mt-4">
+            <ng-container slot="withoutTitle">
+                <div class="row justify-content-end">
+                    <div class="col-auto">
+                        <app-button (click)="onPreviewPage()" buttonText="cancel" buttonName="asBtnSecondry"></app-button>
+                    </div>
+                    <div class="col-auto">
+                        <app-button (click)="onPublishProduct()" buttonText="Publish product" buttonName="asBtnPrimary"></app-button>
+                    </div>
+                </div>
+            </ng-container>
+        </app-title-with-item>
+    </div>
+
+</div>

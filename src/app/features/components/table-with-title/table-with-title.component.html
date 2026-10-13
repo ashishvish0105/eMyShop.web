@@ -1,0 +1,103 @@
+<div class="eMy-titleWithtableGroup">
+    <div class="eMy-titleWithtable" *ngIf="titleName.toString().length">
+        <h4 class="eMy-title">{{ titleName }}</h4>
+    </div>
+
+    <div class="eMy-table" [class]="tableClass">
+        <table>
+            <thead>
+                <tr>
+                    <th class="eMy-textAlignCenter"><input class="eMy-checkbox" type="checkbox"></th>
+                    @for (col of tableColumnNamas; track $index) {
+                    <th>{{ col.header }}</th>
+                    }
+                    <th class="eMy-textAlignCenter">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (row of paginatedData; track row.productId) {
+                <tr>
+                    <th class="eMy-textAlignCenter">
+                        <input class="eMy-checkbox" type="checkbox">
+                    </th>
+
+                    @for (col of tableColumnNamas; track col.field) {
+                    <td>
+
+                        @if (col.type === 'text') { {{ getNestedValue(row, col.field) }} } @if (col.type === 'product') {
+                        <div class="product-group cutommer-group">
+                            <span class="short-name">
+              {{ getNestedValue(row, col.field)?.charAt(0) }}
+            </span>
+
+                            <div class="cutommer-details">
+                                <h6 class="cuttomer-name">
+                                    {{ getNestedValue(row, col.field) }}
+                                </h6>
+
+                                <p class="description">
+                                    SKU: {{ row.sku || '-' }}
+                                </p>
+                            </div>
+                        </div>
+                        } @if (col.type === 'currency') { ${{ getNestedValue(row, col.field)?.toFixed(2) }} } @if (col.type === 'status') {
+                        <span class="status">
+            {{ getNestedValue(row, col.field) }}
+          </span> }
+
+                    </td>
+                    }
+
+                    <td class="eMy-textAlignCenter">
+                        @if (showRowActions) {
+                        <button type="button" class="actionBtn" (click)="editRow.emit(row)" aria-label="Edit product">
+                            Edit
+                        </button>
+                        <button type="button" class="actionBtn" (click)="deleteRow.emit(row)" aria-label="Delete product">
+                            Delete
+                        </button>
+                        } @else {
+                        <button type="button" class="actionBtn" aria-label="Actions">
+                            <span class="material-symbols-outlined">more_vert</span>
+                        </button>
+                        }
+                    </td>
+                </tr>
+                } @empty {
+                <tr>
+                    <td [attr.colspan]="tableColumnNamas.length + 2" class="eMy-textAlignCenter">
+                        <p class="eMy-noDataFound">
+                            No data found
+                        </p>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    @if (totalCount > pageSize) {
+    <div class="eMy-pagination" aria-label="Table pagination">
+
+        <div class="eMy-pagination-summary">
+            Showing {{ totalCount > 0 ? ((currentPage - 1) * pageSize) + 1 : 0 }} - {{ mathMin(currentPage * pageSize, totalCount) }} of {{ totalCount }}
+        </div>
+
+        <div class="eMy-pagination-controls">
+            <button type="button" class="eMy-pagination-btn" [disabled]="currentPage === 1" (click)="prevPage()">
+        Prev
+      </button> @for (page of visiblePageNumbers; track page) { @if (totalPages > 4 && page === currentPage - 1 && page > 1) {
+            <span class="eMy-pagination-dots">...</span> }
+            <button type="button" class="eMy-pagination-btn eMy-page-number" [class.is-active]="page === currentPage" (click)="goToPage(page)">
+          {{ page }}
+        </button> } @if (totalPages > 4) {
+            <span class="eMy-pagination-dots">...</span> }
+
+            <button type="button" class="eMy-pagination-btn" [disabled]="currentPage === totalPages" (click)="nextPage()">
+        Next
+      </button>
+        </div>
+    </div>
+    }
+
+</div>

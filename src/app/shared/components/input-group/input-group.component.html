@@ -1,0 +1,326 @@
+@switch (inputLabelName) {
+
+
+<!-- ================================================= -->
+<!-- TEXT EDITOR -->
+<!-- ================================================= -->
+
+@case ("textEditor") {
+
+<div class="mb-3 form-group" [class.has-error]="showError">
+
+    <label [for]="labelText" class="form-label">{{ labelText }}</label>
+    <app-text-editor [textEditorContent]="inputValue" [disabled]="disabled" (valueChange)="textEditorChanged($event)">
+    </app-text-editor>
+
+
+    @if (showError) {
+    <div class="invalid-feedback d-block">
+        {{ errorMessage }}
+    </div>
+
+    }
+
+</div>
+}
+
+
+<!-- ================================================= -->
+<!-- ONLY TEXT -->
+<!-- ================================================= -->
+
+@case ("OnlyText") {
+
+<div class="mb-3 form-group" [class.has-error]="showError">
+
+    <input type="text" [id]="labelText" [value]="inputValue" [disabled]="disabled" [placeholder]="
+                    'Please enter ' +
+                    (labelText )
+                " class="form-control" [class.is-invalid]="showError" (input)="inputChanged($event)" (blur)="inputBlur()"> @if (showError) {
+
+    <div class="invalid-feedback d-block">
+
+        {{ errorMessage }}
+
+    </div>
+
+    }
+
+</div>
+}
+
+
+<!-- ================================================= -->
+<!-- SELECT WITH TITLE -->
+<!-- ================================================= -->
+
+@case ("selectGroup") {
+
+<div class="mb-3 form-group emy-drop-down-group" [class.has-error]="showError">
+
+    <label [for]="labelText" class="form-label">
+
+                {{ labelText }}
+
+            </label>
+
+
+    <div class="emy-drop-down">
+
+        <input type="text" [id]="labelText" [value]="selectValue?.value ?? ''" [disabled]="disabled" [placeholder]="
+                        'Please select ' +
+                        (labelText )
+                    " class="form-control" [class.is-invalid]="showError" (click)="toggleDropdown()" readonly>
+
+
+        <span class="emy-drop-down-icon">
+
+                    <i
+                        class="fa-solid fa-chevron-down">
+                    </i>
+
+                </span>
+
+    </div>
+
+
+    @if (toggleList) {
+
+    <ul class="emy-drop-down-list">
+
+        @for ( item of selectList; track item.id ) {
+
+        <li class="emy-drop-down-list-item" (click)="itemClick(item)">
+
+            {{ item.value }}
+
+        </li>
+
+        } @if (selectList.length === 0) {
+
+        <li>
+            No options available
+        </li>
+
+        }
+
+    </ul>
+
+    } @if (showError) {
+
+    <div class="invalid-feedback d-block">
+
+        {{ errorMessage }}
+
+    </div>
+
+    }
+
+</div>
+}
+
+
+<!-- ================================================= -->
+<!-- SELECT WITHOUT TITLE -->
+<!-- ================================================= -->
+
+@case ("selectGroupWithoutTitle") {
+
+<div class="mb-3 form-group emy-drop-down-group" [class.has-error]="showError">
+
+
+    <div class="emy-drop-down">
+
+        <input type="text" [id]="labelText" [value]="selectValue?.value ?? ''" [disabled]="disabled" [placeholder]="
+                        'Please select ' +
+                        (labelText )
+                    " class="form-control" [class.is-invalid]="showError" (click)="toggleDropdown()" readonly>
+
+
+        <span class="emy-drop-down-icon">
+
+                    <i
+                        class="fa-solid fa-chevron-down">
+                    </i>
+
+                </span>
+
+    </div>
+
+
+    @if (toggleList) {
+
+    <ul class="emy-drop-down-list">
+
+        @for ( item of selectList; track item.id ) {
+
+        <li class="emy-drop-down-list-item" (click)="itemClick(item)">
+
+            {{ item.value }}
+
+        </li>
+
+        } @if (selectList.length === 0) {
+
+        <li>
+            No options available
+        </li>
+
+        }
+
+    </ul>
+
+    } @if (showError) {
+
+    <div class="invalid-feedback d-block">
+
+        {{ errorMessage }}
+
+    </div>
+
+    }
+
+</div>
+}
+
+
+<!-- ================================================= -->
+<!-- TAG INPUT -->
+<!-- ================================================= -->
+
+@case ("tagInputGroup") {
+
+<div class="mb-3 form-group emy-drop-down-group" [class.has-error]="showError">
+
+    <label [for]="labelText" class="form-label">
+
+                {{ labelText }}
+
+            </label>
+
+
+    <div class="tag-input-container" (click)="tagInput.focus()">
+
+
+        <!-- TAGS -->
+
+        @for ( tag of tags; track tag ) {
+
+        <span class="tag">
+
+                        {{ tag }}
+
+
+                        <button
+                            type="button"
+                            [disabled]="disabled"
+                            (click)="removeTag(tag)">
+
+                            ×
+
+                        </button>
+
+                    </span> }
+
+
+        <!-- INPUT -->
+
+        <input #tagInput type="text" [value]="currentTag" [disabled]="disabled" placeholder="Add..." (input)="tagInputChanged($event)" (keydown.enter)="addTag($event)" (keydown.space)="addTag($event)" (keydown.backspace)="removeLastTag()">
+
+    </div>
+
+
+    @if (showError) {
+
+    <div class="invalid-feedback d-block">
+
+        {{ errorMessage }}
+
+    </div>
+
+    }
+
+</div>
+}
+
+
+<!-- ================================================= -->
+<!-- INPUT WITH ICON -->
+<!-- ================================================= -->
+
+@case ("inputIconGroupWithTitle") {
+
+<div class="mb-3 form-group emy-inputIconGroupWithTitle" [class.has-error]="showError">
+
+
+    <label [for]="labelText" class="form-label">
+
+                {{ labelText }}
+
+            </label>
+
+
+    <div class="emy-inputIconGroup">
+
+        <span class="icon">
+
+                    <ng-content
+                        select="[slot=inputIcon]">
+                    </ng-content>
+
+                </span>
+
+
+        <input type="number" [id]="labelText" [value]="inputValue" [disabled]="disabled" [placeholder]="inputPlaceholder" class="form-control" [class.is-invalid]="showError" (input)="inputChanged($event)" (blur)="inputBlur()">
+
+    </div>
+
+
+    @if (showError) {
+
+    <div class="invalid-feedback d-block">
+
+        {{ errorMessage }}
+
+    </div>
+
+    }
+
+</div>
+}
+
+
+<!-- ================================================= -->
+<!-- DEFAULT -->
+<!-- ================================================= -->
+
+@default {
+
+<div class="mb-3 form-group" [class.has-error]="showError">
+
+
+    <label [for]="labelText" class="form-label">
+
+                {{ labelText }}
+
+            </label>
+
+
+    <input type="text" [id]="labelText" [value]="inputValue" [disabled]="disabled" [placeholder]="
+                    inputPlaceholder ||
+                    (
+                        'Please enter ' +
+                        (labelText )
+                    )
+                " class="form-control" [class.is-invalid]="showError" (input)="inputChanged($event)" (blur)="inputBlur()"> @if (showError) {
+
+    <div class="invalid-feedback d-block">
+
+        {{ errorMessage }}
+
+    </div>
+
+    }
+
+</div>
+} }

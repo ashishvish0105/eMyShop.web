@@ -1,0 +1,43 @@
+.center-containt {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.map-box {
+    height: 600px;
+    width: 100%;
+    img {
+        height: inherit;
+        width: inherit;
+    }
+}
+
+@media screen and (max-width:991.98px) {
+    .map-box {
+        height: 500px;
+        width: 100%;
+        img {
+            height: inherit;
+            width: inherit;
+        }
+    }
+}
+
+.authsection {
+    background-color: #384959;
+    height: 100%;
+}
+
+.box-radiaus {
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.background-transparent {
+    background-color: transparent;
+}
+
+.box-spacing {
+    padding: 30px;
+}

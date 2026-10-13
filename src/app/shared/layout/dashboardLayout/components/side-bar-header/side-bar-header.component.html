@@ -1,0 +1,53 @@
+<div class="side-bar" [class]="{'eMy-sideBarCollapsed': !isSideNavBarOpen}">
+    <!-- SideNavBar -->
+    <div class="eMy-sidebarWithButton">
+        <div class="dashboard-subTitle">
+            <h1 class="font-headline-md text-headline text-primary">AdminConsole</h1>
+            <p class="font-label-sm text-label text-secondary">Management Suite</p>
+        </div>
+
+        <button class="eMy-menuIcon" (click)="toggleSideNavBar()">
+            <span class="material-symbols-outlined" [attr.data-icon]="isSideNavBarOpen?'menu':'close'">{{isSideNavBarOpen?'menu':'close'  }}</span>
+        </button>
+
+    </div>
+
+
+    <nav class="eMy-sideNav-bar">
+        <ul class="eMy-nave-list">
+            @for (item of navItems; track $index) {
+            <li class="eMy-nave-item" [class.active]="activeItemName === item.routerLink" (click)="activeMenuItem(item.routerLink)">
+                <span class="material-symbols-outlined" [attr.data-icon]="item.icon">{{ item.icon }}</span>
+                <span class="emy-nave-item-lable">{{ item.name }}</span>
+            </li>
+            }
+        </ul>
+
+
+        <!-- @for (item of navItems; track $index) {
+        <a [class.active]="item.active" class="flex items-center gap-3 border-l-[4px] border-primary bg-secondary-container text-on-secondary-container px-4 py-3 font-label-md transition-all duration-200 ease-in-out" href="#">
+            <img src="/icons/menuIcons/bolt.svg" alt="User Profile">
+            <span>{{ item.name }}</span>
+        </a>
+        } -->
+    </nav>
+
+
+
+    <!-- <div class="px-4 mt-auto">
+
+        <a class="flex items-center gap-3 text-secondary font-body-md px-4 py-3 hover:bg-surface-container-high transition-colors" href="#">
+            <span class="material-symbols-outlined" data-icon="settings">settings</span>
+            <span>Settings</span>
+        </a>
+
+        <div class="flex items-center gap-3 px-4 py-4 mt-4 border-t border-outline-variant">
+            <img alt="Store Owner Profile" class="w-8 h-8 rounded-full bg-surface-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCR5NaHB_swwLO8Uxtw32TADe9RuC0Kbig08qAY6xLRxl5xGhHTnyZkp4uB06SY8WtXuCDtKKqqkmbKfKikC_tYrxpdDao-df1hO2OkprKTg8SJD61wKjhpYyM--W41LoBQKWTsgkT_miy3adSascRunjmv_cgdDL2h5AfpMZxIvlLszoYM9hVhaWzloYA2U3pgzAOK6A5-IB8oZEwQM5e44M8aLHO8sB17cw8Q1mz_v9xhr-sDFX0Lez6dYZTI_vG0S0qa67k"
+            />
+            <div class="overflow-hidden">
+                <p class="font-label-md truncate">Alex Thompson</p>
+                <p class="font-label-sm text-secondary truncate">Owner</p>
+            </div>
+        </div>
+    </div> -->
+</div>

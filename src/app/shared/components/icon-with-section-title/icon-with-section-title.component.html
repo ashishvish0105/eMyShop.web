@@ -1,0 +1,14 @@
+<!-- @if(dataSources && dataSources.title){ -->
+<div class="service-item">
+    <span class="item-icon">
+      <i class="fa-regular fa-pen-to-square"></i>
+  </span>
+    <div class="item-detail">
+        <h4 class="title-name">{{ dataSources.title }}</h4>
+        <p class="description">{{ dataSources.description }}</p>
+        <!-- <a routerLink="convertPage">click here</a> -->
+        <button class="link-btn" (click)="clickHereHandler()">click here</button>
+
+    </div>
+</div>
+<!-- } -->

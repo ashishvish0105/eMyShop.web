@@ -1,0 +1,43 @@
+// structure scss
+.eMy-dashboard-containt {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    .eMy-summary-card-container {
+        display: flex;
+        gap: 30px;
+        width: 100%;
+        overflow: auto;
+        app-summary-card {
+            width: 25%;
+            // min-width: 300px;
+        }
+        .eMy-summary-card-left {
+            width: 70%;
+            display: inline-block;
+        }
+        .eMy-summary-card-right {
+            width: 30%;
+            display: inline-block;
+        }
+    }
+}
+
+// projection css use
+.eMy-proressBarGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.eMy-unlockInventoryDetailed {
+    background: gray;
+    padding: 36px 16px;
+    border-radius: 8px;
+}
+
+.eMy-lable {
+    font-size: 16px;
+    line-height: 1.2;
+    color: white !important;
+}

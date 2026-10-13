@@ -1,0 +1,21 @@
+.map-box {
+    height: 750px;
+    width: 100%;
+    border-radius: var(--radius5);
+    overflow: hidden;
+    iframe {
+        height: inherit;
+        width: inherit;
+    }
+}
+
+@media screen and (max-width:991.98px) {
+    .map-box {
+        height: 500px;
+        width: 100%;
+        iframe {
+            height: inherit;
+            width: inherit;
+        }
+    }
+}

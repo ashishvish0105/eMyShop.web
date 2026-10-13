@@ -1,0 +1,49 @@
+<app-outer-box-style inputBarWithAddButton="onlyTitleBar">
+    <ng-container slot="onlyTitleBar">
+        <form [formGroup]="formInfo" class="row form-group">
+            <div class="mb-3 col-md-12">
+                <div class="image-with-buttton">
+                    <div class="imageGroup">
+                        <div class="image-box" [class.requiredInput]="imageRequired()">
+                            <img [src]="imgInfo.fileBolb" alt="category image">
+                        </div>
+                        <!-- <input formControlName="catImage" [(ngModel)]="imgInfo.filePath" type="text" style="display: none;"> -->
+
+                    </div>
+                    <div class="buttonGroup">
+                        <!-- <button class="file-upload-btn mb-3" (click)="fileUpload($event)">upload</button> -->
+                        <div class="d-flex gap-3 flex-column">
+                            <app-button buttonName="asBtnPrimary" (click)="fileUpload($event)" class="mb-3" buttonText="upload"></app-button>
+
+                            <div class="visDashboard">
+                                <b class="d-block">Do Show</b>
+                                <app-button buttonName="switchBtn" (switchEvent)="switchEvent($event)" [setSwitchValue]="switcValue()"></app-button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="mb-3 col-md-12">
+                <input formControlName="categoryName" type="text" placeholder="enter category name" class="form-control" [class.requiredInput]="this.formInfo.get('categoryName')?.invalid && isSubmitForm">
+            </div>
+            <div class="mb-3 col-md-12">
+                <input formControlName="catTitle" type="text" placeholder="enter category Title name" class="form-control" [class.requiredInput]="this.formInfo.get('catTitle')?.invalid && isSubmitForm">
+            </div>
+            <div class="mb-3 col-md-12 ">
+                <textarea rows="5" formControlName="catDescription" type="text" placeholder="category item description" class="form-control" [class.requiredInput]="this.formInfo.get('catDescription')?.invalid && isSubmitForm"></textarea>
+            </div>
+            <div class="d-flex gap-3">
+                @if (this.petchData) {
+                <app-button buttonName="asBtnPrimary" (click)="submit()" [smallSize]="true" buttonText="Update"></app-button>
+                } @else {
+                <app-button buttonName="asBtnPrimary" (click)="submit()" [smallSize]="true" buttonText="Save"></app-button>
+                }
+                <app-button buttonName="asBtnSecondry" (click)="cancel()" [smallSize]="true" buttonText="cancel"></app-button>
+            </div>
+        </form>
+
+        <!-- <app-button buttonText="save" ButtonSize="btn-sm"></app-button> -->
+    </ng-container>
+</app-outer-box-style>

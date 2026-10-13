@@ -1,0 +1,67 @@
+.breadcumb-section {
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 20px;
+    // margin: 50px 0;
+    .breadcumb-title {
+        font-size: 60px;
+        font-family: "HK Grotesk";
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+    .breadcumb-group {
+        display: flex;
+        padding-left: 0;
+        list-style: none;
+        margin-bottom: 0;
+        .group-item {
+            text-transform: capitalize;
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            &+.group-item {
+                padding-left: 30px;
+                position: relative;
+                &::after {
+                    content: "\f105";
+                    font-family: 'FontAwesome';
+                    position: absolute;
+                    left: 8px;
+                    top: 50%;
+                    transform: translate(50%, -50%);
+                    // height: 10px;
+                    // width: 10px;
+                    display: inline-block;
+                    // background-color: red;
+                    z-index: 0;
+                }
+            }
+        }
+    }
+    &.traditional {
+        padding: 0;
+        background-color: transparent;
+        .breadcumb-title {
+            margin-bottom: 0;
+        }
+        .breadcumb-group {
+            margin-bottom: 8px;
+            .group-item {
+                font-size: 14px;
+            }
+        }
+        .breadcumb-title {
+            font-size: 24px;
+            line-height: 32px;
+        }
+    }
+}
+
+@media screen and (max-width:991.98px) {
+    .breadcumb-section {
+        .breadcumb-title {
+            font-size: 45px;
+        }
+    }
+}

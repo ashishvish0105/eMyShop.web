@@ -1,0 +1,160 @@
+$nav-color :var(--background-main);
+header {
+    // margin-bottom: 30px;
+    top: 0;
+    z-index: 999;
+    left: 0;
+    right: 0;
+    width: 100%;
+    position: fixed;
+    background-color: #ffffff;
+    &.header-scroll {
+        // margin-bottom: 30px;
+        // box-shadow: 0 3px 50px rgba(0, 0, 0, 0.2);
+        // position: sticky;
+        top: 0;
+        z-index: 999;
+        // top: 0;
+        // width: 100%;
+        // position: fixed;
+        // background-color: #ffffff;
+        box-shadow: 0 3px 50px rgba(0, 0, 0, 0.2);
+        border-bottom: none;
+        left: 0;
+        z-index: 99;
+        border-bottom-color: transparent;
+    }
+    nav {
+        // background-image: url(/Images/curve.png);
+        // background-color: $nav-color;
+        background-repeat: no-repeat;
+        padding: 30px 30px;
+        background-position: right top;
+        .brand-name {
+            font-size: 50px;
+        }
+    }
+}
+
+.navbar-nav {
+    .nav-item {
+        .nav-link {
+            font-size: 16px;
+            font-weight: 600;
+            color: white !important;
+            cursor: pointer;
+            // text-transform: capitalize;
+        }
+    }
+    .dropdown {
+        .dropdown-menu {
+            background-color: #384959 !important;
+            color: white;
+            border: 1px solid #fff;
+            border-radius: 4px;
+            .dropdown-item {
+                font-size: 16px;
+                font-weight: 600;
+                color: white !important;
+                // text-transform: capitalize;
+                &:hover {
+                    background-color: transparent !important;
+                }
+            }
+        }
+    }
+}
+
+.fill-space-bihind {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+}
+
+.profile-box {
+    position: relative;
+    &:hover .profile-login-detail {
+        display: inline-flex;
+        gap: 15px;
+        // margin-top: 5px;
+        // }
+    }
+    .btn.btn-icon {
+        color: var(--white-color);
+        font-size: 16px;
+        border-radius: 50%;
+        border: 2px solid currentColor;
+        margin-left: 15px;
+        padding: 6px 11px;
+    }
+    .profile-login-detail {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: white;
+        border-radius: 5px;
+        overflow: hidden;
+        padding: 15px;
+        box-shadow: 0px 0px 5px 0 #384959;
+        .profile-image {
+            img {
+                height: 100px;
+                width: 120px;
+            }
+        }
+        .profile-info-with-btn {
+            .profile-info {
+                margin-bottom: 15px;
+                .profile-title,
+                .profile-roll {
+                    font-size: 18px;
+                    text-transform: capitalize;
+                    font-weight: 600;
+                    line-height: 20px;
+                    white-space: nowrap;
+                    margin-bottom: 8px;
+                }
+                .profile-roll {
+                    font-size: 16px;
+                    font-weight: 400;
+                    line-height: 18px;
+                    margin-bottom: 0;
+                    text-transform: lowercase;
+                    padding-left: 15px;
+                    position: relative;
+                    &::after {
+                        content: "";
+                        height: 4px;
+                        width: 10px;
+                        border-radius: 5px;
+                        position: absolute;
+                        left: 0;
+                        background-color: #384959;
+                        top: 50%;
+                        transform: translateY(-50%);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.nav-item.active {
+    position: relative;
+    margin: 0 4px;
+}
+
+.nav-item.active:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background-color: white;
+    border-radius: 5px 5px 0 0;
+    box-shadow: 0 -3px 5px 0px #ffffff;
+}

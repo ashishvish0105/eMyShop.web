@@ -1,0 +1,133 @@
+.generateTokenBox {
+    // padding: 80px 30px;
+    // border-radius: 20px;
+    // border: 1px solid #384959;
+    // // margin-bottom: 45px;
+    // position: relative;
+    // display: inline-block;
+    // max-width: 400px;
+    // height: 450px;
+    // width: 100%;
+    // text-align: center;
+    // border: 1px solid #384959;
+    // box-shadow: inset 0 0 30px 0px #384959;
+    .generateToken-info {
+        font-size: 22px;
+        line-height: 32px;
+        /* text-transform: capitalize; */
+        margin-bottom: 45px;
+        &::first-letter {
+            text-transform: uppercase;
+        }
+        .highligh-text {
+            font-size: inherit;
+            line-height: inherit;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 0;
+        }
+    }
+    .tokenNumber {
+        display: block;
+        font-size: 50px;
+        margin-bottom: 30px;
+        line-height: 60px;
+    }
+    .token-decs {
+        font-size: 16px;
+        margin-bottom: 0;
+        &::first-letter {
+            text-transform: uppercase;
+        }
+        .highligh-text {
+            font-size: initial;
+            // font-style: italic;
+            letter-spacing: 1px;
+            text-transform: capitalize;
+        }
+    }
+}
+
+.outerGenerateTokenBox {
+    padding: 80px 30px;
+    border-radius: 20px;
+    position: relative;
+    display: inline-block;
+    max-width: 400px;
+    height: 450px;
+    width: 100%;
+    text-align: center;
+    border: 1px solid #384959;
+    box-shadow: 5px 5px 30px 0px #38495970;
+    overflow: hidden;
+    .generateTokenBox {
+        position: relative;
+        display: inline-block;
+        transform: rotateY(0deg);
+        overflow: hidden;
+        opacity: 1;
+        transition: all 1s linear;
+        &.tokenBackSide {
+            // display: none;
+            opacity: 0;
+            transform: rotateY(180deg);
+            transition: transform 1s linear;
+            .token-flag {
+                position: absolute;
+                left: 0;
+                top: 0;
+                display: inline-block;
+                padding: 15px 30px;
+                background: white;
+                color: #384959;
+                font-size: 18px;
+                font-weight: 500;
+                letter-spacing: 2px;
+                border-radius: 0 0 20px 0;
+            }
+        }
+    }
+    &:hover {
+        .generateTokenBox {
+            opacity: 0;
+            transform: rotateY(180deg);
+            &.tokenBackSide {
+                transform: rotateY(0deg);
+                // display: inline-block;
+                // opacity: 1;
+                animation: fade-in 1s forwards;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                color: white;
+                background: white;
+                .tokenNumber {
+                    color: white;
+                    font-size: 120px;
+                    line-height: 130px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100%;
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    40% {
+        opacity: 0;
+        background: #384959;
+    }
+    100% {
+        opacity: 1;
+        background: #384959;
+    }
+}

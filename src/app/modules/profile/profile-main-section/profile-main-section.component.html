@@ -1,0 +1,12 @@
+<div class="container">
+    <app-profile-detail></app-profile-detail>
+    <div class="d-block eshop-spaceB-50">
+        <app-outer-box-style cardTitle="Category List" (addButtonMethod)="addButton()" inputBarWithAddButton="barWithAddButton">
+            <ng-container slot="barWithAddButton">
+                @for (category of categoryGetList; track $index) {
+                <app-information-wiith-image [dataSource]="category" (editButtonEvent)="editButton(category)" (deleteButtonEvent)="deleteButtonEvent($event)"></app-information-wiith-image>
+                }
+            </ng-container>
+        </app-outer-box-style>
+    </div>
+</div>

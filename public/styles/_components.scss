@@ -1,0 +1,82 @@
+// ============================================================
+// eMy Component-Level Styles
+// ============================================================
+// Generic table styles
+.eMy-table-wrapper {
+    overflow-x: auto;
+}
+
+.eMy-table {
+    width: 100%;
+    text-align: left;
+    overflow: auto;
+    thead tr {
+        background-color: var(--eMy-surface-container-low);
+        color: var(--eMy-secondary);
+        font-family: var(--eMy-font-body);
+        font-size: var(--eMy-text-xs);
+        font-weight: var(--eMy-weight-medium);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+    th,
+    td {
+        padding: var(--eMy-space-4) var(--eMy-space-6);
+    }
+    tbody tr {
+        border-top: 1px solid var(--eMy-outline-variant);
+        transition: background-color var(--eMy-transition-base);
+        &:hover {
+            background-color: var(--eMy-surface-container-low);
+        }
+    }
+}
+
+// Main layout offset for fixed sidebar/topbar
+.eMy-main {
+    margin-left: var(--eMy-sidebar-width);
+    padding-top: var(--eMy-topbar-height);
+    min-height: 100vh;
+    &__container {
+        padding: var(--eMy-container-padding);
+        max-width: var(--eMy-content-max-width);
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+// KPI Grid
+.eMy-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: var(--eMy-gutter);
+    margin-bottom: var(--eMy-section-gap);
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @media (min-width: 1024px) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+// Dashboard Bento
+.eMy-dashboard__bento {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: var(--eMy-gutter);
+    @media (min-width: 1024px) {
+        grid-template-columns: repeat(12, 1fr);
+    }
+}
+
+.eMy-dashboard__bento-main {
+    @media (min-width: 1024px) {
+        grid-column: span 8 / span 8;
+    }
+}
+
+.eMy-dashboard__bento-side {
+    @media (min-width: 1024px) {
+        grid-column: span 4 / span 4;
+    }
+}

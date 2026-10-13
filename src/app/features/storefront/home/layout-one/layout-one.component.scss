@@ -1,0 +1,62 @@
+$nav-color :var(--background-main);
+$section-color :var(--background-section);
+$global-space: 8px;
+$bg-white-color: #fff;
+$text-white-color: #fff;
+$global-primary-color: #384959;
+$global-secondary-color: #C70255;
+$font-size: 8px;
+$global-line-height: 8px;
+$global-letter-spacing: 1.1px;
+$global-fw-500: 500;
+$global-transition:all 0.5s linear;
+$global-border-radius: 50px;
+$global-item-radius: 8px;
+$border-color:#80b7ff;
+.discountSection {
+    .container {
+        width: 90%;
+        margin: auto;
+        padding: 50px 0;
+    }
+    .discountGroup {
+        display: flex;
+        justify-content: center;
+        justify-content: start;
+        gap: 30px;
+        overflow-x: auto;
+        padding-bottom: 5px;
+        .discountItem {
+            padding: $global-space calc($global-space * 2);
+            min-width: 350px;
+            height: 200px;
+            background-color: gray;
+            color: white;
+            border-radius: $global-item-radius;
+        }
+    }
+}
+
+.productSection {
+    .container {
+        width: 90%;
+        margin: auto;
+        padding: 50px 0;
+    }
+    .productGroup {
+        display: flex;
+        justify-content: center;
+        justify-content: start;
+        gap: 30px;
+        overflow-x: auto;
+        padding-bottom: 5px;
+        .productItem {
+            padding: 30px;
+            min-width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            background-color: gray;
+            color: white;
+        }
+    }
+}

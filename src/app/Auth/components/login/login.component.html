@@ -1,47 +1,40 @@
-<div class="w-screen layout-content-container flex flex-col w-full max-w-[480px] bg-white dark:bg-[#152a19] p-8 rounded-xl shadow-sm border border-[#e7f3e9] dark:border-[#1a3b1f]">
-    <!-- Headline & Body Text -->
-    <div class="mb-8">
-        <h1 class="text-[#0d1b10] dark:text-white tracking-tight text-[32px] font-bold leading-tight text-center pb-2">Welcome Back!</h1>
-        <p class="text-[#4c9a59] dark:text-[#a1c9a8] text-base font-normal leading-normal text-center">Please enter your details to start ordering.</p>
+<!-- <app-section-title TitleName="Login" Description="welcome our place and injoy our service with benifit"></app-section-title> -->
+<app-section-title TitleName="Login" Description="Your bussiness, our sport for grouth you bussiness"></app-section-title>
+
+<form [formGroup]="login" (ngSubmit)="loginMethod()" class="mt-4" novalidate>
+    <div class="mb-3">
+        <label for="userName" class="form-label">Username</label>
+        <input type="text" id="userName" formControlName="userName" class="form-control"
+            [class.is-invalid]="login.controls['userName'].touched && login.controls['userName'].invalid">
+        @if (login.controls['userName'].touched && login.controls['userName'].hasError('required')) {
+        <small class="validation-error">Username is required.</small>
+        }
     </div>
-    <!-- Login Form -->
-    <form class="flex flex-col gap-5">
-        <!-- Username/Email Field -->
-        <div class="flex flex-col gap-2">
-            <p class="text-[#0d1b10] dark:text-white text-base font-medium leading-normal">Email or Username</p>
-            <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d1b10] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary border border-[#cfe7d3] dark:border-[#1a3b1f] bg-[#f8fcf9] dark:bg-[#102213] h-14 placeholder:text-[#4c9a59]/60 p-[15px] text-base font-normal"
-                placeholder="Enter your email or username" type="text" />
-        </div>
-        <!-- Password Field -->
-        <div class="flex flex-col gap-2">
-            <p class="text-[#0d1b10] dark:text-white text-base font-medium leading-normal">Password</p>
-            <div class="flex w-full flex-1 items-stretch rounded-lg">
-                <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d1b10] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary border border-[#cfe7d3] dark:border-[#1a3b1f] bg-[#f8fcf9] dark:bg-[#102213] h-14 placeholder:text-[#4c9a59]/60 p-[15px] rounded-r-none border-r-0 text-base font-normal"
-                    placeholder="Enter your password" type="password" />
-                <div class="text-[#4c9a59] flex border border-[#cfe7d3] dark:border-[#1a3b1f] bg-[#f8fcf9] dark:bg-[#102213] items-center justify-center pr-[15px] rounded-r-lg border-l-0 cursor-pointer">
-                    <span class="material-symbols-outlined" style="font-size: 24px;">visibility</span>
-                </div>
-            </div>
-        </div>
-        <!-- Remember Me & Forgot Password -->
-        <div class="flex items-center justify-between py-2">
-            <label class="flex items-center gap-2 cursor-pointer group">
-            <input class="h-5 w-5 rounded border-[#cfe7d3] dark:border-[#1a3b1f] text-primary text-[#13ec37] focus:ring-primary focus:ring-[#13ec37]/50 bg-[#f8fcf9] dark:bg-[#102213]" type="checkbox"/>
-            <span class="text-[#0d1b10] dark:text-white text-sm font-medium">Remember me</span>
-            </label>
-            <a class="text-primary text-[#13ec37] text-sm font-bold hover:underline" href="javascript:void(0)" routerLink="/forgot-password">Forgot password?</a>
-        </div>
-        <!-- Sign In Button -->
-        <button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 px-5 bg-primary bg-[#13ec37] text-[#0d1b10] text-base font-bold leading-normal tracking-[0.015em] hover:brightness-110 shadow-lg shadow-primary/20 shadow-[0_10px_25px_rgba(19,236,55,0.2)] transition-all"
-            type="submit">
-            <span class="truncate">Sign In</span>
-        </button>
-    </form>
-    <!-- Footer Link -->
-    <div class="mt-8 text-center">
-        <p class="text-[#4c9a59] dark:text-[#a1c9a8] text-sm">
-            New to FoodieExpress?
-            <a class="text-primary font-bold hover:underline ml-1" href="#">Create an account</a>
-        </p>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" formControlName="email" class="form-control"
+            [class.is-invalid]="login.controls['email'].touched && login.controls['email'].invalid">
+        @if (login.controls['email'].touched && login.controls['email'].hasError('required')) {
+        <small class="validation-error">Email is required.</small>
+        } @else if (login.controls['email'].touched && login.controls['email'].hasError('email')) {
+        <small class="validation-error">Enter a valid email address.</small>
+        }
     </div>
-</div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Password </label>
+        <input type="password" id="password" formControlName="password" class="form-control"
+            [class.is-invalid]="login.controls['password'].touched && login.controls['password'].invalid">
+        @if (login.controls['password'].touched && login.controls['password'].hasError('required')) {
+        <small class="validation-error">Password is required.</small>
+        }
+    </div>
+    <app-button buttonName="asBtnPrimary" buttonType="submit" buttonText="Sing in"></app-button>
+    <div class="d-flex align-items-center pt-4">
+        <p class="mb-0">You need to forgetpassword</p>
+        <a class="ms-3 text-capitalize" routerLink="/auth/forgetPasssword">forget Passsword</a>
+    </div>
+    <div class="d-flex align-items-center pt-3">
+        <p class="mb-0">You slef register here we coonect and provide benifite</p>
+        <a class="ms-3 text-capitalize" routerLink="/auth/registration">registration</a>
+    </div>
+</form>

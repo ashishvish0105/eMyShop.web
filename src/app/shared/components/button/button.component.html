@@ -1,0 +1,9 @@
+@switch (buttonName) { @case ("switchBtn") {
+<label class="switch">
+      <input type="checkbox" (click)="checkEventCall()" [checked]="IsCheckBox">
+      <span class="slider round"></span>
+    </label> } @case ("asBtnSecondry") {
+<button [type]="buttonType" class="btn asBtnSecondry" [class.btn-small]="smallSize">{{ buttonText }}</button> } @case ("asBtnPrimary") {
+<button [type]="buttonType" class="btn asBtnPrimary" [class.btn-small]="smallSize">{{ buttonText }}</button> } @case ("asBtnDanger") {
+<button [type]="buttonType" class="btn asBtnDanger" [class.btn-small]="smallSize">{{ buttonText }}</button> } @default {
+<button [type]="buttonType" class="btn">{{ buttonText }}</button> } }

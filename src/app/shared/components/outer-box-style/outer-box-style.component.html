@@ -1,0 +1,48 @@
+ @switch (inputBarWithAddButton) { @case ("barWithAddButton"){
+<div class="border-1 solid outer-style app-boxStyle barWithAddButton">
+    <div class="top-section box-info">
+        <h5 class="mb-0 app-title">{{ cardTitle }}</h5>
+        <!-- <button class="as-btn btn-sm add-btn" (click)="AddButton()">{{ addButtonText }}</button> -->
+        <app-button buttonName="asBtnPrimary" buttonText="add category" [smallSize]="true" (click)="AddButton()"></app-button>
+    </div>
+    <div class="box-content pt-3">
+        <ng-content select="[slot='barWithAddButton']"></ng-content>
+    </div>
+</div>
+
+} @case ("onlyTitleBar"){
+<div class="border-1 solid outer-style app-boxStyle onlyTitleBar">
+    <div class="top-section box-info">
+        <h5 class="mb-0 app-title">{{ cardTitle }}</h5>
+    </div>
+    <div class="box-content pt-3">
+        <ng-content select="[slot='onlyTitleBar']"></ng-content>
+    </div>
+</div>
+} @default {
+
+<div class="border-1 solid outer-style app-boxStyle">
+    <div class="top-section box-info">
+        <h5 class="mb-0 app-title">{{ cardTitle }}</h5>
+        <app-button buttonName="switchBtn" (switchEvent)="buttonEvent($event)"></app-button>
+    </div>
+    <div class="box-content pt-3">
+        <ng-content select="[slot='innerContent']"></ng-content>
+    </div>
+</div>
+} }
+
+<!-- @if(barWithAddButton){
+<div class="border-1 solid outer-style app-boxStyle">
+    <div class="top-section box-info">
+        <h5 class="mb-0 app-title">{{ cardTitle }}</h5>
+        <app-button [buttonNo]="1" (switchEvent)="buttonEvent($event)"></app-button>
+    </div>
+    <div class="box-content pt-3">
+        <ng-content select="[slot='innerContent']"></ng-content>
+    </div>
+</div>
+} @else {
+
+
+} -->

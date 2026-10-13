@@ -1,0 +1,40 @@
+.eMy-summary-card {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px;
+    border: 1px solid #c3c6d7;
+    background-color: #fff;
+    border-radius: 8px;
+    .eMy-summary-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .totalSales {
+            padding: 8px;
+            border-radius: 8px;
+            color: #004ac6;
+            background-color: #2563eb1a;
+        }
+        .eMy-selles-trand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #7d2d00;
+            font-family: Inter;
+        }
+    }
+    .eMy-sectionTitle {
+        .eMy-summary-card-title {
+            font-size: 16px;
+            line-height: 1.2;
+            color: #545f73 !important
+        }
+        .eMy-summary-card-subtitle {
+            font-size: 24px;
+            line-height: 1.2;
+            font-weight: 600;
+            color: #191b23;
+        }
+    }
+}

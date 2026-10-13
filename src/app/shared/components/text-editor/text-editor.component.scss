@@ -1,0 +1,18 @@
+.editor {
+    border: 1px solid #a09d97;
+    border-radius: 8px;
+    overflow: hidden;
+    ngx-editor-menu {
+        .NgxEditor__MenuBar {
+            background-color: #f3f6fa;
+            padding: 8px;
+        }
+    }
+    .NgxEditor {
+        .NgxEditor__Content {
+            min-height: 200px;
+            max-height: 500px;
+            overflow: auto;
+        }
+    }
+}

@@ -1,0 +1,312 @@
+<app-breadcumb [CurrentPathTitle]="productId === null ? 'Add New Product' : 'Edit Product'">
+</app-breadcumb>
+
+
+<form [formGroup]="productForm" (ngSubmit)="onPublishProduct()">
+
+    <div class="row">
+
+
+        <!-- ================================================= -->
+        <!-- LEFT COLUMN -->
+        <!-- ================================================= -->
+
+        <div class="col-7">
+
+
+            <!-- ============================================= -->
+            <!-- GENERAL INFORMATION -->
+            <!-- ============================================= -->
+
+            <app-title-with-item sectionTitleName="withTitle" class="d-block mt-4" titleName="General Information">
+
+                <ng-container slot="withTitleItem">
+
+
+                    <app-input-group labelText="Product Name" requiredMessage="Product name is required" formControlName="productName">
+                    </app-input-group>
+
+
+                    <app-input-group labelText="Description" inputLabelName="textEditor" requiredMessage="Product description is required" formControlName="description">
+                    </app-input-group>
+
+
+                </ng-container>
+
+            </app-title-with-item>
+
+
+            <!-- ============================================= -->
+            <!-- PRODUCT MEDIA -->
+            <!-- ============================================= -->
+
+            <app-title-with-item sectionTitleName="withTitle" class="d-block mt-4" titleName="Product Media">
+                <ng-container slot="itemBtns">
+                    <a href="javascript:void(0)">
+                        Add via URL
+                    </a>
+                </ng-container>
+
+                <ng-container slot="withTitleItem">
+                    <div class="eMy-product-media">
+                        <div class="eMy-gallery">
+                            <!-- Upload -->
+                            <label class="eMy-upload-card">
+                                <input type="file" multiple accept="image/*" (change)="onSelectImages($event)" hidden>
+                                <div class="eMy-upload-content">
+                                    <svg
+                                        width="34"
+                                        height="34"
+                                        viewBox="0 0 24 24"
+                                        fill="none">
+                                        <path
+                                            d="M12 16V8M8 12H16M21 15V18C21 19.1046 20.1046 20 19 20H5C3.89543 20 3 19.1046 3 18V6C3 4.89543 3 4 5 4H8L10 2H14L16 4H19C20.1046 4 21 4.89543 21 6V9"
+                                            stroke="currentColor"
+                                            stroke-width="1.7"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                        </path>
+
+                                    </svg>
+                                    <span>Upload</span>
+                                </div>
+                            </label>
+
+                            <!-- Images -->
+                            @for ( image of images; track image ) {
+
+                            <div class="eMy-image-card">
+                                <img [src]="image.preview" [alt]="image.name">
+                                <button type="button" class="eMy-delete" (click)="removeImage(image)">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                </ng-container>
+            </app-title-with-item>
+
+            <app-title-with-item sectionTitleName="withTitle" class="d-block mt-4" titleName="Pricing">
+
+                <ng-container slot="withTitleItem">
+
+                    <div class="row">
+
+
+                        <!-- Base Price -->
+                        <div class="col-md-4">
+
+                            <app-input-group labelText="Base Price" inputLabelName="inputIconGroupWithTitle" inputPlaceholder="0.00" requiredMessage="Base price is required" formControlName="basePrice">
+
+
+                                <ng-container slot="inputIcon">
+
+                                    <i class="fa-solid fa-indian-rupee-sign">
+                                    </i>
+
+                                </ng-container>
+
+
+                            </app-input-group>
+
+                        </div>
+
+
+                        <!-- Compare Price -->
+                        <div class="col-md-4">
+
+                            <app-input-group labelText="Compare-at Price" inputLabelName="inputIconGroupWithTitle" inputPlaceholder="0.00" requiredMessage="Compare-at price is required" formControlName="compareAtPrice">
+
+
+                                <ng-container slot="inputIcon">
+
+                                    <i class="fa-solid fa-indian-rupee-sign">
+                                    </i>
+
+                                </ng-container>
+
+
+                            </app-input-group>
+
+                        </div>
+
+
+                        <!-- Cost -->
+                        <div class="col-md-4">
+
+                            <app-input-group labelText="Cost per item" inputLabelName="inputIconGroupWithTitle" inputPlaceholder="0.00" requiredMessage="Cost per item is required" formControlName="costPerItem">
+
+
+                                <ng-container slot="inputIcon">
+
+                                    <i class="fa-solid fa-indian-rupee-sign">
+                                    </i>
+
+                                </ng-container>
+
+
+                            </app-input-group>
+
+                        </div>
+
+
+                    </div>
+
+                </ng-container>
+
+            </app-title-with-item>
+
+
+            <!-- ============================================= -->
+            <!-- VARIANTS -->
+            <!-- ============================================= -->
+
+            <app-title-with-item sectionTitleName="withTitle" class="d-block mt-4" titleName="Variants">
+
+                <ng-container slot="withTitleItem">
+
+                </ng-container>
+
+            </app-title-with-item>
+
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- RIGHT COLUMN -->
+        <!-- ================================================= -->
+
+        <div class="col-5">
+
+
+            <!-- ============================================= -->
+            <!-- STATUS -->
+            <!-- ============================================= -->
+
+            <app-title-with-item sectionTitleName="withTitle" class="d-block mt-4" titleName="Status">
+
+
+                <ng-container slot="withTitleItem">
+
+                    <app-input-group labelText="Status" inputLabelName="selectGroupWithoutTitle" [selectList]="statusList" requiredMessage="Please select status" formControlName="status">
+                    </app-input-group>
+
+                </ng-container>
+
+            </app-title-with-item>
+
+
+            <!-- ============================================= -->
+            <!-- ORGANIZATION -->
+            <!-- ============================================= -->
+
+            <app-title-with-item sectionTitleName="withTitle" class="d-block mt-4" titleName="Organization">
+
+
+                <ng-container slot="withTitleItem">
+
+
+                    <!-- Category -->
+                    <app-input-group labelText="Category" inputLabelName="selectGroup" [selectList]="categoryList" requiredMessage="Please select a category" formControlName="categoryId">
+                    </app-input-group>
+
+                    <div class="mb-3">
+                        <label for="productTypeId" class="form-label">Product Type ID</label>
+                        <input id="productTypeId" type="number" min="1" class="form-control" formControlName="typeId">
+                        @if (productForm.controls['typeId'].touched && productForm.controls['typeId'].invalid) {
+                        <small class="text-danger">Enter a valid product type ID.</small>
+                        }
+                    </div>
+
+
+                    <!-- Brand -->
+                    <app-input-group labelText="Brand" requiredMessage="Brand is required" formControlName="brand">
+                    </app-input-group>
+
+
+                    <!-- Tags -->
+                    <app-input-group labelText="Tags" inputLabelName="tagInputGroup" requiredMessage="Please add at least one tag" formControlName="tags">
+                    </app-input-group>
+
+
+                </ng-container>
+
+            </app-title-with-item>
+
+
+            <!-- ============================================= -->
+            <!-- INVENTORY -->
+            <!-- ============================================= -->
+
+            <app-title-with-item sectionTitleName="withTitle" class="d-block mt-4" titleName="Inventory">
+
+
+                <ng-container slot="withTitleItem">
+
+
+                    <!-- SKU -->
+                    <app-input-group labelText="SKU (Stock Keeping Unit)" requiredMessage="SKU is required" formControlName="sku">
+                    </app-input-group>
+
+
+                    <!-- Barcode -->
+                    <app-input-group labelText="Barcode (ISBN, UPC, etc.)" requiredMessage="Barcode is required" formControlName="barcode">
+                    </app-input-group>
+
+                    <!-- Quantity -->
+                    <app-input-group labelText="Available Quantity" inputLabelName="inputIconGroupWithTitle" inputPlaceholder="0" requiredMessage="Available quantity is required" formControlName="availableQuantity">
+                    </app-input-group>
+                </ng-container>
+            </app-title-with-item>
+
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- ACTION BUTTONS -->
+        <!-- ================================================= -->
+
+        <div class="col-12">
+            <div class="emy-btn-group mt-4">
+                <app-title-with-item sectionTitleName="withoutTitle" class="d-block mt-4">
+                    <ng-container slot="withoutTitle">
+                        <div class="row justify-content-end">
+                            <!-- Discard -->
+                            <div class="col-auto">
+                                <app-button buttonType="button" buttonText="Discard" buttonName="asBtnSecondry" (click)="onDiscard()">
+                                </app-button>
+                            </div>
+                            <!-- Preview -->
+                            <div class="col-auto">
+                                <app-button buttonType="button" buttonText="Save & Preview Product" buttonName="asBtnPrimary" (click)="onPreviewPage()">
+                                </app-button>
+                            </div>
+
+
+                            <!-- Save -->
+                            <div class="col-auto">
+
+                                <app-button buttonType="submit" [buttonText]="productId === null ? 'Save Product' : 'Update Product'" buttonName="asBtnPrimary">
+                                </app-button>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </ng-container>
+
+                </app-title-with-item>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</form>

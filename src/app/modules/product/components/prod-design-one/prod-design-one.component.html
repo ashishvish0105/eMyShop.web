@@ -1,0 +1,83 @@
+<!-- https://codepen.io/tahazsh/pen/WNYKage -->
+
+<!-- <app-section-layout>
+    <div id="display-layout" class="display-layout-group">
+        @for (item of iterms; track $index) {
+        <div class="project-layout" (click)="productDetails($index)">
+            <picture class="product-image">
+                <img src="/bg-img/12.jpg" alt="product image">
+            </picture>
+            <div class="product-details">
+                <div class="product-title-details">
+                    <h3 class="product-title">product name</h3>
+                    <p class="prodcuct-description">product details measn product information thee product of reals </p>
+                    <div class="product-price">price :<strong> 5000</strong></div>
+                </div>
+            </div>
+        </div>
+        } @empty {
+        <p>No items to display.</p>
+        }
+    </div>
+</app-section-layout> -->
+
+<app-product-section-layout-two titleName="Product List" class="app-product-section-layout-two">
+    <div id="display-layout" class="display-layout-group">
+        @for (item of iterms; track $index) {
+        <div class="project-layout">
+            <picture class="product-image">
+                <img src="/bg-img/12.jpg" alt="product image">
+            </picture>
+            <div class="product-details">
+                <div class="product-title-details">
+                    <h3 class="product-title">product name</h3>
+                    <p class="prodcuct-description">product details measn product information thee product of reals </p>
+                    <div class="product-price">price :<strong> 5000</strong></div>
+                </div>
+            </div>
+        </div>
+        } @empty {
+        <p>No items to display.</p>
+        }
+    </div>
+
+</app-product-section-layout-two>
+
+<app-product-section-layout-two class="app-product-section-layout-two">
+    <div id="display-layout" class="product-grid">
+        <div class="product-card">
+
+            <div class="product-image">
+                <img src="/bg-img/12.jpg" alt="product.name" />
+            </div>
+
+            <div class="product-info">
+                <h3 class="product-title">product name</h3>
+                <p class="product-desc">product details measn product information thee product of reals </p>
+
+                <div class="product-footer">
+                    <span class="price">₹<strong> 5000</strong></span>
+                    <button class="btn">View</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</app-product-section-layout-two>
+
+<!-- <div class="container my-5"> -->
+<!-- <div id="project-List" class="project-layout">
+    <picture class="product-image">
+        <img src="/bg-img/12.jpg" alt="product image">
+    </picture>
+    <div class="product-details">
+        <div class="product-title-details">
+            <h3 class="product-title">product name</h3>
+            <p class="prodcuct-description">product details measn product information thee product of reals </p>
+            <div class="product-price">price :<strong> 5000</strong></div>
+        </div>
+    </div>
+</div> -->
+<!-- </div> -->
+
+<router-outlet></router-outlet>

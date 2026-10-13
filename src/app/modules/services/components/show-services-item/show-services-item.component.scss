@@ -1,0 +1,28 @@
+.service-item {
+    background-color: white;
+    border-radius: 5px;
+    padding: 30px;
+    display: inline-block;
+    .item-icon {
+        font-size: 26px;
+        background-color: var(--secondary-color);
+        display: inline-block;
+        padding: 15px;
+        color: white;
+        border-radius: 5px;
+        margin-bottom: 15px;
+    }
+    .item-detail {
+        .title-name {
+            margin-bottom: 8px;
+            text-transform: capitalize;
+        }
+        .description {
+            font-size: 16px;
+            margin-bottom: 8px;
+            &::first-letter {
+                text-transform: uppercase;
+            }
+        }
+    }
+}

@@ -1,0 +1,50 @@
+.footer-link-group {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    .link-item {
+        width: 50%;
+        font-size: 16px;
+        line-height: 26px;
+        text-transform: capitalize;
+        margin-bottom: 15px;
+        color: #a6a6a6;
+    }
+}
+
+.login-name.heading {
+    color: white !important;
+    text-transform: capitalize;
+    font-weight: 500;
+    font-size: 40px;
+}
+
+footer {
+    // background-color: #f2f4f5;
+    // padding: 80px 0;
+    .footer-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+        text-transform: capitalize;
+    }
+    .description {
+        font-size: 16px;
+        color: #212529;
+        &::first-letter {
+            text-transform: uppercase;
+        }
+    }
+    .conpyright {
+        color: #a6a6a6;
+        font-size: 16px;
+    }
+    .contact-no {
+        font-size: 22px;
+        color: #a6a6a6;
+    }
+    address {
+        color: #a6a6a6;
+        font-size: 16px;
+    }
+}

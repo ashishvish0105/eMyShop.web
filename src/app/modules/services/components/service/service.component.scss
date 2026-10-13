@@ -1,0 +1,22 @@
+fieldset {
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid #384959;
+    // margin-bottom: 45px;
+    position: relative;
+    legend {
+        position: absolute;
+        left: 50px;
+        top: 0;
+        background-color: white;
+        display: inline-block;
+        width: max-content;
+        padding: 0 15px;
+        margin-bottom: 0;
+        transform: translateY(-50%);
+        font-size: 22px;
+        font-weight: 400;
+        color: #384959;
+        text-transform: capitalize;
+    }
+}

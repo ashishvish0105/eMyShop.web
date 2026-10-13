@@ -1,0 +1,214 @@
+.form-group {
+    background-color: transparent;
+    .form-label {
+        font-size: 16px;
+        color: #a6a6a6;
+        display: block;
+        margin-bottom: 8px;
+        text-transform: capitalize;
+        display: inline-block;
+    }
+    .form-control {
+        display: block;
+        width: 100%;
+        height: 45px;
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        &:focus {
+            outline: none !important;
+            box-shadow: none
+        }
+        &::placeholder {
+            &::first-letter {
+                text-transform: uppercase !important;
+            }
+        }
+    }
+    .requiredInput {
+        border-color: red;
+        &::placeholder {
+            color: red;
+        }
+        // transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out
+    }
+    textarea.form-control {
+        height: 150px;
+    }
+}
+
+.emy-drop-down-group {
+    position: relative;
+    .emy-drop-down {
+        position: relative;
+        .form-control {
+            cursor: pointer;
+        }
+        .emy-drop-down-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+    }
+    .emy-drop-down-list {
+        list-style: none;
+        padding: 8px;
+        border: 1px solid #c3c6d7;
+        border-radius: 8px;
+        margin-top: 5px;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #fff;
+        cursor: pointer;
+        z-index: 9;
+        box-shadow: 0px 5px 5px #c3c6d7;
+        cursor: pointer;
+        max-height: 250px;
+        overflow: auto;
+        .emy-drop-down-list-item {
+            border-bottom: 1px solid #ced4da;
+            padding: 8px;
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+    }
+}
+
+.tag-input-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 8px;
+    border: 1px solid #cfd3dc;
+    border-radius: 8px;
+    background: #f3f6fa;
+    cursor: text;
+    input {
+        border: none;
+        outline: none;
+        background: transparent;
+        min-width: 120px;
+        flex: 1;
+        font-size: 14px;
+        &::first-letter {
+            text-transform: uppercase;
+        }
+        &::placeholder {
+            color: #666;
+            text-transform: capitalize;
+        }
+    }
+}
+
+.tag {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: #dbe5ff;
+    color: #4b5d8a;
+    border: 1px solid #c3cff8;
+    border-radius: 6px;
+    font-size: 14px;
+    button {
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        color: #5d6884;
+        font-size: 16px;
+        line-height: 1;
+        padding: 0;
+        &:hover {
+            color: #e53935;
+        }
+    }
+}
+
+.emy-inputIconGroupWithTitle {
+    .emy-inputIconGroup {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 16px;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        .icon {}
+        .form-control {
+            border: none;
+            padding: 0;
+            &:focus {
+                outline: none !important;
+                box-shadow: none
+            }
+        }
+    }
+}
+
+.form-control.is-invalid {
+    border-color: #dc3545;
+}
+
+.form-control.is-invalid:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.15);
+}
+
+.has-error .form-label {
+    color: #dc3545;
+}
+
+.invalid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    color: #dc3545;
+}
+
+
+/*
+ * Custom dropdown validation
+ */
+
+.emy-drop-down-group.has-error .emy-drop-down .form-control {
+    border-color: #dc3545;
+}
+
+.emy-drop-down-group.has-error .emy-drop-down .form-control:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.15);
+}
+
+
+/*
+ * Tag input validation
+ */
+
+.tag-input-container.is-invalid,
+.has-error .tag-input-container {
+    border-color: #dc3545;
+}
+
+.has-error .tag-input-container {
+    border: 1px solid #dc3545;
+}

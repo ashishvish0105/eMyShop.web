@@ -1,0 +1,136 @@
+<div class="d-flex justify-content-between align-items-center mb-3 pb-3 border-1 border-bottom">
+    <h2>User list</h2>
+    <div class="btn btn-primary">Add User</div>
+</div>
+<div class="overflow-scroll">
+    <table class="table ">
+        <thead>
+            <tr>
+                <th scope="col">userID</th>
+                <th scope="col">first Name</th>
+                <th scope="col">last Name</th>
+                <th scope="col">email</th>
+                <th scope="col">mobile Number</th>
+                <th scope="col">address</th>
+                <th scope="col">city</th>
+                <th scope="col">state</th>
+                <th scope="col">country</th>
+                <th scope="col">postal Code</th>
+                <th scope="col">role</th>
+                <th scope="col">years Of Experience</th>
+                <th scope="col">skills</th>
+                <th scope="col">createdAt</th>
+                <th scope="col">updatedAt</th>
+                <th scope="col">Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @for (item of UserList; track $index) {
+            <tr>
+                <td>{{ item.userID }}</td>
+                <td>{{ item.firstName }}</td>
+                <td>{{ item.lastName }}</td>
+                <td>{{ item.email }}</td>
+                <td>{{ item.mobileNumber }}</td>
+                <td>{{ item.address }}</td>
+                <td>{{ item.city }}</td>
+                <td>{{ item.state }}</td>
+                <td>{{ item.country }}</td>
+                <td>{{ item.postalCode }}</td>
+                <td>{{ item.role }}</td>
+                <td>{{ item.yearsOfExperience }}</td>
+                <td>{{ item.skills }}</td>
+                <td>{{ item.createdAt | date }}</td>
+                <td>{{ item.updatedAt | date }}</td>
+                <td class="d-flex gap-2">
+                    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </button> -->
+
+                    <!-- <button type="button" class="btn btn-primary" routerLink="['/User', item.userID]" >
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </button> -->
+                    <button type="button" class="btn btn-primary" [routerLink]="['/User', item.userID]">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+
+                    <button class="btn btn-primary">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                </td>
+
+            </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row" [formGroup]="UserForm" (submit)="UserFormData(UserForm.value)">
+                    <div class="control-group col-md-6">
+                        <label for="firname" class="text-capitalize">firstName</label>
+                        <input class="form-control" type="text" formControlName="firstName">
+                    </div>
+                    <div class="control-group col-md-6">
+                        <label for="firname" class="text-capitalize">LastName</label>
+                        <input class="form-control" type="text" formControlName="lastName">
+                    </div>
+                    <div class="control-group col-md-6">
+                        <label for="firname" class="text-capitalize">email</label>
+                        <input class="form-control" type="text" formControlName="email">
+                    </div>
+                    <div class="control-group col-md-6">
+                        <label for="firname" class="text-capitalize">mobile Number</label>
+                        <input class="form-control" type="text" formControlName="mobileNumber">
+                    </div>
+                    <div class="control-group col-md-6">
+                        <label for="firname" class="text-capitalize">address</label>
+                        <input class="form-control" type="text" formControlName="address">
+                    </div>
+                    <div class="control-group col-md-6">
+                        <label for="firname" class="text-capitalize">city</label>
+                        <input class="form-control" type="text" formControlName="city">
+                    </div>
+                    <div class="control-group col-md-6">
+                        <label for="firname" class="text-capitalize">state</label>
+                        <input class="form-control" type="text" formControlName="state">
+                    </div>
+                    <div class="control-group col-md-6">
+                        <label for="firname" class="text-capitalize">country</label>
+                        <input class="form-control" type="text" formControlName="country">
+                    </div>
+                    <div class="control-group col-md-6">
+                        <label for="firname" class="text-capitalize">postal Code</label>
+                        <input class="form-control" type="text" formControlName="postalCode">
+                    </div>
+                    <div class="control-group col-md-6">
+                        <label for="firname" class="text-capitalize">role</label>
+                        <input class="form-control" type="text" formControlName="role">
+                    </div>
+                    <div class="control-group col-md-6">
+                        <label for="firname" class="text-capitalize">years Of Experience</label>
+                        <input class="form-control" type="number" formControlName="yearsOfExperience">
+                    </div>
+                    <div class="control-group col-md-6">
+                        <label for="firname" class="text-capitalize">skills	</label>
+                        <input class="form-control" type="text" formControlName="skills">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

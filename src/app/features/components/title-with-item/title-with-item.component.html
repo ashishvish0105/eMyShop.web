@@ -1,0 +1,33 @@
+@switch (sectionTitleName) { @case ('withoutTitle') {
+<div class="eMy-titleWithItems">
+    <div class="eMy-item">
+        <!-- Defination : slot="item" usually refers to content projection — Angular’s way of letting a parent component inject content into a child component template. -->
+        <!-- Using slot to render the item content passed from parent component -->
+        <!-- <ng-content select="[slot=item]"></ng-content> -->
+        <ng-content select="[slot=withoutTitle]"></ng-content>
+
+        <!-- <h1>second items</h1>
+        <ng-content select="[slot=itemOne]"></ng-content> -->
+    </div>
+</div>
+} @case ('withTitle') {
+<div class="eMy-titleWithItems">
+    <div class="eMy-titleWithItem" [class.eMy-titleWithUnderline]="titleUnderline">
+        <h4 class="eMy-title">{{ titleName }}</h4>
+        <div class="eMy-itemGroup">
+            <ng-content select="[slot=itemBtns]"></ng-content>
+            <!-- <span class="current">Current</span> -->
+        </div>
+    </div>
+    <div class="eMy-item">
+        <!-- Defination : slot="item" usually refers to content projection — Angular’s way of letting a parent component inject content into a child component template. -->
+        <!-- Using slot to render the item content passed from parent component -->
+        <!-- <ng-content select="[slot=item]"></ng-content> -->
+        <ng-content select="[slot=withTitleItem]"></ng-content>
+
+        <!-- <h1>second items</h1>
+        <ng-content select="[slot=itemOne]"></ng-content> -->
+    </div>
+</div>
+
+} }

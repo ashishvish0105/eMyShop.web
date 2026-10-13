@@ -1,0 +1,7 @@
+<div class="container">
+    <section class="pb-5 d-flex gap-3 flex-wrap">
+        @for (item of pdfConvertingList; track $index) {
+        <app-icon-with-section-title [dataSources]="item" (clickHere)="clickHereEvent()"></app-icon-with-section-title>
+        }
+    </section>
+</div>

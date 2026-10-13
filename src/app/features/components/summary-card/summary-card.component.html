@@ -1,0 +1,16 @@
+<div class="eMy-summary-card">
+    <div class="eMy-summary-card-header">
+        <!-- // icon background color is missing accornding to design fix that, use single color and opecity reduce that work as background color -->
+        <span class="material-symbols-outlined totalSales" [style.backgroundColor]="iconBgColorCode" [attr.data-icon]="iconName">{{ iconName }}</span>
+        <div class="eMy-selles-trand">
+            <span class="eMy-selles-trand-value">{{ valueTrand === constValueTrand.ValueTrandUp ? '+' : '-' }} {{ perstageWiseTrand }}%</span> @switch(valueTrand) { @case(constValueTrand.ValueTrandUp) {
+            <span class="material-symbols-outlined" data-icon="trending_up">trending_up</span> } @case(constValueTrand.ValueTrandEqual) {
+            <span class="material-symbols-outlined" data-icon="trending_flat">trending_flat</span> } @default {
+            <span class="material-symbols-outlined" data-icon="trending_down">trending_down</span> } }
+        </div>
+    </div>
+    <div class="eMy-sectionTitle">
+        <h6 class="eMy-summary-card-title">{{ SummaryTitle }}</h6>
+        <span class="eMy-summary-card-subtitle">{{ SummaryValue | currency: currencyType }}</span>
+    </div>
+</div>
