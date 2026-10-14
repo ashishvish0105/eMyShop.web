@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
-import { LocalStarageService } from './local-starage.service';
 import { Router} from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { logintype } from '../constVariable/user.const';
-import { localStorageObjName } from '../constVariable/localStorageObjName.const';
+import { logintype } from '../../constVariable/user.const';
+import { localStorageObjName } from '../../constVariable/localStorageObjName.const';
+import { LocalStarageService } from '../Comman/local-starage.service';
 
 const SELLER_ROLES = new Set([
   'superadmin',

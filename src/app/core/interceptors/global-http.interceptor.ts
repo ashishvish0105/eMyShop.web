@@ -3,9 +3,9 @@ import { inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, finalize, throwError, TimeoutError, timeout } from 'rxjs';
 import { LoadingService } from '../../shared/services/loading.service';
-import { LocalStarageService } from '../../services/local-starage.service';
 import { localStorageObjName } from '../../constVariable/localStorageObjName.const';
 import { environment } from '../../../environments/environment';
+import { LocalStarageService } from '../Comman/local-starage.service';
 
 export const globalHttpInterceptor: HttpInterceptorFn = (request, next) => {
   const loadingService = inject(LoadingService);

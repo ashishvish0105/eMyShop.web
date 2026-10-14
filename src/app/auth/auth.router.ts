@@ -4,7 +4,6 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { MainAuthSectionComponent } from './main-auth-section/main-auth-section.component';
-import { loginGuardGuardGuard } from '../core/guards/login-guard-guard.guard';
 
 export const authRoutes: Routes = [
   {
@@ -17,7 +16,6 @@ export const authRoutes: Routes = [
         pathMatch: 'full',
       },
       {
-        canActivate:[loginGuardGuardGuard],
         path: 'login',
         component: LoginComponent,
       },

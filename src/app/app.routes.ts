@@ -10,7 +10,7 @@ import { ProductOutletComponent } from './features/admin/product-management/prod
 import { ProductViewComponent } from './features/admin/product-management/components/product-view/product-view.component';
 import { LayoutOneComponent } from './features/storefront/home/layout-one/layout-one.component';
 import { ProductPreviewComponent } from './features/admin/product-management/components/product-preview/product-preview.component';
-import { authGuardGuard } from './core/auth-guard.guard';
+import { authGuardGuard } from './core/guards/auth-guard.guard';
 
 export const routes: Routes = [
   {

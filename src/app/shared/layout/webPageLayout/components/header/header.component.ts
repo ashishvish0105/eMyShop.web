@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { logintype } from '../../../../../constVariable/user.const';
 import { localStorageObjName } from '../../../../../constVariable/localStorageObjName.const';
-import { LocalStarageService } from '../../../../../services/local-starage.service';
 import { PhaceOneHeaderComponent } from './components/phace-one-header/phace-one-header.component';
+import { LocalStarageService } from '../../../../../core/Comman/local-starage.service';
 
 @Component({
   selector: 'app-header',

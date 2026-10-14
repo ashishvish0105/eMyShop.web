@@ -1,7 +1,7 @@
 import { Component, Inject, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { LocalStarageService } from '../../../services/local-starage.service';
 import { CONSTE_NAME } from '../../../constVariable/localStorageObjName.const';
+import { LocalStarageService } from '../../../core/Comman/local-starage.service';
 
 @Component({
   selector: 'app-page-not-found',

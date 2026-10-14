@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AsyncSubject, Observable, of } from 'rxjs';
-import { IFileResponse } from '../interface/IFileResponse.model';
 
 @Injectable({
   providedIn: 'root',

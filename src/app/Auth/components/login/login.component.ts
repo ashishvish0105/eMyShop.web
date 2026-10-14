@@ -9,10 +9,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../auth.service';
-import { LocalStarageService } from '../../../services/local-starage.service';
-import { AuthGuardService } from '../../../services/auth-guard.service';
 import { localStorageObjName } from '../../../constVariable/localStorageObjName.const';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LocalStarageService } from '../../../core/Comman/local-starage.service';
+import { AuthGuardService } from '../../../core/guards/auth-guard.service';
 
 @Component({
   selector: 'app-login',
@@ -84,3 +84,4 @@ debugger;
   }
 
 }
+
