@@ -1,5 +1,6 @@
 import { Component, inject, OnInit, viewChild } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { LocalStarageService } from '../../../../../core/Comman/local-starage.service';
 
 @Component({
   selector: 'app-side-bar-header',
@@ -13,7 +14,7 @@ export class SideBarHeaderComponent implements OnInit {
   activeRoute = inject(ActivatedRoute)
   activeItemName = 'dashboard';
   isSideNavBarOpen = true;
-
+  private localStarageService = inject(LocalStarageService)
   navItems: INavItem[] = [
     { routerLink: 'dashboard', name: 'Dashboard', icon: 'dashboard' },
     { routerLink: 'orders', name: 'Orders', icon: 'shopping_bag' },
@@ -41,6 +42,14 @@ export class SideBarHeaderComponent implements OnInit {
     this.isSideNavBarOpen = !this.isSideNavBarOpen;
 
   }
+
+  userLogOute() {
+    localStorage.removeItem('CurrentUser');
+    localStorage.removeItem('UserRegister');
+    this.routes.navigateByUrl('/');
+    this.localStarageService.clearLocalStorage();
+  }
+
 }
 export interface INavItem {
   name: string;

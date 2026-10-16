@@ -10,7 +10,7 @@ import { ProductOutletComponent } from './features/admin/product-management/prod
 import { ProductViewComponent } from './features/admin/product-management/components/product-view/product-view.component';
 import { LayoutOneComponent } from './features/storefront/home/layout-one/layout-one.component';
 import { ProductPreviewComponent } from './features/admin/product-management/components/product-preview/product-preview.component';
-import { authGuardGuard } from './core/guards/auth-guard.guard';
+import { authGuardChildGuard, authGuardGuard } from './core/guards/auth-guard.guard';
 
 export const routes: Routes = [
   {
@@ -20,7 +20,8 @@ export const routes: Routes = [
   {
     path: 'seller-Account',
     component: DashboardRouterOutlatComponent,
-    canActivate: [authGuardGuard],
+    canActivateChild: [authGuardChildGuard],
+    data: { authRole: 'seller' },
     children: [
       {
         path: '',
@@ -83,6 +84,9 @@ export const routes: Routes = [
       {
         path: 'products',
         component: LayoutOneComponent,
+        canActivate: [authGuardGuard],
+        canActivateChild: [authGuardChildGuard],
+        data: { authRole: 'customer' },
         // component: ProdDesignOneComponent,
         // children: [
         //   {

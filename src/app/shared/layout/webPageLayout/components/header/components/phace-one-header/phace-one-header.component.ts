@@ -1,19 +1,20 @@
-import { NgTemplateOutlet, NgIf } from '@angular/common';
+import { localStorageObjName } from './../../../../../../../constVariable/localStorageObjName.const';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   ElementRef,
   inject,
   Input,
-  viewChild,
   ViewChild,
 } from '@angular/core';
 import {
   Router,
   RouterLink,
-  ɵEmptyOutletComponent,
   RouterModule,
 } from '@angular/router';
 import { ButtonComponent } from '../../../../../../components/button/button.component';
+import { LocalStarageService } from '../../../../../../../core/Comman/local-starage.service';
+import { JwtDecodeService } from '../../../../../../../core/Comman/Jwt-decode.service';
 
 @Component({
   selector: 'app-phace-one-header',
@@ -37,8 +38,22 @@ export class PhaceOneHeaderComponent {
   };
 
   private routes = inject(Router);
-
+  private localStarageService = inject(LocalStarageService);
+  private JwtDecodeService = inject(JwtDecodeService);
   ngOnInit(): void {
+    debugger;
+
+
+    const currentUser = this.localStarageService.getObjLocalStorage(
+      localStorageObjName.currentUserObj,
+    );
+     const decodedToken = this.JwtDecodeService.getDecodedToken(currentUser);
+    console.log(decodedToken);
+    if(currentUser){
+      this.userDetail = currentUser;
+      this.isUserLoggedIn = true;
+      this.userDetail.userRoll = currentUser.userRoll;
+    }
   }
 
   userLogOute() {
@@ -47,6 +62,7 @@ export class PhaceOneHeaderComponent {
     this.isUserLoggedIn = false;
     this.routes.navigateByUrl('/');
     this.toggleProfileDetail()
+    this.localStarageService.clearLocalStorage();
   }
 
   activeMenuItem(urlName: string) {

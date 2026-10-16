@@ -4,11 +4,15 @@ import { ShowServicesItemComponent } from './components/show-services-item/show-
 import { TokenGenereteComponent } from './components/token-generete/token-generete.component';
 import { ServicesMainSectionComponent } from './services-main-section/services-main-section.component';
 import { Routes } from '@angular/router';
+import { authGuardChildGuard, authGuardGuard } from '../../core/guards/auth-guard.guard';
 
 export const route: Routes = [
   {
     path: '',
     component: ServicesMainSectionComponent,
+    canActivate: [authGuardGuard],
+    canActivateChild: [authGuardChildGuard],
+    data: { authRole: 'seller' },
     children: [
       {
         path: '',

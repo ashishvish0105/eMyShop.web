@@ -1,7 +1,9 @@
 export const localStorageObjName={
   currentUserObj:"CurrentUser",
   accessToken:"accessToken",
-  userRoles:"userRoles"
+  userRoles:"userRoles",
+  userId:"userId",
+  expiresAt:"expiresAt"
 }
 
 export interface localStorageObjNameModel {

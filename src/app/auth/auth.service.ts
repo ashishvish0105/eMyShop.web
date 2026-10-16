@@ -16,6 +16,10 @@ export class AuthService {
     return this.http.post<ILoginApiResponseModel>(`${environment.BaseUrl}Auth/Login`, UserInfo);
   }
 
+  validateSession(userId: string): Observable<unknown> {
+    return this.http.get<unknown>(`${environment.BaseUrl}Auth/${encodeURIComponent(userId)}`);
+  }
+
   register(userInfo: IRegisterModel): Observable<IRegisterApiResponseModel> {
     return this.http.post<IRegisterApiResponseModel>(`${environment.BaseUrl}Auth/register`, userInfo);
   }
