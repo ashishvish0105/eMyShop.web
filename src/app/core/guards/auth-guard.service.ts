@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Router, UrlTree } from '@angular/router';
-import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
+import { BehaviorSubject, catchError, finalize, map, Observable, of, shareReplay } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { AuthService } from '../../auth/auth.service';
 import { logintype } from '../../constVariable/user.const';
@@ -43,6 +43,12 @@ export class AuthGuardService {
   private readonly router = inject(Router);
   private readonly localStarageService = inject(LocalStarageService);
   private readonly authService = inject(AuthService);
+  private sessionValidationRequest: {
+    token: string;
+    userId: string;
+    navigationId: number | null;
+    response: Observable<ReadonlySet<AuthenticatedRole> | null>;
+  } | null = null;
 
   constructor() {}
 
@@ -92,7 +98,18 @@ export class AuthGuardService {
       return of(null);
     }
 
-    return this.authService.validateSession(session.userId).pipe(
+    const navigationId = this.router.getCurrentNavigation()?.id ?? null;
+    const pendingValidation = this.sessionValidationRequest;
+    if (
+      pendingValidation?.token === session.token
+      && pendingValidation.userId === session.userId
+      && pendingValidation.navigationId === navigationId
+    ) {
+      return pendingValidation.response;
+    }
+
+    let response: Observable<ReadonlySet<AuthenticatedRole> | null>;
+    response = this.authService.validateSession(session.userId).pipe(
       map(() => {
         this.autharize.next(true);
         return roles;
@@ -101,7 +118,15 @@ export class AuthGuardService {
         this.clearSession();
         return of(null);
       }),
+      finalize(() => {
+        if (navigationId === null && this.sessionValidationRequest?.response === response) {
+          this.sessionValidationRequest = null;
+        }
+      }),
+      shareReplay({ bufferSize: 1, refCount: false }),
     );
+    this.sessionValidationRequest = { token: session.token, userId: session.userId, navigationId, response };
+    return response;
   }
 
   getLandingUrl(role: AuthenticatedRole): string {

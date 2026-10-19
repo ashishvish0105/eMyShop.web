@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router, Routes, UrlTree } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, of, Subject, throwError } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
 import { localStorageObjName } from '../../constVariable/localStorageObjName.const';
 import { authGuardChildGuard, authGuardGuard } from './auth-guard.guard';
@@ -110,6 +110,26 @@ describe('authentication and route authorization', () => {
 
     expect(TestBed.inject(Router).url).toBe('/seller-Account/dashboard');
     expect(validateSessionSpy).toHaveBeenCalledWith('test-user');
+  });
+
+  it('shares concurrent session validation requests but revalidates after completion', () => {
+    setSession(['customer']);
+    const validationResponse = new Subject<unknown>();
+    validateSessionSpy.and.returnValue(validationResponse);
+    const authGuardService = TestBed.inject(AuthGuardService);
+
+    const firstValidation = authGuardService.validateSession();
+    const secondValidation = authGuardService.validateSession();
+
+    expect(validateSessionSpy).toHaveBeenCalledTimes(1);
+
+    firstValidation.subscribe();
+    secondValidation.subscribe();
+    validationResponse.next({});
+    validationResponse.complete();
+
+    authGuardService.validateSession().subscribe();
+    expect(validateSessionSpy).toHaveBeenCalledTimes(2);
   });
 
   it('allows a customer to open the customer product route', async () => {
@@ -222,6 +242,7 @@ describe('authentication and route authorization', () => {
     await navigate('/seller-Account/products/add-product');
 
     expect(TestBed.inject(Router).url).toBe('/seller-Account/products/add-product');
+    expect(validateSessionSpy).toHaveBeenCalledTimes(1);
   });
 
   it('sends an unknown URL to the not-found route instead of login', async () => {
