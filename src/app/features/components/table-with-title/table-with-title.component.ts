@@ -20,6 +20,7 @@ export class TableWithTitleComponent implements OnInit, OnChanges {
   @Output() pageSizeChange: EventEmitter<{pageSize: number; currentPage: number; }> = new EventEmitter<{ pageSize: number; currentPage: number; }>();
   @Output() editRow = new EventEmitter<any>();
   @Output() deleteRow = new EventEmitter<any>();
+  @Output() viewRow = new EventEmitter<any>();
 
   currentPage: number = 1;
   totalPages: number = 1;

@@ -22,3 +22,43 @@
 .product-thumbnail img {
     object-fit: cover;
 }
+.product-preview-image {
+    max-height: 460px;
+    object-fit: contain;
+    background: #f7f8fb;
+}
+
+.product-preview-empty {
+    min-height: 280px;
+    background: #f7f8fb;
+}
+
+.product-preview-thumbnail {
+    width: 58px;
+    height: 58px;
+    overflow: hidden;
+    border: 1px solid #dee2e6;
+}
+
+.product-preview-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.preview-details > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.preview-details dt {
+    color: #6c757d;
+    font-weight: 400;
+}
+
+.preview-details dd {
+    margin-bottom: 0;
+    text-align: right;
+}

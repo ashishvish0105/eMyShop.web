@@ -50,6 +50,9 @@
 
                     <td class="eMy-textAlignCenter">
                         @if (showRowActions) {
+                        <button type="button" class="actionBtn" (click)="viewRow.emit(row)" aria-label="View product details">
+                            View
+                        </button>
                         <button type="button" class="actionBtn" (click)="editRow.emit(row)" aria-label="Edit product">
                             Edit
                         </button>

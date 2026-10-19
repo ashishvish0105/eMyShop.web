@@ -27,6 +27,7 @@ export class ButtonComponent implements AfterViewInit {
   // @Input() buttonType: buttonTypes[] = 'button';
   @Input({ alias: 'buttonName', required: false }) buttonName : "switchBtn" | "asBtnSecondry" | "asBtnPrimary" | "asBtnDanger" | "asBtnWhite" | "asBtnInfo" | "asBtnSuccess" | "default"="default";
   @Input() smallSize: boolean = false;
+  @Input() disabled: boolean = false;
   // @Input('setSwitchValue') setSwitchValue: boolean = false;
   @Output() switchEvent = new EventEmitter<boolean>();
 

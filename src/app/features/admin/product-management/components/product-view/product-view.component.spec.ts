@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProductManagmentService } from '../../services/product-managment.service';
 import { ProductViewComponent } from './product-view.component';
 
 describe('ProductViewComponent', () => {
@@ -8,7 +9,12 @@ describe('ProductViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProductViewComponent]
+      imports: [ProductViewComponent],
+      providers: [
+        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: { get: () => null } } } },
+        { provide: Router, useValue: { navigate: jasmine.createSpy() } },
+        { provide: ProductManagmentService, useValue: {} }
+      ]
     })
     .compileComponents();
 

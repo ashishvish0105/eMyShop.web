@@ -5,11 +5,12 @@ export interface IProduct {
   productName: string;
   description: string;
   categoryId: number;
+  categoryName?: string;
   typeId: number;
   basePrice: number;
   compareAtPrice: number;
   costPerItem: number;
-  status: number;
+  status: number | string;
   brand?: string;
   tags?: string[];
   sku?: string;

@@ -1,136 +1,102 @@
-import { Component, computed, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit, inject, signal } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IProduct } from '../../../../../interface/admin/product-management/IProduct.model';
+import { ProductManagmentService } from '../../services/product-managment.service';
 
 @Component({
   selector: 'app-product-view',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './product-view.component.html',
   styleUrl: './product-view.component.scss'
 })
-export class ProductViewComponent {
+export class ProductViewComponent implements OnInit {
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+  private readonly productService = inject(ProductManagmentService);
 
-  readonly MAX_DESC_LENGTH = 2000;
-  description = signal<string>('');
+  readonly product = signal<IProduct | null>(null);
+  readonly categoryName = signal('Uncategorized');
+  readonly loading = signal(true);
+  readonly errorMessage = signal('');
 
-  charCount = computed(() => this.description().length);
-  charCountLabel = computed(() => `${this.charCount()} / ${this.MAX_DESC_LENGTH}`);
-
-  onDescriptionInput(event: Event): void {
-    const value = (event.target as HTMLTextAreaElement).value;
-    this.description.set(value);
-  }
-
-  stockQuantity = signal<number>(0);
-
-  stockStatus = computed<StockStatus>(() => {
-    const qty = this.stockQuantity();
-    if (qty === 0) {
-      return {
-        label: 'Out of stock',
-        background: '#FEF2F2',
-        color: '#B91C1C',
-        borderColor: '#FECACA'
-      };
-    } else if (qty <= 5) {
-      return {
-        label: 'Low stock',
-        background: '#FFFBEB',
-        color: '#92400E',
-        borderColor: '#FDE68A'
-      };
-    } else {
-      return {
-        label: 'In stock',
-        background: '#EAFAF3',
-        color: '#0D7A45',
-        borderColor: '#A8DFCA'
-      };
+  ngOnInit(): void {
+    const productId = Number(this.route.snapshot.paramMap.get('id'));
+    if (!Number.isInteger(productId) || productId < 1) {
+      this.loading.set(false);
+      this.errorMessage.set('The product identifier is invalid.');
+      return;
     }
-  });
 
-  onStockInput(event: Event): void {
-    const value = parseInt((event.target as HTMLInputElement).value, 10) || 0;
-    this.stockQuantity.set(value);
-  }
+    this.productService.getById(productId).subscribe({
+      next: (response) => {
+        if (!response.payload) {
+          this.errorMessage.set('Product not found.');
+          this.loading.set(false);
+          return;
+        }
 
-  // ── Size tags ─────────────────────────────────────────────────
-  sizeTags = signal<SizeTag[]>([
-    { value: 'XS',  active: false },
-    { value: 'S',   active: true  },
-    { value: 'M',   active: true  },
-    { value: 'L',   active: true  },
-    { value: 'XL',  active: false },
-    { value: 'XXL', active: false },
-  ]);
-
-  toggleSize(index: number): void {
-    this.sizeTags.update(tags =>
-      tags.map((tag, i) =>
-        i === index ? { ...tag, active: !tag.active } : tag
-      )
-    );
-  }
-
-  // ── Color swatches ────────────────────────────────────────────
-  colorSwatches = signal<ColorSwatch[]>([
-    { name: 'Black', hex: '#1A1916',                       active: true  },
-    { name: 'White', hex: '#FFFFFF', border: '#ccc',       active: false },
-    { name: 'Blue',  hex: '#1A56DB',                       active: false },
-    { name: 'Coral', hex: '#D85A30',                       active: false },
-    { name: 'Green', hex: '#639922',                       active: false },
-    { name: 'Gray',  hex: '#6B6860',                       active: false },
-  ]);
-
-  selectColor(index: number): void {
-    this.colorSwatches.update(swatches =>
-      swatches.map((swatch, i) => ({ ...swatch, active: i === index }))
-    );
-  }
-
-  activeColor = computed(() =>
-    this.colorSwatches().find(s => s.active)?.name ?? ''
-  );
-
-  activeSizes = computed(() =>
-    this.sizeTags().filter(t => t.active).map(t => t.value)
-  );
-
-  // ── Form actions ──────────────────────────────────────────────
-  onSaveDraft(): void {
-    console.log('Saving draft...');
-  }
-
-  onPreview(): void {
-    console.log('Previewing...');
-  }
-
-  onPublish(): void {
-    console.log('Publishing product...', {
-      description: this.description(),
-      stockQuantity: this.stockQuantity(),
-      sizes: this.activeSizes(),
-      color: this.activeColor(),
+        this.product.set(response.payload);
+        this.loadCategoryName(response.payload.categoryId);
+        this.loading.set(false);
+      },
+      error: (error) => {
+        this.errorMessage.set(this.getRequestError(error, 'load product details'));
+        this.loading.set(false);
+      }
     });
   }
-}
 
+  editProduct(): void {
+    const product = this.product();
+    if (product) {
+      this.router.navigate(['/seller-Account/products/edit', product.productId]);
+    }
+  }
 
+  backToProducts(): void {
+    this.router.navigate(['/seller-Account/products']);
+  }
 
-interface SizeTag {
-  value: string;
-  active: boolean;
-}
+  statusLabel(status: number | string): string {
+    const labels: Record<number, string> = {
+      0: 'Inactive',
+      1: 'Active',
+      2: 'Draft',
+      3: 'Archived'
+    };
+    return labels[Number(status)] ?? 'Unknown';
+  }
 
-interface ColorSwatch {
-  name: string;
-  hex: string;
-  border?: string;
-  active: boolean;
-}
+  private loadCategoryName(categoryId: number): void {
+    this.productService.getCetegories().subscribe({
+      next: (response) => {
+        const categories = Array.isArray(response?.payload) ? response.payload : [];
+        const category = categories.find((item: { categoryId?: number; id?: number; categoryName?: string; name?: string }) =>
+          Number(item.categoryId ?? item.id) === categoryId
+        );
+        if (category?.categoryName ?? category?.name) {
+          this.categoryName.set(category.categoryName ?? category.name);
+        }
+      },
+      error: () => this.categoryName.set(`Category ${categoryId}`)
+    });
+  }
 
-interface StockStatus {
-  label: string;
-  background: string;
-  color: string;
-  borderColor: string;
+  private getRequestError(error: { status: number; error?: { title?: string } }, action: string): string {
+    if (error.status === 400) {
+      return 'The product ID is invalid.';
+    }
+    if (error.status === 403) {
+      return 'You do not have permission to view this product.';
+    }
+    if (error.status === 404) {
+      return 'Product not found.';
+    }
+
+    return error.error?.title
+      ? `${error.error.title} Could not ${action}.`
+      : `Could not ${action} (request failed${error.status ? `: ${error.status}` : ''}).`;
+  }
 }

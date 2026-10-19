@@ -2,6 +2,10 @@
 </app-breadcumb>
 
 
+@if (isLoading) {
+<div class="alert alert-light border mb-3">Loading product details...</div>
+}
+
 <form [formGroup]="productForm" (ngSubmit)="onPublishProduct()">
 
     <div class="row">
@@ -52,7 +56,7 @@
                         <div class="eMy-gallery">
                             <!-- Upload -->
                             <label class="eMy-upload-card">
-                                <input type="file" multiple accept="image/*" (change)="onSelectImages($event)" hidden>
+                                <input type="file" multiple accept="image/jpeg,image/png,image/webp" (change)="onSelectImages($event)" hidden>
                                 <div class="eMy-upload-content">
                                     <svg
                                         width="34"
@@ -83,6 +87,9 @@
                             </div>
                             }
                         </div>
+                        <p class="small text-muted mt-2 mb-0">
+                            JPG, PNG, or WebP; up to 5 MB each and 5 images. Preview only: product image persistence is not available in the current API.
+                        </p>
                     </div>
                 </ng-container>
             </app-title-with-item>
@@ -276,12 +283,12 @@
                         <div class="row justify-content-end">
                             <!-- Discard -->
                             <div class="col-auto">
-                                <app-button buttonType="button" buttonText="Discard" buttonName="asBtnSecondry" (click)="onDiscard()">
+                                <app-button buttonType="button" [buttonText]="isSubmitting ? 'Saving...' : 'Discard'" buttonName="asBtnSecondry" (click)="onDiscard()" [disabled]="isSubmitting">
                                 </app-button>
                             </div>
                             <!-- Preview -->
                             <div class="col-auto">
-                                <app-button buttonType="button" buttonText="Save & Preview Product" buttonName="asBtnPrimary" (click)="onPreviewPage()">
+                                <app-button buttonType="button" [buttonText]="'Save & Preview Product'" buttonName="asBtnPrimary" (click)="onPreviewPage()" [disabled]="isSubmitting">
                                 </app-button>
                             </div>
 
@@ -289,7 +296,7 @@
                             <!-- Save -->
                             <div class="col-auto">
 
-                                <app-button buttonType="submit" [buttonText]="productId === null ? 'Save Product' : 'Update Product'" buttonName="asBtnPrimary">
+                                <app-button buttonType="submit" [buttonText]="isSubmitting ? (productId === null ? 'Saving Product...' : 'Updating Product...') : (productId === null ? 'Save Product' : 'Update Product')" buttonName="asBtnPrimary" [disabled]="isSubmitting || isLoading">
                                 </app-button>
 
                             </div>

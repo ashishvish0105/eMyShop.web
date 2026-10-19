@@ -1,0 +1,25 @@
+.product-details {
+    padding: 1rem;
+}
+
+.product-description {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.details-list > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.details-list dt {
+    color: #6c757d;
+    font-weight: 400;
+}
+
+.details-list dd {
+    margin-bottom: 0;
+    text-align: right;
+}

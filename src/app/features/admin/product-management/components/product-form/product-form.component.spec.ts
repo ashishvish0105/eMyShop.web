@@ -1,13 +1,27 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProductFormComponent } from './product-form.component';
+import { provideRouter } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ProductManagmentService } from '../../services/product-managment.service';
+import { of } from 'rxjs';
 
 describe('ProductFormComponent', () => {
   let component: ProductFormComponent;
   let fixture: ComponentFixture<ProductFormComponent>;
 
   beforeEach(async () => {
+    const productService = {
+      getCetegories: jasmine.createSpy().and.returnValue(of({ payload: [] })),
+      getById: jasmine.createSpy().and.returnValue(of({ payload: null }))
+    };
+
     await TestBed.configureTestingModule({
-      imports: [ProductFormComponent]
+      imports: [ProductFormComponent],
+      providers: [
+        provideRouter([]),
+        { provide: ProductManagmentService, useValue: productService },
+        { provide: MatSnackBar, useValue: { open: jasmine.createSpy() } }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProductFormComponent);
@@ -15,19 +29,19 @@ describe('ProductFormComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should initialize form with default values', () => {
-    expect(component.productForm.get('productName')?.value).toBe('product 1');
-    expect(component.productForm.get('description')?.value).toBe('this product is');
-    expect(component.productForm.get('basePrice')?.value).toBe(500);
-    expect(component.productForm.get('compareAtPrice')?.value).toBe(41);
-    expect(component.productForm.get('costPerItem')?.value).toBe(85);
+  it('should initialize with blank, valid-range product defaults', () => {
+    expect(component.productForm.get('productName')?.value).toBe('');
+    expect(component.productForm.get('description')?.value).toBe('');
+    expect(component.productForm.get('basePrice')?.value).toBe(0);
+    expect(component.productForm.get('compareAtPrice')?.value).toBe(0);
+    expect(component.productForm.get('costPerItem')?.value).toBe(0);
     expect(component.productForm.get('status')?.value).toBe(1);
-    expect(component.productForm.get('category')?.value).toBe(2);
-    expect(component.productForm.get('brand')?.value).toBe('add');
-    expect(component.productForm.get('tags')?.value).toEqual(['product1', 'prod2']);
-    expect(component.productForm.get('sku')?.value).toBe('123123');
-    expect(component.productForm.get('barcode')?.value).toBe('123123');
-    expect(component.productForm.get('availableQuantity')?.value).toBe(1);
+    expect(component.productForm.get('categoryId')?.value).toBeNull();
+    expect(component.productForm.get('brand')?.value).toBe('');
+    expect(component.productForm.get('tags')?.value).toEqual([]);
+    expect(component.productForm.get('sku')?.value).toBe('');
+    expect(component.productForm.get('barcode')?.value).toBe('');
+    expect(component.productForm.get('availableQuantity')?.value).toBe(0);
   });
 
   it('should validate required fields and tag array', () => {
@@ -38,7 +52,8 @@ describe('ProductFormComponent', () => {
       compareAtPrice: 0,
       costPerItem: 0,
       status: null,
-      category: null,
+      categoryId: null,
+      typeId: null,
       brand: '',
       tags: [],
       sku: '',
@@ -56,4 +71,3 @@ describe('ProductFormComponent', () => {
     expect(component.productForm.get('availableQuantity')?.errors?.['min']).toBeTruthy();
   });
 });
-
