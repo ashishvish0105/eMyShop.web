@@ -3,3 +3,19 @@
 .header-controls { display: flex; align-items: center; gap: 13px; }.icon-button, .help-button { position: relative; width: 36px; height: 36px; display: grid; place-items: center; border: 0; border-radius: 9px; color: #304536; background: #f2f7f2; cursor: pointer; text-decoration: none; }.icon-button > i { position: absolute; width: 7px; height: 7px; top: 6px; right: 6px; border-radius: 50%; background: #ef554c; border: 1px solid white; }.icon-button:hover, .help-button:hover { background: #e7f7eb; }.admin-profile { display: flex; align-items: center; gap: 9px; padding-left: 13px; border-left: 1px solid #e6ede7; }.admin-profile > span:first-child { text-align: right; }.admin-profile strong, .admin-profile small { display: block; }.admin-profile strong { color: #233629; font-size: 10px; }.admin-profile small { color: #869289; font-size: 9px; margin-top: 3px; }.profile-avatar { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: #e6f8ea; color: #15843a; border: 1px solid #88e49e; font-size: 9px; font-weight: 700; }
 .notification-wrap { position: relative; }.notification-popover { position: absolute; z-index: 30; top: 46px; right: -60px; width: min(290px, calc(100vw - 30px)); padding: 15px; border: 1px solid #e3ebe4; border-radius: 11px; background: white; box-shadow: 0 12px 30px #18312020; }.notification-popover > strong { font-size: 13px; }.notification-popover p { display: flex; gap: 8px; align-items: start; color: #647268; font-size: 10px; margin: 13px 0; }.notification-dot { flex: none; width: 7px; height: 7px; background: #00d941; border-radius: 50%; margin-top: 3px; }.notification-popover a { color: #138637; font-size: 10px; font-weight: 700; text-decoration: none; }
 @media (max-width: 700px) { .admin-header { min-height: 58px; padding: 8px 13px; gap: 10px; }.admin-search { width: 100%; min-height: 37px; }.admin-search button { display: none; }.header-controls { gap: 7px; }.help-button, .admin-profile > span:first-child { display: none; }.admin-profile { border-left: 0; padding: 0; }.admin-profile .profile-avatar { width: 31px; height: 31px; }.icon-button { width: 34px; height: 34px; } }
+
+@media (min-width: 901px) {
+  .admin-header { min-height: 88px; padding: 0 36px; gap: 24px; }
+  .admin-search { width: 47%; min-height: 44px; padding: 0 16px; border-radius: 10px; }
+  .admin-search > span { font-size: 24px; }
+  .admin-search input { font-size: 16px; }
+  .admin-search button { display: none; }
+  .header-controls { gap: 20px; }
+  .icon-button, .help-button { width: 50px; height: 50px; border-radius: 11px; }
+  .icon-button .material-symbols-outlined, .help-button .material-symbols-outlined { font-size: 24px; }
+  .icon-button > i { width: 9px; height: 9px; top: 9px; right: 9px; }
+  .admin-profile { gap: 14px; padding-left: 24px; }
+  .admin-profile strong { font-size: 16px; }
+  .admin-profile small { font-size: 12px; }
+  .admin-profile .profile-avatar { width: 44px; height: 44px; font-size: 12px; }
+}

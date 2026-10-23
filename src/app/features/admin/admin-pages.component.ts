@@ -46,6 +46,7 @@ export class AdminPagesComponent implements OnInit {
   draft = { name: '', secondary: '', category: 'Mains', amount: 0, stock: 10 };
   settingsSaved = false;
   reportRange = 'Last 30 days';
+  dashboardRange = 'Last 7 Days';
   alerts = { newOrders: true, lowStock: true, dailySummary: false };
   readonly hours = [
     { day: 'Monday', open: true, start: '09:00', end: '22:00' },
@@ -74,7 +75,7 @@ export class AdminPagesComponent implements OnInit {
 
   get title(): string {
     const titles: Record<string, string> = {
-      dashboard: 'Good morning, Joe', orders: 'Orders management', products: 'Menu management',
+      dashboard: 'Good Morning, Joe', orders: 'Orders management', products: 'Menu management',
       customers: 'Customer database', inventory: 'Inventory control', reports: 'Business reports',
       settings: 'General settings',
     };
@@ -136,6 +137,18 @@ export class AdminPagesComponent implements OnInit {
     if (this.reportRange === 'Last 7 days') return [42, 62, 57, 36, 78, 92, 68];
     if (this.reportRange === 'This year') return [30, 42, 37, 55, 50, 66, 61, 73, 68, 84, 79, 96];
     return [34, 46, 39, 58, 52, 70, 62, 79, 66, 90, 74, 96];
+  }
+
+  get dashboardBars(): number[] {
+    return this.dashboardRange === 'Last 30 Days'
+      ? [34, 46, 39, 58, 52, 70, 62]
+      : [42, 62, 57, 36, 78, 92, 68];
+  }
+
+  get dashboardLabels(): string[] {
+    return this.dashboardRange === 'Last 30 Days'
+      ? ['1', '5', '10', '15', '20', '25', '30']
+      : ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
   }
 
   money(value: number): string {

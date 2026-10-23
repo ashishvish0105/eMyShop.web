@@ -51,3 +51,51 @@ app-storefront-page .food-card, app-storefront-page .category-chip, app-storefro
 app-storefront-page .food-card:hover, app-storefront-page .category-chip:hover { box-shadow: 0 10px 20px rgba(16, 36, 22, .08); transform: translateY(-2px); }
 app-storefront-page .button-primary, app-storefront-page .checkout-button, app-storefront-page .add-button, app-storefront-page .keep-order, app-storefront-page .cancel-dialog button { transition: transform .18s ease, filter .18s ease, background-color .18s ease; }
 app-storefront-page .button-primary:hover, app-storefront-page .checkout-button:hover, app-storefront-page .add-button:hover, app-storefront-page .keep-order:hover, app-storefront-page .cancel-dialog button:hover { transform: translateY(-1px); filter: brightness(.98); }
+app-storefront-page .narrow-page { width: min(1200px, 90%); margin: 0 auto; padding-top: 34px; }
+app-storefront-page .page-title { margin-bottom: 22px; }
+app-storefront-page .checkout-crumbs { display: flex; align-items: center; gap: 8px; color: #6f7a72; font-size: 11px; text-transform: none; margin-bottom: 6px; }
+app-storefront-page .checkout-crumbs a { color: #637066; text-decoration: none; }
+app-storefront-page .checkout-crumbs strong { color: #1b2d21; font-weight: 700; }
+app-storefront-page .checkout-layout { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(280px, 360px); gap: 28px; align-items: flex-start; }
+app-storefront-page .checkout-fields { display: grid; gap: 24px; }
+app-storefront-page .checkout-fields .panel, app-storefront-page .checkout-summary { border: 1px solid #dfeae1; border-radius: 14px; background: rgba(255,255,255,.85); box-shadow: none; }
+app-storefront-page .checkout-fields .panel { padding: 22px 18px 18px; }
+app-storefront-page .form-heading { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+app-storefront-page .form-heading > span { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: #00d845; color: #0c2012; font-size: 12px; font-weight: 800; }
+app-storefront-page .form-heading h2 { margin: 0; font-size: 17px; }
+app-storefront-page .form-heading p { margin: 4px 0 0; font-size: 12px; color: #738178; }
+app-storefront-page .address-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+app-storefront-page .address-choice { position: relative; display: grid; grid-template-columns: 1fr auto; gap: 10px; min-height: 120px; border: 1px solid #dfeae1; border-radius: 10px; padding: 14px 12px; background: #f6faf6; cursor: pointer; }
+app-storefront-page .address-choice.active { border-color: #22d65c; background: #f0fff4; }
+app-storefront-page .address-choice input { position: absolute; inset: 0; opacity: 0; }
+app-storefront-page .address-choice > div { display: flex; flex-direction: column; gap: 2px; padding-right: 12px; }
+app-storefront-page .address-choice strong { font-size: 14px; color: #1c2b21; }
+app-storefront-page .address-choice span, app-storefront-page .address-choice small { color: #66766d; font-size: 11px; line-height: 1.5; }
+app-storefront-page .selected-mark { align-self: center; width: 18px; height: 18px; border-radius: 50%; background: #09d343; color: #fff; font-size: 14px; display: grid; place-items: center; }
+app-storefront-page .payment-option { display: flex; align-items: center; gap: 12px; min-height: 60px; border: 1px solid #dfeae1; border-radius: 10px; background: #f7faf7; padding: 12px 14px; margin-bottom: 12px; }
+app-storefront-page .payment-option.selected { border-color: #27d961; background: #ecfff1; }
+app-storefront-page .payment-option input { accent-color: #16a740; }
+app-storefront-page .payment-option .material-symbols-outlined { color: #107f36; font-size: 22px; }
+app-storefront-page .payment-option b { display: block; font-size: 14px; }
+app-storefront-page .payment-option small { color: #69766d; font-size: 11px; }
+app-storefront-page .field-label { display: grid; gap: 7px; font-size: 10px; color: #7a867d; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; }
+app-storefront-page .field-label input { min-height: 40px; border: 1px solid #dfeae1; border-radius: 8px; padding: 0 12px; background: #fff; color: #1d2b22; }
+app-storefront-page .checkout-summary { position: sticky; top: 92px; padding: 20px 18px 16px; }
+app-storefront-page .checkout-summary h2 { margin: 0 0 16px; font-size: 18px; }
+app-storefront-page .promo-code-row { margin-bottom: 16px; }
+app-storefront-page .promo-code-row label { display: block; font-size: 10px; letter-spacing: .12em; color: #738179; margin-bottom: 8px; font-weight: 700; }
+app-storefront-page .promo-form { display: flex; gap: 8px; }
+app-storefront-page .promo-form input { flex: 1; min-width: 0; min-height: 38px; border: 1px solid #dfeae1; border-radius: 8px; padding: 0 10px; background: white; }
+app-storefront-page .promo-form button { min-height: 38px; border: 0; background: #edf7ef; color: #117d38; border-radius: 8px; padding: 0 12px; font-size: 11px; font-weight: 700; }
+app-storefront-page .totals-list { border-top: 1px solid #edf2ee; padding-top: 12px; }
+app-storefront-page .totals-list > div { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 8px 0; color: #586a5e; font-size: 13px; }
+app-storefront-page .totals-list .total-row { border-top: 1px solid #edf2ee; margin-top: 2px; padding-top: 12px; color: #1c2d22; font-weight: 800; }
+app-storefront-page .totals-list strong { font-size: 18px; }
+app-storefront-page .checkout-button { justify-content: center; width: 100%; min-height: 48px; border: 0; border-radius: 10px; background: linear-gradient(180deg, #17d94a, #00ce3c); color: #0a1c10; font-size: 14px; font-weight: 800; letter-spacing: -.01em; display: inline-flex; align-items: center; gap: 8px; }
+app-storefront-page .secure-note { display: flex; align-items: center; justify-content: center; gap: 6px; color: #758378; font-size: 11px; margin-top: 12px; }
+app-storefront-page .secure-note .material-symbols-outlined { font-size: 16px; color: #1b8b3d; }
+app-storefront-page .add-address { margin-top: 18px; width: 100%; min-height: 42px; border: 1px dashed #d2e7d7; background: #f9fbf9; border-radius: 9px; color: #1b7a3a; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+app-storefront-page .address-choice + .address-choice { background: #f9faf9; }
+app-storefront-page .page-title > p:last-child { max-width: 660px; }
+@media (max-width: 900px) { app-storefront-page .checkout-layout { grid-template-columns: 1fr; }app-storefront-page .checkout-summary { position: static; } }
+@media (max-width: 520px) { app-storefront-page .address-grid { grid-template-columns: 1fr; }app-storefront-page .promo-form { flex-direction: column; }app-storefront-page .checkout-fields .panel, app-storefront-page .checkout-summary { padding: 16px 14px; }app-storefront-page .checkout-button { font-size: 13px; } }

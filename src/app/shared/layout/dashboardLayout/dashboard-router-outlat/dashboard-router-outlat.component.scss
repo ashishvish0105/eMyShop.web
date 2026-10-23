@@ -8,3 +8,9 @@
 @media (max-width: 900px) and (min-width: 701px) { .eMy-side-bar-outer { flex-basis: 72px; width: 72px; }.eMy-layout-display-container { padding: 20px; } }
 @media (max-width: 700px) { .eMy-dashboard-layout { display: block; }.eMy-side-bar-outer { display: contents; }.eMy-layout-display-container { min-height: calc(100vh - 58px); padding: 18px 15px 82px; } }
 @media (max-width: 380px) { .eMy-layout-display-container { padding: 14px 11px 80px; } }
+
+@media (min-width: 901px) {
+  .eMy-side-bar-outer { flex-basis: 288px; width: 288px; }
+  .eMy-layout-display-container { min-height: calc(100vh - 88px); padding: 46px 36px 36px; }
+  .eMy-layout-display { max-width: none; }
+}

@@ -1,48 +1,56 @@
 <section class="admin-page">
-  <header class="page-heading">
+  <header class="page-heading" [class.dashboard-heading]="page === 'dashboard'">
     <div>
-      <p class="eyebrow">{{ page === 'dashboard' ? 'TUESDAY, OCTOBER 24' : 'RESTOADMIN · MANAGEMENT' }}</p>
+      @if (page === 'dashboard') {
+        <p class="eyebrow dashboard-date"><span class="material-symbols-outlined">calendar_today</span>Tuesday, October 24, 2023</p>
+      } @else {
+        <p class="eyebrow">RESTOADMIN · MANAGEMENT</p>
+      }
       <h1>{{ title }}</h1>
-      <p class="page-description">{{ description }}</p>
+      @if (page !== 'dashboard') { <p class="page-description">{{ description }}</p> }
     </div>
     <button class="button button-primary" (click)="openCreate()">
-      <span class="material-symbols-outlined">add</span>{{ page === 'dashboard' ? 'New order' : actionLabel }}
+      <span class="material-symbols-outlined">add</span>{{ page === 'dashboard' ? 'New Order' : actionLabel }}
     </button>
   </header>
 
   @if (page === 'dashboard') {
     <div class="metric-grid">
-      <article class="metric-card"><span>Today's revenue</span><strong>$4,250.00</strong><small class="positive">↗ 12% vs yesterday</small><span class="metric-icon">payments</span></article>
-      <article class="metric-card"><span>Active orders</span><strong>14</strong><small class="positive">↗ 2% vs avg hour</small><span class="metric-icon blue">receipt_long</span></article>
-      <article class="metric-card"><span>Tables occupied</span><strong>18 <i>/ 25</i></strong><small class="positive">● 72% capacity</small><span class="metric-icon orange">table_restaurant</span></article>
-      <article class="metric-card"><span>Low stock alerts</span><strong>5</strong><small class="warning">Needs attention</small><span class="metric-icon red">warning</span></article>
+      <article class="metric-card"><span>Today's Revenue</span><strong>$4,250.00</strong><small class="positive">↗ +12% <i>vs yesterday</i></small><span class="metric-icon">payments</span></article>
+      <article class="metric-card"><span>Active Orders</span><strong>14</strong><small class="positive">↗ +2% <i>vs avg hour</i></small><span class="metric-icon blue">receipt_long</span></article>
+      <article class="metric-card"><span>Tables Occupied</span><strong>18/25</strong><small class="positive">● 72% capacity</small><span class="metric-icon orange">table_restaurant</span></article>
+      <article class="metric-card"><span>Low Stock Alerts</span><strong>5</strong><small class="warning">↘ Requires attention</small><span class="metric-icon red">warning</span></article>
     </div>
 
     <div class="dashboard-grid">
-      <section class="panel quick-actions">
-        <div class="panel-heading"><div><h2>Quick actions</h2><p>Jump into your daily operations</p></div></div>
+      <section class="quick-actions">
+        <div class="dashboard-section-heading"><h2>Quick Actions</h2></div>
         <div class="action-grid">
-          <a routerLink="/seller-Account/orders"><span class="material-symbols-outlined">receipt_long</span>View orders</a>
-          <a routerLink="/seller-Account/products"><span class="material-symbols-outlined">restaurant_menu</span>Edit menu</a>
-          <a routerLink="/seller-Account/inventory"><span class="material-symbols-outlined">inventory_2</span>Check stock</a>
-          <a routerLink="/seller-Account/reports"><span class="material-symbols-outlined">monitoring</span>View reports</a>
+          <a routerLink="/seller-Account/inventory"><span class="material-symbols-outlined">inventory</span>Stock Mgmt</a>
+          <a routerLink="/seller-Account/customers"><span class="material-symbols-outlined">groups</span>Customers</a>
+          <a routerLink="/seller-Account/products"><span class="material-symbols-outlined">edit_square</span>Edit Menu</a>
+          <a routerLink="/seller-Account/reports"><span class="material-symbols-outlined">tune</span>Reports</a>
         </div>
       </section>
-      <section class="panel revenue-panel">
-        <div class="panel-heading"><div><h2>Revenue trend</h2><p>Sales performance this week</p></div><span class="period-label">Last 7 days⌄</span></div>
-        <div class="bar-chart" aria-label="Revenue chart for Monday through Sunday">
-          @for (bar of [42, 62, 57, 36, 78, 92, 68]; track $index) {
-            <div class="bar-group"><span class="bar" [style.height.%]="bar"></span><small>{{ ['M','T','W','T','F','S','S'][$index] }}</small></div>
+      <section class="revenue-panel">
+        <div class="dashboard-section-heading"><h2>Revenue Trend</h2><label class="dashboard-period"><span class="sr-only">Revenue range</span><select [(ngModel)]="dashboardRange" name="dashboardRange"><option>Last 7 Days</option><option>Last 30 Days</option></select></label></div>
+        <div class="chart-card">
+          <div class="bar-chart" [attr.aria-label]="'Revenue chart for ' + dashboardRange">
+          @for (bar of dashboardBars; track $index) {
+            <div class="bar-group"><span class="bar" [style.height.%]="bar"></span><small>{{ dashboardLabels[$index] }}</small></div>
           }
+          </div>
         </div>
-        <div class="chart-caption"><span><i class="legend-dot"></i>Revenue</span><strong>+$1,248 <small>this week</small></strong></div>
       </section>
     </div>
-    <section class="panel activity-panel">
-      <div class="panel-heading"><div><h2>Recent activity</h2><p>Latest updates from your restaurant</p></div><a routerLink="/seller-Account/orders">View all</a></div>
-      <div class="activity-row"><span class="activity-icon">shopping_bag</span><div><strong>Order #FD-2048 completed</strong><small>Table 12 · 4 items · $32.50</small></div><time>2 mins ago</time></div>
-      <div class="activity-row"><span class="activity-icon alert">inventory_2</span><div><strong>Inventory alert: Low stock</strong><small>Mozzarella remaining below 5 units</small></div><time>15 mins ago</time></div>
-      <div class="activity-row"><span class="activity-icon info">person</span><div><strong>New customer joined</strong><small>Olivia Brown placed her first order</small></div><time>45 mins ago</time></div>
+    <section class="dashboard-activity">
+      <div class="dashboard-section-heading"><h2>Recent Activity</h2><a routerLink="/seller-Account/orders">View All Activity</a></div>
+      <div class="panel activity-panel">
+        <div class="activity-row"><span class="activity-icon">shopping_bag</span><div><strong>Order #FD-2048 completed</strong><small>Table 12 · 4 items · $32.50</small></div><time>2 mins ago</time></div>
+        <div class="activity-row"><span class="activity-icon alert">inventory_2</span><div><strong>Inventory Alert: Low Stock</strong><small>Mozzarella remaining below 5 units</small></div><time>15 mins ago</time></div>
+        <div class="activity-row"><span class="activity-icon info">person</span><div><strong>New customer joined</strong><small>Olivia Brown placed her first order</small></div><time>45 mins ago</time></div>
+        <div class="activity-row"><span class="activity-icon review">star</span><div><strong>New 5-Star Review Received</strong><small>“Excellent food and quick service!”</small></div><time>1 hour ago</time></div>
+      </div>
     </section>
   } @else if (page === 'settings') {
     <section class="settings-grid">

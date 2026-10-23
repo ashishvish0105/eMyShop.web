@@ -99,3 +99,70 @@ app-admin-pages .dialog form { display: grid; gap: 14px; }app-admin-pages .form-
 app-admin-pages .panel, app-admin-pages .metric-card { transition: box-shadow .2s ease, transform .2s ease; }
 app-admin-pages .panel:hover, app-admin-pages .metric-card:hover { transform: translateY(-1px); box-shadow: 0 12px 24px rgba(20, 46, 31, .08); }
 app-admin-pages .button:focus-visible, app-admin-pages .search-box:focus-within, app-admin-pages .settings-fields input:focus, app-admin-pages .settings-fields select:focus, app-admin-pages .hours-row input:focus { outline: 3px solid rgba(0, 217, 67, .2); outline-offset: 2px; }
+app-admin-pages .admin-page { max-width: 1360px; }
+app-admin-pages .page-heading { margin: 10px 0 28px; }
+app-admin-pages .page-heading h1 { font-size: clamp(30px, 3vw, 42px); }
+app-admin-pages .metric-card { border-radius: 12px; }
+app-admin-pages .dashboard-grid { align-items: stretch; }
+app-admin-pages .panel { border-color: #dfeae2; }
+@media (min-width: 901px) {
+  app-admin-pages .admin-page { max-width: none; padding: 0 0 36px; }
+  app-admin-pages .page-heading.dashboard-heading { align-items: flex-end; margin: 0 0 26px; }
+  app-admin-pages .dashboard-heading > div { display: flex; flex-direction: column-reverse; align-items: flex-start; gap: 8px; }
+  app-admin-pages .dashboard-heading h1 { margin: 0; font-size: 42px; line-height: 1.1; font-weight: 800; letter-spacing: -.045em; }
+  app-admin-pages .dashboard-heading .dashboard-date { display: flex; align-items: center; gap: 9px; margin: 0; color: #258e43; font-size: 19px; font-weight: 500; letter-spacing: 0; text-transform: capitalize; }
+  app-admin-pages .dashboard-date .material-symbols-outlined { font-size: 17px; }
+  app-admin-pages .dashboard-heading .button { min-width: 187px; min-height: 50px; border-radius: 10px; font-size: 16px; background: #00df32; }
+  app-admin-pages .metric-grid { gap: 18px; margin-bottom: 43px; }
+  app-admin-pages .metric-card { min-height: 182px; padding: 28px; gap: 13px; border-color: #c8e5ce; border-radius: 14px; box-shadow: 0 2px 4px rgba(21, 56, 31, .06); }
+  app-admin-pages .metric-card > span:first-child { color: #258a42; font-size: 16px; }
+  app-admin-pages .metric-card strong { color: #0c1710; font-size: 37px; line-height: 1.08; font-weight: 800; letter-spacing: -.045em; }
+  app-admin-pages .metric-card strong i { color: inherit; font-size: inherit; }
+  app-admin-pages .metric-card small { font-size: 15px; font-weight: 500; }
+  app-admin-pages .metric-card small i { color: #398d4e; font-size: inherit; font-style: normal; font-weight: 400; }
+  app-admin-pages .warning { color: #f34343; }
+  app-admin-pages .metric-icon { top: 27px; right: 27px; width: 42px; height: 46px; border-radius: 11px; }
+  app-admin-pages .metric-icon::before { font-size: 24px; }
+  app-admin-pages .dashboard-grid { grid-template-columns: minmax(0, .48fr) minmax(0, 1fr); gap: 36px; margin-bottom: 38px; }
+  app-admin-pages .dashboard-section-heading { min-height: 32px; display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 17px; }
+  app-admin-pages .dashboard-section-heading h2 { margin: 0; color: #101a13; font-size: 23px; line-height: 1.2; font-weight: 750; letter-spacing: -.035em; }
+  app-admin-pages .quick-actions .action-grid { gap: 14px; }
+  app-admin-pages .quick-actions .dashboard-section-heading { min-height: 27px; margin-bottom: 15px; }
+  app-admin-pages .quick-actions .action-grid a { min-height: 128px; align-items: center; gap: 14px; padding: 14px 8px; border-color: #c9e6d0; border-radius: 14px; background: #fff; color: #101a13; font-size: 16px; font-weight: 650; text-align: center; }
+  app-admin-pages .quick-actions .action-grid a .material-symbols-outlined { color: #00df32; font-size: 31px; }
+  app-admin-pages .quick-actions .action-grid a:hover { transform: translateY(-1px); border-color: #00d941; background: #fbfffc; }
+  app-admin-pages .dashboard-period select { min-height: 36px; border: 0; padding: 0 24px 0 8px; color: #18843a; background-color: transparent; font: inherit; font-size: 16px; cursor: pointer; }
+  app-admin-pages .chart-card { height: 260px; padding: 24px 28px; border: 1px solid #c9e6d0; border-radius: 14px; background: #fff; }
+  app-admin-pages .bar-chart { height: 100%; gap: 10px; padding: 0; border: 0; background: none; }
+  app-admin-pages .bar-group { min-width: 0; gap: 0; }
+  app-admin-pages .bar-group small { display: none; }
+  app-admin-pages .bar { width: 100%; max-width: none; min-height: 10px; border-radius: 6px 6px 0 0; background: #b7f3c2; }
+  app-admin-pages .bar-group:nth-child(6) .bar { background: #00df32; }
+  app-admin-pages .bar-group:nth-child(5) .bar, app-admin-pages .bar-group:nth-child(7) .bar { background: #66ed81; }
+  app-admin-pages .dashboard-activity { margin-top: 0; }
+  app-admin-pages .dashboard-activity .dashboard-section-heading { margin: 0 5px 17px; }
+  app-admin-pages .dashboard-activity .dashboard-section-heading a { color: #00bf32; font-size: 15px; font-weight: 700; text-decoration: none; }
+  app-admin-pages .activity-panel { padding: 0; overflow: hidden; border: 1px solid #c9e6d0; border-radius: 14px; box-shadow: none; }
+  app-admin-pages .activity-row { min-height: 82px; gap: 18px; padding: 0 20px; border-top-color: #cfe8d4; }
+  app-admin-pages .activity-row:first-child { border-top: 0; }
+  app-admin-pages .activity-icon { width: 50px; height: 50px; }
+  app-admin-pages .activity-icon::before { font-size: 22px; }
+  app-admin-pages .activity-icon.review { color: #d99813; background: #fff5dc; }
+  app-admin-pages .activity-icon.review::before { content: 'star'; }
+  app-admin-pages .activity-row strong { font-size: 15px; }
+  app-admin-pages .activity-row small, app-admin-pages .activity-row time { color: #398b4c; font-size: 13px; }
+  app-admin-pages .activity-row time { margin-left: auto; }
+}
+
+@media (min-width: 701px) and (max-width: 1200px) {
+  app-admin-pages .metric-card { min-height: 145px; }
+  app-admin-pages .dashboard-section-heading h2 { font-size: 20px; }
+}
+
+@media (min-width: 901px) and (max-width: 1100px) {
+  app-admin-pages .metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  app-admin-pages .panel, app-admin-pages .metric-card, app-admin-pages .button { transition: none; }
+}

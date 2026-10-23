@@ -11,7 +11,9 @@
     }
   </nav>
   <div class="sidebar-bottom">
-    <div class="user-summary"><span class="user-avatar">JA</span><span><strong>Joe Admin</strong><small>General manager</small></span></div>
-    <button class="logout-button" type="button" (click)="userLogOute()"><span class="material-symbols-outlined">logout</span>Log out</button>
+    <a class="nav-item settings-item" routerLink="/seller-Account/settings" routerLinkActive="active">
+      <span class="material-symbols-outlined">settings</span><span>Settings</span>
+    </a>
+    <button class="logout-button" type="button" (click)="userLogOute()"><span class="material-symbols-outlined">logout</span>Logout</button>
   </div>
 </aside>

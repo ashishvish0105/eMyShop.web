@@ -19,7 +19,6 @@ export class SideBarHeaderComponent {
     { routerLink: '/seller-Account/customers', name: 'Customers', icon: 'group' },
     { routerLink: '/seller-Account/inventory', name: 'Inventory', icon: 'inventory_2' },
     { routerLink: '/seller-Account/reports', name: 'Reports', icon: 'monitoring' },
-    { routerLink: '/seller-Account/settings', name: 'Settings', icon: 'settings' },
   ];
 
   userLogOute() {
