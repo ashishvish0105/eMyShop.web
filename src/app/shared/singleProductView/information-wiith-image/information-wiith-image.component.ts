@@ -4,7 +4,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import {  ICategoryInfo } from '../../../models/IFileResponse.model';
+import {  ICategoryInfo } from '../../../interface/IFileResponse.model';
 import { ButtonComponent } from "../../components/button/button.component";
 
 @Component({

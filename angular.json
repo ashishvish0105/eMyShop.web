@@ -94,6 +94,11 @@
                         ],
                         "tsConfig": "tsconfig.spec.json",
                         "inlineStyleLanguage": "scss",
+                        "stylePreprocessorOptions": {
+                            "includePaths": [
+                                "public/styles"
+                            ]
+                        },
                         "assets": [{
                             "glob": "**/*",
                             "input": "public"

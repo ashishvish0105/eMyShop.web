@@ -184,10 +184,12 @@ describe('authentication and route authorization', () => {
     expect(TestBed.inject(Router).url).toBe('/seller-Account/dashboard');
   });
 
-  it('allows unauthenticated registration while keeping it guest-only', async () => {
+  it('allows unauthenticated registration', async () => {
     await navigate('/auth/registration');
     expect(TestBed.inject(Router).url).toBe('/auth/registration');
+  });
 
+  it('redirects an authenticated customer away from guest-only registration', async () => {
     setSession(['customer']);
     await navigate('/auth/registration');
     expect(TestBed.inject(Router).url).toBe('/home/products');

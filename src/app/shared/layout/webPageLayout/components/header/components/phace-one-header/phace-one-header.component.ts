@@ -41,18 +41,24 @@ export class PhaceOneHeaderComponent {
   private localStarageService = inject(LocalStarageService);
   private JwtDecodeService = inject(JwtDecodeService);
   ngOnInit(): void {
-    debugger;
-
-
     const currentUser = this.localStarageService.getObjLocalStorage(
       localStorageObjName.currentUserObj,
     );
-     const decodedToken = this.JwtDecodeService.getDecodedToken(currentUser);
-    console.log(decodedToken);
-    if(currentUser){
-      this.userDetail = currentUser;
+    const accessToken = this.localStarageService.getLocalStorage(localStorageObjName.accessToken);
+    const decodedToken = this.JwtDecodeService.getDecodedToken(accessToken);
+
+    if (currentUser) {
+      this.userDetail = {
+        userName: currentUser.userName ?? currentUser.userNameAndEmail ?? 'User',
+        userRoll: currentUser.userRoll ?? decodedToken?.role ?? 'Customer',
+      };
       this.isUserLoggedIn = true;
-      this.userDetail.userRoll = currentUser.userRoll;
+    } else if (decodedToken) {
+      this.userDetail = {
+        userName: decodedToken.unique_name ?? 'User',
+        userRoll: decodedToken.role ?? 'Customer',
+      };
+      this.isUserLoggedIn = true;
     }
   }
 
@@ -61,15 +67,13 @@ export class PhaceOneHeaderComponent {
     localStorage.removeItem('UserRegister');
     this.isUserLoggedIn = false;
     this.routes.navigateByUrl('/');
-    this.toggleProfileDetail()
+    this.toggleProfileDetail();
     this.localStarageService.clearLocalStorage();
   }
 
   activeMenuItem(urlName: string) {
-      console.log(urlName);
     if (this.routes.url.includes(urlName)) {
       this.routes.navigateByUrl(urlName);
-      console.log(urlName);
       this.activeItemName = urlName;
     }
   }

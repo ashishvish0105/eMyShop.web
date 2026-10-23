@@ -17,7 +17,7 @@ import {
   ApiResponseInsertOrUpdateCategory,
   ICategoryGetList,
   ICategoryInfo
-} from '../../../models/IFileResponse.model';
+} from '../../../interface/IFileResponse.model';
 import { ProfileService } from '../profile.service';
 import { ProfileDetailComponent } from '../../user/component/profile-detail/profile-detail.component';
 @Component({

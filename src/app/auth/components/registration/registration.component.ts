@@ -3,7 +3,6 @@ import { Router, RouterLink } from '@angular/router';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { AuthService } from '../../auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -29,7 +28,6 @@ export class RegistrationComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService,
     private snackBar: MatSnackBar,
     private router: Router
   ) {}
@@ -47,20 +45,8 @@ export class RegistrationComponent {
     }
 
     const { userName, email, password } = this.registration.getRawValue();
-    this.authService.register({ userName, email, password }).subscribe({
-      next: (response) => {
-        if (response.statusCode < 200 || response.statusCode >= 300) {
-          this.snackBar.open(response.errors?.join(', ') || response.message || 'Registration failed.', 'Close', {
-            duration: 5000
-          });
-          return;
-        }
-
-        this.snackBar.open(response.message || 'Registration successful. Please sign in.', 'Close', {
-          duration: 5000
-        });
-        this.router.navigate(['/auth/login']);
-      }
-    });
+    localStorage.setItem('UserRegister', JSON.stringify({ userName, email }));
+    this.snackBar.open('Demo account details saved in this browser. Please sign in.', 'Close', { duration: 4000 });
+    this.router.navigate(['/auth/login']);
   }
 }

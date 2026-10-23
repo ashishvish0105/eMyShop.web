@@ -1,18 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { AuthService } from '../../auth.service';
-import { localStorageObjName } from '../../../constVariable/localStorageObjName.const';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { LocalStarageService } from '../../../core/Comman/local-starage.service';
-import { AuthGuardService } from '../../../core/guards/auth-guard.service';
 
 @Component({
   selector: 'app-login',
@@ -30,11 +25,8 @@ export class LoginComponent implements OnInit {
   login!: FormGroup;
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
-    private localStarageService: LocalStarageService,
-    private authGuardService: AuthGuardService,
     private activatedRoute: ActivatedRoute,
-    private snackBar: MatSnackBar,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -51,34 +43,11 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.authService.Userlogin({
-      userName: this.login.get('userName')?.value,
-      email: this.login.get('email')?.value,
-      password: this.login.get('password')?.value
-    }).subscribe({
-      next: (response) => {
-        if (!response.payload?.accessToken) {
-          this.snackBar.open(response.message || 'Login failed. Please check your credentials.', 'Close', {
-            duration: 5000
-          });
-          return;
-        }
-
-        this.localStarageService.setObjLocalStorage(localStorageObjName.accessToken, response.payload.accessToken);
-        const roles = response.payload.user?.roles ?? [];
-        this.localStarageService.setObjLocalStorage(localStorageObjName.userRoles, roles);
-        this.localStarageService.setObjLocalStorage(localStorageObjName.userId, response.payload.user.userId);
-        this.localStarageService.setObjLocalStorage(localStorageObjName.expiresAt, response.payload.expiresAt);
-
-        const returnUrl = this.activatedRoute.snapshot.queryParamMap.get('returnUrl');
-        if (!this.authGuardService.login(roles, returnUrl ?? undefined)) {
-          this.snackBar.open('Your account does not have a supported role. Please contact an administrator.', 'Close', {
-            duration: 5000
-          });
-        }
-      }
-    });
+    const user = this.login.getRawValue();
+    const account = this.activatedRoute.snapshot.queryParamMap.get('account');
+    localStorage.setItem('CurrentUser', JSON.stringify({ userName: user.userName, email: user.email, role: account === 'seller' ? 'seller' : 'customer' }));
+    const returnUrl = this.activatedRoute.snapshot.queryParamMap.get('returnUrl');
+    this.router.navigateByUrl(returnUrl || (account === 'seller' ? '/seller-Account/dashboard' : '/products'));
   }
 
 }
-

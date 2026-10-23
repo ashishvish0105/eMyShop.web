@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { SectionTitleComponent } from "../../../../shared/components/section-title/section-title.component";
 import { ButtonComponent } from "../../../../shared/components/button/button.component";
-import { CreateDynamicButtonService } from '../../../../services/create-dynamic-button.service';
+import { CreateDynamicButtonService } from '../../../../core/Comman/create-dynamic-button.service';
 
 @Component({
   selector: 'app-detail-convert',

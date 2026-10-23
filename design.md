@@ -167,54 +167,47 @@ DemoProject/
 - **No NgModules:** Modules are optional; components use imports directly
 - **Lazy Loading:** Routes configured for on-demand module loading
 
-### 4.2 Routing Architecture
+### 4.2 Active commerce UI (frontend-only demo)
+
+The current commerce experience follows the existing Angular standalone-component and router architecture. Its active shopping and seller-admin pages use static data from `features/mock-commerce.service.ts`; these routes do not call an API, database, or payment processor. Cart contents, order changes, profile edits, settings, and catalog changes remain in client-side memory for the current app session.
+
+| Route | Screen |
+|-------|--------|
+| `/products` | Customer landing page and featured dishes |
+| `/menu`, `/offers` | Searchable categorized menu and offers |
+| `/cart`, `/checkout` | Cart, demo checkout, and order confirmation |
+| `/orders`, `/profile`, `/help` | Customer order history, profile preferences, and help |
+| `/seller-Account/dashboard` | Restaurant overview and revenue activity |
+| `/seller-Account/orders` | Searchable and filterable order management |
+| `/seller-Account/products` | Menu item management |
+| `/seller-Account/customers` | Customer database |
+| `/seller-Account/inventory` | Stock status and availability |
+| `/seller-Account/reports` | Sales metrics and downloadable CSV |
+| `/seller-Account/settings` | Business details, opening hours, and alert preferences |
+
+The shared seller layout lives under `shared/layout/dashboardLayout/`. Admin and customer pages adapt to desktop, tablet, and mobile widths. Authentication is demonstration-only: sign-in stores a lightweight mock identity locally, registration saves a mock profile without a password, and checkout never processes card details. Existing API service files support legacy features outside these active demo routes.
+
+### 4.3 Routing Architecture
 
 #### Main Routes (`app.routes.ts`)
 ```
-/                           → Main layout (lazy-loaded)
-/auth/*                     → Authentication module
-  ├── /auth/login          → Login page (guarded)
-  ├── /auth/registration   → Registration page
-  ├── /auth/forgetPassword → Forget password
-  └── /auth/resetPassword  → Reset password
-/**                         → 404 Page Not Found
+/auth/login, /auth/registration, /auth/forget-password, /auth/reset-password
+/products, /menu, /offers, /cart, /checkout
+/orders, /profile, /help
+/seller-Account/dashboard, /orders, /products, /customers
+/seller-Account/inventory, /reports, /settings
+/** → 404 Page Not Found
 ```
 
-#### Feature Routes (Lazy-Loaded)
-- **Home Module** - Homepage and related content
-- **Product Module** - Product listing and details
-- **Dashboard Module** - Administrative interface
-- **Blog Module** - Blog posts and articles
-- **Contact Us Module** - Contact form and information
-- **Image Manager Module** - Image upload and management
-- **News Feed Module** - News and updates
-- **Payment Module** - Payment processing
-- **Profile Module** - User profile management
-- **PDF Converter Module** - PDF conversion utilities
-- **User Module** - User management
+Commerce routes render the frontend-only mock workflows. Authentication route aliases preserve older camel-case route names, and `/home/products` redirects to `/products`.
 
-### 4.3 Authentication Flow
+### 4.4 Authentication and legacy API integration
 
-**Service:** `AuthService` (providedIn: 'root')
-- **Method:** `Userlogin(UserInfo: ILoginModel): Observable<ILoginApiResponseModel>`
-- **API Endpoint:** `https://localhost:44374/api/Auth/login`
-- **Guards:**
-  - `loginGuardGuardGuard` - Protects login routes
-  - `auth-guard.guard.ts` - General authentication guard
-
-### 4.4 API Integration
-
-**Base URL:** `https://localhost:44374/api`
-**Client:** HttpClient (dependency injected)
-**Response Type:** Wrapped in `IApiResponseModel`
-**HTTP Methods:** GET, POST (extensible)
+The active demo login, registration, and password-recovery screens use local frontend state and do not invoke the legacy `AuthService`. Some pre-existing feature services still use Angular `HttpClient` and configured environment URLs, but they are outside the active storefront and seller-demo routes. No API or backend integration is part of the commerce workflow.
 
 ### 4.5 State Management
 
-**Strategy:** RxJS Observables with Angular services
-- Services use HttpClient for HTTP calls
-- Observable streams for reactive data flow
-- No centralized state management (NgRx/Akita) in current setup
+The active commerce UI shares static mock catalog, cart, and order data through the root-provided `MockCommerceService`. Individual page components own search, filter, modal, and form state. No additional state-management dependency is required.
 
 ---
 
@@ -606,4 +599,3 @@ npm test
 **Last Updated:** 2026-05-03  
 **Angular Version:** 18.0.5  
 **Node Requirements:** 18.18.0+  
-

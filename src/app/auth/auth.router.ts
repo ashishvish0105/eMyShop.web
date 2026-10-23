@@ -4,8 +4,6 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { MainAuthSectionComponent } from './main-auth-section/main-auth-section.component';
-import { authGuardGuard } from '../core/guards/auth-guard.guard';
-import { loginRedirectGuard } from '../core/guards/loginRedirectGuard.gaurd';
 
 // export const authRoutes: Routes = [
 //   {
@@ -67,7 +65,6 @@ export const authRoutes: Routes = [
       {
         path: 'login',
         component: LoginComponent,
-        canActivate: [loginRedirectGuard],
       },
       {
         path: 'forgetPasssword',
@@ -80,7 +77,6 @@ export const authRoutes: Routes = [
       {
         path: 'registration',
         component: RegistrationComponent,
-        canActivate: [loginRedirectGuard],
       },
       { path: 'register', redirectTo: 'registration', pathMatch: 'full' },
       { path: 'forgot-password', redirectTo: 'forgetPasssword', pathMatch: 'full' },

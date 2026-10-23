@@ -1,55 +1,33 @@
-import { Component, inject, OnInit, viewChild } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { LocalStarageService } from '../../../../../core/Comman/local-starage.service';
 
 @Component({
   selector: 'app-side-bar-header',
   standalone: true,
-  imports: [],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './side-bar-header.component.html',
   styleUrl: './side-bar-header.component.scss',
 })
-export class SideBarHeaderComponent implements OnInit {
-  routes = inject(Router);
-  activeRoute = inject(ActivatedRoute)
-  activeItemName = 'dashboard';
-  isSideNavBarOpen = true;
-  private localStarageService = inject(LocalStarageService)
-  navItems: INavItem[] = [
-    { routerLink: 'dashboard', name: 'Dashboard', icon: 'dashboard' },
-    { routerLink: 'orders', name: 'Orders', icon: 'shopping_bag' },
-    { routerLink: 'products', name: 'Products', icon: 'inventory_2' },
-    { routerLink: 'customers', name: 'Customers', icon: 'group' },
-    // { routerLink: 'analytics', name: 'Analytics', icon: 'monitoring' },
-    // { routerLink: 'marketing', name: 'Marketing', icon: 'campaign' },
-    // { routerLink: 'integrations', name: 'Integrations', icon: 'hub' },
+export class SideBarHeaderComponent {
+  private readonly router = inject(Router);
+  private readonly localStarageService = inject(LocalStarageService);
+  readonly navItems: INavItem[] = [
+    { routerLink: '/seller-Account/dashboard', name: 'Dashboard', icon: 'dashboard' },
+    { routerLink: '/seller-Account/orders', name: 'Orders', icon: 'shopping_bag' },
+    { routerLink: '/seller-Account/products', name: 'Menu', icon: 'restaurant_menu' },
+    { routerLink: '/seller-Account/customers', name: 'Customers', icon: 'group' },
+    { routerLink: '/seller-Account/inventory', name: 'Inventory', icon: 'inventory_2' },
+    { routerLink: '/seller-Account/reports', name: 'Reports', icon: 'monitoring' },
+    { routerLink: '/seller-Account/settings', name: 'Settings', icon: 'settings' },
   ];
-
-  ngOnInit(): void {
-
-    // this.activeRoute
-  }
-    activeMenuItem(urlName: string) {
-      console.log(urlName);
-    // if (this.routes.url.includes(urlName)) {
-      this.routes.navigate(["/","seller-Account",urlName]);
-      console.log(urlName);
-      this.activeItemName = urlName;
-    // }
-  }
-  toggleSideNavBar() {
-    console.log("toggleSideNavBar called");
-    this.isSideNavBarOpen = !this.isSideNavBarOpen;
-
-  }
 
   userLogOute() {
     localStorage.removeItem('CurrentUser');
     localStorage.removeItem('UserRegister');
-    this.routes.navigateByUrl('/');
+    this.router.navigateByUrl('/auth/login');
     this.localStarageService.clearLocalStorage();
   }
-
 }
 export interface INavItem {
   name: string;

@@ -1,9 +1,11 @@
 <!-- <app-section-title TitleName="Login" Description="welcome our place and injoy our service with benifit"></app-section-title> -->
-<app-section-title TitleName="Login" Description="Your bussiness, our sport for grouth you bussiness"></app-section-title>
+<app-section-title TitleName="Welcome back" Description="Sign in to continue exploring FoodieDash."></app-section-title>
+
+<p class="demo-hint">Demo mode: enter any valid email and password. No account or payment is sent to a server.</p>
 
 <form [formGroup]="login" (ngSubmit)="loginMethod()" class="mt-4" novalidate>
     <div class="mb-3">
-        <label for="userName" class="form-label">Username</label>
+        <label for="userName" class="form-label">Your name</label>
         <input type="text" id="userName" formControlName="userName" class="form-control"
             [class.is-invalid]="login.controls['userName'].touched && login.controls['userName'].invalid">
         @if (login.controls['userName'].touched && login.controls['userName'].hasError('required')) {
@@ -28,13 +30,17 @@
         <small class="validation-error">Password is required.</small>
         }
     </div>
-    <app-button buttonName="asBtnPrimary" buttonType="submit" buttonText="Sing in"></app-button>
+    <app-button buttonName="asBtnPrimary" buttonType="submit" buttonText="Sign in"></app-button>
     <div class="d-flex align-items-center pt-4">
-        <p class="mb-0">You need to forgetpassword</p>
-        <a class="ms-3 text-capitalize" routerLink="/auth/forgetPasssword">forget Passsword</a>
+        <p class="mb-0">Forgot your password?</p>
+        <a class="ms-3 text-capitalize" routerLink="/auth/forget-password">Reset it</a>
     </div>
     <div class="d-flex align-items-center pt-3">
-        <p class="mb-0">You slef register here we coonect and provide benifite</p>
-        <a class="ms-3 text-capitalize" routerLink="/auth/registration">registration</a>
+        <p class="mb-0">New to FoodieDash?</p>
+        <a class="ms-3 text-capitalize" routerLink="/auth/registration">Create an account</a>
+    </div>
+    <div class="d-flex align-items-center pt-3">
+        <p class="mb-0">Just browsing?</p>
+        <a class="ms-3 text-capitalize" routerLink="/products">Explore the menu</a>
     </div>
 </form>

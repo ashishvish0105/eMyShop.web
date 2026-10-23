@@ -133,42 +133,14 @@
   --eMy-transition-slow: 300ms ease-in-out;
 }
 
-// Self-hosted font declarations
-// Place woff2 files in src/assets/fonts/inter/ and src/assets/fonts/plus-jakarta/
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: local('Inter Regular'), local('Inter-Regular'),
-       url('/assets/fonts/inter/Inter-Regular.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: local('Inter Medium'), local('Inter-Medium'),
-       url('/assets/fonts/inter/Inter-Medium.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: local('Inter SemiBold'), local('Inter-SemiBold'),
-       url('/assets/fonts/inter/Inter-SemiBold.woff2') format('woff2');
-}
-
+// Self-hosted Plus Jakarta Sans font files shipped with the app.
 @font-face {
   font-family: 'Plus Jakarta Sans';
   font-style: normal;
   font-weight: 600;
   font-display: swap;
   src: local('Plus Jakarta Sans SemiBold'), local('PlusJakartaSans-SemiBold'),
-       url('/assets/fonts/plus-jakarta/PlusJakartaSans-SemiBold.woff2') format('woff2');
+       url('/Google.Font/Plus_Jakarta_Sans/static/PlusJakartaSans-SemiBold.ttf') format('truetype');
 }
 
 @font-face {
@@ -177,5 +149,5 @@
   font-weight: 700;
   font-display: swap;
   src: local('Plus Jakarta Sans Bold'), local('PlusJakartaSans-Bold'),
-       url('/assets/fonts/plus-jakarta/PlusJakartaSans-Bold.woff2') format('woff2');
+       url('/Google.Font/Plus_Jakarta_Sans/static/PlusJakartaSans-Bold.ttf') format('truetype');
 }

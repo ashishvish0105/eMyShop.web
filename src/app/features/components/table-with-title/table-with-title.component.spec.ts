@@ -14,21 +14,21 @@ describe('TableWithTitleComponent', () => {
 
     fixture = TestBed.createComponent(TableWithTitleComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
+    fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 
   it('should calculate pagination when table data is provided', () => {
-    component.pageSize = 2;
-    component.tableData = [
+    fixture.componentRef.setInput('pageSize', 2);
+    fixture.componentRef.setInput('tableData', [
       { productId: 1, name: 'A' },
       { productId: 2, name: 'B' },
       { productId: 3, name: 'C' },
       { productId: 4, name: 'D' }
-    ];
+    ]);
 
     fixture.detectChanges();
 
@@ -39,11 +39,14 @@ describe('TableWithTitleComponent', () => {
   });
 
   it('should show the server-provided page without slicing it again', () => {
-    component.serverSidePagination = true;
-    component.totalCount = 25;
-    component.pageSize = 10;
-    component.tableData = Array.from({ length: 10 }, (_, index) => ({ productId: index + 11 }));
-    component.ngOnChanges({});
+    fixture.componentRef.setInput('serverSidePagination', true);
+    fixture.componentRef.setInput('totalCount', 25);
+    fixture.componentRef.setInput('pageSize', 10);
+    fixture.componentRef.setInput(
+      'tableData',
+      Array.from({ length: 10 }, (_, index) => ({ productId: index + 11 })),
+    );
+    fixture.detectChanges();
 
     let requestedPage = 0;
     component.pageSizeChange.subscribe(({ currentPage }) => requestedPage = currentPage);
@@ -53,5 +56,6 @@ describe('TableWithTitleComponent', () => {
     expect(component.paginatedData.length).toBe(10);
     expect(component.paginatedData[0].productId).toBe(11);
     expect(requestedPage).toBe(2);
+    expect(component.currentPage).toBe(2);
   });
 });

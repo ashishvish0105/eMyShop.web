@@ -20,7 +20,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ButtonComponent } from '../../components/button/button.component';
-import { ICategoryInfo } from '../../../models/IFileResponse.model';
+import { ICategoryInfo } from '../../../interface/IFileResponse.model';
 import { single } from 'rxjs';
 
 @Component({

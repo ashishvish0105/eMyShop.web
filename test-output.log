@@ -1,0 +1,94 @@
+- Generating browser application bundles (phase: setup)...
+✔ Browser application bundle generation complete.
+
+./src/app/features/components/progress-bar/progress-bar.component.spec.ts:9:16-35 - Error: export 'ProressBarComponent' (imported as 'ProressBarComponent') was not found in './proress-bar.component' (possible exports: ProgressBarComponent)
+
+./src/app/features/components/progress-bar/progress-bar.component.spec.ts:11:38-57 - Error: export 'ProressBarComponent' (imported as 'ProressBarComponent') was not found in './proress-bar.component' (possible exports: ProgressBarComponent)
+
+./src/app/modules/pdfConverter/components/detail-convert/detail-convert.component.ts:8:0-96 - Error: Module not found: Error: Can't resolve '../../../../services/create-dynamic-button.service' in 'D:\Project\Enterprice Project\eMyShop.web\src\app\modules\pdfConverter\components\detail-convert'
+
+./src/app/shared/layout/webPageLayout/components/header/header.component.spec.ts:4:0-84 - Error: Module not found: Error: Can't resolve '../../../../../services/local-starage.service' in 'D:\Project\Enterprice Project\eMyShop.web\src\app\shared\layout\webPageLayout\components\header'
+
+./src/styles.scss - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @use 'base';
+  │ ^^^^^^^^^^^
+  ╵
+  src\styles.scss 1:1  root stylesheet
+
+./src/styles.scss?ngGlobalStyle - Error: Module build failed (from ./node_modules/mini-css-extract-plugin/dist/loader.js):
+HookWebpackError: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @use 'base';
+  │ ^^^^^^^^^^^
+  ╵
+  src\styles.scss 1:1  root stylesheet
+
+Error: src/app/features/components/progress-bar/progress-bar.component.spec.ts:3:10 - error TS2724: '"./proress-bar.component"' has no exported member named 'ProressBarComponent'. Did you mean 'ProgressBarComponent'?
+
+3 import { ProressBarComponent } from './proress-bar.component';
+           ~~~~~~~~~~~~~~~~~~~
+
+  src/app/features/components/progress-bar/proress-bar.component.ts:11:14
+    11 export class ProgressBarComponent {
+                    ~~~~~~~~~~~~~~~~~~~~
+    'ProgressBarComponent' is declared here.
+
+
+Error: src/app/modules/pdfConverter/components/detail-convert/detail-convert.component.ts:4:44 - error TS2307: Cannot find module '../../../../services/create-dynamic-button.service' or its corresponding type declarations.
+
+4 import { CreateDynamicButtonService } from '../../../../services/create-dynamic-button.service';
+                                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/modules/profile/profile-main-section/profile-main-section.component.ts:20:8 - error TS2307: Cannot find module '../../../models/IFileResponse.model' or its corresponding type declarations.
+
+20 } from '../../../models/IFileResponse.model';
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/shared/layout/webPageLayout/components/header/header.component.spec.ts:4:37 - error TS2307: Cannot find module '../../../../../services/local-starage.service' or its corresponding type declarations.
+
+4 import { LocalStarageService } from '../../../../../services/local-starage.service';
+                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/shared/layout/webPageLayout/components/header/header.component.spec.ts:27:27 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'never'.
+
+27     spyOn(storageService, 'getObjLocalStorage').and.callFake((key: string) =>
+                             ~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/shared/layout/webPageLayout/components/header/header.component.spec.ts:27:62 - error TS2345: Argument of type '(key: string) => string[] | null' is not assignable to parameter of type 'never'.
+
+27     spyOn(storageService, 'getObjLocalStorage').and.callFake((key: string) =>
+                                                                ~~~~~~~~~~~~~~~~
+28       key === 'userRoles' ? ['customer'] : null,
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/shared/singleProductView/add-or-edit-image-info/add-or-edit-image-info.component.ts:23:31 - error TS2307: Cannot find module '../../../models/IFileResponse.model' or its corresponding type declarations.
+
+23 import { ICategoryInfo } from '../../../models/IFileResponse.model';
+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/shared/singleProductView/information-wiith-image/information-wiith-image.component.ts:7:32 - error TS2307: Cannot find module '../../../models/IFileResponse.model' or its corresponding type declarations.
+
+7 import {  ICategoryInfo } from '../../../models/IFileResponse.model';
+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+23 10 2026 19:41:18.111:INFO [karma-server]: Karma v6.4.4 server started at http://localhost:9876/
+23 10 2026 19:41:18.137:INFO [launcher]: Launching browsers Chrome with concurrency unlimited
+23 10 2026 19:41:18.138:ERROR [karma-server]: Error: Found 1 load error
+    at Server.<anonymous> (D:\Project\Enterprice Project\eMyShop.web\node_modules\karma\lib\server.js:243:26)
+    at Object.onceWrapper (node:events:638:28)
+    at Server.emit (node:events:536:35)
+    at emitListeningNT (node:net:1955:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+✔ Browser application bundle generation complete.
+✔ Browser application bundle generation complete.

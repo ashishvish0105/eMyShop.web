@@ -6,25 +6,31 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class JwtDecodeService {
   constructor() {}
-// Method to decode a given token string
 
-  getDecodedToken(token: string): AppJwtPayload | null {
+  getDecodedToken(token: string | null | undefined): AppJwtPayload | null {
+    if (typeof token !== 'string' || token.trim().length === 0) {
+      return null;
+    }
+
+    const normalizedToken = token.trim();
+    if (!normalizedToken.includes('.') || normalizedToken.split('.').length !== 3) {
+      return null;
+    }
+
     try {
-      return jwtDecode<AppJwtPayload>(token);
-    } catch (error) {
-      console.error('Invalid token format', error);
+      return jwtDecode<AppJwtPayload>(normalizedToken);
+    } catch {
       return null;
     }
   }
 
-  // Example helper to check if the token is expired
-  isTokenExpired(token: string): boolean {
+  isTokenExpired(token: string | null | undefined): boolean {
     const decoded = this.getDecodedToken(token);
     if (!decoded || !decoded.exp) {
       return true;
     }
 
-    const currentTime = Math.floor(Date.now() / 1000); // Convert milliseconds to seconds
+    const currentTime = Math.floor(Date.now() / 1000);
     return decoded.exp < currentTime;
   }
 }

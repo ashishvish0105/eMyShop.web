@@ -1,0 +1,116 @@
+<div class="storefront">
+  <header class="shop-header">
+    <a class="brand" routerLink="/products"><span class="brand-mark">restaurant</span><strong>Foodie<span>Dash</span></strong></a>
+    <button class="mobile-menu" type="button" aria-label="Toggle navigation" (click)="menuOpen = !menuOpen"><span class="material-symbols-outlined">{{ menuOpen ? 'close' : 'menu' }}</span></button>
+    <nav [class.open]="menuOpen">
+      <a routerLink="/products" [class.active]="page === 'home' || page === 'menu'">Restaurants</a>
+      <a routerLink="/offers" [class.active]="page === 'offers'">Offers</a>
+      <a routerLink="/orders" [class.active]="page === 'orders'">My orders</a>
+    </nav>
+    <div class="header-actions">
+      <span class="location"><span class="material-symbols-outlined">location_on</span>New York, NY</span>
+      <a class="cart-link" routerLink="/cart" aria-label="View shopping cart"><span class="material-symbols-outlined">shopping_cart</span>@if (commerce.itemCount) { <b>{{ commerce.itemCount }}</b> }</a>
+      <a class="avatar" routerLink="/profile" aria-label="Your profile">JL</a>
+    </div>
+  </header>
+
+  @if (page === 'home') {
+    <main>
+      <section class="hero">
+        <div class="hero-copy"><span class="hero-label"><span class="material-symbols-outlined">near_me</span>GOOD FOOD, RIGHT AROUND THE CORNER</span><h1>Delicious meals,<br>delivered to your doorstep.</h1><p>Your neighborhood favorites, brought to you fresh.</p>
+          <form class="hero-search" (ngSubmit)="router.navigate(['/menu'], { queryParams: { search } })"><span class="material-symbols-outlined">search</span><input [(ngModel)]="search" name="heroSearch" placeholder="What are you craving?"><button type="submit">Find food</button></form>
+          <div class="delivery-note"><span class="material-symbols-outlined">schedule</span>Fast delivery <b>·</b> Free delivery on your first order</div>
+        </div>
+        <div class="hero-image" role="img" aria-label="Fresh restaurant meal"></div>
+      </section>
+      <section class="content-section category-section">
+        <div class="section-heading"><div><p class="eyebrow">PICK YOUR FAVORITE</p><h2>Popular categories</h2></div><a routerLink="/menu">Explore menu <span class="material-symbols-outlined">arrow_forward</span></a></div>
+        <div class="category-list">
+          @for (item of popularCategories; track item.name) {
+            <button class="category-chip" (click)="setCategory(item.name)"><span class="material-symbols-outlined">{{ item.icon }}</span><b>{{ item.name }}</b></button>
+          }
+        </div>
+      </section>
+      <section class="content-section popular-section">
+        <div class="section-heading"><div><p class="eyebrow">FRESH FROM OUR KITCHEN</p><h2>Trending in your city</h2><p>Local favorites our neighbors love this week.</p></div><a routerLink="/menu">See all dishes <span class="material-symbols-outlined">arrow_forward</span></a></div>
+        <div class="product-grid">
+          @for (product of filteredProducts.slice(0, 3); track product.id) {
+            <article class="food-card"><div class="food-photo"><img [src]="product.image" [alt]="product.name" [attr.loading]="$index === 0 ? 'eager' : 'lazy'"><span class="rating"><span class="material-symbols-outlined">star</span>{{ product.rating }}</span>@if ($index === 0) { <span class="best-seller">BEST SELLER</span> }</div><div class="food-info"><div class="food-title"><h3>{{ product.name }}</h3><strong>{{ product.price | currency }}</strong></div><p>{{ product.description }}</p><div class="food-meta"><span><span class="material-symbols-outlined">schedule</span>20–30 min</span><span>Free delivery</span></div><button class="add-button" (click)="addToCart(product)"><span class="material-symbols-outlined">add_shopping_cart</span>Add to order</button></div></article>
+          }
+        </div>
+      </section>
+      <section class="promo-banner"><div><p class="eyebrow">A LITTLE SOMETHING EXTRA</p><h2>Good food tastes even better with 20% off.</h2><p>Take 20% off your first order with code <b>WELCOME20</b>.</p></div><a routerLink="/offers" class="button-primary">Explore today's offers</a></section>
+    </main>
+  } @else if (page === 'menu' || page === 'offers') {
+    <main class="menu-layout">
+      <aside class="menu-sidebar"><p class="eyebrow">BROWSE MENU</p><h2>Categories</h2>
+        @for (item of categories; track item) { <button [class.selected]="category === item" (click)="category = item">{{ item }} <span>{{ categoryCount(item) }}</span></button> }
+        <div class="sidebar-promo"><span class="material-symbols-outlined">local_offer</span><strong>First order offer</strong><p>Enjoy 20% off your first meal.</p><button (click)="copyOfferCode()">Copy code</button></div>
+      </aside>
+      <section class="menu-main"><div class="menu-title"><div><p class="eyebrow">{{ page === 'offers' ? 'HAND-PICKED DEALS' : 'MADE FRESH TO ORDER' }}</p><h1>{{ page === 'offers' ? 'Today’s special offers' : category === 'All' ? 'Explore the menu' : category }}</h1><p>Fresh ingredients, local flavors, and something for every craving.</p></div><label class="menu-search"><span class="material-symbols-outlined">search</span><input [(ngModel)]="search" name="menuSearch" placeholder="Search dishes"></label></div>
+        <div class="category-tabs">@for (item of categories; track item) { <button [class.selected]="category === item" (click)="category = item">{{ item }}</button> }</div>
+        <div class="product-grid">
+          @for (product of filteredProducts; track product.id) {
+            <article class="food-card"><div class="food-photo"><img [src]="product.image" [alt]="product.name" loading="lazy"><span class="rating"><span class="material-symbols-outlined">star</span>{{ product.rating }}</span></div><div class="food-info"><div class="food-title"><h3>{{ product.name }}</h3><strong>{{ product.price | currency }}</strong></div><p>{{ product.description }}</p><div class="food-meta"><span>{{ product.category }}</span><span>20–30 min</span></div><button class="add-button" (click)="addToCart(product)"><span class="material-symbols-outlined">add_shopping_cart</span>Add to cart</button></div></article>
+          } @empty { <div class="empty-card"><span class="material-symbols-outlined">search_off</span><h3>No dishes found</h3><p>Try another search or category.</p><button (click)="category = 'All'; search = ''">Show all dishes</button></div> }
+        </div>
+      </section>
+      <aside class="cart-summary"><div class="summary-title"><h2>Your order</h2><span>{{ commerce.itemCount }} items</span></div>
+        @for (item of commerce.cart; track item.product.id) { <div class="mini-cart-item"><img [src]="item.product.image" [alt]="item.product.name"><div><strong>{{ item.product.name }}</strong><small>{{ item.product.price | currency }}</small><div class="quantity-control"><button (click)="commerce.updateQuantity(item.product.id, -1)" aria-label="Decrease quantity">−</button><span>{{ item.quantity }}</span><button (click)="commerce.updateQuantity(item.product.id, 1)" aria-label="Increase quantity">+</button></div></div><b>{{ item.product.price * item.quantity | currency }}</b></div> }
+        @if (!commerce.cart.length) { <div class="cart-empty"><span class="material-symbols-outlined">shopping_bag</span><p>Your order is empty. Add something delicious to get started.</p></div> }
+        <div class="summary-total"><span>Subtotal</span><b>{{ commerce.subtotal | currency }}</b><span>Delivery</span><b class="free">FREE</b><strong>Total</strong><strong>{{ commerce.subtotal | currency }}</strong></div>
+        <button class="checkout-button" (click)="checkout()">Continue to checkout <span class="material-symbols-outlined">arrow_forward</span></button>
+      </aside>
+    </main>
+  } @else if (page === 'cart') {
+    <main class="narrow-page"><div class="page-title"><p class="eyebrow">YOUR ORDER</p><h1>Shopping cart</h1><p>Review your items before checkout.</p></div>
+      <section class="cart-page panel">
+        @for (item of commerce.cart; track item.product.id) { <article class="cart-row"><img [src]="item.product.image" [alt]="item.product.name"><div class="cart-item-info"><h3>{{ item.product.name }}</h3><p>{{ item.product.description }}</p><strong>{{ item.product.price | currency }}</strong></div><div class="quantity-control"><button (click)="commerce.updateQuantity(item.product.id, -1)">−</button><span>{{ quantity(item) }}</span><button (click)="commerce.updateQuantity(item.product.id, 1)">+</button></div><strong>{{ item.product.price * item.quantity | currency }}</strong><button class="remove-button" (click)="commerce.removeFromCart(item.product.id)" aria-label="Remove item"><span class="material-symbols-outlined">delete</span></button></article> }
+        @if (!commerce.cart.length) { <div class="empty-card"><span class="material-symbols-outlined">shopping_bag</span><h3>Your cart is waiting</h3><p>Discover something delicious from our menu.</p><a routerLink="/menu" class="button-primary">Browse menu</a></div> }
+        @if (commerce.cart.length) { <div class="cart-footer"><a routerLink="/menu">← Continue shopping</a><div class="summary-total"><span>Subtotal</span><b>{{ commerce.subtotal | currency }}</b><span>Delivery fee</span><b class="free">FREE</b><strong>Total</strong><strong>{{ commerce.subtotal | currency }}</strong><button class="checkout-button" (click)="checkout()">Proceed to checkout</button></div></div> }
+      </section>
+    </main>
+  } @else if (page === 'checkout') {
+    <main class="narrow-page"><div class="page-title"><p class="eyebrow">ALMOST THERE</p><h1>Secure checkout</h1><p>Your fresh favorites are just a few steps away.</p></div>
+      @if (orderComplete) { <section class="panel success-card"><span class="success-mark material-symbols-outlined">check_circle</span><p class="eyebrow">ORDER RECEIVED</p><h2>Thanks, {{ customerName }}!</h2><p>Your order is being prepared. We’ll have it at your door in about 25–35 minutes.</p><a routerLink="/orders" class="button-primary">Track your order</a></section> }
+      @else { <form class="checkout-layout" (ngSubmit)="placeOrder()"><section class="checkout-fields">
+        <article class="panel"><div class="form-heading"><span>1</span><div><h2>Delivery address</h2><p>Where should we bring your meal?</p></div></div><label class="field-label">Full name<input [(ngModel)]="customerName" name="customerName" required autocomplete="name"></label><label class="field-label">Street address<input [(ngModel)]="deliveryAddress" name="address" required autocomplete="street-address"></label><div class="form-columns"><label class="field-label">Apartment, suite (optional)<input name="apartment"></label><label class="field-label">Phone number<input type="tel" name="phone" required autocomplete="tel" placeholder="+1 (555) 000-0000"></label></div></article>
+        <article class="panel"><div class="form-heading"><span>2</span><div><h2>Payment method</h2><p>All transactions are secure and encrypted.</p></div></div><label class="payment-option"><input type="radio" name="payment" checked><span class="material-symbols-outlined">credit_card</span><span><b>Credit or debit card</b><small>Visa, Mastercard, American Express</small></span></label><label class="field-label">Card number<input inputmode="numeric" name="card" placeholder="4242 4242 4242 4242" required minlength="12"></label><div class="form-columns"><label class="field-label">Expiration date<input name="expiry" placeholder="MM / YY" required></label><label class="field-label">Security code<input inputmode="numeric" name="cvc" placeholder="CVC" required minlength="3"></label></div></article>
+      </section><aside class="panel checkout-summary"><h2>Order summary</h2>@for (item of commerce.cart; track item.product.id) { <div class="checkout-item"><span>{{ item.quantity }} × {{ item.product.name }}</span><b>{{ item.product.price * item.quantity | currency }}</b></div> }<div class="summary-total"><span>Subtotal</span><b>{{ commerce.subtotal | currency }}</b><span>Delivery fee</span><b class="free">FREE</b><strong>Total</strong><strong>{{ commerce.subtotal | currency }}</strong></div><button class="checkout-button" type="submit">Place order · {{ commerce.subtotal | currency }}</button><small class="secure-note"><span class="material-symbols-outlined">lock</span>Secure demo checkout — no payment is processed.</small></aside></form> }
+    </main>
+  } @else if (page === 'orders') {
+    <main class="narrow-page"><div class="page-title"><p class="eyebrow">YOUR FOOD JOURNEY</p><h1>My orders</h1><p>Good food memories, all in one place.</p></div>
+      <div class="order-list">@for (order of commerce.orders; track order.id) { <article class="panel customer-order"><div class="order-top"><div><span class="order-number">{{ order.id }}</span><small>{{ order.date }}</small></div><span class="status-chip" [class.cancelled]="order.status === 'Cancelled'">{{ order.status }}</span></div><div class="order-restaurant"><span class="restaurant-icon material-symbols-outlined">restaurant</span><div><h2>Green Table Bistro</h2><p>{{ order.items }}</p></div><strong>{{ order.total | currency }}</strong></div>      <div class="order-actions"><button class="button-secondary" (click)="viewOrder(order.id)">View details</button>@if (order.status === 'Pending' || order.status === 'Preparing') { <button class="text-button" (click)="cancelOrder(order.id)">Cancel order</button> }</div></article> }
+        @empty { <section class="panel empty-card"><span class="material-symbols-outlined">receipt_long</span><h3>No orders yet</h3><p>Your next favorite meal is waiting.</p><a routerLink="/menu" class="button-primary">Explore the menu</a></section> }
+      </div>
+    </main>
+  } @else if (page === 'profile') {
+    <main class="narrow-page"><div class="page-title"><p class="eyebrow">YOUR ACCOUNT</p><h1>Profile & settings</h1><p>Keep your details up to date for a smoother delivery.</p></div>
+      <form class="panel profile-form" (ngSubmit)="saveProfile()"><div class="profile-banner"><div class="profile-avatar">JL</div><div><h2>{{ customerName }}</h2><p>FoodieDash member since 2024</p></div><span class="loyalty-chip">GOLD MEMBER</span></div><div class="form-columns"><label class="field-label">Full name<input [(ngModel)]="customerName" name="profileName" required></label><label class="field-label">Email address<input type="email" name="profileEmail" value="jordan.lee@email.com" required></label></div><label class="field-label">Default delivery address<input [(ngModel)]="deliveryAddress" name="profileAddress" required></label>      <div class="profile-options"><h2>Preferences</h2><label><input type="checkbox" [(ngModel)]="profilePreferences.orderUpdates" name="orderUpdates"> Send me order updates and delivery notifications</label><label><input type="checkbox" [(ngModel)]="profilePreferences.offers" name="offers"> Email me about new offers and rewards</label></div><div class="profile-submit"><span>{{ profileSaved ? 'Profile saved.' : '' }}</span><button class="button-primary" type="submit">Save changes</button></div></form>
+    </main>
+  } @else {
+    <main class="narrow-page"><div class="page-title"><p class="eyebrow">WE’RE HERE TO HELP</p><h1>Help & support</h1><p>Find answers or get in touch with our friendly team.</p></div><div class="help-grid"><a class="panel help-card" routerLink="/orders"><span class="material-symbols-outlined">local_shipping</span><h2>Order & delivery</h2><p>Track an order, update delivery details or check an estimated arrival.</p><span>View my orders →</span></a><a class="panel help-card" routerLink="/profile"><span class="material-symbols-outlined">person</span><h2>Account & profile</h2><p>Manage your profile information, delivery address and preferences.</p><span>Manage my profile →</span></a><button class="panel help-card" (click)="showNotice('Our support team is ready to help at help@foodiedash.example.')"><span class="material-symbols-outlined">chat</span><h2>Contact support</h2><p>Our team is available every day from 8am to 10pm.</p><span>Start a conversation →</span></button></div></main>
+  }
+
+  <footer class="shop-footer"><a class="brand" routerLink="/products"><span class="brand-mark">restaurant</span><strong>Foodie<span>Dash</span></strong></a><p>Neighborhood favorites, delivered fresh.</p><div><a routerLink="/help">Help & support</a><a routerLink="/offers">Offers</a><a routerLink="/seller-Account/dashboard">Restaurant partner</a></div><small>© 2025 FoodieDash. Made for good food and good company.</small></footer>
+  @if (cancelOrderId) {
+    <div class="modal-backdrop" (click)="cancelOrderId = ''">
+      <section class="cancel-dialog" role="dialog" aria-modal="true" aria-labelledby="cancel-title" (click)="$event.stopPropagation()">
+        <span class="material-symbols-outlined">warning</span>
+        <h2 id="cancel-title">Cancel order {{ cancelOrderId }}?</h2>
+        <p>Your restaurant may already be preparing this meal. This demo will mark the order as cancelled.</p>
+        <div><button class="keep-order" (click)="cancelOrderId = ''">Keep my order</button><button class="confirm-cancel" (click)="confirmCancellation()">Cancel order</button></div>
+      </section>
+    </div>
+  }
+  @if (selectedOrder) {
+    <div class="modal-backdrop" (click)="selectedOrder = undefined">
+      <section class="order-detail-dialog" role="dialog" aria-modal="true" aria-labelledby="order-detail-title" (click)="$event.stopPropagation()">
+        <div class="order-detail-heading"><div><p class="eyebrow">ORDER DETAILS</p><h2 id="order-detail-title">{{ selectedOrder.id }}</h2></div><button type="button" aria-label="Close order details" (click)="selectedOrder = undefined">×</button></div>
+        <div class="order-detail-content"><div><span>Restaurant</span><strong>Green Table Bistro</strong></div><div><span>Order status</span><strong>{{ selectedOrder.status }}</strong></div><div><span>Items</span><strong>{{ selectedOrder.items }}</strong></div><div><span>Delivery address</span><strong>{{ deliveryAddress }}</strong></div><div><span>Order total</span><strong>{{ selectedOrder.total | currency }}</strong></div></div>
+        <div class="order-detail-actions"><button class="keep-order" (click)="selectedOrder = undefined">Close</button>@if (selectedOrder.status === 'Pending' || selectedOrder.status === 'Preparing') { <button class="confirm-cancel" (click)="cancelOrder(selectedOrder.id); selectedOrder = undefined">Cancel order</button> }</div>
+      </section>
+    </div>
+  }
+  @if (notice) { <div class="toast-message" role="status">{{ notice }}</div> }
+</div>

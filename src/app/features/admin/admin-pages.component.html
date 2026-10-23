@@ -1,0 +1,146 @@
+<section class="admin-page">
+  <header class="page-heading">
+    <div>
+      <p class="eyebrow">{{ page === 'dashboard' ? 'TUESDAY, OCTOBER 24' : 'RESTOADMIN · MANAGEMENT' }}</p>
+      <h1>{{ title }}</h1>
+      <p class="page-description">{{ description }}</p>
+    </div>
+    <button class="button button-primary" (click)="openCreate()">
+      <span class="material-symbols-outlined">add</span>{{ page === 'dashboard' ? 'New order' : actionLabel }}
+    </button>
+  </header>
+
+  @if (page === 'dashboard') {
+    <div class="metric-grid">
+      <article class="metric-card"><span>Today's revenue</span><strong>$4,250.00</strong><small class="positive">↗ 12% vs yesterday</small><span class="metric-icon">payments</span></article>
+      <article class="metric-card"><span>Active orders</span><strong>14</strong><small class="positive">↗ 2% vs avg hour</small><span class="metric-icon blue">receipt_long</span></article>
+      <article class="metric-card"><span>Tables occupied</span><strong>18 <i>/ 25</i></strong><small class="positive">● 72% capacity</small><span class="metric-icon orange">table_restaurant</span></article>
+      <article class="metric-card"><span>Low stock alerts</span><strong>5</strong><small class="warning">Needs attention</small><span class="metric-icon red">warning</span></article>
+    </div>
+
+    <div class="dashboard-grid">
+      <section class="panel quick-actions">
+        <div class="panel-heading"><div><h2>Quick actions</h2><p>Jump into your daily operations</p></div></div>
+        <div class="action-grid">
+          <a routerLink="/seller-Account/orders"><span class="material-symbols-outlined">receipt_long</span>View orders</a>
+          <a routerLink="/seller-Account/products"><span class="material-symbols-outlined">restaurant_menu</span>Edit menu</a>
+          <a routerLink="/seller-Account/inventory"><span class="material-symbols-outlined">inventory_2</span>Check stock</a>
+          <a routerLink="/seller-Account/reports"><span class="material-symbols-outlined">monitoring</span>View reports</a>
+        </div>
+      </section>
+      <section class="panel revenue-panel">
+        <div class="panel-heading"><div><h2>Revenue trend</h2><p>Sales performance this week</p></div><span class="period-label">Last 7 days⌄</span></div>
+        <div class="bar-chart" aria-label="Revenue chart for Monday through Sunday">
+          @for (bar of [42, 62, 57, 36, 78, 92, 68]; track $index) {
+            <div class="bar-group"><span class="bar" [style.height.%]="bar"></span><small>{{ ['M','T','W','T','F','S','S'][$index] }}</small></div>
+          }
+        </div>
+        <div class="chart-caption"><span><i class="legend-dot"></i>Revenue</span><strong>+$1,248 <small>this week</small></strong></div>
+      </section>
+    </div>
+    <section class="panel activity-panel">
+      <div class="panel-heading"><div><h2>Recent activity</h2><p>Latest updates from your restaurant</p></div><a routerLink="/seller-Account/orders">View all</a></div>
+      <div class="activity-row"><span class="activity-icon">shopping_bag</span><div><strong>Order #FD-2048 completed</strong><small>Table 12 · 4 items · $32.50</small></div><time>2 mins ago</time></div>
+      <div class="activity-row"><span class="activity-icon alert">inventory_2</span><div><strong>Inventory alert: Low stock</strong><small>Mozzarella remaining below 5 units</small></div><time>15 mins ago</time></div>
+      <div class="activity-row"><span class="activity-icon info">person</span><div><strong>New customer joined</strong><small>Olivia Brown placed her first order</small></div><time>45 mins ago</time></div>
+    </section>
+  } @else if (page === 'settings') {
+    <section class="settings-grid">
+      <article class="panel settings-card">
+        <div class="panel-heading"><div><h2>Business information</h2><p>Details shown on your receipts and storefront.</p></div></div>
+        <div class="settings-fields">
+          <label>Restaurant name<input [(ngModel)]="settings.businessName" name="restaurantName" required></label>
+          <label>Contact email<input [(ngModel)]="settings.contactEmail" type="email" name="contactEmail" required></label>
+          <label>Phone number<input [(ngModel)]="settings.phone" type="tel" name="phone"></label>
+          <label>Currency<select [(ngModel)]="settings.currency" name="currency"><option>USD ($) - US Dollar</option><option>EUR (€) - Euro</option><option>GBP (£) - British Pound</option></select></label>
+        </div>
+      </article>
+      <article class="panel settings-card">
+        <div class="panel-heading"><div><h2>Operating hours</h2><p>Configure when your kitchen accepts orders.</p></div><span class="green-text">GMT-5 (EST)</span></div>
+        @for (day of hours; track day.day) {
+          <div class="hours-row"><label><input type="checkbox" [(ngModel)]="day.open" [name]="'open-' + day.day"> {{ day.day }}</label><input type="time" [(ngModel)]="day.start" [name]="'start-' + day.day" [disabled]="!day.open"><span>to</span><input type="time" [(ngModel)]="day.end" [name]="'end-' + day.day" [disabled]="!day.open"><b [class.muted]="!day.open">{{ day.open ? 'Open' : 'Closed' }}</b></div>
+        }
+      </article>
+      <article class="panel settings-card">
+        <div class="panel-heading"><div><h2>Notification preferences</h2><p>Choose which updates you'd like to receive.</p></div></div>
+        <label class="toggle-row">New order alerts<input type="checkbox" [(ngModel)]="alerts.newOrders" name="alertOrders"><span></span></label>
+        <label class="toggle-row">Low inventory warnings<input type="checkbox" [(ngModel)]="alerts.lowStock" name="alertInventory"><span></span></label>
+        <label class="toggle-row">Daily summary email<input type="checkbox" [(ngModel)]="alerts.dailySummary" name="alertSummary"><span></span></label>
+      </article>
+      <div class="settings-save"><span>{{ settingsSaved ? 'Your settings are up to date.' : 'Changes are saved in this demo only.' }}</span><div><button class="button button-secondary" (click)="discardSettings()">Discard</button><button class="button button-primary" (click)="saveSettings()">Save changes</button></div></div>
+    </section>
+  } @else if (page === 'reports') {
+    <div class="metric-grid report-metrics">
+      <article class="metric-card"><span>Total sales</span><strong>$28,430</strong><small class="positive">↗ 12.5% this month</small></article>
+      <article class="metric-card"><span>Orders completed</span><strong>1,284</strong><small class="positive">↗ 8.2% this month</small></article>
+      <article class="metric-card"><span>Average order value</span><strong>$22.14</strong><small class="positive">↗ 3.4% this month</small></article>
+      <article class="metric-card"><span>Returning customers</span><strong>64%</strong><small class="positive">↗ 4.1% this month</small></article>
+    </div>
+    <section class="panel revenue-panel report-chart">
+      <div class="panel-heading"><div><h2>Revenue growth</h2><p>Sales and order volume over {{ reportRange.toLowerCase() }}</p></div><select [(ngModel)]="reportRange" name="reportRange" aria-label="Report range"><option>Last 30 days</option><option>Last 7 days</option><option>This year</option></select></div>
+      <div class="bar-chart tall-chart">
+        @for (bar of reportBars; track $index) { <div class="bar-group"><span class="bar" [style.height.%]="bar"></span><small>{{ reportRange === 'Last 7 days' ? ['M','T','W','T','F','S','S'][$index] : reportRange === 'This year' ? ['J','F','M','A','M','J','J','A','S','O','N','D'][$index] : $index * 2 + 1 }}</small></div> }
+      </div>
+    </section>
+    <section class="panel activity-panel"><div class="panel-heading"><div><h2>Top menu items</h2><p>Best-selling dishes this month</p></div><button class="button button-secondary" (click)="exportReport()">Download report</button></div>
+      @for (item of commerce.products.slice(0, 4); track item.id) { <div class="activity-row"><span class="rank">{{ $index + 1 }}</span><div><strong>{{ item.name }}</strong><small>{{ 128 - $index * 19 }} orders · {{ item.category }}</small></div><b>{{ money(item.price * (128 - $index * 19)) }}</b></div> }
+    </section>
+  } @else {
+    <div class="metric-grid compact-metrics">
+      <article class="metric-card"><span>{{ page === 'orders' ? 'Orders today' : page === 'customers' ? 'Total customers' : 'Active menu items' }}</span><strong>{{ page === 'orders' ? '142' : page === 'customers' ? '2,840' : records.length }}</strong><small class="positive">↗ 12% this week</small></article>
+      <article class="metric-card"><span>{{ page === 'orders' ? 'Needs attention' : page === 'customers' ? 'New this month' : 'Low stock' }}</span><strong>{{ page === 'orders' ? '12' : page === 'customers' ? '184' : lowStockCount }}</strong><small class="warning">Check today's updates</small></article>
+      <article class="metric-card"><span>{{ page === 'orders' ? 'Completed' : page === 'customers' ? 'Returning customers' : 'Menu revenue' }}</span><strong>{{ page === 'orders' ? '125' : page === 'customers' ? '64%' : '$8,420' }}</strong><small class="positive">↗ 8% this month</small></article>
+      <article class="metric-card"><span>{{ page === 'orders' ? 'Revenue today' : page === 'customers' ? 'Average spend' : 'Availability' }}</span><strong>{{ page === 'orders' ? '$4,250' : page === 'customers' ? '$86.40' : '92%' }}</strong><small class="positive">On track</small></article>
+    </div>
+    <section class="panel list-panel">
+      <div class="panel-heading list-heading"><div><h2>{{ page === 'orders' ? 'Recent orders' : page === 'customers' ? 'All customers' : page === 'inventory' ? 'Stock overview' : 'Your menu' }}</h2><p>{{ page === 'orders' ? 'Update order status as your team prepares each meal.' : 'Search, review and manage your restaurant data.' }}</p></div></div>
+      <div class="toolbar">
+        <label class="search-box"><span class="material-symbols-outlined">search</span><input [(ngModel)]="search" name="search" placeholder="Search {{ page }} by name or ID..." (ngModelChange)="pageIndex = 0"></label>
+        <select [(ngModel)]="statusFilter" name="statusFilter" aria-label="Filter by status" (ngModelChange)="pageIndex = 0">
+          <option>All</option><option>Pending</option><option>Preparing</option><option>Ready</option><option>Completed</option><option>Cancelled</option><option>Available</option><option>Low stock</option><option>Unavailable</option><option>Active</option><option>Inactive</option>
+        </select>
+        <button class="button button-secondary sort-button" (click)="sortDescending = !sortDescending">Sort amount {{ sortDescending ? '↓' : '↑' }}</button>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>{{ page === 'orders' ? 'ORDER ID' : page === 'customers' ? 'CUSTOMER' : 'MENU ITEM' }}</th><th>{{ page === 'orders' ? 'CUSTOMER / ITEMS' : page === 'customers' ? 'LOYALTY' : 'CATEGORY' }}</th><th>{{ page === 'orders' ? 'DATE' : page === 'customers' ? 'ORDERS' : 'PRICE / STOCK' }}</th><th>STATUS</th><th class="amount-column">{{ page === 'customers' ? 'TOTAL SPENT' : 'AMOUNT' }}</th><th> </th></tr></thead>
+          <tbody>
+            @for (record of pageRecords; track record.id) {
+              <tr>
+                <td><strong>{{ page === 'orders' ? record.id : record.name }}</strong><small>{{ page === 'orders' ? record.name : record.id }}</small></td>
+                <td>{{ page === 'orders' ? record.secondary : record.category }}<small>{{ page === 'orders' ? '' : record.secondary }}</small></td>
+                <td>{{ page === 'orders' ? record.secondary : page === 'customers' ? record.stock + ' visits' : money(record.amount) + ' · ' + record.stock + ' in stock' }}</td>
+                <td><span class="status-pill" [ngClass]="record.status.toLowerCase().replace(' ', '-')">{{ record.status }}</span></td>
+                <td class="amount-column">{{ money(record.amount) }}</td>
+                <td><div class="row-actions"><button title="View details" aria-label="View details" (click)="showDetails(record)">visibility</button><button title="Edit" aria-label="Edit" (click)="editRecord(record)">edit</button><button title="Update status" aria-label="Update status" (click)="updateStatus(record)">sync</button><button title="Delete" aria-label="Delete" (click)="askDelete(record)">delete</button></div></td>
+              </tr>
+            } @empty { <tr><td colspan="6" class="empty-state"><span class="material-symbols-outlined">search_off</span><strong>No matching {{ page }} found</strong><small>Try another search or clear the selected filters.</small><button (click)="search = ''; statusFilter = 'All'">Clear filters</button></td></tr> }
+          </tbody>
+        </table>
+      </div>
+      <footer class="pagination"><span>Showing {{ filteredRecords.length ? pageIndex * pageSize + 1 : 0 }}–{{ Math.min((pageIndex + 1) * pageSize, filteredRecords.length) }} of {{ filteredRecords.length }}</span><div><button [disabled]="pageIndex === 0" (click)="nextPage(-1)">Previous</button><span>Page {{ pageIndex + 1 }} of {{ pageCount }}</span><button [disabled]="pageIndex >= pageCount - 1" (click)="nextPage(1)">Next</button></div></footer>
+    </section>
+  }
+
+  @if (notice) { <div class="toast-message" role="status">{{ notice }}</div> }
+  @if (modal) {
+    <div class="modal-backdrop" (click)="modal = null">
+      <section class="dialog" role="dialog" aria-modal="true" (click)="$event.stopPropagation()">
+        @if (modal === 'create' || modal === 'edit') {
+          <form (ngSubmit)="saveRecord()"><h2>{{ modal === 'edit' ? 'Edit ' + recordLabel.toLowerCase() : actionLabel }}</h2><p>{{ modal === 'edit' ? 'Update this record in the local demo data.' : 'Add a record to the local demo data.' }}</p>
+            <label>Name<input [(ngModel)]="draft.name" name="draftName" required maxlength="80" autofocus></label>
+            <label>{{ page === 'orders' ? 'Items summary' : 'Description / email' }}<input [(ngModel)]="draft.secondary" name="draftSecondary" maxlength="140"></label>
+            <div class="form-row"><label>Category<input [(ngModel)]="draft.category" name="draftCategory" required></label><label>{{ page === 'orders' ? 'Order total' : 'Price' }}<input [(ngModel)]="draft.amount" name="draftAmount" type="number" min="0" step="0.01" required></label></div>
+            <div class="dialog-actions"><button type="button" class="button button-secondary" (click)="modal = null">Cancel</button><button class="button button-primary" type="submit">{{ modal === 'edit' ? 'Save changes' : 'Add ' + recordLabel.toLowerCase() }}</button></div>
+          </form>
+        } @else if (modal === 'detail' && selected) {
+          <h2>{{ selected.name }}</h2><p>{{ selected.id }} · {{ selected.category }}</p><div class="detail-grid"><span>Description</span><strong>{{ selected.secondary }}</strong><span>Status</span><strong>{{ selected.status }}</strong><span>{{ page === 'customers' ? 'Total spent' : 'Amount' }}</span><strong>{{ money(selected.amount) }}</strong></div>
+          <div class="dialog-actions"><button class="button button-secondary" (click)="modal = null">Close</button><button class="button button-primary" (click)="modal = null; showNotice('Changes saved in this demo.')">Done</button></div>
+        } @else {
+          <h2>Remove this {{ recordLabel.toLowerCase() }}?</h2><p>{{ selected?.name }} will be removed from this view. This change only affects the current demo session.</p>
+          <div class="dialog-actions"><button class="button button-secondary" (click)="modal = null">Keep it</button><button class="button button-danger" (click)="deleteRecord()">Remove</button></div>
+        }
+      </section>
+    </div>
+  }
+</section>

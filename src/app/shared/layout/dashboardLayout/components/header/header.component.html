@@ -1,8 +1,17 @@
-<header>
-    <div class="eMy-top-section-header">
-        <div class="eMy-searching-group">
-            <span class="material-symbols-outlined eMy-searching-icon" data-icon="search">search</span>
-            <input class="searching-input" placeholder="Search orders, products..." type="text" />
-        </div>
+<header class="admin-header">
+  <form class="admin-search" (ngSubmit)="searchAdmin()">
+    <span class="material-symbols-outlined">search</span>
+    <input [(ngModel)]="search" name="adminSearch" placeholder="Search menu, orders, customers..." aria-label="Search administration">
+    <button type="submit">Search</button>
+  </form>
+  <div class="header-controls">
+    <div class="notification-wrap">
+      <button class="icon-button" type="button" aria-label="Notifications" (click)="notificationsOpen = !notificationsOpen"><span class="material-symbols-outlined">notifications</span><i></i></button>
+      @if (notificationsOpen) {
+        <div class="notification-popover"><strong>Notifications</strong><p><span class="notification-dot"></span>Two dishes are running low on stock.</p><p><span class="notification-dot"></span>You have 3 new orders to review.</p><a routerLink="/seller-Account/orders" (click)="notificationsOpen = false">Open orders</a></div>
+      }
     </div>
+    <a class="help-button" routerLink="/help" aria-label="Help and support"><span class="material-symbols-outlined">help</span></a>
+    <div class="admin-profile"><span><strong>Joe Admin</strong><small>Restaurant manager</small></span><span class="profile-avatar">JA</span></div>
+  </div>
 </header>

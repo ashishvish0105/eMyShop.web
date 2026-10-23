@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { DashboardRouterOutlatComponent } from './dashboard-router-outlat.component';
 
@@ -8,7 +9,8 @@ describe('DashboardRouterOutlatComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DashboardRouterOutlatComponent]
+      imports: [DashboardRouterOutlatComponent],
+      providers: [provideRouter([])]
     })
     .compileComponents();
 

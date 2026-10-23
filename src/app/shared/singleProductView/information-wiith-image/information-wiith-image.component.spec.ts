@@ -14,6 +14,14 @@ describe('InformationWiithImageComponent', () => {
 
     fixture = TestBed.createComponent(InformationWiithImageComponent);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('dataSource', {
+      categoryId: 1,
+      categoryName: 'Beverages',
+      itemName: 'Coffee',
+      itemdescription: 'Freshly brewed coffee.',
+      isvisiable: true,
+      itemImagePath: '/assets/coffee.jpg',
+    });
     fixture.detectChanges();
   });
 

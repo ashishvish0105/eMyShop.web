@@ -29,8 +29,8 @@ export class UserInfoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activeRouter.paramMap.subscribe((route: any) => {
-      this.CurrentRoute = Number(route.params.userId);
+    this.activeRouter.paramMap.subscribe((route) => {
+      this.CurrentRoute = Number(route.get('userId'));
       console.log(this.CurrentRoute);
       this.getUserData()
     });

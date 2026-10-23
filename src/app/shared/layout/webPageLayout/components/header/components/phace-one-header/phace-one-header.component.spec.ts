@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { PhaceOneHeaderComponent } from './phace-one-header.component';
 
@@ -8,7 +9,8 @@ describe('PhaceOneHeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PhaceOneHeaderComponent]
+      imports: [PhaceOneHeaderComponent],
+      providers: [provideRouter([])]
     })
     .compileComponents();
 

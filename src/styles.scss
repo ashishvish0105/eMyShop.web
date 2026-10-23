@@ -2,7 +2,10 @@
 @use 'components';
 @use 'tokens';
 @use 'utilities';
+@use './styles/admin-pages';
+@use './styles/storefront-pages';
 // imporat css inport here
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 @import '@angular/cdk/overlay-prebuilt.css';
 
 .global-error-snackbar .mdc-snackbar__surface {
@@ -61,6 +64,8 @@ sans-serif;
 body {
     background-color: $body-backGroundColor !important;
     color: $paragraph-color;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    letter-spacing: -0.01em;
     // font-family: ;
     // font-weight: 400;
     header {
@@ -151,6 +156,13 @@ body {
     border-radius: 20px;
 }
 
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
 button.primary {
     background-color: var(--button-primary-bg);
     color: var(--button-primary-text);
@@ -180,7 +192,7 @@ button.secondary {
 * {
     margin: 0;
     padding: 0;
-    box-sizing: content-box;
+    box-sizing: border-box;
 }
 
 html,

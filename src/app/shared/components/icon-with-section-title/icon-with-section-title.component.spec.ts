@@ -14,6 +14,10 @@ describe('IconWithSectionTitleComponent', () => {
 
     fixture = TestBed.createComponent(IconWithSectionTitleComponent);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('dataSources', {
+      title: 'Featured services',
+      description: 'Services available to customers.',
+    });
     fixture.detectChanges();
   });
 

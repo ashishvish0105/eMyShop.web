@@ -43,5 +43,6 @@ export interface InsertOrUpdateCategory {
 }
 
 export interface ApiResponseInsertOrUpdateCategory extends IApiResponseModel {
+  isSuccess: boolean;
   payload: InsertOrUpdateCategory;
 }
