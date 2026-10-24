@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class LocalStarageService {
+export class LocalStorageService {
   constructor() {}
 
   private isBrowserEnvironment(): boolean {

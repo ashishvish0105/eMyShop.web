@@ -5,12 +5,12 @@ import { catchError, finalize, throwError, TimeoutError, timeout } from 'rxjs';
 import { LoadingService } from '../../shared/services/loading.service';
 import { localStorageObjName } from '../../constVariable/localStorageObjName.const';
 import { environment } from '../../../environments/environment';
-import { LocalStarageService } from '../Comman/local-starage.service';
+import { LocalStorageService } from '../Comman/local-storage.service';
 
 export const globalHttpInterceptor: HttpInterceptorFn = (request, next) => {
   const loadingService = inject(LoadingService);
   const snackBar = inject(MatSnackBar);
-  const storageService = inject(LocalStarageService);
+  const storageService = inject(LocalStorageService);
   const token = storageService.getObjLocalStorage(localStorageObjName.accessToken);
   const isPublicAuthRequest = /\/auth\/(login|register)\/?$/i.test(request.url);
 

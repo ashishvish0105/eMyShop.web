@@ -1,7 +1,7 @@
 import { Component, Inject, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { CONSTE_NAME } from '../../../constVariable/localStorageObjName.const';
-import { LocalStarageService } from '../../../core/Comman/local-starage.service';
+import { LocalStorageService } from '../../../core/Comman/local-storage.service';
 
 @Component({
   selector: 'app-page-not-found',
@@ -20,12 +20,12 @@ export class PageNotFoundComponent {
 
   // }
 router: Router = inject(Router);
-localStarageService: LocalStarageService = inject(LocalStarageService);
+localStorageService: LocalStorageService = inject(LocalStorageService);
 
 
 goToHome() {
    ;
-    this.localStarageService.removeItemLocalStorage(this.CONSTE_VARIABLE.CURRENT_USER);
+    this.localStorageService.removeItemLocalStorage(this.CONSTE_VARIABLE.CURRENT_USER);
     this.router.navigate(['/','login']);
 
   }

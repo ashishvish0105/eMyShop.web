@@ -5,7 +5,7 @@ import { jwtDecode } from 'jwt-decode';
 import { AuthService } from '../../auth/auth.service';
 import { logintype } from '../../constVariable/user.const';
 import { localStorageObjName } from '../../constVariable/localStorageObjName.const';
-import { LocalStarageService } from '../Comman/local-starage.service';
+import { LocalStorageService } from '../Comman/local-storage.service';
 
 const SELLER_ROLES = new Set([
   'superadmin',
@@ -41,7 +41,7 @@ const ROLE_CLAIMS = [
 export class AuthGuardService {
   readonly autharize = new BehaviorSubject(false);
   private readonly router = inject(Router);
-  private readonly localStarageService = inject(LocalStarageService);
+  private readonly localStorageService = inject(LocalStorageService);
   private readonly authService = inject(AuthService);
   private sessionValidationRequest: {
     token: string;
@@ -135,16 +135,16 @@ export class AuthGuardService {
 
   clearSession(): void {
     this.autharize.next(false);
-    this.localStarageService.removeItemLocalStorage(localStorageObjName.accessToken);
-    this.localStarageService.removeItemLocalStorage(localStorageObjName.userRoles);
-    this.localStarageService.removeItemLocalStorage(localStorageObjName.userId);
-    this.localStarageService.removeItemLocalStorage(localStorageObjName.expiresAt);
+    this.localStorageService.removeItemLocalStorage(localStorageObjName.accessToken);
+    this.localStorageService.removeItemLocalStorage(localStorageObjName.userRoles);
+    this.localStorageService.removeItemLocalStorage(localStorageObjName.userId);
+    this.localStorageService.removeItemLocalStorage(localStorageObjName.expiresAt);
   }
 
   private readSession(): { token: string; userId: string } | null {
-    const token: unknown = this.localStarageService.getObjLocalStorage(localStorageObjName.accessToken);
-    const userId: unknown = this.localStarageService.getObjLocalStorage(localStorageObjName.userId);
-    const expiresAt: unknown = this.localStarageService.getObjLocalStorage(localStorageObjName.expiresAt);
+    const token: unknown = this.localStorageService.getObjLocalStorage(localStorageObjName.accessToken);
+    const userId: unknown = this.localStorageService.getObjLocalStorage(localStorageObjName.userId);
+    const expiresAt: unknown = this.localStorageService.getObjLocalStorage(localStorageObjName.expiresAt);
 
     if (typeof token !== 'string' || !token.trim() || typeof userId !== 'string' || !userId.trim()) {
       return null;
@@ -168,7 +168,7 @@ export class AuthGuardService {
   }
 
   private getTokenRoles(token?: string): string[] {
-    const accessToken = token ?? this.localStarageService.getObjLocalStorage(localStorageObjName.accessToken);
+    const accessToken = token ?? this.localStorageService.getObjLocalStorage(localStorageObjName.accessToken);
     if (typeof accessToken !== 'string' || !accessToken) {
       return [];
     }

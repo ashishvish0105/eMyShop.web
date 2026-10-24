@@ -1,7 +1,7 @@
 import { IApiResponseModel } from '../IApiResponseModel';
 
 export interface ILoginModel {
-  userName: string;
+  // userName: string;
   email: string;
   password: string;
 }

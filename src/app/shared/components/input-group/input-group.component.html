@@ -30,22 +30,16 @@
 <!-- ================================================= -->
 
 @case ("OnlyText") {
-
 <div class="mb-3 form-group" [class.has-error]="showError">
-
     <input type="text" [id]="labelText" [value]="inputValue" [disabled]="disabled" [placeholder]="
                     'Please enter ' +
                     (labelText )
                 " class="form-control" [class.is-invalid]="showError" (input)="inputChanged($event)" (blur)="inputBlur()"> @if (showError) {
 
     <div class="invalid-feedback d-block">
-
         {{ errorMessage }}
-
     </div>
-
     }
-
 </div>
 }
 
@@ -127,24 +121,16 @@
 @case ("selectGroupWithoutTitle") {
 
 <div class="mb-3 form-group emy-drop-down-group" [class.has-error]="showError">
-
-
     <div class="emy-drop-down">
-
         <input type="text" [id]="labelText" [value]="selectValue?.value ?? ''" [disabled]="disabled" [placeholder]="
                         'Please select ' +
                         (labelText )
                     " class="form-control" [class.is-invalid]="showError" (click)="toggleDropdown()" readonly>
 
-
         <span class="emy-drop-down-icon">
-
-                    <i
-                        class="fa-solid fa-chevron-down">
+                    <i class="fa-solid fa-chevron-down">
                     </i>
-
                 </span>
-
     </div>
 
 

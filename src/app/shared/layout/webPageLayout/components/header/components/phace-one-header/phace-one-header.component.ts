@@ -13,8 +13,8 @@ import {
   RouterModule,
 } from '@angular/router';
 import { ButtonComponent } from '../../../../../../components/button/button.component';
-import { LocalStarageService } from '../../../../../../../core/Comman/local-starage.service';
 import { JwtDecodeService } from '../../../../../../../core/Comman/Jwt-decode.service';
+import { LocalStorageService } from '../../../../../../../core/Comman/local-storage.service';
 
 @Component({
   selector: 'app-phace-one-header',
@@ -38,13 +38,13 @@ export class PhaceOneHeaderComponent {
   };
 
   private routes = inject(Router);
-  private localStarageService = inject(LocalStarageService);
+  private localStorageService = inject(LocalStorageService);
   private JwtDecodeService = inject(JwtDecodeService);
   ngOnInit(): void {
-    const currentUser = this.localStarageService.getObjLocalStorage(
+    const currentUser = this.localStorageService.getObjLocalStorage(
       localStorageObjName.currentUserObj,
     );
-    const accessToken = this.localStarageService.getLocalStorage(localStorageObjName.accessToken);
+    const accessToken = this.localStorageService.getLocalStorage(localStorageObjName.accessToken);
     const decodedToken = this.JwtDecodeService.getDecodedToken(accessToken);
 
     if (currentUser) {
@@ -68,7 +68,7 @@ export class PhaceOneHeaderComponent {
     this.isUserLoggedIn = false;
     this.routes.navigateByUrl('/');
     this.toggleProfileDetail();
-    this.localStarageService.clearLocalStorage();
+    this.localStorageService.clearLocalStorage();
   }
 
   activeMenuItem(urlName: string) {

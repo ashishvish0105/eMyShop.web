@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { logintype } from '../../../../../constVariable/user.const';
 import { localStorageObjName } from '../../../../../constVariable/localStorageObjName.const';
 import { PhaceOneHeaderComponent } from './components/phace-one-header/phace-one-header.component';
-import { LocalStarageService } from '../../../../../core/Comman/local-starage.service';
+import { LocalStorageService } from '../../../../../core/Comman/local-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -46,13 +46,13 @@ export class HeaderComponent implements OnInit {
     },
   ];
 
-  constructor(private _LocalStarageService:LocalStarageService) {}
+  constructor(private _LocalStorageService: LocalStorageService) {}
 
   ngOnInit() {
-    const userRoles: unknown = this._LocalStarageService.getObjLocalStorage(
+    const userRoles: unknown = this._LocalStorageService.getObjLocalStorage(
       localStorageObjName.userRoles,
     );
-    const legacyUser = this._LocalStarageService.getObjLocalStorage(
+    const legacyUser = this._LocalStorageService.getObjLocalStorage(
       localStorageObjName.currentUserObj,
     );
     const loginType = Array.isArray(userRoles)

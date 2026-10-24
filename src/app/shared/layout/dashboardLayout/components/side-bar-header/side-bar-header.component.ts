@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { LocalStarageService } from '../../../../../core/Comman/local-starage.service';
+import { LocalStorageService } from '../../../../../core/Comman/local-storage.service';
 
 @Component({
   selector: 'app-side-bar-header',
@@ -11,7 +11,7 @@ import { LocalStarageService } from '../../../../../core/Comman/local-starage.se
 })
 export class SideBarHeaderComponent {
   private readonly router = inject(Router);
-  private readonly localStarageService = inject(LocalStarageService);
+  private readonly localStarageService = inject(LocalStorageService);
   readonly navItems: INavItem[] = [
     { routerLink: '/seller-Account/dashboard', name: 'Dashboard', icon: 'dashboard' },
     { routerLink: '/seller-Account/orders', name: 'Orders', icon: 'shopping_bag' },

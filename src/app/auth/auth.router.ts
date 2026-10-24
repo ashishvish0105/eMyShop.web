@@ -67,11 +67,11 @@ export const authRoutes: Routes = [
         component: LoginComponent,
       },
       {
-        path: 'forgetPasssword',
+        path: 'forget-password',
         component: ForgetPasswordComponent,
       },
       {
-        path: 'resetPassword',
+        path: 'reset-password',
         component: ResetPasswordComponent,
       },
       {
@@ -79,8 +79,8 @@ export const authRoutes: Routes = [
         component: RegistrationComponent,
       },
       { path: 'register', redirectTo: 'registration', pathMatch: 'full' },
-      { path: 'forgot-password', redirectTo: 'forgetPasssword', pathMatch: 'full' },
-      { path: 'reset-password', redirectTo: 'resetPassword', pathMatch: 'full' },
+      { path: 'forgot-password', redirectTo: 'forget-password', pathMatch: 'full' },
+      { path: 'reset-password', redirectTo: 'reset-password', pathMatch: 'full' },
     ],
   },
   {

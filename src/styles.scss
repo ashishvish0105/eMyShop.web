@@ -7,7 +7,6 @@
 // imporat css inport here
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 @import '@angular/cdk/overlay-prebuilt.css';
-
 .global-error-snackbar .mdc-snackbar__surface {
     background-color: #b3261e !important;
 }
@@ -16,6 +15,7 @@
 .global-error-snackbar .mat-mdc-button {
     color: #fff !important;
 }
+
 //font size or color or commane thign change from scss file
 // ********************* //
 $as-topBottom-space: 80px;
