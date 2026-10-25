@@ -1,0 +1,308 @@
+<main class="pricing-page">
+  <header class="pricing-heading">
+    <div>
+      <p class="eyebrow">SELLER TOOLS · PRICING</p>
+      <h1>Product pricing calculator</h1>
+      <p class="intro">Price with confidence. Understand your costs, fees, tax and estimated profit before listing.</p>
+    </div>
+    <div class="heading-actions">
+      <button class="button button-secondary" type="button" (click)="reset()">Reset</button>
+      <button class="button button-primary" type="button" (click)="exportCsv()" [disabled]="!!result.error">Export CSV</button>
+    </div>
+  </header>
+
+  @if (notice) {
+    <p class="notice" [class.notice-error]="noticeIsError" role="status">{{ notice }}</p>
+  }
+
+  <div class="calculator-layout">
+    <div class="calculator-inputs">
+      <section class="card">
+        <div class="section-heading">
+          <div><span class="step">01</span><div><h2>Product information</h2><p>Set the product and batch you are pricing.</p></div></div>
+        </div>
+        <div class="field-grid">
+          <label class="field field-wide">Product name
+            <input [(ngModel)]="product.name" name="productName" maxlength="120" placeholder="e.g. Handmade ceramic mug">
+          </label>
+          <label class="field">SKU / product ID
+            <input [(ngModel)]="product.sku" name="productSku" maxlength="60" placeholder="Optional">
+          </label>
+          <label class="field">Category
+            <input [(ngModel)]="product.category" name="productCategory" maxlength="80" placeholder="e.g. Home & kitchen">
+          </label>
+          <label class="field">Units produced / priced
+            <input type="number" [(ngModel)]="product.quantity" name="quantity" min="1" step="1" required>
+          </label>
+          <label class="field">Currency
+            <select [(ngModel)]="product.currency" name="currency">
+              @for (currency of currencies; track currency) { <option [value]="currency">{{ currency }}</option> }
+            </select>
+          </label>
+          <label class="field">Product weight (optional)
+            <div class="input-suffix"><input type="number" [(ngModel)]="productWeight" name="productWeight" min="0" step="0.01" placeholder="0"><span>kg</span></div>
+          </label>
+          <label class="field">Dimensions (optional)
+            <input [(ngModel)]="productDimensions" name="productDimensions" placeholder="L × W × H">
+          </label>
+        </div>
+        <p class="field-hint">Quantity is used to estimate batch profit. Unit prices and costs remain per sellable unit.</p>
+      </section>
+
+      <section class="card">
+        <div class="section-heading">
+          <div><span class="step">02</span><div><h2>Unit costs</h2><p>Enter the cost for one sellable unit. Disable items that do not apply.</p></div></div>
+          <button class="text-button" type="button" (click)="addCost()">+ Add cost</button>
+        </div>
+        <div class="cost-list">
+          @for (cost of costs; track cost.key) {
+            <div class="cost-row">
+              <label class="cost-toggle" [attr.aria-label]="'Include ' + cost.label">
+                <input type="checkbox" [(ngModel)]="cost.enabled" [name]="'enabled-' + cost.key">
+              </label>
+              <label class="field cost-name">
+                <span>{{ cost.label }}</span>
+                <input [(ngModel)]="cost.label" [name]="'label-' + cost.key" [disabled]="!cost.enabled" maxlength="60">
+              </label>
+              <label class="field cost-amount">
+                <span>Per unit</span>
+                <div class="input-prefix"><span>{{ currencySymbol }}</span><input type="number" [(ngModel)]="cost.value" [name]="'cost-' + cost.key" min="0" step="0.01" [disabled]="!cost.enabled"></div>
+              </label>
+              @if (cost.key.startsWith('custom-')) {
+                <button class="icon-button" type="button" (click)="removeCost(cost.key)" [attr.aria-label]="'Remove ' + cost.label">×</button>
+              }
+            </div>
+          }
+        </div>
+        <p class="section-footnote"><span class="material-symbols-outlined">info</span>Enter recurring per-unit costs here. One-time costs should be divided by the number of units they support.</p>
+      </section>
+
+      <section class="card">
+        <div class="section-heading">
+          <div><span class="step">03</span><div><h2>Selling fees & expenses</h2><p>Percentage fees are calculated on discounted sales revenue, excluding product sales tax.</p></div></div>
+        </div>
+        <div class="field-grid">
+          <label class="field">Marketplace commission
+            <div class="input-suffix"><input type="number" [ngModel]="percent(input.marketplaceRate)" (ngModelChange)="setRate('marketplaceRate', $event)" name="marketplaceRate" min="0" max="99.99" step="0.1"><span>%</span></div>
+          </label>
+          <label class="field">Payment gateway fee
+            <div class="input-suffix"><input type="number" [ngModel]="percent(input.paymentRate)" (ngModelChange)="setRate('paymentRate', $event)" name="paymentRate" min="0" max="99.99" step="0.1"><span>%</span></div>
+          </label>
+          <label class="field">Affiliate commission
+            <div class="input-suffix"><input type="number" [ngModel]="percent(input.affiliateRate)" (ngModelChange)="setRate('affiliateRate', $event)" name="affiliateRate" min="0" max="99.99" step="0.1"><span>%</span></div>
+          </label>
+          <label class="field">Advertising as % of sales
+            <div class="input-suffix"><input type="number" [ngModel]="percent(input.advertisingRate)" (ngModelChange)="setRate('advertisingRate', $event)" name="advertisingRate" min="0" max="99.99" step="0.1"><span>%</span></div>
+          </label>
+          <label class="field">Fixed transaction fee / order
+            <div class="input-prefix"><span>{{ currencySymbol }}</span><input type="number" [(ngModel)]="input.transactionFee" name="transactionFee" min="0" step="0.01"></div>
+          </label>
+          <label class="field">Platform fee allocation / unit
+            <div class="input-prefix"><span>{{ currencySymbol }}</span><input type="number" [(ngModel)]="input.platformFee" name="platformFee" min="0" step="0.01"></div>
+          </label>
+          <label class="field">Fixed advertising cost / order
+            <div class="input-prefix"><span>{{ currencySymbol }}</span><input type="number" [(ngModel)]="input.advertisingCost" name="advertisingCost" min="0" step="0.01"></div>
+          </label>
+          <label class="field">Cash-on-delivery fee / order
+            <div class="input-prefix"><span>{{ currencySymbol }}</span><input type="number" [(ngModel)]="input.codFee" name="codFee" min="0" step="0.01"></div>
+          </label>
+          <label class="field">Expected returns & refunds / unit
+            <div class="input-prefix"><span>{{ currencySymbol }}</span><input type="number" [(ngModel)]="input.returnsCost" name="returnsCost" min="0" step="0.01"></div>
+          </label>
+          <label class="field">Reverse shipping cost / unit
+            <div class="input-prefix"><span>{{ currencySymbol }}</span><input type="number" [(ngModel)]="input.reverseShippingCost" name="reverseShippingCost" min="0" step="0.01"></div>
+          </label>
+          <label class="field">Damaged, lost & failed delivery / unit
+            <div class="input-prefix"><span>{{ currencySymbol }}</span><input type="number" [(ngModel)]="input.deliveryFailureCost" name="deliveryFailureCost" min="0" step="0.01"></div>
+          </label>
+          <label class="field">Warranty & after-sales / unit
+            <div class="input-prefix"><span>{{ currencySymbol }}</span><input type="number" [(ngModel)]="input.warrantyCost" name="warrantyCost" min="0" step="0.01"></div>
+          </label>
+        </div>
+        <p class="section-footnote"><span class="material-symbols-outlined">info</span>Rates are seller-entered assumptions; no effective-dated platform fee schedule is connected. Do not duplicate fees across fields. Fixed order fees assume one order per unit; enter taxes on fixed fees in unit costs.</p>
+      </section>
+
+      <section class="card">
+        <div class="section-heading">
+          <div><span class="step">04</span><div><h2>Tax & discounts</h2><p>Choose the product tax behavior for your jurisdiction.</p></div></div>
+        </div>
+        <div class="field-grid">
+          <label class="field">GST / VAT / sales tax rate
+            <div class="input-suffix"><input type="number" [ngModel]="percent(input.taxRate)" (ngModelChange)="setRate('taxRate', $event)" name="taxRate" min="0" max="99.99" step="0.1"><span>%</span></div>
+          </label>
+          <label class="field">Tax on percentage platform / payment fees
+            <div class="input-suffix"><input type="number" [ngModel]="percent(input.feeTaxRate)" (ngModelChange)="setRate('feeTaxRate', $event)" name="feeTaxRate" min="0" max="99.99" step="0.1"><span>%</span></div>
+          </label>
+          <label class="field">Promotional discount
+            <div class="input-suffix"><input type="number" [ngModel]="percent(input.discountRate)" (ngModelChange)="setRate('discountRate', $event)" name="discountRate" min="0" max="99.99" step="0.1"><span>%</span></div>
+          </label>
+          <label class="field">Coupon discount (stacked)
+            <div class="input-suffix"><input type="number" [ngModel]="percent(input.couponRate)" (ngModelChange)="setRate('couponRate', $event)" name="couponRate" min="0" max="99.99" step="0.1"><span>%</span></div>
+          </label>
+        </div>
+        <label class="check-line">
+          <input type="checkbox" [(ngModel)]="input.taxInclusive" name="taxInclusive">
+          <span><strong>My listed price includes product tax</strong><small>Tax is separated from sales revenue before profit is calculated. If unchecked, tax is added at checkout.</small></span>
+        </label>
+        <label class="check-line">
+          <input type="checkbox" [(ngModel)]="input.taxExempt" name="taxExempt">
+          <span><strong>This product is tax-exempt</strong><small>Applies a zero product tax rate; configured tax on platform and payment fees still applies.</small></span>
+        </label>
+        <div class="tax-note">Discounts stack sequentially (for example, 10% then 5%). Sales tax is calculated after discounts and is not treated as seller revenue.</div>
+      </section>
+
+      <section class="card">
+        <div class="section-heading">
+          <div><span class="step">05</span><div><h2>Pricing strategy</h2><p>Choose how the calculator should determine your required sale price.</p></div></div>
+        </div>
+        <div class="field-grid strategy-grid">
+          <label class="field field-wide">Strategy
+            <select [(ngModel)]="input.strategy" name="strategy">
+              @for (strategy of strategies; track strategy.value) { <option [value]="strategy.value">{{ strategy.label }}</option> }
+            </select>
+          </label>
+          @if (input.strategy === 'margin') {
+            <label class="field">Target profit margin
+              <div class="input-suffix"><input type="number" [ngModel]="percent(input.targetMargin)" (ngModelChange)="setRate('targetMargin', $event)" name="targetMargin" min="0" max="99.99" step="0.1"><span>%</span></div>
+            </label>
+          } @else if (input.strategy === 'fixed') {
+            <label class="field">Desired profit per unit
+              <div class="input-prefix"><span>{{ currencySymbol }}</span><input type="number" [(ngModel)]="input.targetProfit" name="targetProfit" min="0" step="0.01"></div>
+            </label>
+          } @else if (input.strategy === 'markup') {
+            <label class="field">Markup on cost
+              <div class="input-suffix"><input type="number" [ngModel]="percent(input.markupRate)" (ngModelChange)="setRate('markupRate', $event)" name="markupRate" min="0" max="99.99" step="0.1"><span>%</span></div>
+            </label>
+          } @else if (input.strategy === 'custom') {
+            <label class="field">Expected pre-tax sale price after discounts
+              <div class="input-prefix"><span>{{ currencySymbol }}</span><input type="number" [(ngModel)]="input.customPrice" name="customPrice" min="0" step="0.01"></div>
+            </label>
+          }
+        </div>
+        <div class="strategy-note"><strong>Markup vs. margin:</strong> markup is profit divided by cost; profit margin is profit divided by net sales revenue. They are not interchangeable.</div>
+      </section>
+    </div>
+
+    <aside class="results-column" aria-label="Pricing results">
+      <section class="result-hero">
+        <div class="result-hero-top"><span>RECOMMENDED LIST PRICE</span><span class="material-symbols-outlined">price_check</span></div>
+        @if (result.error) {
+          <div class="result-error" role="alert">{{ result.error }}</div>
+        } @else {
+          <strong>{{ money(result.recommendedListPrice) }}</strong>
+          <p>{{ input.taxExempt ? 'Product tax exempt' : input.taxInclusive ? 'Tax included in list price' : 'Tax added at checkout' }}<span> · </span>{{ percent(totalDiscountRate) }}% total discount</p>
+          <div class="hero-secondary"><span>Customer pays after discounts</span><b>{{ money(result.discountedCustomerPrice) }}</b></div>
+        }
+      </section>
+
+      @if (!isFormValid && !result.error) {
+        <div class="validation-alert" role="alert">Enter non-negative costs, percentages below 100%, and a whole quantity greater than zero.</div>
+      }
+      @if (!result.error && result.totalCost === 0) {
+        <div class="validation-alert" role="status">No unit or fixed costs are included. Add your costs before relying on this price.</div>
+      }
+      @if (!result.error && result.profit !== null && result.profit < 0) {
+        <div class="validation-alert loss" role="status">This price estimates a loss of {{ money(result.profit) }} per unit.</div>
+      } @else if (!result.error && result.margin !== null && result.margin < 0.05) {
+        <div class="validation-alert" role="status">Estimated profit margin is below 5%. Review your price or target.</div>
+      }
+
+      <section class="result-metrics">
+        <article class="result-card"><span>Break-even price</span><strong>{{ money(result.breakEvenPrice) }}</strong><small>After variable fees, before product sales tax</small></article>
+        <article class="result-card"><span>Total cost per unit</span><strong>{{ money(result.totalCost) }}</strong><small>Unit costs and fixed fees combined</small></article>
+        <article class="result-card" [class.negative]="(result.profit ?? 0) < 0"><span>Estimated profit / unit</span><strong>{{ money(result.profit) }}</strong><small>{{ percent(result.margin ?? 0) }}% margin · {{ percent(result.markup ?? 0) }}% markup</small></article>
+        <article class="result-card"><span>Total profit · {{ product.quantity }} units</span><strong>{{ money((result.profit ?? 0) * product.quantity) }}</strong><small>Estimated batch profit</small></article>
+        <article class="result-card"><span>Seller payout before product costs</span><strong>{{ money(sellerPayout) }}</strong><small>After tax collected and configured platform/payment fees</small></article>
+      </section>
+
+      <section class="card breakdown-card">
+        <div class="panel-title"><div><h2>Price breakdown</h2><p>Per unit · final customer payment</p></div></div>
+        <div class="breakdown-lines">
+          <div class="breakdown-line"><span>Customer payment after discount</span><strong>{{ money(result.discountedCustomerPrice) }}</strong></div>
+          @if (discountAmount > 0) { <div class="breakdown-line subdued"><span>Discount from list price</span><strong>−{{ money(discountAmount) }}</strong></div> }
+          <div class="breakdown-line"><span>Net revenue, excluding sales tax</span><strong>{{ money(result.netRevenue) }}</strong></div>
+          @for (cost of costBreakdown; track cost.label) { <div class="breakdown-line detail"><span>{{ cost.label }}</span><strong>{{ money(cost.amount) }}</strong></div> }
+          <div class="breakdown-line"><span>Marketplace commission</span><strong>{{ money(result.marketplaceFee) }}</strong></div>
+          <div class="breakdown-line"><span>Payment processing fees</span><strong>{{ money(result.paymentFee) }}</strong></div>
+          <div class="breakdown-line"><span>Affiliate & percentage advertising fees</span><strong>{{ money(result.otherVariableFees) }}</strong></div>
+          @if ((result.feeTax ?? 0) > 0) { <div class="breakdown-line"><span>Tax on fees</span><strong>{{ money(result.feeTax) }}</strong></div> }
+          <div class="breakdown-line"><span>Product sales tax collected</span><strong>{{ money(result.taxAmount) }}</strong></div>
+          <div class="breakdown-line"><span>Seller payout before product costs</span><strong>{{ money(sellerPayout) }}</strong></div>
+          <div class="breakdown-line total-line" [class.profit-negative]="(result.profit ?? 0) < 0"><span>Estimated seller profit</span><strong>{{ money(result.profit) }}</strong></div>
+        </div>
+      </section>
+
+      <section class="card distribution-card">
+        <div class="panel-title"><div><h2>Payment distribution</h2><p>Customer payment allocated once across these categories.</p></div></div>
+        @if (distributionTotal > 0) {
+          <div class="distribution-bar" role="img" aria-label="Distribution of customer payment between costs, fees, taxes, and estimated profit">
+            @for (item of distribution; track item.label) {
+              <span [class]="'distribution-segment ' + item.tone" [style.width.%]="Math.max(0, item.amount) / distributionTotal * 100"></span>
+            }
+          </div>
+          <div class="legend">
+            @for (item of distribution; track item.label) {
+              <div class="legend-item"><span [class]="'legend-dot ' + item.tone"></span><span>{{ item.label }}</span><strong>{{ money(item.amount) }}</strong></div>
+            }
+          </div>
+        } @else { <p class="empty-chart">{{ result.profit !== null && result.profit < 0 ? 'The loss exceeds customer proceeds, so a customer-payment distribution would not reconcile.' : 'Enter costs and a valid pricing strategy to see the distribution.' }}</p> }
+      </section>
+
+      <section class="card scenario-card">
+        <div class="panel-title"><div><h2>Save this scenario</h2><p>Scenarios are stored in this browser only; they are not sent to the server.</p></div></div>
+        <div class="scenario-save-row">
+          <label class="field"><span class="sr-only">Scenario name</span><input [(ngModel)]="scenarioName" name="scenarioName" maxlength="80" placeholder="Scenario name (optional)"></label>
+          <button class="button button-primary" type="button" (click)="saveScenario()" [disabled]="!!result.error || !isFormValid">Save locally</button>
+        </div>
+        <div class="scenario-actions">
+          <label class="field rounding-field">Price ending
+            <select [ngModel]="'none'" (ngModelChange)="roundToEnding($event)" name="priceEnding">
+              <option value="none">No rounding</option><option value=".99">End in .99</option><option value=".95">End in .95</option>
+            </select>
+          </label>
+          <button class="button button-secondary" type="button" (click)="copyPrice()" [disabled]="!!result.error">Copy recommended price</button>
+        </div>
+        <p class="backend-note"><span class="material-symbols-outlined">info</span>Scenario drafts stay in this browser. The active product list is demo-backed and has no connected save-to-listing action, so this calculation does not update a product.</p>
+      </section>
+
+      <section class="card assumptions-card">
+        <div class="panel-title"><div><h2>Calculation assumptions</h2><p>Review what this estimate includes.</p></div></div>
+        <ul>
+          <li>Percentage fees and profit margin use post-discount, pre-sales-tax revenue.</li>
+          <li>Marketplace, payment, affiliate and ad rates are combined once; configured fee tax applies to percentage-based fees.</li>
+          <li>Promotional and coupon discounts stack sequentially; order-level fixed fees are treated as one order per unit.</li>
+          <li>Income tax, exemptions and seller-specific shipping rules are not modeled.</li>
+        </ul>
+      </section>
+    </aside>
+  </div>
+
+  <section class="card saved-section">
+    <div class="panel-title"><div><h2>Saved pricing scenarios</h2><p>Compare and reuse calculations saved on this device.</p></div><span class="scenario-count">{{ scenarios.length }} saved</span></div>
+    @if (scenarios.length) {
+      <div class="scenario-table-wrap">
+        <table>
+          <thead><tr><th>Scenario</th><th>Product</th><th>Recommended price</th><th>Profit / unit</th><th>Margin</th><th>Actions</th></tr></thead>
+          <tbody>
+            @for (scenario of scenarios; track scenario.id) {
+              <tr>
+                <td><strong>{{ scenario.name }}</strong><small>{{ scenario.createdAt | date:'mediumDate' }}</small></td>
+                <td>{{ scenario.product.name || 'Untitled product' }}</td>
+                <td>{{ scenarioMoney(scenario.result.recommendedListPrice, scenario.product.currency) }}</td>
+                <td [class.negative-text]="(scenario.result.profit ?? 0) < 0">{{ scenarioMoney(scenario.result.profit, scenario.product.currency) }}</td>
+                <td>{{ percent(scenario.result.margin ?? 0) }}%</td>
+                <td class="row-actions">
+                  <button type="button" (click)="loadScenario(scenario)">Load</button>
+                  <button type="button" (click)="duplicateScenario(scenario)">Duplicate</button>
+                  <button type="button" class="danger-link" (click)="deleteScenario(scenario.id)">Delete</button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    } @else {
+      <div class="empty-scenarios"><span class="material-symbols-outlined">calculate</span><p>No saved scenarios yet. Save a calculation to compare prices here.</p></div>
+    }
+  </section>
+</main>

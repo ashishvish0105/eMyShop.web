@@ -18,6 +18,7 @@ export class SideBarHeaderComponent {
     { routerLink: '/seller-Account/products', name: 'Menu', icon: 'restaurant_menu' },
     { routerLink: '/seller-Account/customers', name: 'Customers', icon: 'group' },
     { routerLink: '/seller-Account/inventory', name: 'Inventory', icon: 'inventory_2' },
+    { routerLink: '/seller-Account/pricing-calculator', name: 'Price calculator', icon: 'calculate' },
     { routerLink: '/seller-Account/reports', name: 'Reports', icon: 'monitoring' },
   ];
 

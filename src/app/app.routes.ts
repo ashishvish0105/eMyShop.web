@@ -21,6 +21,13 @@ export const routes: Routes = [
       { path: 'products', component: AdminPagesComponent, data: { page: 'products' } },
       { path: 'customers', component: AdminPagesComponent, data: { page: 'customers' } },
       { path: 'inventory', component: AdminPagesComponent, data: { page: 'inventory' } },
+      {
+        path: 'pricing-calculator',
+        loadComponent: () =>
+          import('./features/admin/pricing-calculator/pricing-calculator.component').then(
+            (component) => component.PricingCalculatorComponent,
+          ),
+      },
       { path: 'reports', component: AdminPagesComponent, data: { page: 'reports' } },
       { path: 'settings', component: AdminPagesComponent, data: { page: 'settings' } },
     ],
