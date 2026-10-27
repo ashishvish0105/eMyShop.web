@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, EventEmitter, HostListener, OnDestroy, Output, QueryList, ViewChildren, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, OnDestroy, Output, QueryList, ViewChild, ViewChildren, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { CustomerAuthService } from './customer-auth.service';
@@ -12,9 +12,11 @@ type AuthStep = 'phone' | 'otp' | 'success';
   imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './storefront-login-modal.component.html',
 })
-export class StorefrontLoginModalComponent implements OnDestroy {
+export class StorefrontLoginModalComponent implements AfterViewInit, OnDestroy {
   readonly auth = inject(CustomerAuthService);
   @Output() authenticated = new EventEmitter<void>();
+  @ViewChild('dialog') private dialog?: ElementRef<HTMLElement>;
+  @ViewChild('phoneInput') private phoneInput?: ElementRef<HTMLInputElement>;
   @ViewChildren('otpBox') private otpBoxes?: QueryList<ElementRef<HTMLInputElement>>;
 
   step: AuthStep = 'phone';
@@ -29,13 +31,35 @@ export class StorefrontLoginModalComponent implements OnDestroy {
 
   readonly countryCodes = ['+1', '+91', '+44', '+61'];
 
+  ngAfterViewInit(): void {
+    setTimeout(() => this.focusFirstAvailable());
+  }
+
   ngOnDestroy(): void {
     this.clearTimer();
   }
 
-  @HostListener('document:keydown.escape')
-  onEscape(): void {
-    if (this.step !== 'success') this.close();
+  @HostListener('document:keydown', ['$event'])
+  onDocumentKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Escape') {
+      if (this.step !== 'success') this.close();
+      return;
+    }
+    if (event.key !== 'Tab' || !this.dialog) return;
+
+    const focusable = this.dialog.nativeElement.querySelectorAll<HTMLElement>(
+      'button:not([disabled]), input:not([disabled]), select:not([disabled]), a[href]',
+    );
+    const first = focusable.item(0);
+    const last = focusable.item(focusable.length - 1);
+    if (!first || !last) return;
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
   }
 
   close(): void {
@@ -51,7 +75,7 @@ export class StorefrontLoginModalComponent implements OnDestroy {
   }
 
   submitPhone(): void {
-    this.phoneError = this.auth.validateMobile(this.countryCode, this.mobileNumber);
+    this.phoneError = this.auth.validateMobile(this.countryCode, this.mobileNumber) ?? '';
     if (this.phoneError) return;
     this.submitting = true;
     this.auth.sendOtp(this.countryCode, this.mobileNumber).subscribe({
@@ -137,6 +161,10 @@ export class StorefrontLoginModalComponent implements OnDestroy {
 
   private focusOtp(index: number): void {
     this.otpBoxes?.get(index)?.nativeElement.focus();
+  }
+
+  private focusFirstAvailable(): void {
+    this.phoneInput?.nativeElement.focus();
   }
 
   private clearTimer(): void {

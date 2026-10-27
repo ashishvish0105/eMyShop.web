@@ -1,5 +1,5 @@
 <div class="auth-backdrop" (click)="close()"></div>
-<section class="auth-dialog" role="dialog" aria-modal="true" [attr.aria-labelledby]="step === 'otp' ? 'otp-title' : 'login-title'" (click)="$event.stopPropagation()">
+<section #dialog class="auth-dialog" role="dialog" aria-modal="true" [attr.aria-busy]="submitting" [attr.aria-labelledby]="step === 'otp' ? 'otp-title' : 'login-title'" (click)="$event.stopPropagation()">
     @if (step === 'phone') {
     <button class="auth-back" type="button" aria-label="Close login" (click)="close()"><span class="material-symbols-outlined">arrow_back</span></button>
     <div class="auth-brand"><span class="brand-mark">restaurant</span><strong>Foodie<span>Dash</span></strong></div>
@@ -12,15 +12,17 @@
                 @for (code of countryCodes; track code) { <option [value]="code">{{ code }}</option> }
             </select>
             <input
+                #phoneInput
                 type="tel"
                 name="mobileNumber"
                 inputmode="numeric"
                 autocomplete="tel-national"
                 maxlength="10"
+                required
                 [(ngModel)]="mobileNumber"
                 placeholder="Enter mobile number"
                 [attr.aria-invalid]="!!phoneError"
-                aria-describedby="phone-error">
+                [attr.aria-describedby]="phoneError ? 'phone-error' : null">
         </label>
         @if (phoneError) { <p class="field-error" id="phone-error" role="alert">{{ phoneError }}</p> }
         <button class="auth-continue" type="submit" [disabled]="submitting">{{ submitting ? 'Sending code…' : 'Continue' }}</button>
@@ -29,7 +31,7 @@
     } @else if (step === 'otp') {
     <button class="auth-back" type="button" aria-label="Back to mobile number" (click)="backToPhone()"><span class="material-symbols-outlined">arrow_back</span></button>
     <h2 id="otp-title">OTP Verification</h2>
-    <p class="auth-subtitle">We have sent a verification code to<br><b>{{ auth.maskPhone(countryCode, mobileNumber) }}</b></p>
+    <p class="auth-subtitle" id="otp-description">We have sent a verification code to<br><b>{{ auth.maskPhone(countryCode, mobileNumber) }}</b></p>
     @if (auth.mockOtpHint()) {
     <p class="mock-hint" role="status">Development mock is on. Your code is <b>{{ auth.mockOtpHint() }}</b>. This hint is hidden when the live OTP API is enabled.</p>
     }
@@ -43,19 +45,20 @@
             maxlength="1"
             autocomplete="one-time-code"
             [attr.aria-label]="'Digit ' + ($index + 1)"
+            [attr.aria-describedby]="otpError ? 'otp-error' : 'otp-description'"
             [value]="digit"
             [disabled]="submitting"
             (input)="onOtpInput($index, $event)"
             (keydown)="onOtpKeydown($index, $event)">
         }
     </div>
-    @if (otpError) { <p class="field-error" role="alert">{{ otpError }}</p> }
-    @if (submitting) { <p class="auth-status">Verifying your code…</p> }
+    @if (otpError) { <p class="field-error" id="otp-error" role="alert">{{ otpError }}</p> }
+    @if (submitting) { <p class="auth-status" role="status" aria-live="polite">Verifying your code…</p> }
     <button class="resend-link" type="button" [disabled]="resendIn > 0 || submitting" (click)="resendOtp()">
         {{ resendIn > 0 ? 'Resend Code (in ' + resendIn + ' secs)' : 'Resend Code' }}
     </button>
     } @else {
-    <div class="auth-success">
+    <div class="auth-success" role="status" aria-live="polite">
         <span class="material-symbols-outlined" aria-hidden="true">check_circle</span>
         <p>Successfully logged in!</p>
     </div>
