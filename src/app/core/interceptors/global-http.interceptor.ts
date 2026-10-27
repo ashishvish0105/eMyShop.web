@@ -1,15 +1,15 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, finalize, throwError, TimeoutError, timeout } from 'rxjs';
 import { LoadingService } from '../../shared/services/loading.service';
 import { localStorageObjName } from '../../constVariable/localStorageObjName.const';
 import { environment } from '../../../environments/environment';
 import { LocalStorageService } from '../Comman/local-storage.service';
+import { SnackbarService } from '../../shared/snackbar/snackbar.service';
 
 export const globalHttpInterceptor: HttpInterceptorFn = (request, next) => {
   const loadingService = inject(LoadingService);
-  const snackBar = inject(MatSnackBar);
+  const snackbarService = inject(SnackbarService);
   const storageService = inject(LocalStorageService);
   const token = storageService.getObjLocalStorage(localStorageObjName.accessToken);
   const isPublicAuthRequest = /\/auth\/(login|register)\/?$/i.test(request.url);
@@ -24,10 +24,7 @@ export const globalHttpInterceptor: HttpInterceptorFn = (request, next) => {
     timeout({ first: 15000 }),
     catchError((error: unknown) => {
       if (error instanceof HttpErrorResponse || error instanceof TimeoutError) {
-        snackBar.open(getErrorMessage(error), 'Close', {
-          duration: 5000,
-          panelClass: ['global-error-snackbar']
-        });
+        snackbarService.error(getErrorMessage(error));
       }
 
       return throwError(() => error);

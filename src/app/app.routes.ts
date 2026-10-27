@@ -7,8 +7,9 @@ import { DashboardRouterOutlatComponent } from './shared/layout/dashboardLayout/
 import { MainSectionComponent } from './shared/layout/webPageLayout/main-section/main-section.component';
 
 export const routes: Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
-    path: '',
+    path: 'login',
     loadChildren: () => import('./auth/auth.router').then((module) => module.authRoutes),
   },
   {

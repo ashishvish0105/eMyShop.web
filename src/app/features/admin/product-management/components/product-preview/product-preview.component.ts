@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { IProductWrite } from '../../../../../interface/admin/product-management/IProduct.model';
 import { ProductManagmentService } from '../../services/product-managment.service';
+import { SnackbarService } from '../../../../../shared/snackbar/snackbar.service';
 
 interface PreviewImage {
   name: string;
@@ -27,7 +27,7 @@ interface ProductPreviewData extends Omit<IProductWrite, 'tags'> {
 export class ProductPreviewComponent implements OnInit, OnDestroy {
   private readonly router = inject(Router);
   private readonly productService = inject(ProductManagmentService);
-  private readonly snackBar = inject(MatSnackBar);
+  private readonly snackbarService = inject(SnackbarService);
 
   readonly product = signal<ProductPreviewData | null>(null);
   readonly selectedImage = signal(0);
@@ -40,7 +40,7 @@ export class ProductPreviewComponent implements OnInit, OnDestroy {
       : undefined;
     if (!product) {
       this.router.navigate(['/seller-Account/products']);
-      this.snackBar.open('Preview data is no longer available. Please reopen the product form.', 'Close', { duration: 5000 });
+      this.snackbarService.error('Preview data is no longer available. Please reopen the product form.');
       return;
     }
 
@@ -85,13 +85,13 @@ export class ProductPreviewComponent implements OnInit, OnDestroy {
       next: (response) => {
         this.isSaving.set(false);
         this.releaseImagePreviews();
-        this.snackBar.open(response.message || 'Product saved successfully.', 'Close', { duration: 4000 });
+        this.snackbarService.success(response.message || 'Product saved successfully.');
         this.router.navigate(['/seller-Account/products']);
       },
       error: (error) => {
         this.isSaving.set(false);
         const message = error?.error?.message || 'Unable to save the product. Please try again.';
-        this.snackBar.open(message, 'Close', { duration: 5000 });
+        this.snackbarService.error(message);
       }
     });
   }

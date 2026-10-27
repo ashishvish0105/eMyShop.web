@@ -7,7 +7,7 @@ import { logintype } from '../../constVariable/user.const';
 import { localStorageObjName } from '../../constVariable/localStorageObjName.const';
 import { LocalStorageService } from '../Comman/local-storage.service';
 
-const SELLER_ROLES = new Set([
+const ROLES = new Set([
   'superadmin',
   'admin',
   'manager',
@@ -17,10 +17,11 @@ const SELLER_ROLES = new Set([
   'customersupport',
   'accountant',
   'deliverymanager',
-  logintype.seller,
+  'seller',
 ]);
 
-type AuthenticatedRole = 'seller' | 'customer';
+type AuthenticatedRole = 'admin' | 'customer';
+
 
 interface JwtClaims {
   exp?: number;
@@ -31,8 +32,7 @@ interface JwtClaims {
 
 const ROLE_CLAIMS = [
   'role',
-  'roles',
-  'http://schemas.microsoft.com/ws/2008/06/identity/claims/role',
+  'roles'
 ];
 
 @Injectable({
@@ -77,7 +77,7 @@ export class AuthGuardService {
   }
 
   hasSellerRole(): boolean {
-    return this.resolveRole(this.getTokenRoles()) === 'seller';
+    return this.resolveRole(this.getTokenRoles()) === 'admin';
   }
 
   getRoleBasedUrl(): string | null {
@@ -130,7 +130,7 @@ export class AuthGuardService {
   }
 
   getLandingUrl(role: AuthenticatedRole): string {
-    return role === 'seller' ? '/seller-Account/dashboard' : '/home/products';
+    return role === 'admin' ? '/seller-Account/dashboard' : '/home/products';
   }
 
   clearSession(): void {
@@ -191,20 +191,18 @@ export class AuthGuardService {
 
   private resolveRole(roles: readonly unknown[]): AuthenticatedRole | null {
     const roleSet = this.resolveRoles(roles);
-    if (roleSet.has('seller')) {
-      return 'seller';
+    if (roleSet.has('admin')) {
+      return 'admin';
     }
     return roleSet.has('customer') ? 'customer' : null;
   }
 
   private resolveRoles(roles: readonly unknown[]): ReadonlySet<AuthenticatedRole> {
-    const normalizedRoles = roles
-      .filter((role): role is string => typeof role === 'string')
-      .map((role) => role.trim().toLowerCase());
+    const normalizedRoles = roles.filter((role): role is string => typeof role === 'string').map((role) => role.trim().toLowerCase());
 
     const roleSet = new Set<AuthenticatedRole>();
-    if (normalizedRoles.some((role) => SELLER_ROLES.has(role))) {
-      roleSet.add('seller');
+    if (normalizedRoles.some((role) => ROLES.has(role))) {
+      roleSet.add('admin');
     }
     if (normalizedRoles.includes(logintype.customer)) {
       roleSet.add('customer');
@@ -225,7 +223,7 @@ export class AuthGuardService {
       const segments = tree.root.children['primary']?.segments.map((segment) => segment.path) ?? [];
       const isSellerRoute = segments[0] === 'seller-Account';
       const isCustomerRoute = segments[0] === 'home' && segments[1] === 'products';
-      return (roles.has('seller') && isSellerRoute) || (roles.has('customer') && isCustomerRoute)
+      return (roles.has('admin') && isSellerRoute) || (roles.has('customer') && isCustomerRoute)
         ? tree
         : null;
     } catch {

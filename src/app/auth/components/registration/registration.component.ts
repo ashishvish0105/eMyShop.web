@@ -3,7 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarService } from '../../../shared/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-registration',
@@ -28,7 +28,7 @@ export class RegistrationComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private snackBar: MatSnackBar,
+    private snackbarService: SnackbarService,
     private router: Router
   ) {}
 
@@ -46,7 +46,7 @@ export class RegistrationComponent {
 
     const { userName, email, password } = this.registration.getRawValue();
     localStorage.setItem('UserRegister', JSON.stringify({ userName, email }));
-    this.snackBar.open('Demo account details saved in this browser. Please sign in.', 'Close', { duration: 4000 });
+    this.snackbarService.success('Demo account details saved in this browser. Please sign in.');
     this.router.navigate(['/auth/login']);
   }
 }

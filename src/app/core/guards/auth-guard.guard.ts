@@ -38,7 +38,7 @@ function authorizeRoute(
       }
 
       if (
-        (requestedRole === 'seller' || requestedRole === 'customer')
+        (requestedRole === 'admin' || requestedRole === 'customer')
         && role.has(requestedRole)
       ) {
         return true;

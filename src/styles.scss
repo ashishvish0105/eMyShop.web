@@ -8,15 +8,6 @@
 // imporat css inport here
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 @import '@angular/cdk/overlay-prebuilt.css';
-.global-error-snackbar .mdc-snackbar__surface {
-    background-color: #b3261e !important;
-}
-
-.global-error-snackbar .mdc-snackbar__label,
-.global-error-snackbar .mat-mdc-button {
-    color: #fff !important;
-}
-
 //font size or color or commane thign change from scss file
 // ********************* //
 $as-topBottom-space: 80px;
@@ -308,6 +299,22 @@ h6 {
     // align-items: center;
     padding: 0 5%;
     // justify-content: center;
+}
+
+.mat-mdc-snack-bar-container.custom-snackbar-container .mdc-snackbar__surface {
+    max-width: min(560px, calc(100vw - 32px));
+    min-width: 0;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.mat-mdc-snack-bar-container.custom-snackbar-container {
+    max-width: min(560px, calc(100vw - 32px));
+}
+
+.mat-mdc-snack-bar-container.custom-snackbar-container .mdc-snackbar__label {
+    padding: 0;
 }
 
 @media screen and (max-width:991.98px) {

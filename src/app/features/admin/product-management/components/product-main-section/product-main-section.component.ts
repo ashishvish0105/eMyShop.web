@@ -8,7 +8,7 @@ import { TitleWithItemComponent } from '../../../../components/title-with-item/t
 import { ProgressBarComponent } from '../../../../components/progress-bar/proress-bar.component';
 import { IProduct } from '../../../../../interface/admin/product-management/IProduct.model';
 import { ProductManagmentService } from '../../services/product-managment.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarService } from '../../../../../shared/snackbar/snackbar.service';
 
 interface CategorySummary {
   name: string;
@@ -26,7 +26,7 @@ interface CategorySummary {
 export class ProductMainSectionComponent implements OnInit {
   private router = inject(Router);
   private productManagementService = inject(ProductManagmentService);
-  private snackBar = inject(MatSnackBar);
+  private snackbarService = inject(SnackbarService);
 
   readonly statusLabels: Record<number, string> = {
     0: 'Inactive',
@@ -112,12 +112,12 @@ export class ProductMainSectionComponent implements OnInit {
     this.productManagementService.delete(product.productId).subscribe({
       next: (response) => {
         this.deletingProductIds.delete(product.productId);
-        this.snackBar.open(response.message || 'Product deleted successfully.', 'Close', { duration: 4000 });
+        this.snackbarService.success(response.message || 'Product deleted successfully.');
         this.loadProducts();
       },
       error: (error) => {
         this.deletingProductIds.delete(product.productId);
-        this.snackBar.open(this.getDeleteError(error), 'Close', { duration: 5000 });
+        this.snackbarService.error(this.getDeleteError(error));
       }
     });
   }

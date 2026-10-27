@@ -16,7 +16,7 @@ import { InputGroupComponent } from '../../../../../shared/components/input-grou
 import { requiredArrayValidator } from '../../../../../core/validation/required-array.validator';
 import { ProductManagmentService } from '../../services/product-managment.service';
 import { IProduct, IProductWrite } from '../../../../../interface/admin/product-management/IProduct.model';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarService } from '../../../../../shared/snackbar/snackbar.service';
 
 interface ProductImagePreview {
   id: number;
@@ -56,7 +56,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private productManagementService: ProductManagmentService,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar
+    private snackbarService: SnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -89,7 +89,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     });
 
     if (invalidProductId) {
-      this.snackBar.open('The product ID is invalid.', 'Close', { duration: 4000 });
+      this.snackbarService.error('The product ID is invalid.');
       this.router.navigate(['/seller-Account/products']);
       return;
     }
@@ -127,7 +127,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       },
       error: () => {
         this.categoryList = [];
-        this.snackBar.open('Categories could not be loaded. Please try again before saving.', 'Close', { duration: 5000 });
+        this.snackbarService.error('Categories could not be loaded. Please try again before saving.');
       }
     });
   }
@@ -138,7 +138,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       next: response => {
         if (!response.payload) {
           this.isLoading = false;
-          this.snackBar.open('Product not found.', 'Close', { duration: 4000 });
+          this.snackbarService.error('Product not found.');
           this.router.navigate(['/seller-Account/products']);
           return;
         }
@@ -147,7 +147,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       },
       error: (error) => {
         this.isLoading = false;
-        this.snackBar.open(this.getRequestError(error, 'load product'), 'Close', { duration: 5000 });
+        this.snackbarService.error(this.getRequestError(error, 'load product'));
         this.router.navigate(['/seller-Account/products']);
       }
     });
@@ -159,7 +159,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     }
     this.productForm.markAllAsTouched();
     if (this.productForm.invalid) {
-      this.snackBar.open('Please fix the highlighted product fields before continuing.', 'Close', { duration: 4000 });
+      this.snackbarService.warning('Please fix the highlighted product fields before continuing.');
       return;
     }
 
@@ -188,13 +188,13 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     saveRequest.subscribe({
       next: response => {
         this.isSubmitting = false;
-        this.snackBar.open(response.message || 'Product saved successfully.', 'Close', { duration: 4000 });
+        this.snackbarService.success(response.message || 'Product saved successfully.');
         this.router.navigate(['/seller-Account/products']);
       },
       error: (error) => {
         this.isSubmitting = false;
         const message = this.getRequestError(error, 'save product');
-        this.snackBar.open(message, 'Close', { duration: 5000 });
+        this.snackbarService.error(message);
       }
     });
   }
@@ -202,7 +202,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   onPreviewPage(): void {
     this.productForm.markAllAsTouched();
     if (this.productForm.invalid) {
-      this.snackBar.open('Please complete the product form before previewing.', 'Close', { duration: 4000 });
+      this.snackbarService.warning('Please complete the product form before previewing.');
       return;
     }
 
@@ -266,15 +266,15 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
     for (const file of selectedFiles) {
       if (!this.acceptedImageTypes.includes(file.type)) {
-        this.snackBar.open(`${file.name} was skipped. Use JPG, PNG, or WebP images.`, 'Close', { duration: 5000 });
+        this.snackbarService.warning(`${file.name} was skipped. Use JPG, PNG, or WebP images.`);
         continue;
       }
       if (file.size > this.maxImageSizeBytes) {
-        this.snackBar.open(`${file.name} was skipped because it exceeds the 5 MB limit.`, 'Close', { duration: 5000 });
+        this.snackbarService.warning(`${file.name} was skipped because it exceeds the 5 MB limit.`);
         continue;
       }
       if (acceptedFiles.length >= remainingSlots) {
-        this.snackBar.open(`You can add up to ${this.maxImageCount} images.`, 'Close', { duration: 4000 });
+        this.snackbarService.warning(`You can add up to ${this.maxImageCount} images.`);
         break;
       }
       acceptedFiles.push(file);

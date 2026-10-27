@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductManagmentService } from '../../services/product-managment.service';
 import { ProductPreviewComponent } from './product-preview.component';
+import { SnackbarService } from '../../../../../shared/snackbar/snackbar.service';
 
 describe('ProductPreviewComponent', () => {
   let component: ProductPreviewComponent;
@@ -15,7 +15,11 @@ describe('ProductPreviewComponent', () => {
       imports: [ProductPreviewComponent],
       providers: [
         { provide: Router, useValue: { navigate: jasmine.createSpy() } },
-        { provide: MatSnackBar, useValue: { open: jasmine.createSpy() } },
+        { provide: SnackbarService, useValue: {
+          success: jasmine.createSpy(),
+          error: jasmine.createSpy(),
+          warning: jasmine.createSpy()
+        } },
         { provide: ProductManagmentService, useValue: {} }
       ]
     })

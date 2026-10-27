@@ -8,7 +8,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { localStorageObjName } from '../../../constVariable/localStorageObjName.const';
 import { AuthGuardService } from '../../../core/guards/auth-guard.service';
 import { AuthService } from '../../auth.service';
@@ -16,6 +15,7 @@ import { LocalStorageService } from '../../../core/Comman/local-storage.service'
 import { LOGIN_VARIABLES } from '../../../constVariable/auth/loginVariable.const';
 import { InputGroupComponent } from '../../../shared/components/input-group/input-group.component';
 import { ILoginModel } from '../../../interface/login/ILogin.Model';
+import { SnackbarService } from '../../../shared/snackbar/snackbar.service';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -40,26 +40,19 @@ export class LoginComponent implements OnInit {
     private localStorageService: LocalStorageService,
 
     private authGuardService: AuthGuardService,
-    private snackBar: MatSnackBar
+    private snackbarService: SnackbarService
   ) {}
 
   ngOnInit(): void {
     this.login = this.fb.group({
       // userName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      email: ['admin@gmail.com', [Validators.required, Validators.email]],
+      password: ['admin', Validators.required]
     });
   }
 
 
 loginMethod(): void {
-  debugger;
-  // 1. Validate the login form
-  if (this.login.invalid) {
-    this.login.markAllAsTouched();
-    return;
-  }
-
   // 2. Get form values and query parameters
   const user:ILoginModel = this.login.getRawValue();
 
@@ -70,11 +63,7 @@ loginMethod(): void {
       const payload = response.payload;
 
       if (!payload?.accessToken) {
-        this.snackBar.open(
-          response.message || 'Login failed. Please check your credentials.',
-          'Close',
-          { duration: 5000 }
-        );
+        this.snackbarService.error(response.message || 'Login failed. Please check your credentials.');
         return;
       }
 
@@ -110,21 +99,13 @@ loginMethod(): void {
       );
 
       if (!isLoginAllowed) {
-        this.snackBar.open(
-          'Your account does not have a supported role. Please contact an administrator.',
-          'Close',
-          { duration: 5000 }
-        );
+        this.snackbarService.error('Your account does not have a supported role. Please contact an administrator.');
       }
     },
 
     // 7. Handle API errors
     error: (error) => {
-      this.snackBar.open(
-        error?.error?.message || 'Something went wrong. Please try again.',
-        'Close',
-        { duration: 5000 }
-      );
+      this.snackbarService.error(error?.error?.message || 'Something went wrong. Please try again.');
     }
   });
 }
