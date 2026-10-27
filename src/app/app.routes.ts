@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { AdminPagesComponent } from './features/admin/admin-pages.component';
 import { StorefrontPageComponent } from './features/storefront-page.component';
+import { storefrontAuthGuard } from './features/storefront/auth/storefront-auth.guard';
 import { MainContactUsSectionComponent } from './modules/contact-us/main-contact-us-section/main-contact-us-section.component';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 import { DashboardRouterOutlatComponent } from './shared/layout/dashboardLayout/dashboard-router-outlat/dashboard-router-outlat.component';
@@ -38,8 +39,12 @@ export const routes: Routes = [
   { path: 'offers', component: StorefrontPageComponent, data: { page: 'offers' } },
   { path: 'cart', component: StorefrontPageComponent, data: { page: 'cart' } },
   { path: 'checkout', component: StorefrontPageComponent, data: { page: 'checkout' } },
-  { path: 'orders', component: StorefrontPageComponent, data: { page: 'orders' } },
-  { path: 'profile', component: StorefrontPageComponent, data: { page: 'profile' } },
+  { path: 'orders', component: StorefrontPageComponent, canActivate: [storefrontAuthGuard], data: { page: 'orders' } },
+  { path: 'profile', component: StorefrontPageComponent, canActivate: [storefrontAuthGuard], data: { page: 'profile' } },
+  { path: 'addresses', component: StorefrontPageComponent, canActivate: [storefrontAuthGuard], data: { page: 'addresses' } },
+  { path: 'wishlist', component: StorefrontPageComponent, canActivate: [storefrontAuthGuard], data: { page: 'wishlist' } },
+  { path: 'notifications', component: StorefrontPageComponent, canActivate: [storefrontAuthGuard], data: { page: 'notifications' } },
+  { path: 'settings', component: StorefrontPageComponent, canActivate: [storefrontAuthGuard], data: { page: 'settings' } },
   { path: 'help', component: StorefrontPageComponent, data: { page: 'help' } },
   {
     path: 'home',

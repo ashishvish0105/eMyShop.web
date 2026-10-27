@@ -11,8 +11,8 @@ export const globalHttpInterceptor: HttpInterceptorFn = (request, next) => {
   const loadingService = inject(LoadingService);
   const snackbarService = inject(SnackbarService);
   const storageService = inject(LocalStorageService);
-  const token = storageService.getObjLocalStorage(localStorageObjName.accessToken);
-  const isPublicAuthRequest = /\/auth\/(login|register)\/?$/i.test(request.url);
+  const token = storageService.getObjLocalStorage(localStorageObjName.accessToken) || readCustomerAccessToken();
+  const isPublicAuthRequest = /\/auth\/(login|register|sendotp|verifyotp)\/?$/i.test(request.url);
 
   const authenticatedRequest = token && request.url.startsWith(environment.BaseUrl) && !isPublicAuthRequest
     ? request.clone({ setHeaders: { Authorization: `Bearer ${token}` } })
@@ -32,6 +32,33 @@ export const globalHttpInterceptor: HttpInterceptorFn = (request, next) => {
     finalize(() => loadingService.requestFinished())
   );
 };
+
+function readCustomerAccessToken(): string | null {
+  if (typeof sessionStorage === 'undefined') {
+    return null;
+  }
+
+  try {
+    const raw = sessionStorage.getItem('foodiedash.customer.session');
+    if (!raw) {
+      return null;
+    }
+
+    const session = JSON.parse(raw) as { mock?: boolean; accessToken?: string; expiresAt?: string };
+    if (session.mock || typeof session.accessToken !== 'string' || !session.accessToken) {
+      return null;
+    }
+
+    const expiration = Date.parse(session.expiresAt ?? '');
+    if (!Number.isFinite(expiration) || expiration <= Date.now()) {
+      return null;
+    }
+
+    return session.accessToken;
+  } catch {
+    return null;
+  }
+}
 
 function getErrorMessage(error: HttpErrorResponse | TimeoutError): string {
   if (error instanceof TimeoutError) {

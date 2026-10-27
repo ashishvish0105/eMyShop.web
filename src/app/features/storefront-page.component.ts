@@ -1,31 +1,49 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { CustomerAccountService } from './storefront/auth/customer-account.service';
+import { CustomerAddress, CustomerOrder, CustomerPreferences } from './storefront/auth/customer-account.models';
+import { CustomerAuthService } from './storefront/auth/customer-auth.service';
+import { StorefrontLoginModalComponent } from './storefront/auth/storefront-login-modal.component';
 import { CartItem, MenuItem, MockCommerceService } from './mock-commerce.service';
 
 @Component({
   selector: 'app-storefront-page',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, StorefrontLoginModalComponent],
   templateUrl: './storefront-page.component.html',
+  styleUrl: './storefront-page.component.scss',
 })
 export class StorefrontPageComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   readonly router = inject(Router);
   readonly commerce = inject(MockCommerceService);
+  readonly auth = inject(CustomerAuthService);
+  readonly account = inject(CustomerAccountService);
   page = 'home';
   search = '';
   category = 'All';
   notice = '';
   menuOpen = false;
-  orderComplete = false;
+  shopMenuOpen = false;
+  profileMenuOpen = false;
+  editingProfile = false;
   profileSaved = false;
+  profileSaving = false;
+  profileError = '';
   cancelOrderId = '';
-  selectedOrder?: MockCommerceService['orders'][number];
-  profilePreferences = { orderUpdates: true, offers: false };
-  customerName = 'Jordan Lee';
-  deliveryAddress = '24 Green Street, New York, NY 10003';
+  selectedOrder?: CustomerOrder;
+  deleteAccountOpen = false;
+  addressEditorOpen = false;
+  addressError = '';
+  @ViewChild('shopToggle') private shopToggle?: ElementRef<HTMLButtonElement>;
+  @ViewChild('shopMenu') private shopMenu?: ElementRef<HTMLElement>;
+  @ViewChild('profileToggle') private profileToggle?: ElementRef<HTMLButtonElement>;
+  @ViewChild('profileMenu') private profileMenu?: ElementRef<HTMLElement>;
+  orderComplete = false;
+  profileForm = this.emptyProfileForm();
+  addressForm = this.emptyAddressForm();
   readonly categories = ['All', 'Pizza', 'Burgers', 'Pasta', 'Healthy', 'Desserts', 'Drinks'];
   readonly popularCategories = [
     { name: 'Pizza', icon: 'local_pizza' },
@@ -35,17 +53,110 @@ export class StorefrontPageComponent implements OnInit {
     { name: 'Desserts', icon: 'icecream' },
     { name: 'Drinks', icon: 'local_cafe' },
   ];
+  readonly shopCategories = this.popularCategories.map(({ name, icon }) => ({
+    name,
+    icon,
+    items: this.commerce.products.filter((product) => product.category === name),
+  }));
+  readonly accountLinks = [
+    { label: 'My Profile', path: '/profile', icon: 'person' },
+    { label: 'My Orders', path: '/orders', icon: 'receipt_long' },
+    { label: 'Saved Addresses', path: '/addresses', icon: 'location_on' },
+    { label: 'Wishlist', path: '/wishlist', icon: 'favorite' },
+    { label: 'Notifications', path: '/notifications', icon: 'notifications' },
+    { label: 'Account Settings', path: '/settings', icon: 'settings' },
+  ];
 
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
       this.page = String(data['page'] ?? 'home');
       this.orderComplete = false;
       this.menuOpen = false;
+      this.shopMenuOpen = false;
+      this.profileMenuOpen = false;
+      this.syncProfileForm();
     });
     this.route.queryParamMap.subscribe((params) => {
       this.category = params.get('category') ?? 'All';
       this.search = params.get('search') ?? '';
+      if (params.get('login') === '1' && !this.auth.isLoggedIn()) {
+        this.auth.openLogin(params.get('returnUrl'));
+      }
     });
+    if (this.auth.isLoggedIn()) {
+      this.account.loadAccount().subscribe(() => this.syncProfileForm());
+    }
+  }
+
+  openLogin(returnUrl?: string): void {
+    this.profileMenuOpen = false;
+    this.auth.openLogin(returnUrl ?? this.router.url);
+  }
+
+  onAuthenticated(): void {
+    this.account.loadAccount().subscribe(() => this.syncProfileForm());
+    const returnUrl = this.auth.consumeReturnUrl();
+    this.router.navigateByUrl(returnUrl && returnUrl.startsWith('/') ? returnUrl : this.router.url.split('?')[0]);
+    this.showNotice('Welcome to FoodieDash.');
+  }
+
+  logout(): void {
+    this.profileMenuOpen = false;
+    this.auth.logout();
+    this.account.loadAccount().subscribe();
+    this.showNotice('You have been logged out.');
+    if (['profile', 'orders', 'addresses', 'wishlist', 'notifications', 'settings'].includes(this.page)) {
+      this.router.navigate(['/products']);
+    }
+  }
+
+  toggleShopMenu(): void {
+    this.shopMenuOpen = !this.shopMenuOpen;
+    this.profileMenuOpen = false;
+  }
+
+  toggleProfileMenu(): void {
+    this.profileMenuOpen = !this.profileMenuOpen;
+    this.shopMenuOpen = false;
+  }
+
+  toggleNavigation(): void {
+    this.menuOpen = !this.menuOpen;
+    if (!this.menuOpen) this.shopMenuOpen = false;
+  }
+
+  closeShopMenu(): void {
+    this.shopMenuOpen = false;
+    this.menuOpen = false;
+  }
+
+  closeMenus(): void {
+    this.shopMenuOpen = false;
+    this.profileMenuOpen = false;
+    this.menuOpen = false;
+  }
+
+  @HostListener('document:click', ['$event'])
+  closeMenusOnOutsideClick(event: MouseEvent): void {
+    const target = event.target as Node;
+    const insideShop = this.shopToggle?.nativeElement.contains(target) || this.shopMenu?.nativeElement.contains(target);
+    const insideProfile = this.profileToggle?.nativeElement.contains(target) || this.profileMenu?.nativeElement.contains(target);
+    if (this.shopMenuOpen && !insideShop) this.shopMenuOpen = false;
+    if (this.profileMenuOpen && !insideProfile) this.profileMenuOpen = false;
+  }
+
+  @HostListener('document:keydown.escape')
+  closeMenusOnEscape(): void {
+    if (this.auth.loginModalOpen()) return;
+    if (this.shopMenuOpen) {
+      this.shopMenuOpen = false;
+      this.shopToggle?.nativeElement.focus();
+      return;
+    }
+    if (this.profileMenuOpen) {
+      this.profileMenuOpen = false;
+      this.profileToggle?.nativeElement.focus();
+    }
   }
 
   get filteredProducts(): MenuItem[] {
@@ -68,6 +179,15 @@ export class StorefrontPageComponent implements OnInit {
     this.showNotice(`${product.name} added to your order.`);
   }
 
+  toggleWishlist(product: MenuItem): void {
+    if (!this.auth.isLoggedIn()) {
+      this.openLogin(this.router.url);
+      return;
+    }
+    const saved = this.account.toggleWishlist(product.id);
+    this.showNotice(saved ? `${product.name} saved to your wishlist.` : `${product.name} removed from your wishlist.`);
+  }
+
   setCategory(category: string): void {
     this.category = category;
     this.page = 'menu';
@@ -79,6 +199,10 @@ export class StorefrontPageComponent implements OnInit {
       this.showNotice('Add a dish to your order before checking out.');
       return;
     }
+    if (!this.auth.isLoggedIn()) {
+      this.openLogin('/checkout');
+      return;
+    }
     this.router.navigate(['/checkout']);
   }
 
@@ -87,23 +211,28 @@ export class StorefrontPageComponent implements OnInit {
       this.router.navigate(['/menu']);
       return;
     }
-    const orderNumber = `#FD-${2050 + this.commerce.orders.length}`;
-    this.commerce.orders.unshift({
+    if (!this.auth.isLoggedIn()) {
+      this.openLogin('/checkout');
+      return;
+    }
+    const orderNumber = `#FD-${2050 + this.account.orders().length}`;
+    const items = this.commerce.cart.map((item) => item.product.name).join(', ');
+    this.account.addOrder({
       id: orderNumber,
-      customer: this.customerName,
-      email: 'jordan.lee@email.com',
-      items: `${this.commerce.itemCount} items · ${this.commerce.cart.map((item) => item.product.name).join(', ')}`,
       date: 'Just now',
+      items,
+      itemCount: this.commerce.itemCount,
       total: this.commerce.subtotal,
-      status: 'Pending',
+      paymentStatus: 'Paid',
+      deliveryStatus: 'Pending',
     });
     this.commerce.cart = [];
     this.orderComplete = true;
   }
 
   cancelOrder(id: string): void {
-    const order = this.commerce.orders.find((item) => item.id === id);
-    if (order && (order.status === 'Pending' || order.status === 'Preparing')) {
+    const order = this.account.orders().find((item) => item.id === id);
+    if (order && (order.deliveryStatus === 'Pending' || order.deliveryStatus === 'Preparing')) {
       this.cancelOrderId = id;
     } else {
       this.showNotice('This order can no longer be cancelled.');
@@ -111,16 +240,24 @@ export class StorefrontPageComponent implements OnInit {
   }
 
   confirmCancellation(): void {
-    const order = this.commerce.orders.find((item) => item.id === this.cancelOrderId);
-    if (order && (order.status === 'Pending' || order.status === 'Preparing')) {
-      order.status = 'Cancelled';
-      this.showNotice(`${order.id} was cancelled.`);
-    }
+    this.account.updateOrderStatus(this.cancelOrderId, 'Cancelled');
+    this.showNotice(`${this.cancelOrderId} was cancelled.`);
     this.cancelOrderId = '';
   }
 
   viewOrder(id: string): void {
-    this.selectedOrder = this.commerce.orders.find((order) => order.id === id);
+    this.selectedOrder = this.account.orders().find((order) => order.id === id);
+  }
+
+  reorder(id: string): void {
+    const order = this.account.orders().find((item) => item.id === id);
+    if (!order) return;
+    const names = order.items.split(',').map((name) => name.trim().toLowerCase());
+    this.commerce.products
+      .filter((product) => names.some((name) => name.includes(product.name.toLowerCase()) || product.name.toLowerCase().includes(name)))
+      .forEach((product) => this.commerce.addToCart(product));
+    this.showNotice('Items from this order were added to your cart.');
+    this.router.navigate(['/cart']);
   }
 
   copyOfferCode(): void {
@@ -129,9 +266,96 @@ export class StorefrontPageComponent implements OnInit {
       .catch(() => this.showNotice('Clipboard unavailable. Use promo code WELCOME20 at checkout.'));
   }
 
+  startProfileEdit(): void {
+    this.editingProfile = true;
+    this.profileSaved = false;
+    this.profileError = '';
+    this.syncProfileForm();
+  }
+
   saveProfile(): void {
-    this.profileSaved = true;
-    this.showNotice('Your profile has been updated.');
+    const profile = this.account.profile();
+    if (!profile) return;
+    if (!this.profileForm.fullName.trim()) {
+      this.profileError = 'Enter your full name.';
+      return;
+    }
+    if (!this.profileForm.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.profileForm.email)) {
+      this.profileError = 'Enter a valid email address.';
+      return;
+    }
+    this.profileSaving = true;
+    this.profileError = '';
+    this.account.saveProfile({
+      ...profile,
+      fullName: this.profileForm.fullName.trim(),
+      email: this.profileForm.email.trim(),
+      preferences: { ...this.profileForm.preferences },
+    }).subscribe({
+      next: () => {
+        this.profileSaving = false;
+        this.profileSaved = true;
+        this.editingProfile = false;
+        this.showNotice('Your profile has been updated.');
+      },
+      error: () => {
+        this.profileSaving = false;
+        this.profileError = 'We could not save your profile. Please try again.';
+      },
+    });
+  }
+
+  saveSettings(): void {
+    this.saveProfile();
+  }
+
+  openAddressEditor(address?: CustomerAddress): void {
+    this.addressError = '';
+    this.addressEditorOpen = true;
+    this.addressForm = address ? { ...address } : this.emptyAddressForm();
+  }
+
+  saveAddress(): void {
+    const form = this.addressForm;
+    if (!form.label.trim() || !form.fullName.trim() || !form.street.trim() || !form.city.trim() || !form.state.trim() || !form.postalCode.trim()) {
+      this.addressError = 'Fill in the name, phone, street, city, state, and postal code.';
+      return;
+    }
+    const phoneError = this.auth.validateMobile(this.auth.currentUser()?.countryCode || '+1', form.phone);
+    if (phoneError) {
+      this.addressError = phoneError;
+      return;
+    }
+    this.account.saveAddress(form).subscribe({
+      next: () => {
+        this.addressEditorOpen = false;
+        this.showNotice('Delivery address saved.');
+      },
+      error: () => this.addressError = 'Unable to save this address right now.',
+    });
+  }
+
+  removeAddress(id: string): void {
+    this.account.deleteAddress(id).subscribe({
+      next: () => this.showNotice('Address removed.'),
+    });
+  }
+
+  confirmDeleteAccount(): void {
+    this.account.deleteAccount().subscribe({
+      next: () => {
+        this.deleteAccountOpen = false;
+        this.router.navigate(['/products']);
+        this.showNotice('Your FoodieDash account was deleted.');
+      },
+    });
+  }
+
+  memberSince(): string {
+    const createdAt = this.account.profile()?.createdAt;
+    if (!createdAt) return 'FoodieDash member';
+    const year = new Date(createdAt).getFullYear();
+    return Number.isFinite(year) ? `FoodieDash member since ${year}` : 'FoodieDash member';
   }
 
   quantity(item: CartItem): number {
@@ -141,5 +365,32 @@ export class StorefrontPageComponent implements OnInit {
   showNotice(message: string): void {
     this.notice = message;
     setTimeout(() => this.notice = '', 2600);
+  }
+
+  private syncProfileForm(): void {
+    const profile = this.account.profile();
+    this.profileForm = profile
+      ? { fullName: profile.fullName, email: profile.email, preferences: { ...profile.preferences } }
+      : this.emptyProfileForm();
+  }
+
+  private emptyProfileForm(): { fullName: string; email: string; preferences: CustomerPreferences } {
+    return { fullName: '', email: '', preferences: { orderUpdates: true, offers: false, smsAlerts: true, shareActivity: false } };
+  }
+
+  private emptyAddressForm(): CustomerAddress {
+    const user = this.auth.currentUser();
+    return {
+      id: '',
+      label: 'Home',
+      fullName: user?.fullName || '',
+      phone: user?.mobileNumber || '',
+      street: '',
+      city: '',
+      state: '',
+      postalCode: '',
+      instructions: '',
+      isDefault: this.account.addresses().length === 0,
+    };
   }
 }
