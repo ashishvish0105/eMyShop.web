@@ -1,0 +1,20 @@
+<main class="narrow-page">
+    <div class="page-title">
+        <p class="eyebrow">SAVED FOR LATER</p>
+        <h1>Wishlist</h1>
+        <p>Dishes you’ve saved for your next craving.</p>
+    </div>
+    <app-storefront-product-grid
+        [products]="account.wishlistItems(commerce.products)"
+        [showWishlist]="false"
+        [showRating]="false"
+        [showMeta]="false"
+        wishlistActionLabel="Remove"
+        (addProduct)="addToCart($event)"
+        (toggleWishlist)="toggleWishlist($event)">
+        <section empty class="panel empty-card"><span class="material-symbols-outlined">favorite</span>
+            <h3>Your wishlist is empty</h3>
+            <p>Tap the heart on a dish to save it here.</p><a routerLink="/menu" class="button-primary">Browse menu</a>
+        </section>
+    </app-storefront-product-grid>
+</main>

@@ -1,0 +1,12 @@
+<section class="hero">
+    <div class="hero-copy"><span class="hero-label"><span class="material-symbols-outlined">near_me</span>GOOD FOOD, RIGHT AROUND THE CORNER</span>
+        <h1>Delicious meals,<br>delivered to your doorstep.</h1>
+        <p>Your neighborhood favorites, brought to you fresh.</p>
+        <form class="hero-search" (ngSubmit)="searchSubmit.emit()"><span class="material-symbols-outlined">search</span>
+            <input [ngModel]="search" (ngModelChange)="searchChange.emit($event)" name="heroSearch" placeholder="What are you craving?">
+            <button type="submit">Find food</button>
+        </form>
+        <div class="delivery-note"><span class="material-symbols-outlined">schedule</span>Fast delivery <b>·</b> Free delivery on your first order</div>
+    </div>
+    <div class="hero-image" role="img" aria-label="Fresh restaurant meal"></div>
+</section>

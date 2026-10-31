@@ -1,0 +1,25 @@
+<main class="narrow-page">
+    <div class="page-title">
+        <p class="eyebrow">STAY IN THE LOOP</p>
+        <h1>Notifications</h1>
+        <p>Order updates, delivery alerts, and account messages.</p>
+    </div>
+    <div class="account-toolbar"><button class="button-secondary" type="button" (click)="account.markAllNotificationsRead()">Mark all as read</button></div>
+    @for (item of account.notifications(); track item.id) {
+    <article class="panel notice-card" [class.unread]="!item.read">
+        <div>
+            <h2>{{ item.title }}</h2>
+            <p>{{ item.body }}</p>
+            <small>{{ item.createdAt | date:'medium' }}</small>
+        </div>
+        @if (!item.read) {
+        <button class="button-secondary" type="button" (click)="account.markNotificationRead(item.id)">Mark read</button>
+        }
+    </article>
+    } @empty {
+    <section class="panel empty-card"><span class="material-symbols-outlined">notifications_off</span>
+        <h3>You’re all caught up</h3>
+        <p>New order and delivery updates will appear here.</p>
+    </section>
+    }
+</main>

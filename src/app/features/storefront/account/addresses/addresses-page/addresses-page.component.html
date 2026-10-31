@@ -1,0 +1,33 @@
+<main class="narrow-page">
+    <div class="page-title">
+        <p class="eyebrow">DELIVER TO</p>
+        <h1>Saved addresses</h1>
+        <p>Add, edit, or choose a default delivery address.</p>
+    </div>
+    <div class="account-toolbar"><button class="button-primary" type="button" (click)="openAddressEditor()">Add an address</button></div>
+    <div class="address-grid">
+        @for (address of account.addresses(); track address.id) {
+        <article class="panel address-card" [class.active]="address.isDefault">
+            <h2>{{ address.label }} @if (address.isDefault) { <small>Default</small> }</h2>
+            <p>{{ address.fullName }}</p>
+            <p>{{ address.street }}</p>
+            <p>{{ address.city }}, {{ address.state }} {{ address.postalCode }}</p>
+            <p>{{ address.phone }}</p>
+            @if (address.instructions) { <small>{{ address.instructions }}</small> }
+            <div class="order-actions">
+                <button class="button-secondary" type="button" (click)="account.setDefaultAddress(address.id)">Set as default</button>
+                <button class="button-secondary" type="button" (click)="openAddressEditor(address)">Edit</button>
+                <button class="text-button" type="button" (click)="removeAddress(address.id)">Delete</button>
+            </div>
+        </article>
+        } @empty {
+        <section class="panel empty-card"><span class="material-symbols-outlined">location_off</span>
+            <h3>No addresses yet</h3>
+            <p>Save a delivery address so checkout is faster next time.</p>
+        </section>
+        }
+    </div>
+</main>
+@if (addressEditorOpen) {
+<app-storefront-address-editor-dialog [addressForm]="addressForm" [addressError]="addressError" (cancelled)="addressEditorOpen = false" (saved)="saveAddress()"></app-storefront-address-editor-dialog>
+}

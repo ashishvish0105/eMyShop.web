@@ -4,8 +4,7 @@
         <button class="mobile-menu" type="button" aria-label="Toggle navigation" [attr.aria-expanded]="menuOpen" (click)="toggleNavigation()"><span class="material-symbols-outlined">{{ menuOpen ? 'close' : 'menu' }}</span></button>
         <nav class="main-navigation" [class.open]="menuOpen">
             <a routerLink="/products" [class.active]="page === 'home'" (click)="menuOpen = false">Products</a>
-            <button #shopToggle class="shop-toggle" type="button" [class.active]="shopMenuOpen || page === 'menu'" [attr.aria-expanded]="shopMenuOpen" aria-controls="shop-mega-menu" aria-haspopup="true" (click)="toggleShopMenu()">Shop <span class="material-symbols-outlined" aria-hidden="true">{{ shopMenuOpen ? 'expand_less' : 'expand_more' }}</span></button>
-            @if (shopMenuOpen) {
+            <button #shopToggle class="shop-toggle" type="button" [class.active]="shopMenuOpen || page === 'menu'" [attr.aria-expanded]="shopMenuOpen" aria-controls="shop-mega-menu" aria-haspopup="true" (click)="toggleShopMenu()">Shop <span class="material-symbols-outlined" aria-hidden="true">{{ shopMenuOpen ? 'expand_less' : 'expand_more' }}</span></button>            @if (shopMenuOpen) {
             <section #shopMenu class="shop-mega-menu" id="shop-mega-menu" aria-label="Shop by category">
                 <div class="shop-mega-menu__heading">
                     <div>
@@ -27,33 +26,27 @@
                 </div>
             </section>
             }
-            <a routerLink="/offers" [class.active]="page === 'offers'" (click)="menuOpen = false">Offers</a>
-            @if (auth.isLoggedIn()) {
-            <a routerLink="/orders" [class.active]="page === 'orders'" (click)="menuOpen = false">My orders</a>
-            }
+            <a routerLink="/offers" [class.active]="page === 'offers'" (click)="menuOpen = false">Offers</a> @if (auth.isLoggedIn()) {
+            <a routerLink="/orders" [class.active]="page === 'orders'" (click)="menuOpen = false">My orders</a> }
         </nav>
         <div class="header-actions">
             <span class="location"><span class="material-symbols-outlined">location_on</span>New York, NY</span>
-            <a class="cart-link" routerLink="/cart" aria-label="View shopping cart"><span class="material-symbols-outlined">shopping_cart</span>@if (commerce.itemCount) { <b>{{ commerce.itemCount }}</b> }</a>
-            @if (auth.isLoggedIn()) {
+            <a class="cart-link" routerLink="/cart" aria-label="View shopping cart"><span class="material-symbols-outlined">shopping_cart</span>@if (commerce.itemCount) { <b>{{ commerce.itemCount }}</b> }</a> @if (auth.isLoggedIn()) {
             <div class="account-menu">
-                <button #profileToggle class="avatar" type="button" [attr.aria-expanded]="profileMenuOpen" aria-haspopup="true" aria-controls="account-menu" [attr.aria-label]="'Account menu for ' + auth.displayName()" (click)="toggleProfileMenu()">{{ auth.initials() }}</button>
-                @if (profileMenuOpen) {
+                <button #profileToggle class="avatar" type="button" [attr.aria-expanded]="profileMenuOpen" aria-haspopup="true" aria-controls="account-menu" [attr.aria-label]="'Account menu for ' + auth.displayName()" (click)="toggleProfileMenu()">{{ auth.initials() }}</button>                @if (profileMenuOpen) {
                 <div #profileMenu class="account-dropdown" id="account-menu" role="menu">
                     <div class="account-dropdown__header">
                         <strong>My Account</strong>
                         <span>{{ auth.displayName() }}</span>
                     </div>
                     @for (link of accountLinks; track link.path) {
-                    <a role="menuitem" [routerLink]="link.path" [class.active]="page === link.path.slice(1)" (click)="closeMenus()"><span class="material-symbols-outlined" aria-hidden="true">{{ link.icon }}</span>{{ link.label }}</a>
-                    }
+                    <a role="menuitem" [routerLink]="link.path" [class.active]="page === link.path.slice(1)" (click)="closeMenus()"><span class="material-symbols-outlined" aria-hidden="true">{{ link.icon }}</span>{{ link.label }}</a> }
                     <button role="menuitem" type="button" class="logout-item" (click)="logout()"><span class="material-symbols-outlined" aria-hidden="true">logout</span>Logout</button>
                 </div>
                 }
             </div>
             } @else {
-            <button class="login-button" type="button" (click)="openLogin()">Login</button>
-            }
+            <button class="login-button" type="button" (click)="openLogin()">Login</button> }
         </div>
     </header>
 
@@ -214,8 +207,7 @@
                             <input type="radio" name="addressChoice" [checked]="address.isDefault" (change)="account.setDefaultAddress(address.id)">
                             <div><strong>{{ address.label }}</strong><span>{{ address.street }}</span><span>{{ address.city }}, {{ address.state }} {{ address.postalCode }}</span><small>{{ address.phone }}</small></div>
                             @if (address.isDefault) { <span class="selected-mark material-symbols-outlined">check</span> }
-                        </label>
-                        } @empty {
+                        </label> } @empty {
                         <p class="empty-inline">No saved addresses yet. Add one to continue.</p>
                         }
                     </div><button class="add-address" type="button" (click)="openAddressEditor()"><span class="material-symbols-outlined">add</span>Add New Address</button></article>
@@ -262,8 +254,7 @@
                         <small>Payment {{ order.paymentStatus }}</small>
                     </div><strong>{{ order.total | currency }}</strong></div>
                 <div class="order-actions"><button class="button-secondary" (click)="viewOrder(order.id)">View details</button>
-                    <button class="button-secondary" (click)="reorder(order.id)">Reorder</button>
-                    @if (order.deliveryStatus === 'Pending' || order.deliveryStatus === 'Preparing') { <button class="text-button" (click)="cancelOrder(order.id)">Cancel order</button> }</div>
+                    <button class="button-secondary" (click)="reorder(order.id)">Reorder</button> @if (order.deliveryStatus === 'Pending' || order.deliveryStatus === 'Preparing') { <button class="text-button" (click)="cancelOrder(order.id)">Cancel order</button>                    }</div>
             </article>
             } @empty {
             <section class="panel empty-card"><span class="material-symbols-outlined">receipt_long</span>
@@ -296,8 +287,7 @@
             </label>
             <label class="field-label">Default delivery address
                 <input [value]="account.formatAddress(account.defaultAddress())" name="profileAddress" readonly placeholder="Add an address from Saved Addresses">
-            </label>
-            @if (account.addresses().length > 1) {
+            </label> @if (account.addresses().length > 1) {
             <div class="saved-address-list">
                 <h2>Additional saved addresses</h2>
                 @for (address of account.addresses(); track address.id) {
@@ -311,7 +301,8 @@
                 <label><input type="checkbox" [(ngModel)]="profileForm.preferences.orderUpdates" name="orderUpdates" [disabled]="!editingProfile"> Send me order updates and delivery notifications</label>
                 <label><input type="checkbox" [(ngModel)]="profileForm.preferences.offers" name="offers" [disabled]="!editingProfile"> Email me about new offers and rewards</label>
             </div>
-            @if (profileError) { <p class="field-error" role="alert">{{ profileError }}</p> }
+            @if (profileError) {
+            <p class="field-error" role="alert">{{ profileError }}</p> }
             <div class="profile-submit"><span>{{ profileSaved ? 'Profile saved.' : '' }}</span><button class="button-primary" type="submit" [disabled]="!editingProfile || profileSaving">{{ profileSaving ? 'Saving…' : 'Save changes' }}</button></div>
         </form>
     </main>
@@ -341,7 +332,8 @@
             } @empty {
             <section class="panel empty-card"><span class="material-symbols-outlined">location_off</span>
                 <h3>No addresses yet</h3>
-                <p>Save a delivery address so checkout is faster next time.</p></section>
+                <p>Save a delivery address so checkout is faster next time.</p>
+            </section>
             }
         </div>
     </main>
@@ -391,7 +383,8 @@
         } @empty {
         <section class="panel empty-card"><span class="material-symbols-outlined">notifications_off</span>
             <h3>You’re all caught up</h3>
-            <p>New order and delivery updates will appear here.</p></section>
+            <p>New order and delivery updates will appear here.</p>
+        </section>
         }
     </main>
     } @else if (page === 'settings') {
@@ -416,7 +409,8 @@
                 <h2>Privacy</h2>
                 <label><input type="checkbox" [(ngModel)]="profileForm.preferences.shareActivity" name="settingsPrivacy"> Share anonymized activity to improve recommendations</label>
             </div>
-            @if (profileError) { <p class="field-error" role="alert">{{ profileError }}</p> }
+            @if (profileError) {
+            <p class="field-error" role="alert">{{ profileError }}</p> }
             <div class="profile-submit"><span>{{ profileSaved ? 'Settings saved.' : '' }}</span><button class="button-primary" type="submit" [disabled]="profileSaving">{{ profileSaving ? 'Saving…' : 'Save changes' }}</button></div>
         </form>
         <section class="panel danger-card">
@@ -470,7 +464,7 @@
                 <div><span>Delivery address</span><strong>{{ account.formatAddress(account.defaultAddress()) || 'No address saved' }}</strong></div>
                 <div><span>Order total</span><strong>{{ selectedOrder.total | currency }}</strong></div>
             </div>
-            <div class="order-detail-actions"><button class="keep-order" (click)="selectedOrder = undefined">Close</button>@if (selectedOrder.deliveryStatus === 'Pending' || selectedOrder.deliveryStatus === 'Preparing') { <button class="confirm-cancel" (click)="cancelOrder(selectedOrder.id); selectedOrder = undefined">Cancel order</button> }</div>
+            <div class="order-detail-actions"><button class="keep-order" (click)="selectedOrder = undefined">Close</button>@if (selectedOrder.deliveryStatus === 'Pending' || selectedOrder.deliveryStatus === 'Preparing') { <button class="confirm-cancel" (click)="cancelOrder(selectedOrder.id); selectedOrder = undefined">Cancel order</button>                }</div>
         </section>
     </div>
     } @if (addressEditorOpen) {
@@ -488,8 +482,8 @@
                 </div>
                 <label class="field-label">Postal code<input [(ngModel)]="addressForm.postalCode" name="addrPostal" required></label>
                 <label class="field-label">Delivery instructions<input [(ngModel)]="addressForm.instructions" name="addrNotes" placeholder="Optional"></label>
-                <label class="checkbox-row"><input type="checkbox" [(ngModel)]="addressForm.isDefault" name="addrDefault"> Set as default delivery address</label>
-                @if (addressError) { <p class="field-error" role="alert">{{ addressError }}</p> }
+                <label class="checkbox-row"><input type="checkbox" [(ngModel)]="addressForm.isDefault" name="addrDefault"> Set as default delivery address</label> @if (addressError) {
+                <p class="field-error" role="alert">{{ addressError }}</p> }
                 <div class="order-detail-actions"><button class="keep-order" type="button" (click)="addressEditorOpen = false">Cancel</button><button class="button-primary" type="submit">Save address</button></div>
             </form>
         </section>

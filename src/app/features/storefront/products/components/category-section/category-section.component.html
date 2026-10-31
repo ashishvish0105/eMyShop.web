@@ -1,0 +1,13 @@
+<section class="content-section category-section">
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">PICK YOUR FAVORITE</p>
+            <h2>Popular categories</h2>
+        </div><a routerLink="/menu">Explore menu <span class="material-symbols-outlined">arrow_forward</span></a>
+    </div>
+    <div class="category-list">
+        @for (item of categories; track item.name) {
+        <button class="category-chip" type="button" (click)="categorySelect.emit(item.name)"><span class="material-symbols-outlined">{{ item.icon }}</span><b>{{ item.name }}</b></button>
+        }
+    </div>
+</section>

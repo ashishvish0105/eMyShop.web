@@ -7,6 +7,7 @@ import { CustomerAddress, CustomerOrder, CustomerPreferences } from './storefron
 import { CustomerAuthService } from './storefront/auth/customer-auth.service';
 import { StorefrontLoginModalComponent } from './storefront/auth/storefront-login-modal.component';
 import { CartItem, MenuItem, MockCommerceService } from './mock-commerce.service';
+import { StorefrontToastService } from './storefront/toast.service';
 
 @Component({
   selector: 'app-storefront-page',
@@ -14,6 +15,7 @@ import { CartItem, MenuItem, MockCommerceService } from './mock-commerce.service
   imports: [CommonModule, FormsModule, RouterLink, StorefrontLoginModalComponent],
   templateUrl: './storefront-page.component.html',
   styleUrl: './storefront-page.component.scss',
+  host: { class: 'foodiedash-storefront' },
 })
 export class StorefrontPageComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
@@ -21,10 +23,10 @@ export class StorefrontPageComponent implements OnInit {
   readonly commerce = inject(MockCommerceService);
   readonly auth = inject(CustomerAuthService);
   readonly account = inject(CustomerAccountService);
-  page = 'home';
+  private readonly toast = inject(StorefrontToastService);
+  page = 'profile';
   search = '';
   category = 'All';
-  notice = '';
   menuOpen = false;
   shopMenuOpen = false;
   profileMenuOpen = false;
@@ -37,13 +39,13 @@ export class StorefrontPageComponent implements OnInit {
   deleteAccountOpen = false;
   addressEditorOpen = false;
   addressError = '';
+  orderComplete = false;
+  profileForm = this.emptyProfileForm();
+  addressForm = this.emptyAddressForm();
   @ViewChild('shopToggle') private shopToggle?: ElementRef<HTMLButtonElement>;
   @ViewChild('shopMenu') private shopMenu?: ElementRef<HTMLElement>;
   @ViewChild('profileToggle') private profileToggle?: ElementRef<HTMLButtonElement>;
   @ViewChild('profileMenu') private profileMenu?: ElementRef<HTMLElement>;
-  orderComplete = false;
-  profileForm = this.emptyProfileForm();
-  addressForm = this.emptyAddressForm();
   readonly categories = ['All', 'Pizza', 'Burgers', 'Pasta', 'Healthy', 'Desserts', 'Drinks'];
   readonly popularCategories = [
     { name: 'Pizza', icon: 'local_pizza' },
@@ -66,14 +68,10 @@ export class StorefrontPageComponent implements OnInit {
     { label: 'Notifications', path: '/notifications', icon: 'notifications' },
     { label: 'Account Settings', path: '/settings', icon: 'settings' },
   ];
-
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
       this.page = String(data['page'] ?? 'home');
       this.orderComplete = false;
-      this.menuOpen = false;
-      this.shopMenuOpen = false;
-      this.profileMenuOpen = false;
       this.syncProfileForm();
     });
     this.route.queryParamMap.subscribe((params) => {
@@ -88,8 +86,12 @@ export class StorefrontPageComponent implements OnInit {
     }
   }
 
+  get notice(): string {
+    return this.toast.message();
+  }
+
   openLogin(returnUrl?: string): void {
-    this.profileMenuOpen = false;
+    this.closeMenus();
     this.auth.openLogin(returnUrl ?? this.router.url);
   }
 
@@ -98,16 +100,6 @@ export class StorefrontPageComponent implements OnInit {
     const returnUrl = this.auth.consumeReturnUrl();
     this.router.navigateByUrl(returnUrl && returnUrl.startsWith('/') ? returnUrl : this.router.url.split('?')[0]);
     this.showNotice('Welcome to FoodieDash.');
-  }
-
-  logout(): void {
-    this.profileMenuOpen = false;
-    this.auth.logout();
-    this.account.loadAccount().subscribe();
-    this.showNotice('You have been logged out.');
-    if (['profile', 'orders', 'addresses', 'wishlist', 'notifications', 'settings'].includes(this.page)) {
-      this.router.navigate(['/products']);
-    }
   }
 
   toggleShopMenu(): void {
@@ -134,6 +126,14 @@ export class StorefrontPageComponent implements OnInit {
     this.shopMenuOpen = false;
     this.profileMenuOpen = false;
     this.menuOpen = false;
+  }
+
+  logout(): void {
+    this.closeMenus();
+    this.auth.logout();
+    if (['/profile', '/orders', '/addresses', '/wishlist', '/notifications', '/settings'].some((path) => this.router.url.startsWith(path))) {
+      this.router.navigate(['/products']);
+    }
   }
 
   @HostListener('document:click', ['$event'])
@@ -363,8 +363,7 @@ export class StorefrontPageComponent implements OnInit {
   }
 
   showNotice(message: string): void {
-    this.notice = message;
-    setTimeout(() => this.notice = '', 2600);
+    this.toast.show(message);
   }
 
   private syncProfileForm(): void {

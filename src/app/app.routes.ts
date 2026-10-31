@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { AdminPagesComponent } from './features/admin/admin-pages.component';
-import { StorefrontPageComponent } from './features/storefront-page.component';
-import { storefrontAuthGuard } from './features/storefront/auth/storefront-auth.guard';
+import { storefrontRoutes } from './features/storefront/storefront.routes';
 import { MainContactUsSectionComponent } from './modules/contact-us/main-contact-us-section/main-contact-us-section.component';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 import { DashboardRouterOutlatComponent } from './shared/layout/dashboardLayout/dashboard-router-outlat/dashboard-router-outlat.component';
@@ -34,18 +33,7 @@ export const routes: Routes = [
       { path: 'settings', component: AdminPagesComponent, data: { page: 'settings' } },
     ],
   },
-  { path: 'products', component: StorefrontPageComponent, data: { page: 'home' } },
-  { path: 'menu', component: StorefrontPageComponent, data: { page: 'menu' } },
-  { path: 'offers', component: StorefrontPageComponent, data: { page: 'offers' } },
-  { path: 'cart', component: StorefrontPageComponent, data: { page: 'cart' } },
-  { path: 'checkout', component: StorefrontPageComponent, data: { page: 'checkout' } },
-  { path: 'orders', component: StorefrontPageComponent, canActivate: [storefrontAuthGuard], data: { page: 'orders' } },
-  { path: 'profile', component: StorefrontPageComponent, canActivate: [storefrontAuthGuard], data: { page: 'profile' } },
-  { path: 'addresses', component: StorefrontPageComponent, canActivate: [storefrontAuthGuard], data: { page: 'addresses' } },
-  { path: 'wishlist', component: StorefrontPageComponent, canActivate: [storefrontAuthGuard], data: { page: 'wishlist' } },
-  { path: 'notifications', component: StorefrontPageComponent, canActivate: [storefrontAuthGuard], data: { page: 'notifications' } },
-  { path: 'settings', component: StorefrontPageComponent, canActivate: [storefrontAuthGuard], data: { page: 'settings' } },
-  { path: 'help', component: StorefrontPageComponent, data: { page: 'help' } },
+  ...storefrontRoutes,
   {
     path: 'home',
     component: MainSectionComponent,

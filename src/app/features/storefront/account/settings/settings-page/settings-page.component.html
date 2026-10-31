@@ -1,0 +1,50 @@
+<main class="narrow-page">
+    <div class="page-title">
+        <p class="eyebrow">ACCOUNT CONTROLS</p>
+        <h1>Account settings</h1>
+        <p>Manage verification, privacy, and how we contact you.</p>
+    </div>
+    <form class="panel profile-form" (ngSubmit)="saveSettings()">
+        <h2>Personal information</h2>
+        <div class="form-columns">
+            <label class="field-label">Full name<input [(ngModel)]="profileForm.fullName" name="settingsName" required></label>
+            <label class="field-label">Email address<input type="email" [(ngModel)]="profileForm.email" name="settingsEmail" required></label>
+        </div>
+        <p>Mobile {{ auth.currentUser()?.countryCode }} {{ auth.currentUser()?.mobileNumber }} · {{ auth.currentUser()?.phoneVerified ? 'Verified' : 'Unverified' }}</p>
+        <p>Email {{ auth.currentUser()?.emailVerified ? 'verified' : 'not verified yet' }}.</p>
+        <div class="profile-options">
+            <h2>Notification preferences</h2>
+            <label><input type="checkbox" [(ngModel)]="profileForm.preferences.orderUpdates" name="settingsOrders"> Order and delivery updates</label>
+            <label><input type="checkbox" [(ngModel)]="profileForm.preferences.smsAlerts" name="settingsSms"> SMS alerts</label>
+            <label><input type="checkbox" [(ngModel)]="profileForm.preferences.offers" name="settingsOffers"> Marketing and offers</label>
+        </div>
+        <div class="profile-options">
+            <h2>Privacy</h2>
+            <label><input type="checkbox" [(ngModel)]="profileForm.preferences.shareActivity" name="settingsPrivacy"> Share anonymized activity to improve recommendations</label>
+        </div>
+        @if (profileError) {
+        <p class="field-error" role="alert">{{ profileError }}</p>
+        }
+        <div class="profile-submit"><span>{{ profileSaved ? 'Settings saved.' : '' }}</span>
+            <button class="button-primary" type="submit" [disabled]="profileSaving">{{ profileSaving ? 'Saving…' : 'Save changes' }}</button>
+        </div>
+    </form>
+    <section class="panel danger-card">
+        <h2>Session</h2>
+        <p>Sign out of FoodieDash on this device.</p>
+        <button class="button-secondary" type="button" (click)="logout()">Logout</button>
+        <h2>Delete account</h2>
+        <p>This permanently removes your profile, addresses, and order history from this device session. The API must authorize deletion on the server.</p>
+        <button class="confirm-cancel" type="button" (click)="deleteAccountOpen = true">Delete my account</button>
+    </section>
+</main>
+@if (deleteAccountOpen) {
+<app-storefront-confirm-dialog
+    title="Delete your account?"
+    message="This cannot be undone. Your profile and saved data will be removed after the server confirms the request."
+    cancelLabel="Keep my account"
+    confirmLabel="Delete account"
+    (cancelled)="deleteAccountOpen = false"
+    (confirmed)="confirmDeleteAccount()">
+</app-storefront-confirm-dialog>
+}

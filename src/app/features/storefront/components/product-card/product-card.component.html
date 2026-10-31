@@ -1,0 +1,24 @@
+<article class="food-card">
+    <div class="food-photo">
+        <img [src]="product.image" [alt]="product.name" [attr.loading]="eagerImage ? 'eager' : 'lazy'">
+        @if (showRating) { <span class="rating"><span class="material-symbols-outlined">star</span>{{ product.rating }}</span> }
+        @if (bestSeller) { <span class="best-seller">BEST SELLER</span> }
+    </div>
+    <div class="food-info">
+        <div class="food-title">
+            <h3>{{ product.name }}</h3><strong>{{ product.price | currency }}</strong>
+        </div>
+        <p>{{ product.description }}</p>
+        @if (showMeta) {
+        <div class="food-meta"><span>{{ product.category }}</span><span>20–30 min</span></div>
+        }
+        <div class="card-actions">
+            <button class="add-button" (click)="add.emit(product)"><span class="material-symbols-outlined">add_shopping_cart</span>{{ addLabel }}</button>
+            @if (showWishlist) {
+            <button class="wish-button" type="button" [class.active]="wishlisted" [attr.aria-label]="wishlisted ? 'Remove from wishlist' : 'Save to wishlist'" (click)="wishlistToggle.emit(product)"><span class="material-symbols-outlined">{{ wishlisted ? 'favorite' : 'favorite_border' }}</span></button>
+            } @else if (wishlistActionLabel) {
+            <button class="text-button" type="button" (click)="wishlistToggle.emit(product)">{{ wishlistActionLabel }}</button>
+            }
+        </div>
+    </div>
+</article>

@@ -1,4 +1,4 @@
-app-storefront-page {
+.foodiedash-storefront {
     display: block;
     --green: #00d941;
     --ink: #111c14;
@@ -8,12 +8,12 @@ app-storefront-page {
     font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-app-storefront-page .storefront {
+.foodiedash-storefront .storefront {
     min-height: 100vh;
     background: #f5f8f5;
 }
 
-app-storefront-page .shop-header {
+.foodiedash-storefront .shop-header {
     height: 72px;
     padding: 0 max(calc((100% - 1260px) / 2), 5%);
     display: flex;
@@ -26,7 +26,7 @@ app-storefront-page .shop-header {
     z-index: 10;
 }
 
-app-storefront-page .brand {
+.foodiedash-storefront .brand {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -36,11 +36,11 @@ app-storefront-page .brand {
     font-size: 20px;
 }
 
-app-storefront-page .brand>strong span {
+.foodiedash-storefront .brand>strong span {
     color: #14a63c;
 }
 
-app-storefront-page .brand-mark {
+.foodiedash-storefront .brand-mark {
     width: 34px;
     height: 34px;
     display: grid;
@@ -51,19 +51,19 @@ app-storefront-page .brand-mark {
     font: 0/0 'Material Symbols Outlined';
 }
 
-app-storefront-page .brand-mark::after {
+.foodiedash-storefront .brand-mark::after {
     content: 'restaurant';
     font: 21px 'Material Symbols Outlined';
 }
 
-app-storefront-page .shop-header nav {
+.foodiedash-storefront .shop-header nav {
     display: flex;
     align-items: center;
     gap: 28px;
     margin: 0 auto;
 }
 
-app-storefront-page .shop-header nav a {
+.foodiedash-storefront .shop-header nav a {
     text-decoration: none;
     color: #556259;
     font-weight: 600;
@@ -72,19 +72,19 @@ app-storefront-page .shop-header nav a {
     border-bottom: 2px solid transparent;
 }
 
-app-storefront-page .shop-header nav a.active,
-app-storefront-page .shop-header nav a:hover {
+.foodiedash-storefront .shop-header nav a.active,
+.foodiedash-storefront .shop-header nav a:hover {
     color: #118b34;
     border-bottom-color: var(--green);
 }
 
-app-storefront-page .header-actions {
+.foodiedash-storefront .header-actions {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-app-storefront-page .location {
+.foodiedash-storefront .location {
     display: flex;
     align-items: center;
     gap: 3px;
@@ -96,23 +96,23 @@ app-storefront-page .location {
     white-space: nowrap;
 }
 
-app-storefront-page .location span {
+.foodiedash-storefront .location span {
     font-size: 15px;
     color: #16a541;
 }
 
-app-storefront-page .cart-link {
+.foodiedash-storefront .cart-link {
     position: relative;
     color: #24352a;
     text-decoration: none;
     display: flex;
 }
 
-app-storefront-page .cart-link .material-symbols-outlined {
+.foodiedash-storefront .cart-link .material-symbols-outlined {
     font-size: 23px;
 }
 
-app-storefront-page .cart-link b {
+.foodiedash-storefront .cart-link b {
     position: absolute;
     top: -8px;
     right: -9px;
@@ -126,8 +126,8 @@ app-storefront-page .cart-link b {
     place-items: center;
 }
 
-app-storefront-page .avatar,
-app-storefront-page .profile-avatar {
+.foodiedash-storefront .avatar,
+.foodiedash-storefront .profile-avatar {
     display: grid;
     place-items: center;
     width: 37px;
@@ -140,18 +140,18 @@ app-storefront-page .profile-avatar {
     border: 2px solid #8fe9a5;
 }
 
-app-storefront-page .mobile-menu {
+.foodiedash-storefront .mobile-menu {
     display: none;
     border: 0;
     background: transparent;
 }
 
-app-storefront-page main {
+.foodiedash-storefront main {
     width: min(1260px, 90%);
     margin: 0 auto;
 }
 
-app-storefront-page .hero {
+.foodiedash-storefront .hero {
     min-height: 390px;
     margin: 24px auto 0;
     border-radius: 18px;
@@ -162,7 +162,7 @@ app-storefront-page .hero {
     background: #122015;
 }
 
-app-storefront-page .hero::before {
+.foodiedash-storefront .hero::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -170,13 +170,13 @@ app-storefront-page .hero::before {
     z-index: 1;
 }
 
-app-storefront-page .hero-image {
+.foodiedash-storefront .hero-image {
     position: absolute;
     inset: 0 0 0 38%;
     background: url('https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1600&q=85') center 52% / cover;
 }
 
-app-storefront-page .hero-copy {
+.foodiedash-storefront .hero-copy {
     position: relative;
     z-index: 2;
     max-width: 650px;
@@ -184,8 +184,8 @@ app-storefront-page .hero-copy {
     color: white;
 }
 
-app-storefront-page .hero-label,
-app-storefront-page .delivery-note {
+.foodiedash-storefront .hero-label,
+.foodiedash-storefront .delivery-note {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -195,12 +195,12 @@ app-storefront-page .delivery-note {
     color: #c8f6d1;
 }
 
-app-storefront-page .hero-label .material-symbols-outlined {
+.foodiedash-storefront .hero-label .material-symbols-outlined {
     color: var(--green);
     font-size: 17px;
 }
 
-app-storefront-page .hero h1 {
+.foodiedash-storefront .hero h1 {
     color: white !important;
     font-size: clamp(38px, 5vw, 59px);
     font-weight: 800;
@@ -209,13 +209,13 @@ app-storefront-page .hero h1 {
     margin: 18px 0 12px;
 }
 
-app-storefront-page .hero-copy>p {
+.foodiedash-storefront .hero-copy>p {
     color: #e2e9e3;
     font-size: 14px;
     margin-bottom: 23px;
 }
 
-app-storefront-page .hero-search {
+.foodiedash-storefront .hero-search {
     width: min(100%, 520px);
     height: 54px;
     padding: 5px 6px 5px 15px;
@@ -226,11 +226,11 @@ app-storefront-page .hero-search {
     border-radius: 10px;
 }
 
-app-storefront-page .hero-search>span {
+.foodiedash-storefront .hero-search>span {
     color: #8b998e;
 }
 
-app-storefront-page .hero-search input {
+.foodiedash-storefront .hero-search input {
     min-width: 0;
     flex: 1;
     border: 0;
@@ -239,8 +239,8 @@ app-storefront-page .hero-search input {
     color: var(--ink);
 }
 
-app-storefront-page .hero-search button,
-app-storefront-page .button-primary {
+.foodiedash-storefront .hero-search button,
+.foodiedash-storefront .button-primary {
     min-height: 41px;
     border: 0;
     padding: 0 18px;
@@ -252,28 +252,28 @@ app-storefront-page .button-primary {
     cursor: pointer;
 }
 
-app-storefront-page .delivery-note {
+.foodiedash-storefront .delivery-note {
     margin-top: 18px;
     color: #d3e1d5;
     font-size: 10px;
     letter-spacing: 0;
 }
 
-app-storefront-page .delivery-note .material-symbols-outlined {
+.foodiedash-storefront .delivery-note .material-symbols-outlined {
     font-size: 16px;
     color: #b0eabe;
 }
 
-app-storefront-page .content-section {
+.foodiedash-storefront .content-section {
     padding: 47px 0;
 }
 
-app-storefront-page .category-section {
+.foodiedash-storefront .category-section {
     padding-bottom: 38px;
 }
 
-app-storefront-page .section-heading,
-app-storefront-page .menu-title {
+.foodiedash-storefront .section-heading,
+.foodiedash-storefront .menu-title {
     display: flex;
     justify-content: space-between;
     align-items: end;
@@ -281,7 +281,7 @@ app-storefront-page .menu-title {
     margin-bottom: 22px;
 }
 
-app-storefront-page .eyebrow {
+.foodiedash-storefront .eyebrow {
     color: #168a38;
     letter-spacing: .12em;
     font-size: 10px;
@@ -289,9 +289,9 @@ app-storefront-page .eyebrow {
     margin: 0 0 8px;
 }
 
-app-storefront-page .section-heading h2,
-app-storefront-page .page-title h1,
-app-storefront-page .menu-title h1 {
+.foodiedash-storefront .section-heading h2,
+.foodiedash-storefront .page-title h1,
+.foodiedash-storefront .menu-title h1 {
     color: #101b13 !important;
     font-size: 27px;
     font-weight: 780;
@@ -299,15 +299,15 @@ app-storefront-page .menu-title h1 {
     margin: 0 0 6px;
 }
 
-app-storefront-page .section-heading p:not(.eyebrow),
-app-storefront-page .menu-title p:not(.eyebrow),
-app-storefront-page .page-title>p:last-child {
+.foodiedash-storefront .section-heading p:not(.eyebrow),
+.foodiedash-storefront .menu-title p:not(.eyebrow),
+.foodiedash-storefront .page-title>p:last-child {
     color: var(--muted);
     font-size: 13px;
     margin: 0;
 }
 
-app-storefront-page .section-heading>a {
+.foodiedash-storefront .section-heading>a {
     display: inline-flex;
     gap: 5px;
     align-items: center;
@@ -318,17 +318,17 @@ app-storefront-page .section-heading>a {
     white-space: nowrap;
 }
 
-app-storefront-page .section-heading>a span {
+.foodiedash-storefront .section-heading>a span {
     font-size: 17px;
 }
 
-app-storefront-page .category-list {
+.foodiedash-storefront .category-list {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 15px;
 }
 
-app-storefront-page .category-chip {
+.foodiedash-storefront .category-chip {
     min-height: 108px;
     border: 1px solid #e0ebe2;
     border-radius: 13px;
@@ -342,22 +342,22 @@ app-storefront-page .category-chip {
     cursor: pointer;
 }
 
-app-storefront-page .category-chip:hover {
+.foodiedash-storefront .category-chip:hover {
     border-color: var(--green);
     background: #f2fff4;
     transform: translateY(-2px);
 }
 
-app-storefront-page .category-chip span {
+.foodiedash-storefront .category-chip span {
     font-size: 28px;
     color: #138d36;
 }
 
-app-storefront-page .category-chip b {
+.foodiedash-storefront .category-chip b {
     font-size: 12px;
 }
 
-app-storefront-page .popular-section {
+.foodiedash-storefront .popular-section {
     background: #eff5f0;
     width: 100vw;
     margin-left: calc((min(1260px, 90vw) - 100vw) / 2);
@@ -365,13 +365,13 @@ app-storefront-page .popular-section {
     box-sizing: border-box;
 }
 
-app-storefront-page .product-grid {
+.foodiedash-storefront .product-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 19px;
 }
 
-app-storefront-page .food-card {
+.foodiedash-storefront .food-card {
     min-width: 0;
     background: white;
     overflow: hidden;
@@ -380,25 +380,25 @@ app-storefront-page .food-card {
     box-shadow: 0 2px 4px #13261808;
 }
 
-app-storefront-page .food-photo {
+.foodiedash-storefront .food-photo {
     height: 190px;
     position: relative;
     overflow: hidden;
     background: #e5eee6;
 }
 
-app-storefront-page .food-photo img {
+.foodiedash-storefront .food-photo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform .25s;
 }
 
-app-storefront-page .food-card:hover .food-photo img {
+.foodiedash-storefront .food-card:hover .food-photo img {
     transform: scale(1.04);
 }
 
-app-storefront-page .rating {
+.foodiedash-storefront .rating {
     position: absolute;
     top: 11px;
     right: 11px;
@@ -413,12 +413,12 @@ app-storefront-page .rating {
     font-size: 11px;
 }
 
-app-storefront-page .rating span {
+.foodiedash-storefront .rating span {
     color: #efab16;
     font-size: 14px;
 }
 
-app-storefront-page .best-seller {
+.foodiedash-storefront .best-seller {
     position: absolute;
     bottom: 10px;
     left: 10px;
@@ -430,31 +430,31 @@ app-storefront-page .best-seller {
     font-weight: 800;
 }
 
-app-storefront-page .food-info {
+.foodiedash-storefront .food-info {
     padding: 15px;
 }
 
-app-storefront-page .food-title {
+.foodiedash-storefront .food-title {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: 8px;
 }
 
-app-storefront-page .food-title h3 {
+.foodiedash-storefront .food-title h3 {
     font-size: 14px;
     font-weight: 750;
     color: #17251b;
     margin: 0;
 }
 
-app-storefront-page .food-title strong {
+.foodiedash-storefront .food-title strong {
     color: #10a43a;
     font-size: 13px;
     white-space: nowrap;
 }
 
-app-storefront-page .food-info>p {
+.foodiedash-storefront .food-info>p {
     min-height: 34px;
     color: #77847a;
     font-size: 11px;
@@ -462,7 +462,7 @@ app-storefront-page .food-info>p {
     margin: 9px 0;
 }
 
-app-storefront-page .food-meta {
+.foodiedash-storefront .food-meta {
     display: flex;
     justify-content: space-between;
     font-size: 10px;
@@ -470,17 +470,17 @@ app-storefront-page .food-meta {
     margin: 11px 0 14px;
 }
 
-app-storefront-page .food-meta span {
+.foodiedash-storefront .food-meta span {
     display: flex;
     align-items: center;
     gap: 4px;
 }
 
-app-storefront-page .food-meta .material-symbols-outlined {
+.foodiedash-storefront .food-meta .material-symbols-outlined {
     font-size: 14px;
 }
 
-app-storefront-page .add-button {
+.foodiedash-storefront .add-button {
     width: 100%;
     min-height: 40px;
     border: 1px solid #b7e9c2;
@@ -496,16 +496,16 @@ app-storefront-page .add-button {
     cursor: pointer;
 }
 
-app-storefront-page .add-button:hover {
+.foodiedash-storefront .add-button:hover {
     background: var(--green);
     border-color: var(--green);
 }
 
-app-storefront-page .add-button span {
+.foodiedash-storefront .add-button span {
     font-size: 18px;
 }
 
-app-storefront-page .promo-banner {
+.foodiedash-storefront .promo-banner {
     width: min(1260px, 90%);
     margin: 25px auto 55px;
     padding: 27px 32px;
@@ -517,27 +517,27 @@ app-storefront-page .promo-banner {
     gap: 24px;
 }
 
-app-storefront-page .promo-banner h2 {
+.foodiedash-storefront .promo-banner h2 {
     max-width: 560px;
     font-size: 24px;
     color: #17301d;
     margin: 0 0 7px;
 }
 
-app-storefront-page .promo-banner p:not(.eyebrow) {
+.foodiedash-storefront .promo-banner p:not(.eyebrow) {
     color: #596b5e;
     font-size: 12px;
     margin: 0;
 }
 
-app-storefront-page .promo-banner .button-primary {
+.foodiedash-storefront .promo-banner .button-primary {
     text-decoration: none;
     display: flex;
     align-items: center;
     white-space: nowrap;
 }
 
-app-storefront-page .menu-layout {
+.foodiedash-storefront .menu-layout {
     display: grid;
     grid-template-columns: 190px minmax(0, 1fr) 270px;
     gap: 26px;
@@ -545,17 +545,17 @@ app-storefront-page .menu-layout {
     align-items: start;
 }
 
-app-storefront-page .menu-sidebar {
+.foodiedash-storefront .menu-sidebar {
     position: sticky;
     top: 94px;
 }
 
-app-storefront-page .menu-sidebar h2 {
+.foodiedash-storefront .menu-sidebar h2 {
     margin: 0 0 14px;
     font-size: 18px;
 }
 
-app-storefront-page .menu-sidebar>button {
+.foodiedash-storefront .menu-sidebar>button {
     width: 100%;
     border: 0;
     display: flex;
@@ -570,41 +570,41 @@ app-storefront-page .menu-sidebar>button {
     cursor: pointer;
 }
 
-app-storefront-page .menu-sidebar>button.selected,
-app-storefront-page .menu-sidebar>button:hover {
+.foodiedash-storefront .menu-sidebar>button.selected,
+.foodiedash-storefront .menu-sidebar>button:hover {
     color: #0d9134;
     background: #e4f9e9;
     font-weight: 700;
 }
 
-app-storefront-page .menu-sidebar>button span {
+.foodiedash-storefront .menu-sidebar>button span {
     color: #8a978d;
     font-size: 10px;
 }
 
-app-storefront-page .sidebar-promo {
+.foodiedash-storefront .sidebar-promo {
     margin-top: 30px;
     padding: 15px;
     border-radius: 12px;
     background: #e5f9e9;
 }
 
-app-storefront-page .sidebar-promo>span {
+.foodiedash-storefront .sidebar-promo>span {
     color: #0ea33a;
 }
 
-app-storefront-page .sidebar-promo strong {
+.foodiedash-storefront .sidebar-promo strong {
     display: block;
     margin-top: 7px;
     font-size: 13px;
 }
 
-app-storefront-page .sidebar-promo p {
+.foodiedash-storefront .sidebar-promo p {
     color: #617166;
     font-size: 11px;
 }
 
-app-storefront-page .sidebar-promo button {
+.foodiedash-storefront .sidebar-promo button {
     border: 0;
     background: none;
     padding: 0;
@@ -614,20 +614,20 @@ app-storefront-page .sidebar-promo button {
     cursor: pointer;
 }
 
-app-storefront-page .menu-main {
+.foodiedash-storefront .menu-main {
     min-width: 0;
 }
 
-app-storefront-page .menu-title {
+.foodiedash-storefront .menu-title {
     align-items: center;
     margin-bottom: 14px;
 }
 
-app-storefront-page .menu-title h1 {
+.foodiedash-storefront .menu-title h1 {
     font-size: 27px;
 }
 
-app-storefront-page .menu-search {
+.foodiedash-storefront .menu-search {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -640,7 +640,7 @@ app-storefront-page .menu-search {
     color: #839087;
 }
 
-app-storefront-page .menu-search input {
+.foodiedash-storefront .menu-search input {
     width: 100%;
     min-width: 0;
     border: 0;
@@ -648,7 +648,7 @@ app-storefront-page .menu-search input {
     font-size: 11px;
 }
 
-app-storefront-page .category-tabs {
+.foodiedash-storefront .category-tabs {
     display: flex;
     gap: 7px;
     overflow-x: auto;
@@ -656,7 +656,7 @@ app-storefront-page .category-tabs {
     padding-bottom: 4px;
 }
 
-app-storefront-page .category-tabs button {
+.foodiedash-storefront .category-tabs button {
     flex: none;
     border: 1px solid #e1e9e2;
     background: white;
@@ -667,26 +667,26 @@ app-storefront-page .category-tabs button {
     cursor: pointer;
 }
 
-app-storefront-page .category-tabs button.selected {
+.foodiedash-storefront .category-tabs button.selected {
     border-color: #10d443;
     background: #e7f9eb;
     color: #157e32;
 }
 
-app-storefront-page .menu-layout .product-grid {
+.foodiedash-storefront .menu-layout .product-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px;
 }
 
-app-storefront-page .menu-layout .food-photo {
+.foodiedash-storefront .menu-layout .food-photo {
     height: 155px;
 }
 
-app-storefront-page .menu-layout .food-info {
+.foodiedash-storefront .menu-layout .food-info {
     padding: 12px;
 }
 
-app-storefront-page .cart-summary {
+.foodiedash-storefront .cart-summary {
     position: sticky;
     top: 95px;
     background: white;
@@ -695,20 +695,20 @@ app-storefront-page .cart-summary {
     padding: 17px;
 }
 
-app-storefront-page .summary-title {
+.foodiedash-storefront .summary-title {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 12px;
 }
 
-app-storefront-page .summary-title h2,
-app-storefront-page .checkout-summary h2 {
+.foodiedash-storefront .summary-title h2,
+.foodiedash-storefront .checkout-summary h2 {
     margin: 0;
     font-size: 17px;
 }
 
-app-storefront-page .summary-title>span {
+.foodiedash-storefront .summary-title>span {
     color: #148b37;
     background: #e6f9eb;
     border-radius: 20px;
@@ -717,7 +717,7 @@ app-storefront-page .summary-title>span {
     font-weight: 700;
 }
 
-app-storefront-page .mini-cart-item {
+.foodiedash-storefront .mini-cart-item {
     display: grid;
     grid-template-columns: 42px minmax(0, 1fr) auto;
     align-items: center;
@@ -726,18 +726,18 @@ app-storefront-page .mini-cart-item {
     border-bottom: 1px solid #eef2ee;
 }
 
-app-storefront-page .mini-cart-item img {
+.foodiedash-storefront .mini-cart-item img {
     width: 42px;
     height: 42px;
     object-fit: cover;
     border-radius: 7px;
 }
 
-app-storefront-page .mini-cart-item>div {
+.foodiedash-storefront .mini-cart-item>div {
     min-width: 0;
 }
 
-app-storefront-page .mini-cart-item>div>strong {
+.foodiedash-storefront .mini-cart-item>div>strong {
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -745,25 +745,25 @@ app-storefront-page .mini-cart-item>div>strong {
     font-size: 10px;
 }
 
-app-storefront-page .mini-cart-item small {
+.foodiedash-storefront .mini-cart-item small {
     color: #748177;
     font-size: 10px;
 }
 
-app-storefront-page .mini-cart-item>b {
+.foodiedash-storefront .mini-cart-item>b {
     align-self: start;
     font-size: 10px;
     white-space: nowrap;
 }
 
-app-storefront-page .quantity-control {
+.foodiedash-storefront .quantity-control {
     display: flex;
     align-items: center;
     gap: 9px;
     margin-top: 6px;
 }
 
-app-storefront-page .quantity-control button {
+.foodiedash-storefront .quantity-control button {
     width: 23px;
     height: 23px;
     border: 0;
@@ -773,26 +773,26 @@ app-storefront-page .quantity-control button {
     cursor: pointer;
 }
 
-app-storefront-page .quantity-control span {
+.foodiedash-storefront .quantity-control span {
     font-size: 11px;
 }
 
-app-storefront-page .cart-empty {
+.foodiedash-storefront .cart-empty {
     padding: 22px 6px;
     text-align: center;
     color: #829087;
 }
 
-app-storefront-page .cart-empty .material-symbols-outlined {
+.foodiedash-storefront .cart-empty .material-symbols-outlined {
     color: #80bf8e;
     font-size: 27px;
 }
 
-app-storefront-page .cart-empty p {
+.foodiedash-storefront .cart-empty p {
     font-size: 11px;
 }
 
-app-storefront-page .summary-total {
+.foodiedash-storefront .summary-total {
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 12px 8px;
@@ -803,28 +803,28 @@ app-storefront-page .summary-total {
     margin-top: 12px;
 }
 
-app-storefront-page .summary-total b {
+.foodiedash-storefront .summary-total b {
     color: #25352a;
     text-align: right;
 }
 
-app-storefront-page .summary-total .free {
+.foodiedash-storefront .summary-total .free {
     color: #0da23a;
 }
 
-app-storefront-page .summary-total strong {
+.foodiedash-storefront .summary-total strong {
     padding-top: 8px;
     border-top: 1px solid var(--line);
     color: #122017;
     font-size: 14px;
 }
 
-app-storefront-page .summary-total strong:last-child {
+.foodiedash-storefront .summary-total strong:last-child {
     color: #05a836;
     text-align: right;
 }
 
-app-storefront-page .checkout-button {
+.foodiedash-storefront .checkout-button {
     width: 100%;
     min-height: 45px;
     padding: 0 12px;
@@ -841,35 +841,35 @@ app-storefront-page .checkout-button {
     gap: 9px;
 }
 
-app-storefront-page .checkout-button:hover {
+.foodiedash-storefront .checkout-button:hover {
     background: #00c43d;
 }
 
-app-storefront-page .narrow-page {
+.foodiedash-storefront .narrow-page {
     max-width: 880px;
     padding: 39px 0 55px;
 }
 
-app-storefront-page .page-title {
+.foodiedash-storefront .page-title {
     margin-bottom: 25px;
 }
 
-app-storefront-page .page-title h1 {
+.foodiedash-storefront .page-title h1 {
     font-size: 32px;
 }
 
-app-storefront-page .panel {
+.foodiedash-storefront .panel {
     background: white;
     border: 1px solid var(--line);
     border-radius: 14px;
     box-shadow: 0 2px 7px #1b2a2008;
 }
 
-app-storefront-page .cart-page {
+.foodiedash-storefront .cart-page {
     padding: 4px 22px 20px;
 }
 
-app-storefront-page .cart-row {
+.foodiedash-storefront .cart-row {
     display: grid;
     grid-template-columns: 76px minmax(0, 1fr) auto auto 30px;
     gap: 16px;
@@ -878,110 +878,110 @@ app-storefront-page .cart-row {
     border-bottom: 1px solid #edf1ed;
 }
 
-app-storefront-page .cart-row>img {
+.foodiedash-storefront .cart-row>img {
     width: 76px;
     height: 68px;
     object-fit: cover;
     border-radius: 9px;
 }
 
-app-storefront-page .cart-item-info h3 {
+.foodiedash-storefront .cart-item-info h3 {
     margin: 0 0 5px;
     font-size: 14px;
 }
 
-app-storefront-page .cart-item-info p {
+.foodiedash-storefront .cart-item-info p {
     margin: 0 0 6px;
     color: #79867c;
     font-size: 11px;
 }
 
-app-storefront-page .cart-item-info>strong {
+.foodiedash-storefront .cart-item-info>strong {
     font-size: 12px;
     color: #168a38;
 }
 
-app-storefront-page .remove-button {
+.foodiedash-storefront .remove-button {
     border: 0;
     background: none;
     color: #8c9990;
     cursor: pointer;
 }
 
-app-storefront-page .remove-button:hover {
+.foodiedash-storefront .remove-button:hover {
     color: #d33;
 }
 
-app-storefront-page .cart-footer {
+.foodiedash-storefront .cart-footer {
     display: flex;
     justify-content: space-between;
     align-items: start;
     padding-top: 20px;
 }
 
-app-storefront-page .cart-footer>a {
+.foodiedash-storefront .cart-footer>a {
     color: #19893a;
     text-decoration: none;
     font-size: 12px;
 }
 
-app-storefront-page .cart-footer .summary-total {
+.foodiedash-storefront .cart-footer .summary-total {
     min-width: 230px;
 }
 
-app-storefront-page .empty-card {
+.foodiedash-storefront .empty-card {
     grid-column: 1/-1;
     padding: 44px 16px;
     text-align: center;
     color: #77847a;
 }
 
-app-storefront-page .empty-card>span {
+.foodiedash-storefront .empty-card>span {
     color: #24b64b;
     font-size: 36px;
 }
 
-app-storefront-page .empty-card h3 {
+.foodiedash-storefront .empty-card h3 {
     color: #19261d;
     font-size: 18px;
 }
 
-app-storefront-page .empty-card p {
+.foodiedash-storefront .empty-card p {
     font-size: 12px;
 }
 
-app-storefront-page .empty-card .button-primary {
+.foodiedash-storefront .empty-card .button-primary {
     display: inline-flex;
     align-items: center;
     text-decoration: none;
     margin-top: 8px;
 }
 
-app-storefront-page .checkout-layout {
+.foodiedash-storefront .checkout-layout {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 295px;
     gap: 18px;
     align-items: start;
 }
 
-app-storefront-page .checkout-fields {
+.foodiedash-storefront .checkout-fields {
     display: grid;
     gap: 15px;
 }
 
-app-storefront-page .checkout-fields .panel,
-app-storefront-page .checkout-summary {
+.foodiedash-storefront .checkout-fields .panel,
+.foodiedash-storefront .checkout-summary {
     padding: 20px;
 }
 
-app-storefront-page .form-heading {
+.foodiedash-storefront .form-heading {
     display: flex;
     gap: 11px;
     align-items: center;
     margin-bottom: 18px;
 }
 
-app-storefront-page .form-heading>span {
+.foodiedash-storefront .form-heading>span {
     width: 28px;
     height: 28px;
     display: grid;
@@ -993,18 +993,18 @@ app-storefront-page .form-heading>span {
     font-weight: 750;
 }
 
-app-storefront-page .form-heading h2 {
+.foodiedash-storefront .form-heading h2 {
     margin: 0 0 4px;
     font-size: 16px;
 }
 
-app-storefront-page .form-heading p {
+.foodiedash-storefront .form-heading p {
     margin: 0;
     color: #78867b;
     font-size: 11px;
 }
 
-app-storefront-page .field-label {
+.foodiedash-storefront .field-label {
     display: grid;
     gap: 7px;
     margin-bottom: 14px;
@@ -1013,7 +1013,7 @@ app-storefront-page .field-label {
     font-weight: 650;
 }
 
-app-storefront-page .field-label input {
+.foodiedash-storefront .field-label input {
     min-width: 0;
     box-sizing: border-box;
     width: 100%;
@@ -1025,13 +1025,13 @@ app-storefront-page .field-label input {
     font-size: 12px;
 }
 
-app-storefront-page .form-columns {
+.foodiedash-storefront .form-columns {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
 }
 
-app-storefront-page .payment-option {
+.foodiedash-storefront .payment-option {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -1042,31 +1042,31 @@ app-storefront-page .payment-option {
     margin-bottom: 15px;
 }
 
-app-storefront-page .payment-option>span:nth-of-type(1) {
+.foodiedash-storefront .payment-option>span:nth-of-type(1) {
     color: #1b8739;
 }
 
-app-storefront-page .payment-option>span:last-child {
+.foodiedash-storefront .payment-option>span:last-child {
     display: grid;
     gap: 3px;
     font-size: 11px;
 }
 
-app-storefront-page .payment-option small {
+.foodiedash-storefront .payment-option small {
     color: #869188;
     font-size: 10px;
 }
 
-app-storefront-page .checkout-summary {
+.foodiedash-storefront .checkout-summary {
     position: sticky;
     top: 95px;
 }
 
-app-storefront-page .checkout-summary h2 {
+.foodiedash-storefront .checkout-summary h2 {
     margin-bottom: 15px;
 }
 
-app-storefront-page .checkout-item {
+.foodiedash-storefront .checkout-item {
     display: flex;
     justify-content: space-between;
     gap: 8px;
@@ -1075,12 +1075,12 @@ app-storefront-page .checkout-item {
     color: #66756a;
 }
 
-app-storefront-page .checkout-item b {
+.foodiedash-storefront .checkout-item b {
     white-space: nowrap;
     color: #2a3b2e;
 }
 
-app-storefront-page .secure-note {
+.foodiedash-storefront .secure-note {
     display: flex;
     gap: 6px;
     align-items: center;
@@ -1090,69 +1090,69 @@ app-storefront-page .secure-note {
     margin-top: 12px;
 }
 
-app-storefront-page .secure-note span {
+.foodiedash-storefront .secure-note span {
     font-size: 14px;
 }
 
-app-storefront-page .success-card {
+.foodiedash-storefront .success-card {
     padding: 45px;
     text-align: center;
 }
 
-app-storefront-page .success-mark {
+.foodiedash-storefront .success-mark {
     color: #12bb43;
     font-size: 52px;
 }
 
-app-storefront-page .success-card h2 {
+.foodiedash-storefront .success-card h2 {
     margin: 5px 0 10px;
     font-size: 26px;
 }
 
-app-storefront-page .success-card>p:not(.eyebrow) {
+.foodiedash-storefront .success-card>p:not(.eyebrow) {
     margin: 0 auto 20px;
     max-width: 430px;
     color: #748178;
     font-size: 13px;
 }
 
-app-storefront-page .success-card a {
+.foodiedash-storefront .success-card a {
     display: inline-flex;
     align-items: center;
     text-decoration: none;
 }
 
-app-storefront-page .order-list {
+.foodiedash-storefront .order-list {
     display: grid;
     gap: 13px;
 }
 
-app-storefront-page .customer-order {
+.foodiedash-storefront .customer-order {
     padding: 18px;
 }
 
-app-storefront-page .order-top,
-app-storefront-page .order-restaurant,
-app-storefront-page .order-actions {
+.foodiedash-storefront .order-top,
+.foodiedash-storefront .order-restaurant,
+.foodiedash-storefront .order-actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 13px;
 }
 
-app-storefront-page .order-number {
+.foodiedash-storefront .order-number {
     font-size: 12px;
     font-weight: 750;
 }
 
-app-storefront-page .order-top small {
+.foodiedash-storefront .order-top small {
     display: block;
     color: #849087;
     font-size: 10px;
     margin-top: 4px;
 }
 
-app-storefront-page .status-chip {
+.foodiedash-storefront .status-chip {
     background: #e9f9ec;
     color: #16863a;
     font-size: 10px;
@@ -1160,12 +1160,12 @@ app-storefront-page .status-chip {
     border-radius: 20px;
 }
 
-app-storefront-page .status-chip.cancelled {
+.foodiedash-storefront .status-chip.cancelled {
     background: #fff0f0;
     color: #bc4545;
 }
 
-app-storefront-page .order-restaurant {
+.foodiedash-storefront .order-restaurant {
     justify-content: flex-start;
     padding: 17px 0;
     margin-top: 12px;
@@ -1173,7 +1173,7 @@ app-storefront-page .order-restaurant {
     border-bottom: 1px solid #edf1ed;
 }
 
-app-storefront-page .restaurant-icon {
+.foodiedash-storefront .restaurant-icon {
     width: 42px;
     height: 42px;
     display: grid;
@@ -1183,28 +1183,28 @@ app-storefront-page .restaurant-icon {
     border-radius: 9px;
 }
 
-app-storefront-page .order-restaurant h2 {
+.foodiedash-storefront .order-restaurant h2 {
     margin: 0 0 4px;
     font-size: 13px;
 }
 
-app-storefront-page .order-restaurant p {
+.foodiedash-storefront .order-restaurant p {
     margin: 0;
     color: #7b887e;
     font-size: 10px;
 }
 
-app-storefront-page .order-restaurant>strong {
+.foodiedash-storefront .order-restaurant>strong {
     margin-left: auto;
     font-size: 13px;
 }
 
-app-storefront-page .order-actions {
+.foodiedash-storefront .order-actions {
     justify-content: flex-start;
     padding-top: 14px;
 }
 
-app-storefront-page .order-actions button {
+.foodiedash-storefront .order-actions button {
     min-height: 34px;
     padding: 0 12px;
     border: 1px solid #e0e9e1;
@@ -1215,16 +1215,16 @@ app-storefront-page .order-actions button {
     cursor: pointer;
 }
 
-app-storefront-page .order-actions .text-button {
+.foodiedash-storefront .order-actions .text-button {
     border: 0;
     color: #b44747;
 }
 
-app-storefront-page .profile-form {
+.foodiedash-storefront .profile-form {
     padding: 22px;
 }
 
-app-storefront-page .profile-banner {
+.foodiedash-storefront .profile-banner {
     display: flex;
     align-items: center;
     gap: 14px;
@@ -1233,24 +1233,24 @@ app-storefront-page .profile-banner {
     border-bottom: 1px solid var(--line);
 }
 
-app-storefront-page .profile-banner h2 {
+.foodiedash-storefront .profile-banner h2 {
     margin: 0 0 5px;
     font-size: 16px;
 }
 
-app-storefront-page .profile-banner p {
+.foodiedash-storefront .profile-banner p {
     margin: 0;
     color: #7c897f;
     font-size: 11px;
 }
 
-app-storefront-page .profile-avatar {
+.foodiedash-storefront .profile-avatar {
     width: 54px;
     height: 54px;
     font-size: 17px;
 }
 
-app-storefront-page .loyalty-chip {
+.foodiedash-storefront .loyalty-chip {
     margin-left: auto;
     border-radius: 20px;
     background: #fff7dc;
@@ -1260,17 +1260,17 @@ app-storefront-page .loyalty-chip {
     font-weight: 750;
 }
 
-app-storefront-page .profile-options {
+.foodiedash-storefront .profile-options {
     border-top: 1px solid var(--line);
     padding-top: 15px;
     margin-top: 7px;
 }
 
-app-storefront-page .profile-options h2 {
+.foodiedash-storefront .profile-options h2 {
     font-size: 14px;
 }
 
-app-storefront-page .profile-options label {
+.foodiedash-storefront .profile-options label {
     display: flex;
     gap: 8px;
     padding: 7px 0;
@@ -1278,7 +1278,7 @@ app-storefront-page .profile-options label {
     font-size: 11px;
 }
 
-app-storefront-page .profile-submit {
+.foodiedash-storefront .profile-submit {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1287,7 +1287,7 @@ app-storefront-page .profile-submit {
     font-size: 11px;
 }
 
-app-storefront-page .profile-submit button {
+.foodiedash-storefront .profile-submit button {
     min-height: 40px;
     padding: 0 17px;
     border: 0;
@@ -1297,13 +1297,13 @@ app-storefront-page .profile-submit button {
     cursor: pointer;
 }
 
-app-storefront-page .help-grid {
+.foodiedash-storefront .help-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 14px;
 }
 
-app-storefront-page .help-card {
+.foodiedash-storefront .help-card {
     padding: 20px;
     display: block;
     text-align: left;
@@ -1312,30 +1312,30 @@ app-storefront-page .help-card {
     cursor: pointer;
 }
 
-app-storefront-page .help-card>span {
+.foodiedash-storefront .help-card>span {
     color: #17a441;
     font-size: 26px;
 }
 
-app-storefront-page .help-card h2 {
+.foodiedash-storefront .help-card h2 {
     font-size: 15px;
     margin: 13px 0 7px;
 }
 
-app-storefront-page .help-card p {
+.foodiedash-storefront .help-card p {
     min-height: 50px;
     color: #77847a;
     font-size: 11px;
     line-height: 1.55;
 }
 
-app-storefront-page .help-card>span:last-child {
+.foodiedash-storefront .help-card>span:last-child {
     color: #17883a;
     font-size: 10px;
     font-weight: 700;
 }
 
-app-storefront-page .shop-footer {
+.foodiedash-storefront .shop-footer {
     margin-top: 30px;
     background: white;
     border-top: 1px solid var(--line);
@@ -1346,24 +1346,24 @@ app-storefront-page .shop-footer {
     gap: 10px 28px;
 }
 
-app-storefront-page .shop-footer>p {
+.foodiedash-storefront .shop-footer>p {
     color: #77847a;
     margin: 0 auto 0 0;
     font-size: 11px;
 }
 
-app-storefront-page .shop-footer>div {
+.foodiedash-storefront .shop-footer>div {
     display: flex;
     gap: 16px;
 }
 
-app-storefront-page .shop-footer>div a {
+.foodiedash-storefront .shop-footer>div a {
     color: #617065;
     text-decoration: none;
     font-size: 10px;
 }
 
-app-storefront-page .shop-footer>small {
+.foodiedash-storefront .shop-footer>small {
     flex-basis: 100%;
     text-align: center;
     color: #9aa49c;
@@ -1372,7 +1372,7 @@ app-storefront-page .shop-footer>small {
     font-size: 9px;
 }
 
-app-storefront-page .toast-message {
+.foodiedash-storefront .toast-message {
     position: fixed;
     z-index: 25;
     bottom: 20px;
@@ -1386,7 +1386,7 @@ app-storefront-page .toast-message {
     box-shadow: 0 8px 30px #10231733;
 }
 
-app-storefront-page .modal-backdrop {
+.foodiedash-storefront .modal-backdrop {
     position: fixed;
     inset: 0;
     z-index: 30;
@@ -1396,7 +1396,7 @@ app-storefront-page .modal-backdrop {
     background: #111c1590;
 }
 
-app-storefront-page .cancel-dialog {
+.foodiedash-storefront .cancel-dialog {
     width: min(100%, 430px);
     padding: 25px;
     border-radius: 15px;
@@ -1404,31 +1404,31 @@ app-storefront-page .cancel-dialog {
     box-shadow: 0 20px 70px #0003;
 }
 
-app-storefront-page .cancel-dialog>span {
+.foodiedash-storefront .cancel-dialog>span {
     color: #dc8a22;
     font-size: 28px;
 }
 
-app-storefront-page .cancel-dialog h2 {
+.foodiedash-storefront .cancel-dialog h2 {
     margin: 10px 0 7px;
     color: #17231a;
     font-size: 20px;
 }
 
-app-storefront-page .cancel-dialog p {
+.foodiedash-storefront .cancel-dialog p {
     color: #718076;
     font-size: 12px;
     line-height: 1.6;
 }
 
-app-storefront-page .cancel-dialog>div {
+.foodiedash-storefront .cancel-dialog>div {
     display: flex;
     justify-content: flex-end;
     gap: 9px;
     margin-top: 20px;
 }
 
-app-storefront-page .cancel-dialog button {
+.foodiedash-storefront .cancel-dialog button {
     min-height: 40px;
     border-radius: 8px;
     padding: 0 13px;
@@ -1437,19 +1437,19 @@ app-storefront-page .cancel-dialog button {
     cursor: pointer;
 }
 
-app-storefront-page .keep-order {
+.foodiedash-storefront .keep-order {
     border: 1px solid #dfe9e0;
     background: #fff;
     color: #35473a;
 }
 
-app-storefront-page .confirm-cancel {
+.foodiedash-storefront .confirm-cancel {
     border: 0;
     background: #e84b4b;
     color: white;
 }
 
-app-storefront-page .order-detail-dialog {
+.foodiedash-storefront .order-detail-dialog {
     width: min(100%, 460px);
     padding: 23px;
     border-radius: 15px;
@@ -1457,19 +1457,19 @@ app-storefront-page .order-detail-dialog {
     box-shadow: 0 20px 70px #0003;
 }
 
-app-storefront-page .order-detail-heading {
+.foodiedash-storefront .order-detail-heading {
     display: flex;
     justify-content: space-between;
     align-items: start;
 }
 
-app-storefront-page .order-detail-heading h2 {
+.foodiedash-storefront .order-detail-heading h2 {
     margin: 0;
     color: #17231a;
     font-size: 21px;
 }
 
-app-storefront-page .order-detail-heading button {
+.foodiedash-storefront .order-detail-heading button {
     border: 0;
     background: transparent;
     color: #758278;
@@ -1477,29 +1477,29 @@ app-storefront-page .order-detail-heading button {
     cursor: pointer;
 }
 
-app-storefront-page .order-detail-content {
+.foodiedash-storefront .order-detail-content {
     display: grid;
     gap: 14px;
     padding: 18px 0;
 }
 
-app-storefront-page .order-detail-content>div {
+.foodiedash-storefront .order-detail-content>div {
     display: grid;
     gap: 4px;
 }
 
-app-storefront-page .order-detail-content span {
+.foodiedash-storefront .order-detail-content span {
     color: #849087;
     font-size: 10px;
 }
 
-app-storefront-page .order-detail-content strong {
+.foodiedash-storefront .order-detail-content strong {
     color: #26382b;
     font-size: 12px;
     overflow-wrap: anywhere;
 }
 
-app-storefront-page .order-detail-actions {
+.foodiedash-storefront .order-detail-actions {
     display: flex;
     justify-content: flex-end;
     gap: 9px;
@@ -1507,7 +1507,7 @@ app-storefront-page .order-detail-actions {
     padding-top: 16px;
 }
 
-app-storefront-page .order-detail-actions button {
+.foodiedash-storefront .order-detail-actions button {
     min-height: 39px;
     border-radius: 8px;
     padding: 0 13px;
@@ -1517,47 +1517,47 @@ app-storefront-page .order-detail-actions button {
 }
 
 @media (max-width: 1050px) {
-    app-storefront-page .menu-layout {
+    .foodiedash-storefront .menu-layout {
         grid-template-columns: 160px minmax(0, 1fr);
     }
-    app-storefront-page .cart-summary {
+    .foodiedash-storefront .cart-summary {
         position: static;
         grid-column: 2;
     }
-    app-storefront-page .menu-layout .product-grid {
+    .foodiedash-storefront .menu-layout .product-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-    app-storefront-page .menu-sidebar {
+    .foodiedash-storefront .menu-sidebar {
         grid-row: span 2;
     }
-    app-storefront-page .sidebar-promo {
+    .foodiedash-storefront .sidebar-promo {
         display: none;
     }
-    app-storefront-page .shop-header {
+    .foodiedash-storefront .shop-header {
         gap: 22px;
     }
-    app-storefront-page .shop-header nav {
+    .foodiedash-storefront .shop-header nav {
         gap: 18px;
     }
 }
 
 @media (max-width: 740px) {
-    app-storefront-page .shop-header {
+    .foodiedash-storefront .shop-header {
         height: 62px;
         padding: 0 5%;
         justify-content: space-between;
         gap: 12px;
     }
-    app-storefront-page .mobile-menu {
+    .foodiedash-storefront .mobile-menu {
         display: grid;
         place-items: center;
         order: 3;
         color: #1d3022;
     }
-    app-storefront-page .mobile-menu span {
+    .foodiedash-storefront .mobile-menu span {
         font-size: 24px;
     }
-    app-storefront-page .shop-header nav {
+    .foodiedash-storefront .shop-header nav {
         display: none;
         position: absolute;
         left: 0;
@@ -1567,381 +1567,381 @@ app-storefront-page .order-detail-actions button {
         padding: 8px 5% 15px;
         box-shadow: 0 8px 14px #15241b14;
     }
-    app-storefront-page .shop-header nav.open {
+    .foodiedash-storefront .shop-header nav.open {
         display: grid;
         gap: 0;
     }
-    app-storefront-page .shop-header nav a {
+    .foodiedash-storefront .shop-header nav a {
         padding: 12px 3px;
         border: 0;
     }
-    app-storefront-page .header-actions {
+    .foodiedash-storefront .header-actions {
         gap: 12px;
         margin-left: auto;
     }
-    app-storefront-page .location {
+    .foodiedash-storefront .location {
         display: none;
     }
-    app-storefront-page .brand {
+    .foodiedash-storefront .brand {
         font-size: 17px;
     }
-    app-storefront-page .brand-mark {
+    .foodiedash-storefront .brand-mark {
         width: 31px;
         height: 31px;
     }
-    app-storefront-page .hero {
+    .foodiedash-storefront .hero {
         min-height: 390px;
         margin-top: 14px;
     }
-    app-storefront-page .hero-image {
+    .foodiedash-storefront .hero-image {
         left: 0;
         opacity: .55;
     }
-    app-storefront-page .hero::before {
+    .foodiedash-storefront .hero::before {
         background: linear-gradient(90deg, #07110bdc, #07110b73);
     }
-    app-storefront-page .hero-copy {
+    .foodiedash-storefront .hero-copy {
         padding: 30px 7%;
     }
-    app-storefront-page .hero h1 {
+    .foodiedash-storefront .hero h1 {
         font-size: clamp(36px, 10vw, 50px);
     }
-    app-storefront-page .content-section {
+    .foodiedash-storefront .content-section {
         padding: 34px 0;
     }
-    app-storefront-page .category-list {
+    .foodiedash-storefront .category-list {
         grid-template-columns: repeat(3, 1fr);
         gap: 9px;
     }
-    app-storefront-page .category-chip {
+    .foodiedash-storefront .category-chip {
         min-height: 88px;
     }
-    app-storefront-page .popular-section {
+    .foodiedash-storefront .popular-section {
         padding-top: 33px;
         padding-bottom: 38px;
     }
-    app-storefront-page .product-grid {
+    .foodiedash-storefront .product-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 12px;
     }
-    app-storefront-page .food-photo {
+    .foodiedash-storefront .food-photo {
         height: 145px;
     }
-    app-storefront-page .food-info {
+    .foodiedash-storefront .food-info {
         padding: 12px;
     }
-    app-storefront-page .food-title {
+    .foodiedash-storefront .food-title {
         flex-direction: column;
         gap: 4px;
     }
-    app-storefront-page .food-info>p {
+    .foodiedash-storefront .food-info>p {
         min-height: 48px;
     }
-    app-storefront-page .section-heading {
+    .foodiedash-storefront .section-heading {
         align-items: flex-start;
     }
-    app-storefront-page .section-heading>a {
+    .foodiedash-storefront .section-heading>a {
         margin-top: 10px;
         font-size: 10px;
     }
-    app-storefront-page .promo-banner {
+    .foodiedash-storefront .promo-banner {
         width: 90%;
         padding: 21px;
         align-items: flex-start;
         flex-direction: column;
         margin-bottom: 34px;
     }
-    app-storefront-page .promo-banner h2 {
+    .foodiedash-storefront .promo-banner h2 {
         font-size: 21px;
     }
-    app-storefront-page .menu-layout {
+    .foodiedash-storefront .menu-layout {
         display: block;
         padding-top: 22px;
     }
-    app-storefront-page .menu-sidebar {
+    .foodiedash-storefront .menu-sidebar {
         position: static;
         margin-bottom: 18px;
     }
-    app-storefront-page .menu-sidebar h2,
-    app-storefront-page .menu-sidebar .eyebrow {
+    .foodiedash-storefront .menu-sidebar h2,
+    .foodiedash-storefront .menu-sidebar .eyebrow {
         display: none;
     }
-    app-storefront-page .menu-sidebar>button {
+    .foodiedash-storefront .menu-sidebar>button {
         display: inline-flex;
         width: auto;
         gap: 9px;
         padding: 8px 10px;
     }
-    app-storefront-page .menu-sidebar>button span {
+    .foodiedash-storefront .menu-sidebar>button span {
         display: none;
     }
-    app-storefront-page .menu-main {
+    .foodiedash-storefront .menu-main {
         margin-top: 8px;
     }
-    app-storefront-page .menu-title {
+    .foodiedash-storefront .menu-title {
         align-items: flex-start;
         flex-direction: column;
     }
-    app-storefront-page .menu-search {
+    .foodiedash-storefront .menu-search {
         width: 100%;
         box-sizing: border-box;
     }
-    app-storefront-page .cart-summary {
+    .foodiedash-storefront .cart-summary {
         margin-top: 18px;
     }
-    app-storefront-page .narrow-page {
+    .foodiedash-storefront .narrow-page {
         padding-top: 28px;
     }
-    app-storefront-page .checkout-layout {
+    .foodiedash-storefront .checkout-layout {
         grid-template-columns: 1fr;
     }
-    app-storefront-page .checkout-summary {
+    .foodiedash-storefront .checkout-summary {
         position: static;
     }
-    app-storefront-page .help-grid {
+    .foodiedash-storefront .help-grid {
         grid-template-columns: 1fr;
     }
-    app-storefront-page .help-card p {
+    .foodiedash-storefront .help-card p {
         min-height: auto;
     }
-    app-storefront-page .shop-footer {
+    .foodiedash-storefront .shop-footer {
         justify-content: center;
         text-align: center;
     }
-    app-storefront-page .shop-footer>p {
+    .foodiedash-storefront .shop-footer>p {
         flex-basis: 100%;
         margin: 0;
     }
-    app-storefront-page .shop-footer>div {
+    .foodiedash-storefront .shop-footer>div {
         justify-content: center;
         flex-wrap: wrap;
     }
 }
 
 @media (max-width: 480px) {
-    app-storefront-page main {
+    .foodiedash-storefront main {
         width: 90%;
     }
-    app-storefront-page .hero {
+    .foodiedash-storefront .hero {
         min-height: 370px;
     }
-    app-storefront-page .hero h1 {
+    .foodiedash-storefront .hero h1 {
         font-size: 35px;
     }
-    app-storefront-page .hero-search {
+    .foodiedash-storefront .hero-search {
         height: 48px;
         gap: 7px;
         padding-left: 10px;
     }
-    app-storefront-page .hero-search input {
+    .foodiedash-storefront .hero-search input {
         font-size: 11px;
     }
-    app-storefront-page .hero-search button {
+    .foodiedash-storefront .hero-search button {
         padding: 0 11px;
         font-size: 10px;
     }
-    app-storefront-page .delivery-note {
+    .foodiedash-storefront .delivery-note {
         flex-wrap: wrap;
         line-height: 1.5;
     }
-    app-storefront-page .section-heading h2 {
+    .foodiedash-storefront .section-heading h2 {
         font-size: 22px;
     }
-    app-storefront-page .section-heading>a {
+    .foodiedash-storefront .section-heading>a {
         white-space: nowrap;
     }
-    app-storefront-page .category-list {
+    .foodiedash-storefront .category-list {
         gap: 7px;
     }
-    app-storefront-page .category-chip {
+    .foodiedash-storefront .category-chip {
         min-height: 78px;
         gap: 7px;
     }
-    app-storefront-page .category-chip span {
+    .foodiedash-storefront .category-chip span {
         font-size: 23px;
     }
-    app-storefront-page .category-chip b {
+    .foodiedash-storefront .category-chip b {
         font-size: 10px;
     }
-    app-storefront-page .product-grid {
+    .foodiedash-storefront .product-grid {
         grid-template-columns: 1fr;
     }
-    app-storefront-page .food-photo {
+    .foodiedash-storefront .food-photo {
         height: 190px;
     }
-    app-storefront-page .food-title {
+    .foodiedash-storefront .food-title {
         flex-direction: row;
     }
-    app-storefront-page .food-info>p {
+    .foodiedash-storefront .food-info>p {
         min-height: auto;
     }
-    app-storefront-page .menu-layout .product-grid {
+    .foodiedash-storefront .menu-layout .product-grid {
         grid-template-columns: 1fr;
     }
-    app-storefront-page .menu-layout .food-photo {
+    .foodiedash-storefront .menu-layout .food-photo {
         height: 180px;
     }
-    app-storefront-page .cart-page {
+    .foodiedash-storefront .cart-page {
         padding: 0 13px 15px;
     }
-    app-storefront-page .cart-row {
+    .foodiedash-storefront .cart-row {
         grid-template-columns: 58px minmax(0, 1fr) auto;
         gap: 9px;
         padding: 14px 0;
     }
-    app-storefront-page .cart-row>img {
+    .foodiedash-storefront .cart-row>img {
         width: 58px;
         height: 58px;
     }
-    app-storefront-page .cart-item-info h3 {
+    .foodiedash-storefront .cart-item-info h3 {
         font-size: 12px;
     }
-    app-storefront-page .cart-item-info p {
+    .foodiedash-storefront .cart-item-info p {
         display: none;
     }
-    app-storefront-page .cart-row>strong {
+    .foodiedash-storefront .cart-row>strong {
         grid-column: 2;
         grid-row: 2;
     }
-    app-storefront-page .cart-row>.quantity-control {
+    .foodiedash-storefront .cart-row>.quantity-control {
         grid-column: 3;
         grid-row: 1;
     }
-    app-storefront-page .cart-row>.remove-button {
+    .foodiedash-storefront .cart-row>.remove-button {
         grid-column: 3;
         grid-row: 2;
     }
-    app-storefront-page .cart-footer {
+    .foodiedash-storefront .cart-footer {
         flex-direction: column;
         gap: 12px;
     }
-    app-storefront-page .cart-footer .summary-total {
+    .foodiedash-storefront .cart-footer .summary-total {
         width: 100%;
         box-sizing: border-box;
     }
-    app-storefront-page .form-columns {
+    .foodiedash-storefront .form-columns {
         grid-template-columns: 1fr;
         gap: 0;
     }
-    app-storefront-page .checkout-fields .panel,
-    app-storefront-page .checkout-summary,
-    app-storefront-page .profile-form {
+    .foodiedash-storefront .checkout-fields .panel,
+    .foodiedash-storefront .checkout-summary,
+    .foodiedash-storefront .profile-form {
         padding: 16px;
     }
-    app-storefront-page .customer-order {
+    .foodiedash-storefront .customer-order {
         padding: 13px;
     }
-    app-storefront-page .order-restaurant {
+    .foodiedash-storefront .order-restaurant {
         gap: 8px;
     }
-    app-storefront-page .order-restaurant p {
+    .foodiedash-storefront .order-restaurant p {
         max-width: 205px;
     }
-    app-storefront-page .order-restaurant>strong {
+    .foodiedash-storefront .order-restaurant>strong {
         font-size: 11px;
     }
-    app-storefront-page .profile-banner {
+    .foodiedash-storefront .profile-banner {
         flex-wrap: wrap;
     }
-    app-storefront-page .loyalty-chip {
+    .foodiedash-storefront .loyalty-chip {
         margin-left: auto;
     }
-    app-storefront-page .profile-submit {
+    .foodiedash-storefront .profile-submit {
         align-items: flex-start;
         flex-direction: column;
         gap: 10px;
     }
-    app-storefront-page .profile-submit button {
+    .foodiedash-storefront .profile-submit button {
         width: 100%;
     }
-    app-storefront-page .shop-footer {
+    .foodiedash-storefront .shop-footer {
         padding: 23px 5% 17px;
     }
-    app-storefront-page .shop-footer>div {
+    .foodiedash-storefront .shop-footer>div {
         gap: 11px;
     }
 }
 
 @media (max-width: 350px) {
-    app-storefront-page .brand {
+    .foodiedash-storefront .brand {
         font-size: 15px;
         gap: 6px;
     }
-    app-storefront-page .header-actions {
+    .foodiedash-storefront .header-actions {
         gap: 8px;
     }
-    app-storefront-page .hero h1 {
+    .foodiedash-storefront .hero h1 {
         font-size: 31px;
     }
-    app-storefront-page .category-list {
+    .foodiedash-storefront .category-list {
         grid-template-columns: repeat(2, 1fr);
     }
-    app-storefront-page .order-top {
+    .foodiedash-storefront .order-top {
         align-items: flex-start;
     }
-    app-storefront-page .order-restaurant p {
+    .foodiedash-storefront .order-restaurant p {
         max-width: 150px;
     }
-    app-storefront-page .promo-banner .button-primary {
+    .foodiedash-storefront .promo-banner .button-primary {
         white-space: normal;
         text-align: center;
     }
 }
 
-app-storefront-page .shop-header {
+.foodiedash-storefront .shop-header {
     backdrop-filter: blur(12px);
 }
 
-app-storefront-page .shop-header nav a {
+.foodiedash-storefront .shop-header nav a {
     transition: color .18s ease, border-color .18s ease;
 }
 
-app-storefront-page .hero-search:focus-within,
-app-storefront-page .menu-search:focus-within {
+.foodiedash-storefront .hero-search:focus-within,
+.foodiedash-storefront .menu-search:focus-within {
     box-shadow: 0 0 0 4px rgba(0, 217, 67, .12);
 }
 
-app-storefront-page .food-card,
-app-storefront-page .category-chip,
-app-storefront-page .panel,
-app-storefront-page .summary-card {
+.foodiedash-storefront .food-card,
+.foodiedash-storefront .category-chip,
+.foodiedash-storefront .panel,
+.foodiedash-storefront .summary-card {
     transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
 }
 
-app-storefront-page .food-card:hover,
-app-storefront-page .category-chip:hover {
+.foodiedash-storefront .food-card:hover,
+.foodiedash-storefront .category-chip:hover {
     box-shadow: 0 10px 20px rgba(16, 36, 22, .08);
     transform: translateY(-2px);
 }
 
-app-storefront-page .button-primary,
-app-storefront-page .checkout-button,
-app-storefront-page .add-button,
-app-storefront-page .keep-order,
-app-storefront-page .cancel-dialog button {
+.foodiedash-storefront .button-primary,
+.foodiedash-storefront .checkout-button,
+.foodiedash-storefront .add-button,
+.foodiedash-storefront .keep-order,
+.foodiedash-storefront .cancel-dialog button {
     transition: transform .18s ease, filter .18s ease, background-color .18s ease;
 }
 
-app-storefront-page .button-primary:hover,
-app-storefront-page .checkout-button:hover,
-app-storefront-page .add-button:hover,
-app-storefront-page .keep-order:hover,
-app-storefront-page .cancel-dialog button:hover {
+.foodiedash-storefront .button-primary:hover,
+.foodiedash-storefront .checkout-button:hover,
+.foodiedash-storefront .add-button:hover,
+.foodiedash-storefront .keep-order:hover,
+.foodiedash-storefront .cancel-dialog button:hover {
     transform: translateY(-1px);
     filter: brightness(.98);
 }
 
-app-storefront-page .narrow-page {
+.foodiedash-storefront .narrow-page {
     width: min(1200px, 90%);
     margin: 0 auto;
     padding-top: 34px;
 }
 
-app-storefront-page .page-title {
+.foodiedash-storefront .page-title {
     margin-bottom: 22px;
 }
 
-app-storefront-page .checkout-crumbs {
+.foodiedash-storefront .checkout-crumbs {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -1951,48 +1951,48 @@ app-storefront-page .checkout-crumbs {
     margin-bottom: 6px;
 }
 
-app-storefront-page .checkout-crumbs a {
+.foodiedash-storefront .checkout-crumbs a {
     color: #637066;
     text-decoration: none;
 }
 
-app-storefront-page .checkout-crumbs strong {
+.foodiedash-storefront .checkout-crumbs strong {
     color: #1b2d21;
     font-weight: 700;
 }
 
-app-storefront-page .checkout-layout {
+.foodiedash-storefront .checkout-layout {
     display: grid;
     grid-template-columns: minmax(0, 1.5fr) minmax(280px, 360px);
     gap: 28px;
     align-items: flex-start;
 }
 
-app-storefront-page .checkout-fields {
+.foodiedash-storefront .checkout-fields {
     display: grid;
     gap: 24px;
 }
 
-app-storefront-page .checkout-fields .panel,
-app-storefront-page .checkout-summary {
+.foodiedash-storefront .checkout-fields .panel,
+.foodiedash-storefront .checkout-summary {
     border: 1px solid #dfeae1;
     border-radius: 14px;
     background: rgba(255, 255, 255, .85);
     box-shadow: none;
 }
 
-app-storefront-page .checkout-fields .panel {
+.foodiedash-storefront .checkout-fields .panel {
     padding: 22px 18px 18px;
 }
 
-app-storefront-page .form-heading {
+.foodiedash-storefront .form-heading {
     display: flex;
     align-items: center;
     gap: 12px;
     margin-bottom: 18px;
 }
 
-app-storefront-page .form-heading>span {
+.foodiedash-storefront .form-heading>span {
     width: 28px;
     height: 28px;
     display: grid;
@@ -2004,24 +2004,24 @@ app-storefront-page .form-heading>span {
     font-weight: 800;
 }
 
-app-storefront-page .form-heading h2 {
+.foodiedash-storefront .form-heading h2 {
     margin: 0;
     font-size: 17px;
 }
 
-app-storefront-page .form-heading p {
+.foodiedash-storefront .form-heading p {
     margin: 4px 0 0;
     font-size: 12px;
     color: #738178;
 }
 
-app-storefront-page .address-grid {
+.foodiedash-storefront .address-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px;
 }
 
-app-storefront-page .address-choice {
+.foodiedash-storefront .address-choice {
     position: relative;
     display: grid;
     grid-template-columns: 1fr auto;
@@ -2034,37 +2034,37 @@ app-storefront-page .address-choice {
     cursor: pointer;
 }
 
-app-storefront-page .address-choice.active {
+.foodiedash-storefront .address-choice.active {
     border-color: #22d65c;
     background: #f0fff4;
 }
 
-app-storefront-page .address-choice input {
+.foodiedash-storefront .address-choice input {
     position: absolute;
     inset: 0;
     opacity: 0;
 }
 
-app-storefront-page .address-choice>div {
+.foodiedash-storefront .address-choice>div {
     display: flex;
     flex-direction: column;
     gap: 2px;
     padding-right: 12px;
 }
 
-app-storefront-page .address-choice strong {
+.foodiedash-storefront .address-choice strong {
     font-size: 14px;
     color: #1c2b21;
 }
 
-app-storefront-page .address-choice span,
-app-storefront-page .address-choice small {
+.foodiedash-storefront .address-choice span,
+.foodiedash-storefront .address-choice small {
     color: #66766d;
     font-size: 11px;
     line-height: 1.5;
 }
 
-app-storefront-page .selected-mark {
+.foodiedash-storefront .selected-mark {
     align-self: center;
     width: 18px;
     height: 18px;
@@ -2076,7 +2076,7 @@ app-storefront-page .selected-mark {
     place-items: center;
 }
 
-app-storefront-page .payment-option {
+.foodiedash-storefront .payment-option {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -2088,31 +2088,31 @@ app-storefront-page .payment-option {
     margin-bottom: 12px;
 }
 
-app-storefront-page .payment-option.selected {
+.foodiedash-storefront .payment-option.selected {
     border-color: #27d961;
     background: #ecfff1;
 }
 
-app-storefront-page .payment-option input {
+.foodiedash-storefront .payment-option input {
     accent-color: #16a740;
 }
 
-app-storefront-page .payment-option .material-symbols-outlined {
+.foodiedash-storefront .payment-option .material-symbols-outlined {
     color: #107f36;
     font-size: 22px;
 }
 
-app-storefront-page .payment-option b {
+.foodiedash-storefront .payment-option b {
     display: block;
     font-size: 14px;
 }
 
-app-storefront-page .payment-option small {
+.foodiedash-storefront .payment-option small {
     color: #69766d;
     font-size: 11px;
 }
 
-app-storefront-page .field-label {
+.foodiedash-storefront .field-label {
     display: grid;
     gap: 7px;
     font-size: 10px;
@@ -2122,7 +2122,7 @@ app-storefront-page .field-label {
     font-weight: 700;
 }
 
-app-storefront-page .field-label input {
+.foodiedash-storefront .field-label input {
     min-height: 40px;
     border: 1px solid #dfeae1;
     border-radius: 8px;
@@ -2131,22 +2131,22 @@ app-storefront-page .field-label input {
     color: #1d2b22;
 }
 
-app-storefront-page .checkout-summary {
+.foodiedash-storefront .checkout-summary {
     position: sticky;
     top: 92px;
     padding: 20px 18px 16px;
 }
 
-app-storefront-page .checkout-summary h2 {
+.foodiedash-storefront .checkout-summary h2 {
     margin: 0 0 16px;
     font-size: 18px;
 }
 
-app-storefront-page .promo-code-row {
+.foodiedash-storefront .promo-code-row {
     margin-bottom: 16px;
 }
 
-app-storefront-page .promo-code-row label {
+.foodiedash-storefront .promo-code-row label {
     display: block;
     font-size: 10px;
     letter-spacing: .12em;
@@ -2155,12 +2155,12 @@ app-storefront-page .promo-code-row label {
     font-weight: 700;
 }
 
-app-storefront-page .promo-form {
+.foodiedash-storefront .promo-form {
     display: flex;
     gap: 8px;
 }
 
-app-storefront-page .promo-form input {
+.foodiedash-storefront .promo-form input {
     flex: 1;
     min-width: 0;
     min-height: 38px;
@@ -2170,7 +2170,7 @@ app-storefront-page .promo-form input {
     background: white;
 }
 
-app-storefront-page .promo-form button {
+.foodiedash-storefront .promo-form button {
     min-height: 38px;
     border: 0;
     background: #edf7ef;
@@ -2181,12 +2181,12 @@ app-storefront-page .promo-form button {
     font-weight: 700;
 }
 
-app-storefront-page .totals-list {
+.foodiedash-storefront .totals-list {
     border-top: 1px solid #edf2ee;
     padding-top: 12px;
 }
 
-app-storefront-page .totals-list>div {
+.foodiedash-storefront .totals-list>div {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -2196,7 +2196,7 @@ app-storefront-page .totals-list>div {
     font-size: 13px;
 }
 
-app-storefront-page .totals-list .total-row {
+.foodiedash-storefront .totals-list .total-row {
     border-top: 1px solid #edf2ee;
     margin-top: 2px;
     padding-top: 12px;
@@ -2204,11 +2204,11 @@ app-storefront-page .totals-list .total-row {
     font-weight: 800;
 }
 
-app-storefront-page .totals-list strong {
+.foodiedash-storefront .totals-list strong {
     font-size: 18px;
 }
 
-app-storefront-page .checkout-button {
+.foodiedash-storefront .checkout-button {
     justify-content: center;
     width: 100%;
     min-height: 48px;
@@ -2224,7 +2224,7 @@ app-storefront-page .checkout-button {
     gap: 8px;
 }
 
-app-storefront-page .secure-note {
+.foodiedash-storefront .secure-note {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2234,12 +2234,12 @@ app-storefront-page .secure-note {
     margin-top: 12px;
 }
 
-app-storefront-page .secure-note .material-symbols-outlined {
+.foodiedash-storefront .secure-note .material-symbols-outlined {
     font-size: 16px;
     color: #1b8b3d;
 }
 
-app-storefront-page .add-address {
+.foodiedash-storefront .add-address {
     margin-top: 18px;
     width: 100%;
     min-height: 42px;
@@ -2254,40 +2254,40 @@ app-storefront-page .add-address {
     gap: 8px;
 }
 
-app-storefront-page .address-choice+.address-choice {
+.foodiedash-storefront .address-choice+.address-choice {
     background: #f9faf9;
 }
 
-app-storefront-page .page-title>p:last-child {
+.foodiedash-storefront .page-title>p:last-child {
     max-width: 660px;
 }
 
 @media (max-width: 900px) {
-    app-storefront-page .checkout-layout {
+    .foodiedash-storefront .checkout-layout {
         grid-template-columns: 1fr;
     }
-    app-storefront-page .checkout-summary {
+    .foodiedash-storefront .checkout-summary {
         position: static;
     }
 }
 
 @media (max-width: 520px) {
-    app-storefront-page .address-grid {
+    .foodiedash-storefront .address-grid {
         grid-template-columns: 1fr;
     }
-    app-storefront-page .promo-form {
+    .foodiedash-storefront .promo-form {
         flex-direction: column;
     }
-    app-storefront-page .checkout-fields .panel,
-    app-storefront-page .checkout-summary {
+    .foodiedash-storefront .checkout-fields .panel,
+    .foodiedash-storefront .checkout-summary {
         padding: 16px 14px;
     }
-    app-storefront-page .checkout-button {
+    .foodiedash-storefront .checkout-button {
         font-size: 13px;
     }
 }
 
-app-storefront-page .shop-header nav .shop-toggle {
+.foodiedash-storefront .shop-header nav .shop-toggle {
     display: inline-flex;
     align-items: center;
     gap: 3px;
@@ -2303,18 +2303,18 @@ app-storefront-page .shop-header nav .shop-toggle {
     transition: color .18s ease, border-color .18s ease;
 }
 
-app-storefront-page .shop-header nav .shop-toggle.active,
-app-storefront-page .shop-header nav .shop-toggle:hover,
-app-storefront-page .shop-header nav .shop-toggle:focus-visible {
+.foodiedash-storefront .shop-header nav .shop-toggle.active,
+.foodiedash-storefront .shop-header nav .shop-toggle:hover,
+.foodiedash-storefront .shop-header nav .shop-toggle:focus-visible {
     color: #118b34;
     border-bottom-color: var(--green);
 }
 
-app-storefront-page .shop-toggle .material-symbols-outlined {
+.foodiedash-storefront .shop-toggle .material-symbols-outlined {
     font-size: 17px;
 }
 
-app-storefront-page .shop-mega-menu {
+.foodiedash-storefront .shop-mega-menu {
     position: absolute;
     z-index: 20;
     top: 100%;
@@ -2329,7 +2329,7 @@ app-storefront-page .shop-mega-menu {
     animation: shop-menu-enter .16s ease-out;
 }
 
-app-storefront-page .shop-mega-menu__heading {
+.foodiedash-storefront .shop-mega-menu__heading {
     display: flex;
     justify-content: space-between;
     align-items: end;
@@ -2338,18 +2338,18 @@ app-storefront-page .shop-mega-menu__heading {
     border-bottom: 1px solid var(--line);
 }
 
-app-storefront-page .shop-mega-menu__heading .eyebrow {
+.foodiedash-storefront .shop-mega-menu__heading .eyebrow {
     margin-bottom: 5px;
 }
 
-app-storefront-page .shop-mega-menu__heading h2 {
+.foodiedash-storefront .shop-mega-menu__heading h2 {
     margin: 0;
     color: #101b13;
     font-size: 21px;
     font-weight: 750;
 }
 
-app-storefront-page .shop-mega-menu__heading>a {
+.foodiedash-storefront .shop-mega-menu__heading>a {
     display: inline-flex;
     align-items: center;
     gap: 5px;
@@ -2360,18 +2360,18 @@ app-storefront-page .shop-mega-menu__heading>a {
     white-space: nowrap;
 }
 
-app-storefront-page .shop-mega-menu__heading>a .material-symbols-outlined {
+.foodiedash-storefront .shop-mega-menu__heading>a .material-symbols-outlined {
     font-size: 17px;
 }
 
-app-storefront-page .shop-mega-menu__grid {
+.foodiedash-storefront .shop-mega-menu__grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 22px 30px;
     padding-top: 19px;
 }
 
-app-storefront-page .shop-category {
+.foodiedash-storefront .shop-category {
     display: flex;
     min-width: 0;
     flex-direction: column;
@@ -2379,7 +2379,7 @@ app-storefront-page .shop-category {
     gap: 5px;
 }
 
-app-storefront-page .shop-category__title {
+.foodiedash-storefront .shop-category__title {
     display: inline-flex;
     align-items: center;
     gap: 7px;
@@ -2390,12 +2390,12 @@ app-storefront-page .shop-category__title {
     text-decoration: none;
 }
 
-app-storefront-page .shop-category__title .material-symbols-outlined {
+.foodiedash-storefront .shop-category__title .material-symbols-outlined {
     color: #168a38;
     font-size: 19px;
 }
 
-app-storefront-page .shop-category__item {
+.foodiedash-storefront .shop-category__item {
     max-width: 100%;
     padding: 3px 0;
     color: #556259;
@@ -2406,19 +2406,19 @@ app-storefront-page .shop-category__item {
     transition: color .15s ease, transform .15s ease;
 }
 
-app-storefront-page .shop-category__title:hover,
-app-storefront-page .shop-category__title:focus-visible,
-app-storefront-page .shop-category__item:hover,
-app-storefront-page .shop-category__item:focus-visible {
+.foodiedash-storefront .shop-category__title:hover,
+.foodiedash-storefront .shop-category__title:focus-visible,
+.foodiedash-storefront .shop-category__item:hover,
+.foodiedash-storefront .shop-category__item:focus-visible {
     color: #118b34;
 }
 
-app-storefront-page .shop-category__item:hover {
+.foodiedash-storefront .shop-category__item:hover {
     transform: translateX(2px);
 }
 
-app-storefront-page .shop-toggle:focus-visible,
-app-storefront-page .shop-mega-menu a:focus-visible {
+.foodiedash-storefront .shop-toggle:focus-visible,
+.foodiedash-storefront .shop-mega-menu a:focus-visible {
     outline: 2px solid #168a38;
     outline-offset: 3px;
     border-radius: 3px;
@@ -2436,21 +2436,21 @@ app-storefront-page .shop-mega-menu a:focus-visible {
 }
 
 @media (max-width: 900px) {
-    app-storefront-page .shop-mega-menu__grid {
+    .foodiedash-storefront .shop-mega-menu__grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 20px;
     }
 }
 
 @media (max-width: 740px) {
-    app-storefront-page .shop-header nav .shop-toggle {
+    .foodiedash-storefront .shop-header nav .shop-toggle {
         width: 100%;
         justify-content: space-between;
         padding: 12px 3px;
         border: 0;
         text-align: left;
     }
-    app-storefront-page .shop-mega-menu {
+    .foodiedash-storefront .shop-mega-menu {
         position: static;
         grid-column: 1 / -1;
         width: 100%;
@@ -2460,16 +2460,16 @@ app-storefront-page .shop-mega-menu a:focus-visible {
         box-shadow: none;
         animation: none;
     }
-    app-storefront-page .shop-mega-menu__heading {
+    .foodiedash-storefront .shop-mega-menu__heading {
         align-items: flex-start;
         flex-direction: column;
         gap: 10px;
         padding-bottom: 13px;
     }
-    app-storefront-page .shop-mega-menu__heading h2 {
+    .foodiedash-storefront .shop-mega-menu__heading h2 {
         font-size: 18px;
     }
-    app-storefront-page .shop-mega-menu__grid {
+    .foodiedash-storefront .shop-mega-menu__grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 18px 14px;
         padding-top: 15px;
@@ -2477,19 +2477,19 @@ app-storefront-page .shop-mega-menu a:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    app-storefront-page .shop-mega-menu,
-    app-storefront-page .shop-category__item {
+    .foodiedash-storefront .shop-mega-menu,
+    .foodiedash-storefront .shop-category__item {
         animation: none;
         transition: none;
     }
 }
 
-app-storefront-page .shop-header {
+.foodiedash-storefront .shop-header {
     overflow: visible;
     z-index: 20;
 }
 
-app-storefront-page .login-button {
+.foodiedash-storefront .login-button {
     min-height: 36px;
     padding: 0 16px;
     border: 0;
@@ -2501,22 +2501,22 @@ app-storefront-page .login-button {
     cursor: pointer;
 }
 
-app-storefront-page .login-button:focus-visible,
-app-storefront-page .avatar:focus-visible {
+.foodiedash-storefront .login-button:focus-visible,
+.foodiedash-storefront .avatar:focus-visible {
     outline: 2px solid #168a38;
     outline-offset: 3px;
 }
 
-app-storefront-page .account-menu {
+.foodiedash-storefront .account-menu {
     position: relative;
 }
 
-app-storefront-page .avatar {
+.foodiedash-storefront .avatar {
     border: 2px solid #8fe9a5;
     cursor: pointer;
 }
 
-app-storefront-page .account-dropdown {
+.foodiedash-storefront .account-dropdown {
     position: absolute;
     top: calc(100% + 10px);
     right: 0;
@@ -2529,24 +2529,24 @@ app-storefront-page .account-dropdown {
     box-shadow: 0 18px 40px #15241b24;
 }
 
-app-storefront-page .account-dropdown__header {
+.foodiedash-storefront .account-dropdown__header {
     display: grid;
     gap: 2px;
     padding: 10px 16px 12px;
     border-bottom: 1px solid var(--line);
 }
 
-app-storefront-page .account-dropdown__header strong {
+.foodiedash-storefront .account-dropdown__header strong {
     font-size: 13px;
 }
 
-app-storefront-page .account-dropdown__header span {
+.foodiedash-storefront .account-dropdown__header span {
     color: var(--muted);
     font-size: 11px;
 }
 
-app-storefront-page .account-dropdown a,
-app-storefront-page .account-dropdown .logout-item {
+.foodiedash-storefront .account-dropdown a,
+.foodiedash-storefront .account-dropdown .logout-item {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -2561,31 +2561,31 @@ app-storefront-page .account-dropdown .logout-item {
     cursor: pointer;
 }
 
-app-storefront-page .account-dropdown a:hover,
-app-storefront-page .account-dropdown a.active,
-app-storefront-page .account-dropdown .logout-item:hover {
+.foodiedash-storefront .account-dropdown a:hover,
+.foodiedash-storefront .account-dropdown a.active,
+.foodiedash-storefront .account-dropdown .logout-item:hover {
     background: #f3faf4;
     color: #118b34;
 }
 
-app-storefront-page .account-dropdown .material-symbols-outlined {
+.foodiedash-storefront .account-dropdown .material-symbols-outlined {
     font-size: 18px;
     color: #168a38;
 }
 
-app-storefront-page .logout-item {
+.foodiedash-storefront .logout-item {
     margin-top: 4px;
     border-top: 1px solid var(--line);
     color: #b44747 !important;
 }
 
-app-storefront-page .card-actions {
+.foodiedash-storefront .card-actions {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-app-storefront-page .wish-button {
+.foodiedash-storefront .wish-button {
     width: 40px;
     height: 40px;
     border: 1px solid #dce6dd;
@@ -2595,13 +2595,13 @@ app-storefront-page .wish-button {
     cursor: pointer;
 }
 
-app-storefront-page .wish-button.active,
-app-storefront-page .wish-button:hover {
+.foodiedash-storefront .wish-button.active,
+.foodiedash-storefront .wish-button:hover {
     color: #d64545;
     border-color: #f3c4c4;
 }
 
-app-storefront-page .phone-readonly {
+.foodiedash-storefront .phone-readonly {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -2613,7 +2613,7 @@ app-storefront-page .phone-readonly {
     font-size: 12px;
 }
 
-app-storefront-page .verify-chip {
+.foodiedash-storefront .verify-chip {
     margin-left: auto;
     padding: 3px 8px;
     border-radius: 20px;
@@ -2622,99 +2622,99 @@ app-storefront-page .verify-chip {
     font-size: 10px;
 }
 
-app-storefront-page .verify-chip.unverified {
+.foodiedash-storefront .verify-chip.unverified {
     background: #fff4d6;
     color: #8a6a12;
 }
 
-app-storefront-page .field-error {
+.foodiedash-storefront .field-error {
     margin: 0 0 12px;
     color: #b44747;
     font-size: 12px;
 }
 
-app-storefront-page .account-toolbar {
+.foodiedash-storefront .account-toolbar {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 14px;
 }
 
-app-storefront-page .address-card h2,
-app-storefront-page .notice-card h2,
-app-storefront-page .danger-card h2 {
+.foodiedash-storefront .address-card h2,
+.foodiedash-storefront .notice-card h2,
+.foodiedash-storefront .danger-card h2 {
     margin: 0 0 8px;
     font-size: 16px;
 }
 
-app-storefront-page .address-card p,
-app-storefront-page .notice-card p,
-app-storefront-page .danger-card p {
+.foodiedash-storefront .address-card p,
+.foodiedash-storefront .notice-card p,
+.foodiedash-storefront .danger-card p {
     margin: 0 0 4px;
     color: #66756a;
     font-size: 12px;
 }
 
-app-storefront-page .address-card.active {
+.foodiedash-storefront .address-card.active {
     border-color: #8fe9a5;
 }
 
-app-storefront-page .notice-card {
+.foodiedash-storefront .notice-card {
     display: flex;
     justify-content: space-between;
     gap: 16px;
     margin-bottom: 12px;
 }
 
-app-storefront-page .notice-card.unread {
+.foodiedash-storefront .notice-card.unread {
     background: #f3faf4;
 }
 
-app-storefront-page .danger-card {
+.foodiedash-storefront .danger-card {
     margin-top: 16px;
 }
 
-app-storefront-page .danger-card .confirm-cancel {
+.foodiedash-storefront .danger-card .confirm-cancel {
     margin: 8px 0 18px;
 }
 
-app-storefront-page .saved-address-list {
+.foodiedash-storefront .saved-address-list {
     margin-bottom: 12px;
 }
 
-app-storefront-page .saved-address-list h2 {
+.foodiedash-storefront .saved-address-list h2 {
     font-size: 14px;
 }
 
-app-storefront-page .saved-address-list p {
+.foodiedash-storefront .saved-address-list p {
     margin: 0 0 4px;
     color: #66756a;
     font-size: 12px;
 }
 
-app-storefront-page .saved-address-list a,
-app-storefront-page .empty-inline {
+.foodiedash-storefront .saved-address-list a,
+.foodiedash-storefront .empty-inline {
     color: #168a38;
     font-size: 12px;
 }
 
-app-storefront-page .checkbox-row {
+.foodiedash-storefront .checkbox-row {
     display: flex;
     gap: 8px;
     margin-bottom: 14px;
     font-size: 12px;
 }
 
-app-storefront-page .address-dialog {
+.foodiedash-storefront .address-dialog {
     width: min(100%, 520px);
     max-height: calc(100dvh - 36px);
     overflow: auto;
 }
 
-app-storefront-page .profile-banner .button-secondary {
+.foodiedash-storefront .profile-banner .button-secondary {
     margin-left: auto;
 }
 
-app-storefront-page app-storefront-login-modal {
+.foodiedash-storefront app-storefront-login-modal {
     position: fixed;
     inset: 0;
     z-index: 50;
@@ -2723,13 +2723,13 @@ app-storefront-page app-storefront-login-modal {
     padding: 18px;
 }
 
-app-storefront-page .auth-backdrop {
+.foodiedash-storefront .auth-backdrop {
     position: absolute;
     inset: 0;
     background: #111c1590;
 }
 
-app-storefront-page .auth-dialog {
+.foodiedash-storefront .auth-dialog {
     position: relative;
     z-index: 1;
     width: min(100%, 440px);
@@ -2740,7 +2740,7 @@ app-storefront-page .auth-dialog {
     text-align: center;
 }
 
-app-storefront-page .auth-back {
+.foodiedash-storefront .auth-back {
     position: absolute;
     top: 16px;
     left: 14px;
@@ -2754,7 +2754,7 @@ app-storefront-page .auth-back {
     cursor: pointer;
 }
 
-app-storefront-page .auth-brand {
+.foodiedash-storefront .auth-brand {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -2763,19 +2763,19 @@ app-storefront-page .auth-brand {
     font-size: 20px;
 }
 
-app-storefront-page .auth-dialog h2 {
+.foodiedash-storefront .auth-dialog h2 {
     margin: 8px 0 6px;
     font-size: 22px;
 }
 
-app-storefront-page .auth-subtitle {
+.foodiedash-storefront .auth-subtitle {
     margin: 0 0 18px;
     color: #66756a;
     font-size: 13px;
     line-height: 1.5;
 }
 
-app-storefront-page .phone-field {
+.foodiedash-storefront .phone-field {
     display: flex;
     align-items: center;
     min-height: 48px;
@@ -2785,34 +2785,34 @@ app-storefront-page .phone-field {
     overflow: hidden;
 }
 
-app-storefront-page .phone-field.invalid {
+.foodiedash-storefront .phone-field.invalid {
     border-color: #d96a6a;
 }
 
-app-storefront-page .phone-field select,
-app-storefront-page .phone-field input {
+.foodiedash-storefront .phone-field select,
+.foodiedash-storefront .phone-field input {
     border: 0;
     outline: 0;
     min-height: 48px;
     background: #fff;
 }
 
-app-storefront-page .phone-field select {
+.foodiedash-storefront .phone-field select {
     padding: 0 8px 0 12px;
     border-right: 1px solid #e4ece5;
     color: #24352a;
     font-weight: 700;
 }
 
-app-storefront-page .phone-field input {
+.foodiedash-storefront .phone-field input {
     flex: 1;
     min-width: 0;
     padding: 0 12px;
     font-size: 14px;
 }
 
-app-storefront-page .auth-continue,
-app-storefront-page .auth-dialog .button-primary {
+.foodiedash-storefront .auth-continue,
+.foodiedash-storefront .auth-dialog .button-primary {
     width: 100%;
     min-height: 46px;
     border: 0;
@@ -2823,30 +2823,30 @@ app-storefront-page .auth-dialog .button-primary {
     cursor: pointer;
 }
 
-app-storefront-page .auth-continue:disabled,
-app-storefront-page .resend-link:disabled {
+.foodiedash-storefront .auth-continue:disabled,
+.foodiedash-storefront .resend-link:disabled {
     opacity: .55;
     cursor: not-allowed;
 }
 
-app-storefront-page .auth-legal {
+.foodiedash-storefront .auth-legal {
     margin: 14px 0 0;
     color: #8a968c;
     font-size: 11px;
 }
 
-app-storefront-page .auth-legal a {
+.foodiedash-storefront .auth-legal a {
     color: #168a38;
 }
 
-app-storefront-page .otp-row {
+.foodiedash-storefront .otp-row {
     display: flex;
     justify-content: center;
     gap: 10px;
     margin: 8px 0 14px;
 }
 
-app-storefront-page .otp-box {
+.foodiedash-storefront .otp-box {
     width: 48px;
     height: 52px;
     border: 1px solid #d5e0d7;
@@ -2856,12 +2856,12 @@ app-storefront-page .otp-box {
     font-weight: 700;
 }
 
-app-storefront-page .otp-box:focus {
+.foodiedash-storefront .otp-box:focus {
     outline: 2px solid #3bce5f;
     border-color: #3bce5f;
 }
 
-app-storefront-page .resend-link {
+.foodiedash-storefront .resend-link {
     border: 0;
     background: transparent;
     color: #8a968c;
@@ -2869,13 +2869,13 @@ app-storefront-page .resend-link {
     cursor: pointer;
 }
 
-app-storefront-page .resend-link:not(:disabled) {
+.foodiedash-storefront .resend-link:not(:disabled) {
     color: #168a38;
     font-weight: 700;
 }
 
-app-storefront-page .mock-hint,
-app-storefront-page .auth-status {
+.foodiedash-storefront .mock-hint,
+.foodiedash-storefront .auth-status {
     margin: 0 0 12px;
     padding: 8px 10px;
     border-radius: 8px;
@@ -2884,21 +2884,21 @@ app-storefront-page .auth-status {
     font-size: 12px;
 }
 
-app-storefront-page .auth-success {
+.foodiedash-storefront .auth-success {
     padding: 28px 8px 18px;
     color: #168a38;
 }
 
-app-storefront-page .auth-success .material-symbols-outlined {
+.foodiedash-storefront .auth-success .material-symbols-outlined {
     font-size: 42px;
 }
 
-app-storefront-page .auth-success p {
+.foodiedash-storefront .auth-success p {
     margin: 10px 0 0;
     font-weight: 700;
 }
 
-app-storefront-page .visually-hidden {
+.foodiedash-storefront .visually-hidden {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -2907,14 +2907,14 @@ app-storefront-page .visually-hidden {
 }
 
 @media (max-width: 740px) {
-    app-storefront-page .account-dropdown {
+    .foodiedash-storefront .account-dropdown {
         right: -8px;
     }
-    app-storefront-page .otp-box {
+    .foodiedash-storefront .otp-box {
         width: 42px;
         height: 46px;
     }
-    app-storefront-page .profile-banner .button-secondary {
+    .foodiedash-storefront .profile-banner .button-secondary {
         width: 100%;
         margin-left: 0;
     }

@@ -1,0 +1,402 @@
+# Task: Refactor FoodieDash into a Component-Wise Angular Architecture
+
+Act as a Senior Angular Architect and Angular Developer.
+
+I have an existing FoodieDash application built with Angular. Currently, the storefront functionality is managed inside a large component (`StorefrontPageComponent`), which contains multiple pages, UI sections, forms, modals, and business logic.
+
+I want you to refactor my existing implementation into a **scalable, maintainable, reusable, component-wise architecture** without breaking any existing functionality or UI.
+
+## 1. First: Analyze the Existing Project
+
+Before making any changes:
+
+- Analyze the existing folder structure.
+- Review `StorefrontPageComponent` HTML, TypeScript, and SCSS.
+- Identify all existing routes and page sections.
+- Identify existing services, models, interfaces, and dependencies.
+- Understand the current authentication, cart, checkout, and account workflows.
+- Identify reusable UI elements and business logic.
+- Check existing Angular version and project conventions.
+
+Do not immediately rewrite the application.
+
+First, understand how the existing implementation works.
+
+## 2. Target Folder Structure
+
+Refactor the storefront into the following structure. Adapt names and locations to the existing project where necessary.
+
+```text
+src/app/
+│
+├── core/
+│   ├── guards/
+│   │   └── auth.guard.ts
+│   ├── services/
+│   │   ├── customer-auth.service.ts
+│   │   ├── customer-account.service.ts
+│   │   └── mock-commerce.service.ts
+│   └── core.config.ts
+│
+├── shared/
+│   ├── components/
+│   │   ├── header/
+│   │   ├── footer/
+│   │   ├── product-card/
+│   │   ├── product-grid/
+│   │   ├── mega-menu/
+│   │   ├── login-modal/
+│   │   ├── toast/
+│   │   └── loading/
+│   ├── directives/
+│   └── pipes/
+│
+├── layouts/
+│   └── storefront-layout/
+│       ├── storefront-layout.component.ts
+│       ├── storefront-layout.component.html
+│       └── storefront-layout.component.scss
+│
+├── features/
+│   └── storefront/
+│       ├── products/
+│       │   ├── pages/
+│       │   │   └── products-page/
+│       │   └── components/
+│       │       ├── hero-section/
+│       │       ├── category-section/
+│       │       └── trending-products/
+│       │
+│       ├── menu/
+│       │   └── menu-page/
+│       │
+│       ├── offers/
+│       │   └── offers-page/
+│       │
+│       ├── cart/
+│       │   └── cart-page/
+│       │
+│       ├── checkout/
+│       │   └── checkout-page/
+│       │
+│       ├── orders/
+│       │   └── orders-page/
+│       │
+│       ├── account/
+│       │   ├── profile/
+│       │   ├── addresses/
+│       │   ├── wishlist/
+│       │   ├── notifications/
+│       │   └── settings/
+│       │
+│       └── help/
+│           └── help-page/
+│
+└── app.routes.ts
+```
+
+## 3. Component Responsibilities
+
+Create separate standalone components for the following pages:
+
+| Component | Responsibility |
+|---|---|
+| ProductsPageComponent | Homepage, hero, categories, trending products |
+| MenuPageComponent | Product menu and category filtering |
+| OffersPageComponent | Promotional offers and discounted products |
+| CartPageComponent | Cart items, quantity updates, totals |
+| CheckoutPageComponent | Address selection, payment, order placement |
+| OrdersPageComponent | Order history, details, cancellation, reorder |
+| ProfilePageComponent | Customer profile management |
+| AddressesPageComponent | Add, edit, delete customer addresses |
+| WishlistPageComponent | Saved products |
+| NotificationsPageComponent | Customer notifications |
+| SettingsPageComponent | Account preferences and settings |
+| HelpPageComponent | Help and customer support |
+
+Create reusable components for:
+
+- Header and navigation
+- Footer
+- Product card
+- Product grid
+- Category navigation
+- Mega menu
+- Login modal
+- Toast notifications
+- Confirmation dialogs
+- Order details modal
+- Address form modal
+
+Avoid duplicating the same UI or business logic across multiple components.
+
+## 4. Routing Implementation
+
+Use Angular standalone routing and lazy loading.
+
+Create a parent `StorefrontLayoutComponent` containing:
+
+- Header
+- Router outlet
+- Footer
+- Global login modal
+- Global toast notifications
+
+Configure child routes similar to:
+
+```typescript
+export const storefrontRoutes: Routes = [
+  {
+    path: '',
+    component: StorefrontLayoutComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'products',
+        pathMatch: 'full'
+      },
+      {
+        path: 'products',
+        loadComponent: () =>
+          import('./features/storefront/products/pages/products-page/products-page.component')
+            .then(m => m.ProductsPageComponent)
+      },
+      {
+        path: 'menu',
+        loadComponent: () =>
+          import('./features/storefront/menu/menu-page/menu-page.component')
+            .then(m => m.MenuPageComponent)
+      },
+      {
+        path: 'offers',
+        loadComponent: () =>
+          import('./features/storefront/offers/offers-page/offers-page.component')
+            .then(m => m.OffersPageComponent)
+      },
+      {
+        path: 'cart',
+        loadComponent: () =>
+          import('./features/storefront/cart/cart-page/cart-page.component')
+            .then(m => m.CartPageComponent)
+      },
+      {
+        path: 'checkout',
+        canActivate: [authGuard],
+        loadComponent: () =>
+          import('./features/storefront/checkout/checkout-page/checkout-page.component')
+            .then(m => m.CheckoutPageComponent)
+      },
+      {
+        path: 'orders',
+        canActivate: [authGuard],
+        loadComponent: () =>
+          import('./features/storefront/orders/orders-page/orders-page.component')
+            .then(m => m.OrdersPageComponent)
+      },
+      {
+        path: 'account/profile',
+        canActivate: [authGuard],
+        loadComponent: () =>
+          import('./features/storefront/account/profile/profile-page/profile-page.component')
+            .then(m => m.ProfilePageComponent)
+      },
+      {
+        path: 'account/addresses',
+        canActivate: [authGuard],
+        loadComponent: () =>
+          import('./features/storefront/account/addresses/addresses-page/addresses-page.component')
+            .then(m => m.AddressesPageComponent)
+      },
+      {
+        path: 'account/wishlist',
+        canActivate: [authGuard],
+        loadComponent: () =>
+          import('./features/storefront/account/wishlist/wishlist-page/wishlist-page.component')
+            .then(m => m.WishlistPageComponent)
+      },
+      {
+        path: 'account/notifications',
+        canActivate: [authGuard],
+        loadComponent: () =>
+          import('./features/storefront/account/notifications/notifications-page/notifications-page.component')
+            .then(m => m.NotificationsPageComponent)
+      },
+      {
+        path: 'account/settings',
+        canActivate: [authGuard],
+        loadComponent: () =>
+          import('./features/storefront/account/settings/settings-page/settings-page.component')
+            .then(m => m.SettingsPageComponent)
+      },
+      {
+        path: 'help',
+        loadComponent: () =>
+          import('./features/storefront/help/help-page/help-page.component')
+            .then(m => m.HelpPageComponent)
+      }
+    ]
+  }
+];
+```
+
+Adapt import paths to the actual generated folder structure. Do not blindly copy paths without verifying them.
+
+## 5. Angular Coding Standards
+
+Follow these standards:
+
+- Use standalone components.
+- Use lazy-loaded routes.
+- Use TypeScript strict typing.
+- Prefer Angular Signals where appropriate.
+- Use `inject()` for dependency injection when consistent with project conventions.
+- Use `@if`, `@for`, and modern Angular control flow.
+- Use Reactive Forms for complex forms.
+- Use `takeUntilDestroyed()` where subscriptions require lifecycle cleanup.
+- Keep components focused on UI and presentation.
+- Keep reusable business logic inside services.
+- Avoid unnecessary subscriptions and duplicated state.
+- Use interfaces and models instead of `any`.
+- Avoid unnecessary third-party dependencies.
+
+## 6. Service Management
+
+Reuse existing services wherever possible:
+
+- `CustomerAuthService`
+- `CustomerAccountService`
+- `MockCommerceService`
+
+Do not recreate these services if they already exist.
+
+Important:
+
+- Maintain singleton service instances.
+- Do not provide shared services independently in each page component.
+- Preserve authentication state.
+- Preserve cart state while navigating between routes.
+- Preserve account and wishlist data.
+- Keep API and business logic outside presentation components.
+
+## 7. UI and Functionality Preservation
+
+This is a refactoring task, not a redesign.
+
+Preserve:
+
+- Existing UI design and layout.
+- Existing SCSS and CSS classes.
+- Existing responsive behavior.
+- Existing navigation and menu interactions.
+- Product filtering and search.
+- Cart quantity and price calculations.
+- Checkout workflow.
+- Order history and actions.
+- Profile and address management.
+- Wishlist and notifications.
+- Login/logout behavior.
+- Existing modals and toast messages.
+
+Do not remove functionality just because it is difficult to migrate.
+
+## 8. Authentication and Route Guards
+
+Implement authentication guards for protected pages.
+
+Expected behavior:
+
+- Unauthenticated users cannot access protected routes.
+- Open the existing login modal when authentication is required.
+- Preserve the requested return URL.
+- After successful login, navigate to the requested protected route.
+- If the user logs out while on a protected route, redirect them to a public route.
+- Do not create duplicate login modal instances.
+
+Ensure the guard and login modal work together correctly.
+
+## 9. SCSS Standards
+
+- Keep component-specific styles in their own SCSS files.
+- Preserve existing styling during migration.
+- Use the existing `eMy-` CSS class naming convention where applicable.
+- Avoid unnecessary global styles.
+- Avoid inline styles unless necessary.
+- Maintain mobile, tablet, and desktop responsiveness.
+- Do not introduce external CDN resources.
+
+## 10. Implementation Strategy
+
+Implement this refactoring in small, verifiable phases.
+
+**Phase 1 — Analysis**
+- Analyze the existing component.
+- Prepare a mapping of old sections to new components.
+- Identify service dependencies.
+- Identify existing routes and functionality.
+- Report potential migration risks.
+
+**Phase 2 — Shared Architecture**
+- Create the storefront layout.
+- Extract header and footer.
+- Extract reusable product card and product grid.
+- Extract global login modal and toast.
+
+**Phase 3 — Public Pages**
+- Implement Products page.
+- Implement Menu page.
+- Implement Offers page.
+- Implement Help page.
+
+**Phase 4 — Shopping Pages**
+- Implement Cart page.
+- Implement Checkout page.
+- Implement Orders page.
+
+**Phase 5 — Account Pages**
+- Implement Profile page.
+- Implement Addresses page.
+- Implement Wishlist page.
+- Implement Notifications page.
+- Implement Settings page.
+
+**Phase 6 — Routing and Authentication**
+- Configure lazy-loaded routes.
+- Configure route guards.
+- Verify login return URL handling.
+- Verify logout behavior.
+
+**Phase 7 — Testing and Cleanup**
+- Run Angular build.
+- Fix TypeScript errors.
+- Fix template errors.
+- Verify all routes.
+- Test all existing user workflows.
+- Remove obsolete code only after successful migration.
+
+## 11. Important Rules
+
+1. Do not rewrite the entire project in one step.
+2. Do not delete the existing component before the replacement pages are working.
+3. Do not invent new services when existing services already support the functionality.
+4. Do not change existing business logic without explaining why.
+5. Do not use placeholder content to replace existing working functionality.
+6. Do not break existing API integrations.
+7. Do not introduce unnecessary dependencies.
+8. Verify every import path and route.
+9. Maintain the existing design.
+10. After each phase, report changed files and testing results.
+
+## 12. Expected Final Result
+
+I want a production-friendly Angular architecture where:
+
+- Every major page has its own standalone component.
+- Reusable UI components are shared.
+- Layout and navigation are separated.
+- Business logic is handled by services.
+- Routes are lazy-loaded.
+- Authentication is handled through guards.
+- Existing functionality and design remain intact.
+- The codebase is easy to maintain, extend, and debug.
+
+**Start with Phase 1: Analyze my existing FoodieDash project and provide the component mapping and migration plan. Do not modify files until the analysis is complete and I approve the plan.**

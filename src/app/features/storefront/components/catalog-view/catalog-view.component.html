@@ -1,0 +1,62 @@
+<main class="menu-layout">
+    <aside class="menu-sidebar">
+        <p class="eyebrow">BROWSE MENU</p>
+        <h2>Categories</h2>
+        @for (item of categories; track item) {
+        <button [class.selected]="category === item" (click)="categoryChange.emit(item)">{{ item }} <span>{{ categoryCount(item) }}</span></button>
+        }
+        <div class="sidebar-promo"><span class="material-symbols-outlined">local_offer</span><strong>First order offer</strong>
+            <p>Enjoy 20% off your first meal.</p><button type="button" (click)="copyOffer.emit()">Copy code</button></div>
+    </aside>
+    <section class="menu-main">
+        <div class="menu-title">
+            <div>
+                <p class="eyebrow">{{ mode === 'offers' ? 'HAND-PICKED DEALS' : 'MADE FRESH TO ORDER' }}</p>
+                <h1>{{ mode === 'offers' ? 'Today’s special offers' : category === 'All' ? 'Explore the menu' : category }}</h1>
+                <p>Fresh ingredients, local flavors, and something for every craving.</p>
+            </div>
+            <label class="menu-search"><span class="material-symbols-outlined">search</span>
+                <input [ngModel]="search" (ngModelChange)="searchChange.emit($event)" name="menuSearch" placeholder="Search dishes">
+            </label>
+        </div>
+        <div class="category-tabs">
+            @for (item of categories; track item) {
+            <button [class.selected]="category === item" (click)="categoryChange.emit(item)">{{ item }}</button>
+            }
+        </div>
+        <app-storefront-product-grid
+            [products]="products"
+            [wishlistedIds]="wishlistedIds"
+            addLabel="Add to cart"
+            (addProduct)="addProduct.emit($event)"
+            (toggleWishlist)="toggleWishlist.emit($event)">
+            <div empty class="empty-card"><span class="material-symbols-outlined">search_off</span>
+                <h3>No dishes found</h3>
+                <p>Try another search or category.</p>
+                <button type="button" (click)="resetFilters.emit()">Show all dishes</button>
+            </div>
+        </app-storefront-product-grid>
+    </section>
+    <aside class="cart-summary">
+        <div class="summary-title">
+            <h2>Your order</h2><span>{{ itemCount }} items</span>
+        </div>
+        @for (item of cart; track item.product.id) {
+        <div class="mini-cart-item"><img [src]="item.product.image" [alt]="item.product.name">
+            <div><strong>{{ item.product.name }}</strong><small>{{ item.product.price | currency }}</small>
+                <div class="quantity-control">
+                    <button type="button" (click)="quantityChange.emit({ productId: item.product.id, delta: -1 })" aria-label="Decrease quantity">−</button>
+                    <span>{{ item.quantity }}</span>
+                    <button type="button" (click)="quantityChange.emit({ productId: item.product.id, delta: 1 })" aria-label="Increase quantity">+</button>
+                </div>
+            </div><b>{{ item.product.price * item.quantity | currency }}</b>
+        </div>
+        } @if (!cart.length) {
+        <div class="cart-empty"><span class="material-symbols-outlined">shopping_bag</span>
+            <p>Your order is empty. Add something delicious to get started.</p>
+        </div>
+        }
+        <div class="summary-total"><span>Subtotal</span><b>{{ subtotal | currency }}</b><span>Delivery</span><b class="free">FREE</b><strong>Total</strong><strong>{{ subtotal | currency }}</strong></div>
+        <button class="checkout-button" type="button" (click)="checkout.emit()">Continue to checkout <span class="material-symbols-outlined">arrow_forward</span></button>
+    </aside>
+</main>

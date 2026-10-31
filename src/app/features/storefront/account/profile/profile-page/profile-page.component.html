@@ -1,0 +1,50 @@
+<main class="narrow-page">
+    <div class="page-title">
+        <p class="eyebrow">YOUR ACCOUNT</p>
+        <h1>Profile & settings</h1>
+        <p>Keep your details up to date for a smoother delivery.</p>
+    </div>
+    <form class="panel profile-form" (ngSubmit)="saveProfile()">
+        <div class="profile-banner">
+            <div class="profile-avatar">{{ auth.initials() }}</div>
+            <div>
+                <h2>{{ auth.displayName() }}</h2>
+                <p>{{ memberSince() }}</p>
+            </div>
+            @if (account.profile()?.membershipTier) { <span class="loyalty-chip">{{ account.profile()?.membershipTier }}</span> }
+            <button class="button-secondary" type="button" (click)="startProfileEdit()">Edit profile</button>
+        </div>
+        <div class="form-columns">
+            <label class="field-label">Full name<input [(ngModel)]="profileForm.fullName" name="profileName" [readonly]="!editingProfile" required></label>
+            <label class="field-label">Email address<input type="email" [(ngModel)]="profileForm.email" name="profileEmail" [readonly]="!editingProfile" required></label>
+        </div>
+        <label class="field-label">Mobile number
+            <span class="phone-readonly">{{ auth.currentUser()?.countryCode }} {{ auth.currentUser()?.mobileNumber }}
+                <b class="verify-chip" [class.unverified]="!auth.currentUser()?.phoneVerified">{{ auth.currentUser()?.phoneVerified ? 'Verified' : 'Unverified' }}</b>
+            </span>
+        </label>
+        <label class="field-label">Default delivery address
+            <input [value]="account.formatAddress(account.defaultAddress())" name="profileAddress" readonly placeholder="Add an address from Saved Addresses">
+        </label>
+        @if (account.addresses().length > 1) {
+        <div class="saved-address-list">
+            <h2>Additional saved addresses</h2>
+            @for (address of account.addresses(); track address.id) {
+            <p>{{ address.label }} · {{ account.formatAddress(address) }}</p>
+            }
+            <a routerLink="/addresses">Manage addresses</a>
+        </div>
+        }
+        <div class="profile-options">
+            <h2>Preferences</h2>
+            <label><input type="checkbox" [(ngModel)]="profileForm.preferences.orderUpdates" name="orderUpdates" [disabled]="!editingProfile"> Send me order updates and delivery notifications</label>
+            <label><input type="checkbox" [(ngModel)]="profileForm.preferences.offers" name="offers" [disabled]="!editingProfile"> Email me about new offers and rewards</label>
+        </div>
+        @if (profileError) {
+        <p class="field-error" role="alert">{{ profileError }}</p>
+        }
+        <div class="profile-submit"><span>{{ profileSaved ? 'Profile saved.' : '' }}</span>
+            <button class="button-primary" type="submit" [disabled]="!editingProfile || profileSaving">{{ profileSaving ? 'Saving…' : 'Save changes' }}</button>
+        </div>
+    </form>
+</main>

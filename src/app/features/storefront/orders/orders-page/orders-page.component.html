@@ -1,0 +1,54 @@
+<main class="narrow-page">
+    <div class="page-title">
+        <p class="eyebrow">YOUR FOOD JOURNEY</p>
+        <h1>My orders</h1>
+        <p>Good food memories, all in one place.</p>
+    </div>
+    <div class="order-list">
+        @for (order of account.orders(); track order.id) {
+        <article class="panel customer-order">
+            <div class="order-top">
+                <div><span class="order-number">{{ order.id }}</span><small>{{ order.date }}</small></div>
+                <span class="status-chip" [class.cancelled]="order.deliveryStatus === 'Cancelled'">{{ order.deliveryStatus }}</span>
+            </div>
+            <div class="order-restaurant"><span class="restaurant-icon material-symbols-outlined">restaurant</span>
+                <div>
+                    <h2>{{ order.itemCount }} items</h2>
+                    <p>{{ order.items }}</p>
+                    <small>Payment {{ order.paymentStatus }}</small>
+                </div><strong>{{ order.total | currency }}</strong>
+            </div>
+            <div class="order-actions">
+                <button class="button-secondary" type="button" (click)="viewOrder(order.id)">View details</button>
+                <button class="button-secondary" type="button" (click)="reorder(order.id)">Reorder</button>
+                @if (order.deliveryStatus === 'Pending' || order.deliveryStatus === 'Preparing') {
+                <button class="text-button" type="button" (click)="cancelOrder(order.id)">Cancel order</button>
+                }
+            </div>
+        </article>
+        } @empty {
+        <section class="panel empty-card"><span class="material-symbols-outlined">receipt_long</span>
+            <h3>No orders yet</h3>
+            <p>Your next favorite meal is waiting.</p><a routerLink="/menu" class="button-primary">Explore the menu</a>
+        </section>
+        }
+    </div>
+</main>
+@if (cancelOrderId) {
+<app-storefront-confirm-dialog
+    [title]="'Cancel order ' + cancelOrderId + '?'"
+    message="Your restaurant may already be preparing this meal."
+    cancelLabel="Keep my order"
+    confirmLabel="Cancel order"
+    (cancelled)="cancelOrderId = ''"
+    (confirmed)="confirmCancellation()">
+</app-storefront-confirm-dialog>
+}
+@if (selectedOrder) {
+<app-storefront-order-detail-dialog
+    [order]="selectedOrder"
+    [deliveryAddress]="account.formatAddress(account.defaultAddress()) || 'No address saved'"
+    (closed)="selectedOrder = undefined"
+    (cancelOrder)="cancelOrder($event); selectedOrder = undefined">
+</app-storefront-order-detail-dialog>
+}

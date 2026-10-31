@@ -1,0 +1,19 @@
+<div class="product-grid">
+    @for (product of products; track product.id; let first = $first) {
+    <app-storefront-product-card
+        [product]="product"
+        [wishlisted]="isWishlisted(product.id)"
+        [showWishlist]="showWishlist"
+        [showRating]="showRating"
+        [showMeta]="showMeta"
+        [bestSeller]="bestSellerFirst && first"
+        [eagerImage]="eagerFirstImage && first"
+        [addLabel]="addLabel"
+        [wishlistActionLabel]="wishlistActionLabel"
+        (add)="addProduct.emit($event)"
+        (wishlistToggle)="toggleWishlist.emit($event)">
+    </app-storefront-product-card>
+    } @empty {
+    <ng-content select="[empty]"></ng-content>
+    }
+</div>

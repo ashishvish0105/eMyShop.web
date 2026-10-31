@@ -1,0 +1,58 @@
+<header class="shop-header">
+    <a class="brand" routerLink="/products"><span class="brand-mark">restaurant</span><strong>Foodie<span>Dash</span></strong></a>
+    <button class="mobile-menu" type="button" aria-label="Toggle navigation" [attr.aria-expanded]="menuOpen" (click)="toggleNavigation()"><span class="material-symbols-outlined">{{ menuOpen ? 'close' : 'menu' }}</span></button>
+    <nav class="main-navigation" [class.open]="menuOpen">
+        <a routerLink="/products" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="menuOpen = false">Products</a>
+        <button #shopToggle class="shop-toggle" type="button" [class.active]="shopMenuOpen || router.url.startsWith('/menu')" [attr.aria-expanded]="shopMenuOpen" aria-controls="shop-mega-menu" aria-haspopup="true" (click)="toggleShopMenu()">Shop <span class="material-symbols-outlined" aria-hidden="true">{{ shopMenuOpen ? 'expand_less' : 'expand_more' }}</span></button>
+        @if (shopMenuOpen) {
+        <section #shopMenu class="shop-mega-menu" id="shop-mega-menu" aria-label="Shop by category">
+            <div class="shop-mega-menu__heading">
+                <div>
+                    <p class="eyebrow">FRESH FROM OUR KITCHEN</p>
+                    <h2>Shop by category</h2>
+                </div>
+                <a routerLink="/menu" (click)="closeShopMenu()">Explore full menu <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>
+            </div>
+            <div class="shop-mega-menu__grid">
+                @for (group of shopCategories; track group.name) {
+                <section class="shop-category">
+                    <a class="shop-category__title" routerLink="/menu" [queryParams]="{ category: group.name }" (click)="closeShopMenu()">
+                        <span class="material-symbols-outlined" aria-hidden="true">{{ group.icon }}</span>{{ group.name }}
+                    </a>
+                    @for (item of group.items; track item.id) {
+                    <a class="shop-category__item" routerLink="/menu" [queryParams]="{ category: group.name, search: item.name }" (click)="closeShopMenu()">{{ item.name }}</a>
+                    }
+                </section>
+                }
+            </div>
+        </section>
+        }
+        <a routerLink="/offers" routerLinkActive="active" (click)="menuOpen = false">Offers</a>
+        @if (auth.isLoggedIn()) {
+        <a routerLink="/orders" routerLinkActive="active" (click)="menuOpen = false">My orders</a>
+        }
+    </nav>
+    <div class="header-actions">
+        <span class="location"><span class="material-symbols-outlined">location_on</span>New York, NY</span>
+        <a class="cart-link" routerLink="/cart" aria-label="View shopping cart"><span class="material-symbols-outlined">shopping_cart</span>@if (commerce.itemCount) { <b>{{ commerce.itemCount }}</b> }</a>
+        @if (auth.isLoggedIn()) {
+        <div class="account-menu">
+            <button #profileToggle class="avatar" type="button" [attr.aria-expanded]="profileMenuOpen" aria-haspopup="true" aria-controls="account-menu" [attr.aria-label]="'Account menu for ' + auth.displayName()" (click)="toggleProfileMenu()">{{ auth.initials() }}</button>
+            @if (profileMenuOpen) {
+            <div #profileMenu class="account-dropdown" id="account-menu" role="menu">
+                <div class="account-dropdown__header">
+                    <strong>My Account</strong>
+                    <span>{{ auth.displayName() }}</span>
+                </div>
+                @for (link of accountLinks; track link.path) {
+                <a role="menuitem" [routerLink]="link.path" routerLinkActive="active" (click)="closeMenus()"><span class="material-symbols-outlined" aria-hidden="true">{{ link.icon }}</span>{{ link.label }}</a>
+                }
+                <button role="menuitem" type="button" class="logout-item" (click)="logout()"><span class="material-symbols-outlined" aria-hidden="true">logout</span>Logout</button>
+            </div>
+            }
+        </div>
+        } @else {
+        <button class="login-button" type="button" (click)="openLogin()">Login</button>
+        }
+    </div>
+</header>

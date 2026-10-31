@@ -1,0 +1,17 @@
+<main>
+    <app-storefront-hero-section [search]="search" (searchChange)="search = $event" (searchSubmit)="findFood()"></app-storefront-hero-section>
+    <app-storefront-category-section [categories]="popularCategories" (categorySelect)="setCategory($event)"></app-storefront-category-section>
+    <app-storefront-trending-products
+        [products]="trendingProducts"
+        [wishlistedIds]="account.wishlistIds()"
+        (addProduct)="addToCart($event)"
+        (toggleWishlist)="toggleWishlist($event)">
+    </app-storefront-trending-products>
+    <section class="promo-banner">
+        <div>
+            <p class="eyebrow">A LITTLE SOMETHING EXTRA</p>
+            <h2>Good food tastes even better with 20% off.</h2>
+            <p>Take 20% off your first order with code <b>WELCOME20</b>.</p>
+        </div><a routerLink="/offers" class="button-primary">Explore today's offers</a>
+    </section>
+</main>

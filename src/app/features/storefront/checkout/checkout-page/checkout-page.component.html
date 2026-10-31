@@ -1,0 +1,68 @@
+<main class="narrow-page">
+    <div class="page-title">
+        <div class="checkout-crumbs"><a routerLink="/products">Home</a><span>›</span><a routerLink="/cart">Cart</a><span>›</span><strong>Checkout</strong></div>
+        <p class="eyebrow">ALMOST THERE</p>
+        <h1>Secure Checkout</h1>
+        <p>Complete your order by providing delivery and payment details.</p>
+    </div>
+    @if (orderComplete) {
+    <section class="panel success-card"><span class="success-mark material-symbols-outlined">check_circle</span>
+        <p class="eyebrow">ORDER RECEIVED</p>
+        <h2>Thanks{{ auth.displayName() ? ', ' + auth.displayName() : '' }}!</h2>
+        <p>Your order is being prepared. We’ll have it at your door in about 25–35 minutes.</p><a routerLink="/orders" class="button-primary">Track your order</a>
+    </section>
+    } @else {
+    <form class="checkout-layout" (ngSubmit)="placeOrder()">
+        <section class="checkout-fields">
+            <article class="panel">
+                <div class="form-heading"><span>1</span>
+                    <div>
+                        <h2>Delivery Address</h2>
+                        <p>Where should we bring your meal?</p>
+                    </div>
+                </div>
+                <div class="address-grid">
+                    @for (address of account.addresses(); track address.id) {
+                    <label class="address-choice" [class.active]="address.isDefault">
+                        <input type="radio" name="addressChoice" [checked]="address.isDefault" (change)="account.setDefaultAddress(address.id)">
+                        <div><strong>{{ address.label }}</strong><span>{{ address.street }}</span><span>{{ address.city }}, {{ address.state }} {{ address.postalCode }}</span><small>{{ address.phone }}</small></div>
+                        @if (address.isDefault) { <span class="selected-mark material-symbols-outlined">check</span> }
+                    </label>
+                    } @empty {
+                    <p class="empty-inline">No saved addresses yet. Add one to continue.</p>
+                    }
+                </div>
+                <button class="add-address" type="button" (click)="openAddressEditor()"><span class="material-symbols-outlined">add</span>Add New Address</button>
+            </article>
+            <article class="panel">
+                <div class="form-heading"><span>2</span>
+                    <div>
+                        <h2>Payment Method</h2>
+                        <p>All transactions are secure and encrypted.</p>
+                    </div>
+                </div>
+                <label class="payment-option selected"><input type="radio" name="payment" checked><span class="material-symbols-outlined">credit_card</span><span><b>Credit or Debit Card</b><small>Visa, Mastercard, American Express</small></span></label>
+                <label class="field-label">Card number<input inputmode="numeric" name="card" placeholder="XXXX XXXX XXXX 4421" required minlength="12"></label>
+                <div class="form-columns"><label class="field-label">Expiry date<input name="expiry" placeholder="MM/YY" required></label><label class="field-label">CVV<input inputmode="numeric" name="cvc" placeholder="***" required minlength="3"></label></div>
+            </article>
+        </section>
+        <aside class="panel checkout-summary">
+            <h2>Order Summary</h2>
+            <div class="promo-code-row"><label>PROMO CODE</label>
+                <div class="promo-form"><input type="text" placeholder="Enter code"><button type="button">Apply</button></div>
+            </div>
+            <div class="totals-list">
+                <div><span>Subtotal</span><b>{{ commerce.subtotal | currency }}</b></div>
+                <div><span>Delivery Fee</span><b>$2.99</b></div>
+                <div><span>Tax & Fees</span><b>$1.85</b></div>
+                <div class="total-row"><span>Total</span><strong>{{ commerce.subtotal + 4.84 | currency }}</strong></div>
+            </div>
+            <button class="checkout-button" type="submit" [disabled]="!account.addresses().length"><span class="material-symbols-outlined">shopping_bag</span>Place Order</button>
+            <small class="secure-note"><span class="material-symbols-outlined">lock</span>SSL secured checkout</small>
+        </aside>
+    </form>
+    }
+</main>
+@if (addressEditorOpen) {
+<app-storefront-address-editor-dialog [addressForm]="addressForm" [addressError]="addressError" (cancelled)="addressEditorOpen = false" (saved)="saveAddress()"></app-storefront-address-editor-dialog>
+}

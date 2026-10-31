@@ -1,0 +1,25 @@
+<div class="modal-backdrop" (click)="cancelled.emit()">
+    <section class="cancel-dialog address-dialog" role="dialog" aria-modal="true" aria-labelledby="address-title" (click)="$event.stopPropagation()">
+        <h2 id="address-title">{{ addressForm.id ? 'Edit address' : 'Add address' }}</h2>
+        <form (ngSubmit)="saved.emit()">
+            <label class="field-label">Label<input [(ngModel)]="addressForm.label" name="addrLabel" placeholder="Home, Work" required></label>
+            <label class="field-label">Full name<input [(ngModel)]="addressForm.fullName" name="addrName" required></label>
+            <label class="field-label">Phone number<input [(ngModel)]="addressForm.phone" name="addrPhone" required></label>
+            <label class="field-label">Street address<input [(ngModel)]="addressForm.street" name="addrStreet" required></label>
+            <div class="form-columns">
+                <label class="field-label">City<input [(ngModel)]="addressForm.city" name="addrCity" required></label>
+                <label class="field-label">State<input [(ngModel)]="addressForm.state" name="addrState" required></label>
+            </div>
+            <label class="field-label">Postal code<input [(ngModel)]="addressForm.postalCode" name="addrPostal" required></label>
+            <label class="field-label">Delivery instructions<input [(ngModel)]="addressForm.instructions" name="addrNotes" placeholder="Optional"></label>
+            <label class="checkbox-row"><input type="checkbox" [(ngModel)]="addressForm.isDefault" name="addrDefault"> Set as default delivery address</label>
+            @if (addressError) {
+            <p class="field-error" role="alert">{{ addressError }}</p>
+            }
+            <div class="order-detail-actions">
+                <button class="keep-order" type="button" (click)="cancelled.emit()">Cancel</button>
+                <button class="button-primary" type="submit">Save address</button>
+            </div>
+        </form>
+    </section>
+</div>

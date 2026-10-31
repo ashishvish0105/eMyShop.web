@@ -1,0 +1,9 @@
+<div class="storefront">
+    <app-storefront-header></app-storefront-header>
+    <router-outlet></router-outlet>
+    <app-storefront-footer></app-storefront-footer>
+</div>
+@if (auth.loginModalOpen()) {
+<app-storefront-login-modal (authenticated)="onAuthenticated()"></app-storefront-login-modal>
+}
+<app-storefront-toast></app-storefront-toast>

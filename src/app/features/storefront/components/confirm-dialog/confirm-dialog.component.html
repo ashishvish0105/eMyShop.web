@@ -1,0 +1,13 @@
+<div class="modal-backdrop" (click)="cancelled.emit()">
+    <section class="cancel-dialog" role="dialog" aria-modal="true" aria-labelledby="confirm-title" (click)="$event.stopPropagation()">
+        @if (icon) {
+        <span class="material-symbols-outlined">{{ icon }}</span>
+        }
+        <h2 id="confirm-title">{{ title }}</h2>
+        <p>{{ message }}</p>
+        <div>
+            <button class="keep-order" type="button" (click)="cancelled.emit()">{{ cancelLabel }}</button>
+            <button class="confirm-cancel" type="button" (click)="confirmed.emit()">{{ confirmLabel }}</button>
+        </div>
+    </section>
+</div>

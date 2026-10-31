@@ -1,0 +1,29 @@
+<section class="content-section popular-section">
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">FRESH FROM OUR KITCHEN</p>
+            <h2>Trending in your city</h2>
+            <p>Local favorites our neighbors love this week.</p>
+        </div><a routerLink="/menu">See all dishes <span class="material-symbols-outlined">arrow_forward</span></a>
+    </div>
+    <div class="product-grid">
+        @for (product of products; track product.id; let index = $index) {
+        <article class="food-card">
+            <div class="food-photo"><img [src]="product.image" [alt]="product.name" [attr.loading]="index === 0 ? 'eager' : 'lazy'"><span class="rating"><span class="material-symbols-outlined">star</span>{{ product.rating }}</span>
+                @if (index === 0) { <span class="best-seller">BEST SELLER</span> }
+            </div>
+            <div class="food-info">
+                <div class="food-title">
+                    <h3>{{ product.name }}</h3><strong>{{ product.price | currency }}</strong>
+                </div>
+                <p>{{ product.description }}</p>
+                <div class="food-meta"><span><span class="material-symbols-outlined">schedule</span>20–30 min</span><span>Free delivery</span></div>
+                <div class="card-actions">
+                    <button class="add-button" type="button" (click)="addProduct.emit(product)"><span class="material-symbols-outlined">add_shopping_cart</span>Add to order</button>
+                    <button class="wish-button" type="button" [class.active]="isWishlisted(product.id)" [attr.aria-label]="isWishlisted(product.id) ? 'Remove from wishlist' : 'Save to wishlist'" (click)="toggleWishlist.emit(product)"><span class="material-symbols-outlined">{{ isWishlisted(product.id) ? 'favorite' : 'favorite_border' }}</span></button>
+                </div>
+            </div>
+        </article>
+        }
+    </div>
+</section>
