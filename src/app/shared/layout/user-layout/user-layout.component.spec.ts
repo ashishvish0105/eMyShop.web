@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PhaceOneHeaderComponent } from './phace-one-header.component';
+import { UserLayoutComponent } from './user-layout.component';
 
-describe('PhaceOneHeaderComponent', () => {
-  let component: PhaceOneHeaderComponent;
-  let fixture: ComponentFixture<PhaceOneHeaderComponent>;
+describe('UserLayoutComponent', () => {
+  let component: UserLayoutComponent;
+  let fixture: ComponentFixture<UserLayoutComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PhaceOneHeaderComponent]
+      imports: [UserLayoutComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PhaceOneHeaderComponent);
+    fixture = TestBed.createComponent(UserLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
