@@ -1,50 +1,346 @@
-.footer-link-group {
-    list-style: none;
-    padding-left: 0;
+// .footer-link-group {
+//     list-style: none;
+//     padding-left: 0;
+//     display: flex;
+//     flex-wrap: wrap;
+//     .link-item {
+//         width: 50%;
+//         font-size: 16px;
+//         line-height: 26px;
+//         text-transform: capitalize;
+//         margin-bottom: 15px;
+//         color: #a6a6a6;
+//     }
+// }
+
+// .login-name.heading {
+//     color: white !important;
+//     text-transform: capitalize;
+//     font-weight: 500;
+//     font-size: 40px;
+// }
+
+// footer {
+//     // background-color: #f2f4f5;
+//     // padding: 80px 0;
+//     .footer-title {
+//         font-size: 24px;
+//         margin-bottom: 20px;
+//         text-transform: capitalize;
+//     }
+//     .description {
+//         font-size: 16px;
+//         color: #212529;
+//         &::first-letter {
+//             text-transform: uppercase;
+//         }
+//     }
+//     .conpyright {
+//         color: #a6a6a6;
+//         font-size: 16px;
+//     }
+//     .contact-no {
+//         font-size: 22px;
+//         color: #a6a6a6;
+//     }
+//     address {
+//         color: #a6a6a6;
+//         font-size: 16px;
+//     }
+// }
+
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.eMy-footer {
+  --footer-primary: #384959;
+  --footer-accent: #c70255;
+  --footer-text: #f3f6fa;
+  --footer-muted: #bdc8d3;
+  --footer-border: rgba(255, 255, 255, 0.13);
+
+  position: relative;
+  width: 100%;
+  background: var(--footer-primary);
+  color: var(--footer-text);
+  overflow: hidden;
+
+  // Top accent
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--footer-accent);
+  }
+
+  &__container {
+    width: min(1200px, calc(100% - 48px));
+    margin-inline: auto;
+    padding: 64px 0 24px;
+  }
+
+  // Main layout
+  &__main {
+    display: grid;
+    grid-template-columns: 1.6fr repeat(4, 1fr);
+    gap: 40px;
+    padding-bottom: 48px;
+  }
+
+  // Brand
+  &__brand {
+    max-width: 280px;
+  }
+
+  &__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    text-decoration: none;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 18px;
+  }
+
+  &__logo-text {
+    color: #fff;
+  }
+
+  &__logo-accent {
+    color: var(--footer-accent);
+  }
+
+  &__description {
+    color: var(--footer-muted);
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 0 0 24px;
+  }
+
+  // Social media
+  &__social {
     display: flex;
-    flex-wrap: wrap;
-    .link-item {
-        width: 50%;
-        font-size: 16px;
-        line-height: 26px;
-        text-transform: capitalize;
-        margin-bottom: 15px;
-        color: #a6a6a6;
+    align-items: center;
+    gap: 10px;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 36px;
+      height: 36px;
+
+      border: 1px solid var(--footer-border);
+      border-radius: 50%;
+
+      color: var(--footer-text);
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+
+      transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
+
+      &:hover {
+        background: var(--footer-accent);
+        border-color: var(--footer-accent);
+        color: #fff;
+        transform: translateY(-3px);
+      }
+
+      &:focus-visible {
+        outline: 2px solid #fff;
+        outline-offset: 3px;
+      }
     }
+  }
+
+  // Navigation columns
+  &__column {
+    h3 {
+      position: relative;
+      display: inline-block;
+
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+
+      margin: 4px 0 24px;
+      padding-bottom: 12px;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+
+        width: 30px;
+        height: 2px;
+
+        background: var(--footer-accent);
+        border-radius: 2px;
+      }
+    }
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    a {
+      color: var(--footer-muted);
+      font-size: 13px;
+      text-decoration: none;
+
+      transition:
+        color 0.2s ease,
+        padding-left 0.2s ease;
+
+      &:hover {
+        color: #fff;
+        padding-left: 5px;
+      }
+
+      &:focus-visible {
+        outline: 2px solid #fff;
+        outline-offset: 3px;
+      }
+    }
+  }
+
+  // Divider
+  &__divider {
+    width: 100%;
+    height: 1px;
+    background: var(--footer-border);
+  }
+
+  // Copyright
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+
+    padding-top: 24px;
+
+    p {
+      margin: 0;
+      color: var(--footer-muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+  }
+
+  &__tagline {
+    span {
+      color: var(--footer-accent);
+    }
+  }
 }
 
-.login-name.heading {
-    color: white !important;
-    text-transform: capitalize;
-    font-weight: 500;
-    font-size: 40px;
+// ===================================
+// Tablet
+// ===================================
+
+@media (max-width: 1024px) {
+  .eMy-footer {
+
+    &__main {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 36px 28px;
+    }
+
+    &__brand {
+      grid-column: span 3;
+      max-width: 420px;
+    }
+  }
 }
 
-footer {
-    // background-color: #f2f4f5;
-    // padding: 80px 0;
-    .footer-title {
-        font-size: 24px;
-        margin-bottom: 20px;
-        text-transform: capitalize;
+// ===================================
+// Mobile
+// ===================================
+
+@media (max-width: 600px) {
+  .eMy-footer {
+
+    &__container {
+      width: calc(100% - 36px);
+      padding: 48px 0 20px;
     }
-    .description {
-        font-size: 16px;
-        color: #212529;
-        &::first-letter {
-            text-transform: uppercase;
-        }
+
+    &__main {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 32px 20px;
+      padding-bottom: 32px;
     }
-    .conpyright {
-        color: #a6a6a6;
-        font-size: 16px;
+
+    &__brand {
+      grid-column: span 2;
+      max-width: 100%;
     }
-    .contact-no {
-        font-size: 22px;
-        color: #a6a6a6;
+
+    &__logo {
+      font-size: 25px;
     }
-    address {
-        color: #a6a6a6;
-        font-size: 16px;
+
+    &__column {
+      h3 {
+        font-size: 14px;
+        margin-bottom: 18px;
+      }
+
+      ul {
+        gap: 13px;
+      }
+
+      a {
+        font-size: 12px;
+      }
     }
+
+    &__bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      padding-top: 20px;
+
+      p {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+// ===================================
+// Extra small devices
+// ===================================
+
+@media (max-width: 360px) {
+  .eMy-footer {
+
+    &__main {
+      grid-template-columns: 1fr;
+    }
+
+    &__brand {
+      grid-column: auto;
+    }
+  }
 }

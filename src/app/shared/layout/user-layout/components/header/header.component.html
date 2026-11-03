@@ -6,7 +6,7 @@
             </div>
             <div class="collapse navbar-collapse comman-font" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    @for (item of displayMenu; track $index) {
+                    @for (item of menuNameList; track $index) {
                     <li class="nav-item" [class.active]="activeItemName === item.routerLink" (click)="activeMenuItem(item.routerLink)">
                         <span class="nav-link">{{ item.menuName}}</span>
                     </li>
@@ -24,7 +24,6 @@
         </nav>
     </div>
 </header>
-
 <ng-template #profileLoginDetail>
     @if(isProfileModelOpen){
     <div class="profile-login-detail">

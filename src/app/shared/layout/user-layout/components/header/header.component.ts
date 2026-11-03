@@ -5,11 +5,12 @@ import { LocalStarageService } from '../../../../../core/Comman/local-starage.se
 import { Router } from '@angular/router';
 import { JwtDecodeService } from '../../../../../core/Comman/Jwt-decode.service';
 import { ButtonComponent } from '../../../../components/button/button.component';
+import { CommonModule, JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ButtonComponent],
+  imports: [ButtonComponent,JsonPipe,CommonModule ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -30,38 +31,26 @@ export class HeaderComponent implements OnInit {
     private routes = inject(Router);
     private localStarageService = inject(LocalStarageService);
     private JwtDecodeService = inject(JwtDecodeService);
-  menuNameList: any = [
-    {
-      menuId: 1,
-      menuName: 'Product',
-      routerLink: 'product',
-      access: logintype.customer,
-    },
-    {
-      menuId: 2,
-      menuName: 'News Feed',
-      routerLink: 'newsFeed',
-      access: logintype.customer,
-    },
-    {
-      menuId: 3,
-      menuName: 'Contact',
-      routerLink: 'contactUs',
-      access: logintype.customer,
-    },
-    {
-      menuId: 4,
-      menuName: 'dashboard',
-      routerLink: 'dashboard',
-      access: logintype.seller,
-    },
-    {
-      menuId: 5,
-      menuName: 'Product',
-      routerLink: 'product',
-      access: logintype.seller,
-    },
-  ];
+    menuNameList: any = [
+      {
+        menuId: 1,
+        menuName: 'Product',
+        routerLink: 'product',
+        access: logintype.customer,
+      },
+      {
+        menuId: 2,
+        menuName: 'News Feed',
+        routerLink: 'newsFeed',
+        access: logintype.customer,
+      },
+      {
+        menuId: 3,
+        menuName: 'Contact',
+        routerLink: 'contactUs',
+        access: logintype.customer,
+      },
+    ];
 
   constructor(private _LocalStarageService:LocalStarageService) {}
 
@@ -108,31 +97,30 @@ export class HeaderComponent implements OnInit {
       }
   }
 
+  userLogOute() {
+    localStorage.removeItem('CurrentUser');
+    localStorage.removeItem('UserRegister');
+    this.isUserLoggedIn = false;
+    this.routes.navigateByUrl('/');
+    this.toggleProfileDetail()
+    this.localStarageService.clearLocalStorage();
+  }
 
-
-
-    userLogOute() {
-      localStorage.removeItem('CurrentUser');
-      localStorage.removeItem('UserRegister');
-      this.isUserLoggedIn = false;
-      this.routes.navigateByUrl('/');
-      this.toggleProfileDetail()
-      this.localStarageService.clearLocalStorage();
-    }
-
-    activeMenuItem(urlName: string) {
-        console.log(urlName);
-      if (this.routes.url.includes(urlName)) {
-        this.routes.navigateByUrl(urlName);
-        console.log(urlName);
-        this.activeItemName = urlName;
-      }
-    }
-
-    toggleProfileDetail() {
-      this.isProfileModelOpen = !this.isProfileModelOpen;
+  activeMenuItem(urlName: string) {
+      console.log(urlName);
+    if (this.routes.url.includes(urlName)) {
+      this.routes.navigateByUrl(urlName);
+      console.log(urlName);
+      this.activeItemName = urlName;
     }
   }
+
+  toggleProfileDetail() {
+    console.log('toggleProfileDetail called'+ this.isProfileModelOpen);
+    this.isProfileModelOpen = !this.isProfileModelOpen;
+        console.log('toggleProfileDetail called'+ this.isProfileModelOpen);
+  }
+}
 
 
   export interface UserDetailModel {

@@ -34,4 +34,7 @@ export class FooterComponent {
       linkName: 'adharUpdate',
     },
   ];
+
+
+  readonly currentYear = new Date().getFullYear();
 }

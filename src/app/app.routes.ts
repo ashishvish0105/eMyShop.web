@@ -1,16 +1,11 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './features/admin/dashboard/dashboard.component';
-import { MainContactUsSectionComponent } from './modules/contact-us/main-contact-us-section/main-contact-us-section.component';
+import { authGuardChildGuard } from './core/guards/auth-guard.guard';
+import { ProductPageComponent } from './features/storefront/product-page/product-page.component';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
-import { ProductFormComponent } from './features/admin/product-management/components/product-form/product-form.component';
-import { ProductMainSectionComponent } from './features/admin/product-management/components/product-main-section/product-main-section.component';
-import { ProductOutletComponent } from './features/admin/product-management/product-outlet/product-outlet.component';
-import { ProductViewComponent } from './features/admin/product-management/components/product-view/product-view.component';
-import { LayoutOneComponent } from './features/storefront/home/layout-one/layout-one.component';
-import { ProductPreviewComponent } from './features/admin/product-management/components/product-preview/product-preview.component';
-import { authGuardChildGuard, authGuardGuard } from './core/guards/auth-guard.guard';
 import { AdminLayoutComponent } from './shared/layout/admin-layout/admin-layout.component';
 import { UserLayoutComponent } from './shared/layout/user-layout/user-layout.component';
+import { DashboardComponent } from './features/admin/dashboard/dashboard.component';
+import { ProductOutletComponent } from './features/admin/product-management/product-outlet/product-outlet.component';
 
 export const routes: Routes = [
   {
@@ -20,12 +15,50 @@ export const routes: Routes = [
   {
     path: 'seller-Account',
     component: AdminLayoutComponent,
-    canActivateChild: [authGuardChildGuard],
-    data: { authRole: 'admin' },
+    // canActivateChild: [authGuardChildGuard],
+    // data: { authRole: 'admin' },
+    children: [
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        // https://codepen.io/leonam-silva-de-souza/pen/zxrKyOv
+        // canActivate: [authGuardGuard],
+        // data: { authRole: 'seller' },
+        // loadComponent: () =>
+        //   import('./features/admin/dashboard/dashboard.component').then(  c => c.DashboardComponent),
+      },
+      {
+        path: 'products',
+        component: ProductOutletComponent,
+        // canActivate: [authGuardGuard],
+        // data: { authRole: 'seller' },
+        // loadComponent: () =>
+        //   import('./features/admin/product-management/product-outlet/product-outlet.component').then(
+        //     (component) => component.ProductOutletComponent,
+        //   ),
+      }
+    ]
   },
   {
     path: '',
     component: UserLayoutComponent,
+      children: [
+        {
+          path: '',
+          redirectTo: 'Product',
+          pathMatch: 'full',
+        },
+      {
+        path: 'Product',
+        component:ProductPageComponent,
+        data: { staticInfo: 'Some Config Data' } // Static route data
+      }
+    ]
   },
   {
     path: '**',

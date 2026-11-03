@@ -1,0 +1,254 @@
+$nav-color :var(--background-main);
+$section-color :var(--background-section);
+$global-space: 8px;
+$bg-white-color: #fff;
+$text-white-color: #fff;
+$global-primary-color: #384959;
+$global-secondary-color: #C70255;
+$font-size: 8px;
+$global-line-height: 8px;
+$global-letter-spacing: 1.1px;
+$global-fw-500: 500;
+$global-transition:all 0.5s linear;
+$global-border-radius: 50px;
+$border-color:#80b7ff;
+header {
+    padding: $global-space calc($global-space * 3);
+    background-color: var(--background-section);
+    position: sticky;
+    left: 0;
+    top: 0;
+    right: 0;
+    .navbar {
+        border-radius: $global-border-radius;
+        // overflow: hidden;
+        width: 60%;
+        margin: auto;
+        // padding: $global-space calc($global-space * 2);
+        padding: 0;
+        display: flex;
+        align-items: center;
+        // gap: calc($global-space * 2);
+        .brand-name {
+            // width: 20%;
+            text-align: center;
+            background-color: $global-primary-color;
+            color: $text-white-color;
+            padding: $global-space calc($global-space * 3);
+            font-size: calc($font-size * 2 + 2px);
+            font-weight: $global-fw-500;
+            letter-spacing: $global-letter-spacing;
+            cursor: pointer;
+        }
+        .navbar-collapse {
+            background-color: $global-secondary-color;
+            padding: 5px calc($global-space * 2);
+            position: relative;
+            &::after,
+            &::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                background-color: #f3f6fa;
+                border-radius: 0 $global-border-radius $global-border-radius 0;
+                width: 30px;
+            }
+            &::after {
+                left: auto;
+                right: 0;
+                background-color: #f3f6fa;
+                border-radius: $global-border-radius 0 0 $global-border-radius;
+            }
+            .navbar-nav {
+                display: flex;
+                align-items: center;
+                padding: 0 calc($global-space * 2);
+            }
+            .navbar-nav {
+                .nav-item {
+                    transition: $global-transition;
+                    &:hover,
+                    &.active {
+                        background: $global-primary-color;
+                    }
+                    .nav-link {
+                        position: relative;
+                        font-size: 16px;
+                        font-weight: $global-fw-500;
+                        padding: $global-space calc($global-space * 2);
+                        color: $text-white-color;
+                        line-height: calc($global-line-height * 3);
+                        cursor: pointer;
+                    }
+                    &.active {
+                        .nav-link {
+                            &:hover {
+                                color: $text-white-color;
+                            }
+                            color: $text-white-color;
+                        }
+                    }
+                }
+            }
+        }
+        .profile-box-wrapper {
+            .profile-box {
+                position: relative;
+                .btn.btn-icon {
+                    color: $global-primary-color;
+                    font-size: calc($font-size * 2);
+                    border-radius: 50%;
+                    border: 2px solid currentColor;
+                    padding: calc($global-space - 2px) calc($global-space + 4px);
+                }
+            }
+            .profile-login-detail {
+                // display: none;
+                position: fixed;
+                top: 0;
+                right: 0;
+                background-color: $bg-white-color;
+                padding: 15px;
+                box-shadow: -5px 0px 5px 0 $global-primary-color;
+                width: 30%;
+                bottom: 0;
+                .profile-login-detail-header {
+                    background-color: $global-primary-color;
+                    padding: $global-space;
+                    border-radius: $global-border-radius;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    .profile-lable {
+                        display: inline-block;
+                        font-size: calc($font-size * 2);
+                        line-height: $global-line-height;
+                        color: $text-white-color !important;
+                        font-weight: $global-fw-500;
+                        line-height: $global-line-height;
+                        padding-left: $global-space;
+                        margin: 0;
+                    }
+                    .close-btn {
+                        cursor: pointer;
+                        border-radius: $global-border-radius;
+                        font-size: calc($font-size * 2);
+                        line-height: $global-line-height;
+                        background-color: $bg-white-color;
+                        color: $global-primary-color;
+                        padding: $global-space calc($global-space * 3);
+                    }
+                }
+                .profile-details {
+                    display: flex;
+                    align-items: center;
+                    // justify-content: space-between;
+                    $letterBoxImageSize: 35px;
+                    gap: calc($global-space* 2);
+                    .profile-image {
+                        height: $letterBoxImageSize;
+                        width: $letterBoxImageSize;
+                        background-color: $global-primary-color;
+                        color: $text-white-color;
+                        text-transform: uppercase;
+                        font-size: calc($font-size * 3);
+                        border-radius: $global-border-radius;
+                        text-align: center;
+                        font-family: cursive, sans-serif;
+                        line-height: $letterBoxImageSize;
+                        cursor: pointer;
+                    }
+                    .profile-info {
+                        margin-right: auto;
+                        .profile-title,
+                        .profile-roll {
+                            font-size: calc($font-size * 2);
+                            text-transform: capitalize;
+                            font-weight: 600;
+                            white-space: nowrap;
+                            margin-bottom: 0;
+                        }
+                        .profile-roll {
+                            font-size: 16px;
+                            font-weight: 400;
+                            margin-bottom: 0;
+                            text-transform: lowercase;
+                        }
+                    }
+                }
+            }
+            // .profile-box:hover+.profile-login-detail {
+            //     display: block;
+            // }
+        }
+    }
+    .comman-navbar-item {
+        display: inline-block;
+        border-radius: $global-border-radius;
+    }
+    .comman-font {
+        span {
+            line-height: 1.2;
+        }
+    }
+    background-color: $section-color;
+    &.header-scroll {
+        // margin-bottom: 30px;
+        // box-shadow: 0 3px 50px rgba(0, 0, 0, 0.2);
+        // position: sticky;
+        top: 0;
+        z-index: 999;
+        // top: 0;
+        // width: 100%;
+        // position: fixed;
+        // background-color: #ffffff;
+        box-shadow: 0 3px 50px rgba(0, 0, 0, 0.2);
+        border-bottom: none;
+        left: 0;
+        z-index: 99;
+        border-bottom-color: transparent;
+    }
+}
+
+.profile-login-relative {
+    position: relative;
+    height: 100vh;
+    .profile-detail-with-logout {
+        position: absolute;
+        bottom: 30px;
+        left: 0;
+        right: 0;
+        border: 1px solid $border-color;
+        border-radius: $global-border-radius;
+        padding: $global-space;
+    }
+}
+
+// .navbar-nav {
+//     .dropdown {
+//         .dropdown-menu {
+//             background-color: #384959 !important;
+//             color: white;
+//             border: 1px solid #fff;
+//             border-radius: 4px;
+//             .dropdown-item {
+//                 font-size: 16px;
+//                 font-weight: 600;
+//                 color: white !important;
+//                 // text-transform: capitalize;
+//                 &:hover {
+//                     background-color: transparent !important;
+//                 }
+//             }
+//         }
+//     }
+// }
+// .fill-space-bihind {
+//     position: relative;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     height: 100px;
+// }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SectionTitleWithbuttonsComponent } from '../../components/section-title-withbuttons/section-title-withbuttons.component';
 import { SummaryCardComponent, summaryCardObjModel } from '../../components/summary-card/summary-card.component';
 import { TitleWithItemComponent } from "../../components/title-with-item/title-with-item.component";
