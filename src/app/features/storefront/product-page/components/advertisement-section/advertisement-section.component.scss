@@ -1,241 +1,785 @@
 
-:root {
-  --canvas: #050505;
-  --card-surface: rgba(20, 20, 20, 0.85);
-  --neon-primary: #a855f7;
-  --neon-secondary: #d9f99d;
-  --text-high: #ffffff;
-  --text-low: #94a3b8;
-  --glass-stroke: rgba(255, 255, 255, 0.08);
-}
+/* =========================
+   GENERAL
+========================= */
 
-// ========================================
-// Product Container
-// ========================================
-
-.container-product {
-  background-color: var(--canvas);
-  background-image:
-    radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
-    radial-gradient(at 50% 10%, hsla(270, 50%, 15%, 1) 0, transparent 50%),
-    radial-gradient(at 100% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%);
-
-  font-family: 'Inter', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+*,
+*::before,
+*::after {
   margin: 0;
-  color: var(--text-high);
+  padding: 0;
+  box-sizing: border-box;
 }
 
-// ========================================
-// Product Card
-// ========================================
-
-.product-card {
-  position: relative;
-  width: 360px;
-  background: var(--card-surface);
-  backdrop-filter: blur(25px) saturate(180%);
-  border: 1px solid var(--glass-stroke);
-  border-radius: 32px;
-  padding: 35px;
-
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-
-  // Outer Ambient Glow
-  &::after {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    background: linear-gradient(
-      135deg,
-      var(--neon-primary),
-      transparent,
-      var(--neon-secondary)
-    );
-    z-index: -1;
-    border-radius: 34px;
-    opacity: 0.1;
-    filter: blur(30px);
-    transition: opacity 0.5s ease;
-  }
-
-  &:hover {
-    transform: translateY(-12px);
-    border-color: rgba(255, 255, 255, 0.2);
-
-    &::after {
-      opacity: 0.4;
-    }
-
-    .product-img {
-      transform: scale(1.15) rotate(-8deg) translateY(-10px);
-    }
-  }
+li {
+  list-style: none;
 }
 
-// ========================================
-// Brand Tag
-// ========================================
-
-.brand-tag {
-  position: absolute;
-  top: 25px;
-  right: 30px;
-  font-size: 0.8rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 2.5px;
-
-  background: linear-gradient(to right, var(--neon-primary), #fff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+a {
+  text-decoration: none;
 }
 
-// ========================================
-// Product Image
-// ========================================
-
-.image-container {
-  position: relative;
-  height: 220px;
-  margin-top: -50px;
-  display: flex;
-  justify-content: center;
-
-  filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.8));
-}
-
-.product-img {
-  width: 110%;
-  object-fit: contain;
-
-  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-// ========================================
-// Product Information
-// ========================================
-
-.category {
-  color: var(--neon-secondary);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin: 25px 0 8px;
-}
-
-.product-name {
-  font-size: 1.85rem;
-  font-weight: 900;
-  margin: 0 0 12px;
-  letter-spacing: -1px;
-
-  background: linear-gradient(to bottom, #fff, #bbb);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.info-text {
-  color: var(--text-low);
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin-bottom: 30px;
-}
-
-// ========================================
-// Card Footer
-// ========================================
-
-.card-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  border-top: 1px solid var(--glass-stroke);
-  padding-top: 25px;
-}
-
-// ========================================
-// Price
-// ========================================
-
-.price-tag {
-  font-size: 1.6rem;
-  font-weight: 800;
-
-  span {
-    font-size: 1rem;
-    color: var(--neon-secondary);
-    margin-right: 2px;
-  }
-}
-
-// ========================================
-// Buy Button
-// ========================================
-
-.buy-btn {
-  background: var(--text-high);
-  color: #000;
+button {
+  font: inherit;
   border: none;
-  padding: 12px 24px;
-  border-radius: 14px;
-  font-weight: 800;
+  background: none;
   cursor: pointer;
-
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: var(--neon-secondary);
-    transform: scale(1.05) rotate(2deg);
-  }
 }
 
-// ========================================
-// Creator Link
-// ========================================
+img {
+  display: block;
+  max-width: 100%;
+}
 
-.creator-link {
+:host {
+  display: block;
+  font-family: 'Josefin Sans', sans-serif;
+  color: hsl(217, 28%, 9%);
+}
+
+.container {
+  width: 100%;
+  padding-inline: 15px;
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: 60px;
+}
+
+.btn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  width: fit-content;
+  padding: 14px 25px;
+  font-size: 18px;
+  background: hsl(5, 100%, 69%);
+  color: #fff;
+  border: 1px solid hsl(5, 100%, 69%);
+  transition: 0.25s ease;
+}
 
-  margin-top: 30px;
-  text-decoration: none;
-  color: var(--text-low);
-  font-size: 0.8rem;
-  font-weight: 500;
+.btn-primary:hover {
+  background: hsl(5, 100%, 73%);
+  border-color: hsl(5, 100%, 73%);
+}
 
-  transition: all 0.3s ease;
+.btn-secondary {
+  background: transparent;
+  color: #000;
+  border-color: #000;
+}
 
-  strong {
-    color: var(--text-high);
-    transition: color 0.3s ease;
+.btn-secondary:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.btn-link {
+  background: transparent;
+  color: inherit;
+  border: none;
+  border-bottom: 1px solid #fff;
+  padding: 0 0 6px;
+  margin-inline: auto;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+.btn-link:hover {
+  border-color: transparent;
+}
+
+.h2 {
+  font-size: 26px;
+}
+
+.h3 {
+  font-size: 20px;
+}
+
+.h4 {
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  background-image: url('https://i.postimg.cc/Qtw0rhws/hero-banner.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+}
+
+.hero-title {
+  color: hsl(217, 28%, 9%);
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.hero-title strong {
+  display: block;
+  font-weight: 700;
+}
+
+.hero-text {
+  color: hsl(0, 0%, 27%);
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  line-height: 1.8;
+  max-width: 46ch;
+  margin-bottom: 25px;
+}
+
+
+/* =========================
+   COLLECTION
+========================= */
+
+.collection-list {
+  display: flex;
+  gap: 25px;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  scroll-snap-type: x mandatory;
+
+  > li {
+    min-width: 100%;
+    scroll-snap-align: start;
   }
 
-  &:hover {
-    strong {
-      color: var(--neon-primary);
-    }
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
 
-    .youtube-icon {
-      transform: scale(1.2) rotate(10deg);
-    }
+  &::-webkit-scrollbar-thumb {
+    background: hsl(5, 100%, 69%);
+    border-radius: 20px;
   }
 }
 
-// ========================================
-// YouTube Icon
-// ========================================
+.collection-card {
+  height: 350px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: 45px 25px;
+}
 
-.youtube-icon {
-  width: 16px;
-  fill: #ff0000;
+.collection-card .card-title {
+  font-size: 20px;
+  text-transform: uppercase;
+}
 
-  transition: transform 0.3s ease;
+
+/* =========================
+   PRODUCTS
+========================= */
+
+.product .section-title {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 25px;
+}
+
+.filter-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.filter-btn {
+  color: hsl(0, 0%, 27%);
+  padding: 10px 16px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid hsl(0, 0%, 88%);
+  border-radius: 30px;
+  transition: 0.25s ease;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: hsl(5, 100%, 69%);
+  color: #fff;
+  border-color: hsl(5, 100%, 69%);
+}
+
+.product-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 50px 25px;
+}
+
+.product-card {
+  cursor: pointer;
+}
+
+.card-banner {
+  position: relative;
+  height: 350px;
+  background: hsl(200, 12%, 95%);
+  overflow: hidden;
+}
+
+.image-contain {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  transition: 0.5s ease;
+}
+
+.product-card:hover .image-contain {
+  transform: scale(1.1);
+}
+
+.card-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: hsl(5, 100%, 69%);
+  color: #fff;
+  padding: 5px 15px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  border-radius: 25px;
+}
+
+.card-action-list {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  opacity: 0;
+  transition: 0.25s ease;
+}
+
+.product-card:hover .card-action-list,
+.product-card:focus-within .card-action-list {
+  opacity: 1;
+}
+
+.card-action-item {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.card-action-btn {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  color: hsl(217, 28%, 9%);
+  font-size: 17px;
+  border-radius: 50%;
+  transition: 0.25s ease;
+}
+
+.card-action-btn:hover {
+  background: hsl(5, 100%, 69%);
+  color: #fff;
+}
+
+.card-action-tooltip {
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 5px);
+  transform: translateY(-50%);
+  width: max-content;
+  background: rgba(0, 0, 0, 0.9);
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.25s ease;
+}
+
+.card-action-btn:hover + .card-action-tooltip {
+  opacity: 1;
+}
+
+.card-content {
+  padding: 24px 15px 0;
+  text-align: center;
+}
+
+.card-cat {
+  color: hsl(0, 0%, 27%);
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.card-cat-link {
+  display: inline-block;
+  color: inherit;
+  transition: 0.25s ease;
+}
+
+.card-cat-link:hover {
+  color: hsl(5, 100%, 69%);
+}
+
+.card-title {
+  font-size: 20px;
+  margin-bottom: 12px;
+
+  a {
+    color: inherit;
+    transition: 0.25s ease;
+  }
+
+  a:hover {
+    color: hsl(5, 100%, 69%);
+  }
+}
+
+.card-price {
+  color: hsl(5, 100%, 69%);
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+
+  del {
+    color: hsl(0, 0%, 74%);
+    margin-left: 8px;
+  }
+}
+
+
+/* =========================
+   CTA
+========================= */
+
+.cta-list {
+  display: grid;
+  gap: 40px;
+}
+
+.cta-card {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.cta-card .card-subtitle {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.cta-card .card-title {
+  color: inherit;
+  font-size: 26px;
+  line-height: 1.3;
+  margin-bottom: 20px;
+}
+
+
+/* =========================
+   SPECIAL
+========================= */
+
+.special .container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.special-banner {
+  min-height: 500px;
+  background-color: #070601;
+  background-image: url('https://i.postimg.cc/vTQ4vK3s/special-banner.jpg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  padding: 50px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.banner-title {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.special .section-title {
+  margin-block: 40px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 26px;
+}
+
+.special .section-title .text {
+  min-width: max-content;
+}
+
+.special .section-title .line {
+  width: 100%;
+  height: 1px;
+  background: hsl(0, 0%, 88%);
+}
+
+.special-product-list {
+  display: flex;
+  gap: 25px;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  scroll-snap-type: x mandatory;
+
+  > li {
+    min-width: 100%;
+    scroll-snap-align: start;
+  }
+
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: hsl(5, 100%, 69%);
+    border-radius: 20px;
+  }
+}
+
+
+/* =========================
+   SERVICE
+========================= */
+
+.service-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding-inline: 30px;
+}
+
+.service-item {
+  width: 220px;
+}
+
+.service-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.service-card .card-icon {
+  background: hsl(5, 100%, 69%);
+  min-width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+.service-card .card-icon img {
+  filter: brightness(0) invert(1);
+  width: 60%;
+  height: auto;
+}
+
+.service-card .card-title {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.service-card .card-text {
+  color: hsl(0, 0%, 27%);
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+
+.service-card .card-text span {
+  display: inline-block;
+  color: hsl(5, 100%, 69%);
+}
+
+
+/* =========================
+   INSTAGRAM
+========================= */
+
+.insta-post-list {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.insta-post-item {
+  position: relative;
+  min-width: 33.33%;
+  aspect-ratio: 1 / 1;
+  scroll-snap-align: start;
+  overflow: hidden;
+}
+
+.insta-post-banner {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.insta-post-link {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: hsla(230, 41%, 14%, 0.6);
+  color: #fff;
+  font-size: 40px;
+  opacity: 0;
+  transition: 0.25s ease;
+}
+
+.insta-post-link:hover {
+  opacity: 1;
+}
+
+
+/* =========================
+   GO TO TOP
+========================= */
+
+.go-top-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  background: hsl(5, 100%, 69%);
+  color: #fff;
+  font-size: 20px;
+  border: 4px solid #fff;
+  border-radius: 50%;
+  transition: 0.25s ease;
+  z-index: 10;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.go-top-btn.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.go-top-btn:hover {
+  background: hsl(5, 100%, 73%);
+}
+
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+@media (min-width: 576px) {
+
+  .container {
+    max-width: 650px;
+  }
+
+  .hero-title {
+    font-size: 40px;
+  }
+
+  .hero-text {
+    font-size: 14px;
+  }
+
+  .collection-list > li {
+    min-width: calc(50% - 12.5px);
+  }
+
+  .product-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cta-card {
+    text-align: left;
+  }
+
+  .cta-card .card-title {
+    max-width: 14ch;
+  }
+
+  .cta-card .btn-link {
+    margin-inline: 0;
+  }
+
+  .special-product-list > li {
+    min-width: calc(50% - 12.5px);
+  }
+
+  .insta-post-item {
+    min-width: 25%;
+  }
+}
+
+@media (min-width: 768px) {
+
+  .container {
+    max-width: 720px;
+  }
+
+  .hero {
+    height: 480px;
+  }
+
+  .hero-title {
+    font-size: 42px;
+  }
+
+  .special .container {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  .special-banner,
+  .special-product {
+    min-width: calc(50% - 12.5px);
+  }
+
+  .special-banner {
+    height: auto;
+  }
+
+  .special-product-list > li {
+    min-width: 100%;
+  }
+
+  .insta-post-item {
+    min-width: 20%;
+  }
+
+  .go-top-btn {
+    width: 55px;
+    height: 55px;
+    bottom: 30px;
+    right: 30px;
+  }
+}
+
+@media (min-width: 992px) {
+
+  .container {
+    max-width: 970px;
+  }
+
+  .collection-list > li {
+    min-width: calc(33.33% - 16.66px);
+  }
+
+  .product-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .cta-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+
+  .cta-card {
+    padding-inline: 50px;
+  }
+
+  .special-banner {
+    min-width: calc(33.33% - 25px);
+  }
+
+  .special-product {
+    min-width: 66.66%;
+  }
+
+  .special-product-list > li {
+    min-width: calc(50% - 12.5px);
+  }
+
+  .insta-post-item {
+    min-width: 16.66%;
+  }
+}
+
+@media (min-width: 1200px) {
+
+  .container {
+    max-width: 1280px;
+  }
+
+  .hero {
+    height: 580px;
+  }
+
+  .hero .container {
+    max-width: 1000px;
+  }
+
+  .hero-title {
+    font-size: 50px;
+  }
+
+  .hero-text {
+    font-size: 16px;
+    max-width: 50ch;
+  }
+
+  .product-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .special-banner {
+    min-width: calc(25% - 25px);
+  }
+
+  .special-product-list > li {
+    min-width: calc(33.33% - 16.66px);
+  }
+
+  .service-item {
+    width: 275px;
+  }
+
+  .service-card .card-icon {
+    min-width: 70px;
+    height: 70px;
+  }
+
+  .service-card .card-title {
+    font-size: 20px;
+  }
+
+  .insta-post-item {
+    min-width: 12.5%;
+  }
 }

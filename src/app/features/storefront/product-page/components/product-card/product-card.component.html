@@ -1,0 +1,79 @@
+<!-- <div class="product-card" tabindex="0">
+
+  <figure class="card-banner">
+
+    <img
+      [src]="product.image"
+      [alt]="product.name"
+      class="image-contain"
+      loading="lazy">
+
+    @if (product.badge) {
+      <div class="card-badge">
+        {{ product.badge }}
+      </div>
+    }
+
+    <ul class="card-action-list">
+
+      <li class="card-action-item">
+        <button class="card-action-btn"
+          aria-label="Add to cart"
+          (click)="addToCart()">
+          <i class="fa-solid fa-cart-shopping"></i>
+        </button>
+      </li>
+
+      <li class="card-action-item">
+        <button class="card-action-btn"
+          aria-label="Add to wishlist"
+          (click)="addToWishlist()">
+          <i class="fa-regular fa-heart"></i>
+        </button>
+      </li>
+
+      <li class="card-action-item">
+        <button class="card-action-btn"
+          aria-label="Quick view"
+          (click)="quickView()">
+          <i class="fa-regular fa-eye"></i>
+        </button>
+      </li>
+
+      <li class="card-action-item">
+        <button class="card-action-btn"
+          aria-label="Compare"
+          (click)="compare()">
+          <i class="fa-solid fa-repeat"></i>
+        </button>
+      </li>
+
+    </ul>
+  </figure>
+
+  <div class="card-content">
+
+    <div class="card-cat">
+      @for (category of product.categories; track category; let last = $last) {
+        <a href="#" class="card-cat-link">{{ category }}</a>
+        @if (!last) {
+          /
+        }
+      }
+    </div>
+
+    <h3 class="h3 card-title">
+      <a href="#">{{ product.name }}</a>
+    </h3>
+
+    <data class="card-price" [attr.value]="product.price">
+      ${{ product.price.toFixed(2) }}
+
+      @if (product.oldPrice) {
+        <del>${{ product.oldPrice.toFixed(2) }}</del>
+      }
+    </data>
+
+  </div>
+
+</div> -->

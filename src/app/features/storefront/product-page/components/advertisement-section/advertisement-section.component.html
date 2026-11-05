@@ -1,29 +1,316 @@
-<div class="container-product">
 
-  <div class="product-card">
+<main id="top">
+  <article>
 
-    <div class="image-container">
-      <img
-        src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&q=80&w=800"
-        alt="Nike Neon" class="product-img">
-      <div class="brand-tag">Limited Release</div>
-    </div>
+    <!-- PRODUCTS -->
 
-    <div class="category">Design by Creative Web</div>
-    <h2 class="product-name">Vortex Max</h2>
-    <p class="info-text">Merging high-velocity performance with the signature
-      Creative Web aesthetic.</p>
+    <section class="section product" id="products">
+      <div class="container">
 
-    <div class="card-footer">
-      <div class="price-tag"><span>$</span>299.00</div>
-      <button class="buy-btn">Get Yours</button>
-    </div>
+        <h2 class="section-title">Bestsellers Products</h2>
 
-    <a href="https://www.youtube.com/@creative_web" target="_blank"
-      class="creator-link">
-      Visit <strong>Creative Web</strong>
-      <svg class="youtube-icon" viewBox="0 0 24 24"><path
-          d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
-    </a>
-  </div>
-</div>
+        <ul class="filter-list">
+          <li *ngFor="let filter of filters">
+            <button
+              class="filter-btn"
+              [class.active]="selectedFilter === filter"
+              (click)="filterProducts(filter)">
+              {{ filter }}
+            </button>
+          </li>
+        </ul>
+
+        <ul class="product-list">
+
+          <li class="product-item"
+            *ngFor="let product of filteredProducts; let i = index">
+
+            <div class="product-card">
+
+              <figure class="card-banner">
+
+                <img
+                  [src]="product.image"
+                  [alt]="product.name"
+                  class="image-contain"
+                  loading="lazy">
+
+                <div class="card-badge" *ngIf="product.badge">
+                  {{ product.badge }}
+                </div>
+
+                <ul class="card-action-list">
+
+                  <li class="card-action-item">
+                    <button class="card-action-btn"
+                      aria-label="Add to cart"
+                      (click)="addToCart(product)">
+                      <i class="fa-solid fa-cart-shopping"></i>
+                    </button>
+                    <div class="card-action-tooltip">Add to Cart</div>
+                  </li>
+
+                  <li class="card-action-item">
+                    <button class="card-action-btn"
+                      aria-label="Add to wishlist"
+                      (click)="addToWishlist(product)">
+                      <i class="fa-regular fa-heart"></i>
+                    </button>
+                    <div class="card-action-tooltip">Add to Wishlist</div>
+                  </li>
+
+                  <li class="card-action-item">
+                    <button class="card-action-btn"
+                      aria-label="Quick view"
+                      (click)="quickView(product)">
+                      <i class="fa-regular fa-eye"></i>
+                    </button>
+                    <div class="card-action-tooltip">Quick View</div>
+                  </li>
+
+                  <li class="card-action-item">
+                    <button class="card-action-btn"
+                      aria-label="Compare"
+                      (click)="compareProduct(product)">
+                      <i class="fa-solid fa-repeat"></i>
+                    </button>
+                    <div class="card-action-tooltip">Compare</div>
+                  </li>
+
+                </ul>
+              </figure>
+
+              <div class="card-content">
+
+                <div class="card-cat">
+                  <ng-container *ngFor="let gender of product.gender; let last = last">
+                    <a href="#" class="card-cat-link">{{ gender }}</a>
+                    <span *ngIf="!last"> / </span>
+                  </ng-container>
+                </div>
+
+                <h3 class="card-title">
+                  <a href="#">{{ product.name }}</a>
+                </h3>
+
+                <data [value]="product.price" class="card-price">
+                  ${{ product.price.toFixed(2) }}
+
+                  <del *ngIf="product.oldPrice">
+                    ${{ product.oldPrice.toFixed(2) }}
+                  </del>
+                </data>
+
+              </div>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- CTA -->
+
+    <section class="section cta">
+      <div class="container">
+        <ul class="cta-list">
+
+          <li *ngFor="let card of ctaCards">
+            <div class="cta-card"
+              [style.backgroundImage]="'url(' + card.image + ')'">
+
+              <p class="card-subtitle">{{ card.subtitle }}</p>
+
+              <h3 class="card-title">{{ card.title }}</h3>
+
+              <a href="#" class="btn btn-link">
+                <span>Shop Now</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- SPECIAL PRODUCTS -->
+
+    <section class="section special">
+      <div class="container">
+
+        <div class="special-banner">
+          <h2 class="banner-title">New Trend Edition</h2>
+
+          <a href="#" class="btn btn-link">
+            <span>Explore All</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="special-product">
+
+          <h2 class="section-title">
+            <span class="text">Nike Special</span>
+            <span class="line"></span>
+          </h2>
+
+          <ul class="special-product-list">
+
+            <li class="product-item"
+              *ngFor="let product of specialProducts">
+
+              <div class="product-card">
+
+                <figure class="card-banner">
+
+                  <img [src]="product.image"
+                    [alt]="product.name"
+                    class="image-contain"
+                    loading="lazy">
+
+                  <div class="card-badge" *ngIf="product.badge">
+                    {{ product.badge }}
+                  </div>
+
+                  <ul class="card-action-list">
+
+                    <li class="card-action-item">
+                      <button class="card-action-btn"
+                        aria-label="Add to cart"
+                        (click)="addToCart(product)">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                      </button>
+                      <div class="card-action-tooltip">Add to Cart</div>
+                    </li>
+
+                    <li class="card-action-item">
+                      <button class="card-action-btn"
+                        aria-label="Add to wishlist"
+                        (click)="addToWishlist(product)">
+                        <i class="fa-regular fa-heart"></i>
+                      </button>
+                      <div class="card-action-tooltip">Add to Wishlist</div>
+                    </li>
+
+                    <li class="card-action-item">
+                      <button class="card-action-btn"
+                        aria-label="Quick view"
+                        (click)="quickView(product)">
+                        <i class="fa-regular fa-eye"></i>
+                      </button>
+                      <div class="card-action-tooltip">Quick View</div>
+                    </li>
+
+                    <li class="card-action-item">
+                      <button class="card-action-btn"
+                        aria-label="Compare"
+                        (click)="compareProduct(product)">
+                        <i class="fa-solid fa-repeat"></i>
+                      </button>
+                      <div class="card-action-tooltip">Compare</div>
+                    </li>
+
+                  </ul>
+                </figure>
+
+                <div class="card-content">
+                  <div class="card-cat">
+                    <a href="#" class="card-cat-link">
+                      {{ product.gender.join(' / ') }}
+                    </a>
+                  </div>
+
+                  <h3 class="card-title">
+                    <a href="#">{{ product.name }}</a>
+                  </h3>
+
+                  <data class="card-price" [value]="product.price">
+                    ${{ product.price.toFixed(2) }}
+                  </data>
+                </div>
+
+              </div>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- SERVICES -->
+
+    <section class="section service">
+      <div class="container">
+        <ul class="service-list">
+
+          <li class="service-item" *ngFor="let service of services">
+
+            <div class="service-card">
+
+              <div class="card-icon">
+                <img [src]="service.image" [alt]="service.title">
+              </div>
+
+              <div>
+                <h3 class="card-title">{{ service.title }}</h3>
+
+                <p class="card-text">
+                  {{ service.text }}
+                  <span *ngIf="service.highlight">
+                    {{ service.highlight }}
+                  </span>
+                </p>
+              </div>
+
+            </div>
+
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- INSTAGRAM -->
+
+    <section class="section insta-post">
+      <ul class="insta-post-list">
+
+        <li class="insta-post-item"
+          *ngFor="let image of instagramImages">
+
+          <img [src]="image"
+            alt="Instagram post"
+            class="insta-post-banner"
+            loading="lazy">
+
+          <a href="#" class="insta-post-link"
+            aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+
+        </li>
+
+      </ul>
+    </section>
+
+  </article>
+</main>
+
+
+<!-- GO TO TOP -->
+
+<button
+  class="go-top-btn"
+  [class.active]="headerActive"
+  (click)="scrollToTop()"
+  aria-label="Go to top">
+
+  <i class="fa-solid fa-arrow-up"></i>
+
+</button>

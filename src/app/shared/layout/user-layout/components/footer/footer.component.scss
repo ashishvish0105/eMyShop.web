@@ -344,3 +344,273 @@
     }
   }
 }
+
+
+.footer-link i {
+  margin-right: 8px;
+  font-size: 15px;
+}
+
+.social-link i {
+  font-size: 18px;
+}
+
+.footer-link .fa-chevron-right {
+  font-size: 11px;
+}
+
+
+/* ==============================
+   FOOTER
+============================== */
+
+.footer {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Footer Top */
+
+.footer-top {
+    background: hsl(200, 12%, 95%);
+    padding: 60px 0;
+}
+
+.footer-brand {
+    padding-bottom: 50px;
+    border-bottom: 1px solid hsl(0, 0%, 88%);
+    margin-bottom: 50px;
+}
+
+.footer-brand .logo {
+    display: block;
+    margin-bottom: 15px;
+}
+
+.footer-brand .logo img {
+    display: block;
+    max-width: 160px;
+    height: auto;
+}
+
+/* Social Links */
+
+.social-list {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: hsl(0, 0%, 88%);
+    color: hsl(0, 0%, 27%);
+    font-size: 18px;
+    transition: 0.25s ease;
+}
+
+.social-link:hover,
+.social-link:focus {
+    background: hsl(5, 100%, 69%);
+    color: #fff;
+}
+
+/* Footer Link Box */
+
+.footer-link-box {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+/* Footer Titles */
+
+.footer-list-title {
+    position: relative;
+    color: hsl(217, 28%, 9%);
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.footer-list-title::after {
+    content: "";
+    display: block;
+    background: hsl(5, 100%, 69%);
+    width: 50px;
+    height: 2px;
+    margin-top: 10px;
+}
+
+/* Footer Links */
+
+.footer-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0;
+    color: hsl(0, 0%, 27%);
+    text-decoration: none;
+    transition: 0.25s ease;
+}
+
+.footer-link:hover,
+.footer-link:focus {
+    color: hsl(5, 100%, 69%);
+}
+
+.footer-link-text {
+    flex: 1;
+}
+
+.footer-link i {
+    flex-shrink: 0;
+    font-size: 16px;
+}
+
+.footer-list:first-child .footer-link i {
+    color: hsl(5, 100%, 69%);
+    font-size: 22px;
+}
+
+/* Opening Time Table */
+
+.footer-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: left;
+    padding: 6px 0;
+}
+
+.table-head {
+    color: hsl(217, 28%, 9%);
+    font-weight: 500;
+}
+
+.table-data {
+    color: hsl(0, 0%, 27%);
+}
+
+/* Newsletter */
+
+.newsletter-text {
+    color: hsl(0, 0%, 27%);
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.newsletter-form {
+    position: relative;
+    width: 100%;
+}
+
+.newsletter-input {
+    width: 100%;
+    background: #fff;
+    color: hsl(0, 0%, 27%);
+    padding: 15px 125px 15px 20px;
+    border: 1px solid hsl(0, 0%, 88%);
+    outline: none;
+    font-size: 15px;
+}
+
+.newsletter-input:focus {
+    border-color: hsl(5, 100%, 69%);
+}
+
+.newsletter-form .btn-primary {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: hsl(5, 100%, 69%);
+    color: #fff;
+    border: 1px solid hsl(5, 100%, 69%);
+    padding: 0 20px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.newsletter-form .btn-primary:hover {
+    background: hsl(5, 100%, 73%);
+    border-color: hsl(5, 100%, 73%);
+}
+
+/* Footer Bottom */
+
+.footer-bottom {
+    background: hsl(217, 28%, 9%);
+    padding: 20px 0;
+}
+
+.copyright {
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+}
+
+.copyright-link {
+    display: inline-block;
+    color: hsl(5, 100%, 69%);
+    font-family: 'Turret Road', sans-serif;
+    text-decoration: none;
+    transition: 0.25s ease;
+}
+
+.copyright-link:hover,
+.copyright-link:focus {
+    color: #fff;
+}
+
+/* ==============================
+   RESPONSIVE DESIGN
+============================== */
+
+/* Small Devices */
+
+@media (min-width: 576px) {
+    .footer-brand {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .footer-brand .logo {
+        margin-bottom: 0;
+    }
+
+    .footer-link-box {
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 30px;
+    }
+}
+
+/* Large Devices */
+
+@media (min-width: 992px) {
+    .footer-link-box {
+        grid-template-columns: 1.5fr 1fr 1fr;
+        gap: 40px;
+    }
+}
+
+/* Extra Large Devices */
+
+@media (min-width: 1200px) {
+    .footer-link-box {
+        grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+        gap: 50px;
+    }
+}

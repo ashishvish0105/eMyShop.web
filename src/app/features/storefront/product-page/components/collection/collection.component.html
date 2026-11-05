@@ -1,0 +1,26 @@
+<section class="section collection">
+  <div class="container">
+    <ul class="collection-list has-scrollbar">
+
+      @for (item of collections; track item.title) {
+        <li>
+          <div
+            class="collection-card"
+            [style.background-image]="'url(' + item.image + ')'">
+
+            <h3 class="h4 card-title">
+              {{ item.title }}
+            </h3>
+
+            <a href="#" class="btn btn-secondary">
+              <span>Explore Now</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+        </li>
+      }
+
+    </ul>
+  </div>
+</section>

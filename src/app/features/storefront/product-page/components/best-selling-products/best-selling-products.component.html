@@ -1,204 +1,28 @@
+<!-- <section class="section product">
+  <div class="container">
 
-<section class="eMy-footer__deals eshop-spaceY-50">
-  <div class="eMy-footer__container">
-    <!-- Header -->
-    <div class="eMy-footer__header">
-      <div class="eMy-footer__heading">
-        <h2>Today's Deals</h2>
-        <p>Discount up to 50% only for today!</p>
-      </div>
+    <h2 class="section-title">Bestsellers Products</h2>
 
-      <!-- Countdown -->
-      <div class="eMy-footer__timer">
-        <div class="eMy-footer__time">
-          <strong>08</strong>
-          <span>Hour</span>
-        </div>
-        <div class="eMy-footer__time">
-          <strong>41</strong>
-          <span>Min</span>
-        </div>
-        <div class="eMy-footer__time">
-          <strong>30</strong>
-          <span>Sec</span>
-        </div>
-      </div>
-    </div>
-    <!-- Products Grid -->
-    <div class="eMy-footer__products">
-      <!-- Product 1 -->
-      <div class="eMy-footer__product-card">
-        <div class="eMy-footer__image-wrapper">
-          <span class="eMy-footer__discount">-50%</span>
-          <img src="assets/images/product-1.jpg" alt="Daily Dep Juice">
-        </div>
+    <ul class="filter-list">
+      @for (filter of filters; track filter) {
+        <li>
+          <button
+            class="filter-btn"
+            [class.active]="activeFilter === filter"
+            (click)="setFilter(filter)">
+            {{ filter }}
+          </button>
+        </li>
+      }
+    </ul>
 
-        <div class="eMy-footer__product-info">
-          <h3>Daily Dep: Onion and Honey Juice</h3>
-
-          <div class="eMy-footer__price">
-            <span class="eMy-footer__current-price">Rp50.000</span>
-            <del>100.000</del>
-          </div>
-
-          <div class="eMy-footer__tags">
-            <span>V</span>
-            <span>LS</span>
-            <span>NG</span>
-          </div>
-
-          <div class="eMy-footer__product-bottom">
-            <span>1.4K sold</span>
-            <span class="eMy-footer__rating">★ 5.0</span>
-          </div>
-
-          <div class="eMy-footer__actions">
-            <button class="eMy-footer__wishlist" aria-label="Add to wishlist">♡</button>
-            <button class="eMy-footer__cart">Add to 🛒</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product 2 -->
-      <div class="eMy-footer__product-card">
-        <div class="eMy-footer__image-wrapper">
-          <span class="eMy-footer__discount">-50%</span>
-          <img src="assets/images/product-2.jpg" alt="Positive Energy Beverage">
-        </div>
-
-        <div class="eMy-footer__product-info">
-          <small>Positive Beverage</small>
-          <h3>Immunity Boost: Positive Energy & Beverage</h3>
-
-          <div class="eMy-footer__price">
-            <span class="eMy-footer__current-price">Rp50.000</span>
-            <del>100.000</del>
-          </div>
-
-          <div class="eMy-footer__tags">
-            <span>V</span>
-            <span>LS</span>
-            <span>NG</span>
-          </div>
-
-          <div class="eMy-footer__product-bottom">
-            <span>1.4K sold</span>
-            <span class="eMy-footer__rating">★ 5.0</span>
-          </div>
-
-          <div class="eMy-footer__actions">
-            <button class="eMy-footer__wishlist" aria-label="Add to wishlist">♡</button>
-            <button class="eMy-footer__cart">Add to 🛒</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product 3 -->
-      <div class="eMy-footer__product-card">
-        <div class="eMy-footer__image-wrapper">
-          <span class="eMy-footer__discount">-50%</span>
-          <img src="assets/images/product-3.jpg" alt="First Aid Earthbar">
-        </div>
-
-        <div class="eMy-footer__product-info">
-          <h3>First Aid - Earthbar</h3>
-
-          <div class="eMy-footer__price">
-            <span class="eMy-footer__current-price">Rp50.000</span>
-            <del>100.000</del>
-          </div>
-
-          <div class="eMy-footer__tags">
-            <span>V</span>
-            <span>LS</span>
-            <span>NG</span>
-          </div>
-
-          <div class="eMy-footer__product-bottom">
-            <span>1.4K sold</span>
-            <span class="eMy-footer__rating">★ 5.0</span>
-          </div>
-
-          <div class="eMy-footer__actions">
-            <button class="eMy-footer__wishlist" aria-label="Add to wishlist">♡</button>
-            <button class="eMy-footer__cart">Add to 🛒</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product 4 -->
-      <div class="eMy-footer__product-card">
-        <div class="eMy-footer__image-wrapper">
-          <span class="eMy-footer__discount">-50%</span>
-          <img src="assets/images/product-4.jpg" alt="Dandy Wine Spitzer">
-        </div>
-
-        <div class="eMy-footer__product-info">
-          <h3>Dandy Wine Spitzer</h3>
-
-          <div class="eMy-footer__price">
-            <span class="eMy-footer__current-price">Rp50.000</span>
-            <del>100.000</del>
-          </div>
-
-          <div class="eMy-footer__tags">
-            <span>V</span>
-            <span>LS</span>
-            <span>NG</span>
-          </div>
-
-          <div class="eMy-footer__product-bottom">
-            <span>1.4K sold</span>
-            <span class="eMy-footer__rating">★ 5.0</span>
-          </div>
-
-          <div class="eMy-footer__actions">
-            <button class="eMy-footer__wishlist" aria-label="Add to wishlist">♡</button>
-            <button class="eMy-footer__cart">Add to 🛒</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product 5 -->
-      <div class="eMy-footer__product-card">
-        <div class="eMy-footer__image-wrapper">
-          <span class="eMy-footer__discount">-50%</span>
-          <img src="assets/images/product-5.jpg" alt="Special Offer Product">
-        </div>
-
-        <div class="eMy-footer__product-info">
-          <h3>Special Daily Offer Product</h3>
-
-          <div class="eMy-footer__price">
-            <span class="eMy-footer__current-price">Rp50.000</span>
-            <del>100.000</del>
-          </div>
-
-          <div class="eMy-footer__tags">
-            <span>V</span>
-            <span>LS</span>
-            <span>NG</span>
-          </div>
-
-          <div class="eMy-footer__product-bottom">
-            <span>1.4K sold</span>
-            <span class="eMy-footer__rating">★ 5.0</span>
-          </div>
-
-          <div class="eMy-footer__actions">
-            <button class="eMy-footer__wishlist" aria-label="Add to wishlist">♡</button>
-            <button class="eMy-footer__cart">Add to 🛒</button>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Pagination -->
-    <div class="eMy-footer__pagination">
-      <span class="eMy-footer__page-active"></span>
-      <span></span>
-    </div>
+    <ul class="product-list">
+      @for (product of filteredProducts; track product.id) {
+        <li class="product-item">
+          <app-product-card [product]="product"></app-product-card>
+        </li>
+      }
+    </ul>
 
   </div>
-</section>
+</section> -->
