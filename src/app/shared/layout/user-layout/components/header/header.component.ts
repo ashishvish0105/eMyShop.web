@@ -2,15 +2,15 @@ import { Component, ElementRef, inject, Input, OnInit, ViewChild } from '@angula
 import { logintype } from '../../../../../constVariable/user.const';
 import { localStorageObjName } from '../../../../../constVariable/localStorageObjName.const';
 import { LocalStarageService } from '../../../../../core/Comman/local-starage.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { JwtDecodeService } from '../../../../../core/Comman/Jwt-decode.service';
-import { ButtonComponent } from '../../../../components/button/button.component';
-import { CommonModule, JsonPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { access } from 'fs';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ButtonComponent,JsonPipe,CommonModule ],
+  imports: [CommonModule, RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -21,7 +21,8 @@ export class HeaderComponent implements OnInit {
     @ViewChild('viewProfileLoginDetail') viewProfileLoginDetail!: ElementRef;
     isProfileModelOpen: boolean = false;
     activeItemName: string = '';
-    @Input() displayMenu: any;
+      activeMenu = 'Personal Profile';
+    isMobileMenuOpen: boolean = false;
 
     userDetail: UserDetailModel = {
       userName: 'ashish0111',
@@ -31,30 +32,62 @@ export class HeaderComponent implements OnInit {
     private routes = inject(Router);
     private localStarageService = inject(LocalStarageService);
     private JwtDecodeService = inject(JwtDecodeService);
+
     menuNameList: any = [
       {
         menuId: 1,
         menuName: 'Product',
         routerLink: 'product',
-        access: logintype.customer,
+         access: logintype.customer,
       },
       {
         menuId: 2,
         menuName: 'News Feed',
         routerLink: 'newsFeed',
-        access: logintype.customer,
+         access: logintype.customer,
       },
       {
         menuId: 3,
         menuName: 'Contact',
         routerLink: 'contactUs',
-        access: logintype.customer,
+         access: logintype.customer,
       },
     ];
+
+    menuSections: MenuSection[] = [
+  {
+    title: 'My Account',
+    items: [
+      { name: 'Personal Profile', icon: 'fa-regular fa-user' },
+      { name: 'My Orders', icon: 'fa-solid fa-bag-shopping', badge: '3 Active' },
+      { name: 'Wishlist', icon: 'fa-regular fa-heart', badge: '12' },
+      { name: 'Saved Addresses', icon: 'fa-solid fa-location-dot' },
+      { name: 'Payment Methods', icon: 'fa-regular fa-credit-card' }
+    ]
+  },
+  {
+    title: 'Shopping & Orders',
+    items: [
+      { name: 'My Shopping Cart', icon: 'fa-solid fa-cart-shopping', badge: '4 items' },
+      { name: 'Track Active Order', icon: 'fa-solid fa-truck-fast' },
+      { name: 'Returns & Refunds', icon: 'fa-solid fa-rotate-left' },
+      { name: 'Coupons & Special Promos', icon: 'fa-solid fa-tags', badge: '2 New!' }
+    ]
+  },
+  {
+    title: 'Preferences & Support',
+    items: [
+      { name: 'Notifications', icon: 'fa-regular fa-bell' },
+      { name: '24/7 Customer Care', icon: 'fa-solid fa-headset' },
+      { name: 'Security & Preferences', icon: 'fa-solid fa-gear' }
+    ]
+  }
+];
 
   constructor(private _LocalStarageService:LocalStarageService) {}
 
   ngOnInit() {
+    debugger
     const userRoles: unknown = this._LocalStarageService.getObjLocalStorage(
       localStorageObjName.userRoles,
     );
@@ -71,59 +104,80 @@ export class HeaderComponent implements OnInit {
 
     switch (loginType) {
       case logintype.seller:
-        this.displayMenu = this.menuNameList.filter((menu: any) => {
+        this.menuNameList.filter((menu: any) => {
           if (menu.access === logintype.seller) {
             return menu;
           }
         });
         break;
       case logintype.customer:
-        this.displayMenu = this.menuNameList.filter((menu: any) => {
+        this.menuNameList.filter((menu: any) => {
           if (menu.access === logintype.customer) {
             return menu;
           }
         });
     }
 
-          const currentUser = this.localStarageService.getObjLocalStorage(
-        localStorageObjName.currentUserObj,
-      );
-       const decodedToken = this.JwtDecodeService.getDecodedToken(currentUser);
-      console.log(decodedToken);
-      if(currentUser){
-        this.userDetail = currentUser;
+    const decodedToken = this.localStarageService.getObjLocalStorage(localStorageObjName.accessToken);
+    const currentUser = this.JwtDecodeService.getDecodedToken(decodedToken);
+
+    if(currentUser){
+        this.userDetail.userName = currentUser.email;
+        this.userDetail.userRoll = currentUser.role;
         this.isUserLoggedIn = true;
-        this.userDetail.userRoll = currentUser.userRoll;
       }
   }
 
-  userLogOute() {
+  userLogOute(isUserLoggedIn:boolean) {
+    if(isUserLoggedIn){
     localStorage.removeItem('CurrentUser');
     localStorage.removeItem('UserRegister');
+
     this.isUserLoggedIn = false;
-    this.routes.navigateByUrl('/');
-    this.toggleProfileDetail()
+    this.isProfileModelOpen = false;
+
     this.localStarageService.clearLocalStorage();
+
+    this.routes.navigateByUrl('/');
+    }else{
+        this.routes.navigateByUrl('/login');
+    }
+
   }
 
   activeMenuItem(urlName: string) {
-      console.log(urlName);
-    if (this.routes.url.includes(urlName)) {
-      this.routes.navigateByUrl(urlName);
-      console.log(urlName);
-      this.activeItemName = urlName;
-    }
+    this.activeItemName = urlName;
+    this.routes.navigateByUrl('/' + urlName);
   }
 
   toggleProfileDetail() {
-    console.log('toggleProfileDetail called'+ this.isProfileModelOpen);
     this.isProfileModelOpen = !this.isProfileModelOpen;
-        console.log('toggleProfileDetail called'+ this.isProfileModelOpen);
+  }
+   selectMenu(menu: string): void {
+    this.activeMenu = menu;
   }
 }
 
+export interface UserDetailModel {
+  userName: string;
+  userRoll: string;
+}
 
-  export interface UserDetailModel {
-    userName: string;
-    userRoll: string;
-  }
+
+interface Category {
+  title: string;
+  link: string;
+  className: string;
+  image: string;
+}
+
+interface MenuItem {
+  name: string;
+  icon: string;
+  badge?: string;
+}
+
+interface MenuSection {
+  title: string;
+  items: MenuItem[];
+}

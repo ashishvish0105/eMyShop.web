@@ -130,7 +130,7 @@ export class AuthGuardService {
   }
 
   getLandingUrl(role: AuthenticatedRole): string {
-    return role === 'seller' ? '/seller-Account/dashboard' : '/home/products';
+    return role === 'seller' ? '/seller-Account/dashboard' : '/Product';
   }
 
   clearSession(): void {

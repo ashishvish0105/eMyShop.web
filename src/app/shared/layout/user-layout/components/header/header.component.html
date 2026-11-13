@@ -1,59 +1,324 @@
-<header #headerScroll>
-    <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="brand-name comman-navbar-item comman-font">
-                <span class="brand-logo" routerLink="/">{{ logoName }}</span>
-            </div>
-            <div class="collapse navbar-collapse comman-font" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    @for (item of menuNameList; track $index) {
-                    <li class="nav-item" [class.active]="activeItemName === item.routerLink" (click)="activeMenuItem(item.routerLink)">
-                        <span class="nav-link">{{ item.menuName}}</span>
-                    </li>
-                    }
-                </ul>
-            </div>
-            <div class="profile-box-wrapper">
-                <div class="profile-box comman-navbar-item comman-font">
-                    <button class="btn btn-icon" (click)="toggleProfileDetail()">
-                        <i class="fa-solid fa-user"></i>
-                    </button>
-                </div>
-                <ng-container *ngTemplateOutlet="profileLoginDetail"></ng-container>
-            </div>
-        </nav>
-    </div>
+
+<header #headerScroll class="main-header">
+  <div class="container-fluid header-container">
+
+    <nav class="navbar navbar-expand-lg">
+
+      <!-- LOGO -->
+      <div class="brand-name">
+        <span class="brand-logo" routerLink="/">
+          {{ logoName }}
+        </span>
+      </div>
+
+      <!-- MOBILE MENU BUTTON -->
+      <button
+        class="mobile-menu-toggle"
+        type="button"
+        (click)="isMobileMenuOpen = !isMobileMenuOpen"
+        aria-label="Toggle navigation">
+
+        <i class="fa-solid"
+          [class.fa-bars]="!isMobileMenuOpen"
+          [class.fa-xmark]="isMobileMenuOpen">
+        </i>
+      </button>
+
+      <!-- NAVIGATION -->
+      <div
+        class="header-navigation"
+        [class.mobile-open]="isMobileMenuOpen">
+
+        <ul class="navbar-nav">
+
+          @for (item of menuNameList; track item.menuId) {
+          <li
+            class="nav-item"
+            [class.active]="activeItemName === item.routerLink"
+            (click)="activeMenuItem(item.routerLink); isMobileMenuOpen = false">
+
+            <span class="nav-link">
+              {{ item.menuName }}
+            </span>
+
+          </li>
+          }
+
+        </ul>
+
+      </div>
+
+      <!-- ACCOUNT BUTTON -->
+      <div class="profile-box-wrapper">
+
+        <button
+          class="account-button"
+          (click)="toggleProfileDetail()">
+          <span class="online-dot"></span>
+          <span class="account-text">
+            {{ isUserLoggedIn ? 'My Account' : 'Sign In' }}
+          </span>
+
+          <i class="fa-solid fa-user"></i>
+
+        </button>
+
+      </div>
+
+    </nav>
+
+  </div>
 </header>
-<ng-template #profileLoginDetail>
-    @if(isProfileModelOpen){
-    <div class="profile-login-detail">
-        <div class="profile-login-relative">
-            <div class="profile-login-detail-header">
-                <h5 class="profile-lable">Profile Details</h5>
-                <button class="btn btn-icon close-btn" (click)="toggleProfileDetail()">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-            </div>
-            <div class="profile-detail-with-logout">
-                <div class="profile-details">
-                    <span class="profile-image">
-                        {{ userDetail.userName.toString().split('')[0] }}
-                        <!-- <img src="/cscImage/csc-1.webp" alt=""> -->
-                    </span>
-                    <!-- <div class="profile-info-with-btn"> -->
-                    <div class="profile-info">
-                        <h6 class="profile-title">{{ userDetail.userName }}</h6>
-                        <!-- <p class="profile-roll">{{ userDetail.userRoll }}</p> -->
-                    </div>
-                    <app-button buttonName="asBtnPrimary" [smallSize]="true" buttonText="Sign Out" (click)="userLogOute()"></app-button>
-                </div>
-            </div>
-        </div>
-        <!-- <div class="btn-group d-flex gap-3">
-            <app-button buttonName="asBtnPrimary" class="text-nowrap" [smallSize]="true" buttonText="View Profile" routerLink="/user/profile"></app-button>
-            <app-button buttonName="asBtnPrimary" [smallSize]="true" buttonText="Log Out" (click)="userLogOute()"></app-button>
-        </div> -->
+
+<!-- DRAWER BACKDROP -->
+<div
+  class="drawer-backdrop"
+  [class.show]="isProfileModelOpen"
+  (click)="toggleProfileDetail()">
+</div>
+
+<!-- ACCOUNT DRAWER -->
+<aside
+  class="account-drawer"
+  [class.open]="isProfileModelOpen">
+
+  <!-- DRAWER HEADER -->
+  <div class="drawer-header">
+
+    <div class="drawer-title">
+      <i class="fa-solid fa-id-card"></i>
+      <h2>Profile Details</h2>
     </div>
+
+    <button
+      class="close-button"
+      aria-label="Close profile"
+      (click)="toggleProfileDetail()">
+
+      <i class="fa-solid fa-xmark"></i>
+
+    </button>
+
+  </div>
+
+  <!-- AUTH STATUS -->
+  <div class="auth-switcher">
+
+    <span>
+      <span class="online-dot"></span>
+      Account Information
+    </span>
+
+  </div>
+
+  <!-- DRAWER BODY -->
+  <div class="drawer-body">
+
+    @if (isUserLoggedIn) {
+
+    <!-- LOGGED IN PROFILE -->
+    <div class="profile-section">
+
+      <div class="profile-info">
+
+        <div class="avatar">
+          {{ userDetail.userName[0] || 'U' }}
+          <span></span>
+        </div>
+
+        <div class="profile-details">
+
+          <h3>{{ userDetail.userName }}</h3>
+
+          <span class="verified">
+            <i class="fa-solid fa-circle-check"></i>
+            Verified Account
+          </span>
+
+          <p>{{ userDetail.userRoll }}</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- PROFILE MENU -->
+    <!-- <div class="menu-section">
+
+        <h4>MY ACCOUNT</h4>
+
+        <button class="menu-item">
+
+          <span class="menu-item-left">
+            <i class="fa-regular fa-user"></i>
+            My Profile
+          </span>
+
+          <i class="fa-solid fa-chevron-right menu-arrow"></i>
+
+        </button>
+
+        <button class="menu-item">
+
+          <span class="menu-item-left">
+            <i class="fa-solid fa-bag-shopping"></i>
+            My Orders
+          </span>
+
+          <i class="fa-solid fa-chevron-right menu-arrow"></i>
+
+        </button>
+
+        <button class="menu-item">
+
+          <span class="menu-item-left">
+            <i class="fa-regular fa-heart"></i>
+            Wishlist
+          </span>
+
+          <i class="fa-solid fa-chevron-right menu-arrow"></i>
+
+        </button>
+
+        <button class="menu-item">
+
+          <span class="menu-item-left">
+            <i class="fa-solid fa-location-dot"></i>
+            Saved Addresses
+          </span>
+
+          <i class="fa-solid fa-chevron-right menu-arrow"></i>
+
+        </button>
+
+      </div> -->
+
+    @for (section of menuSections; track section.title) {
+
+    <div class="menu-section">
+
+      <h4>{{ section.title }}</h4>
+
+      @for (item of section.items; track item.name) {
+
+      <button
+        class="menu-item"
+        [class.active]="activeMenu === item.name"
+        (click)="selectMenu(item.name)">
+
+        <span class="menu-item-left">
+
+          <i [class]="item.icon"></i>
+
+          {{ item.name }}
+
+        </span>
+
+        @if (item.badge) {
+        <span class="menu-badge">
+          {{ item.badge }}
+        </span>
+        } @else {
+        <i class="fa-solid fa-chevron-right menu-arrow"></i>
+        }
+
+      </button>
+
+      }
+
+    </div>
+
+    }
+    } @else {
+
+    <!-- GUEST VIEW -->
+    <div class="guest-view">
+
+      <div class="guest-icon">
+        <i class="fa-solid fa-user"></i>
+      </div>
+
+      <h3>Welcome to eMyshop</h3>
+
+      <p>
+        Sign in to manage your account, track your orders
+        and enjoy a better shopping experience.
+      </p>
+
+      <button class="guest-button" routerLink="/login">
+        Sign In with Email
+      </button>
+
+      <button class="guest-secondary-button" routerLink="/login">
+        Create an Account
+      </button>
+      <div class="border-top pt-4 text-start">
+
+        <p class="small fw-semibold text-secondary text-uppercase mb-3"
+          style="letter-spacing: 1px;">
+          Member Perks
+        </p>
+
+        <div class="d-flex flex-column gap-2">
+
+          <div class="d-flex align-items-center gap-2 small text-secondary">
+            <span class="text-success fw-bold">✓</span>
+            <span>Free express summer shipping</span>
+          </div>
+
+          <div class="d-flex align-items-center gap-2 small text-secondary">
+            <span class="text-success fw-bold">✓</span>
+            <span>30-day wear test &amp; simple returns</span>
+          </div>
+
+          <div class="d-flex align-items-center gap-2 small text-secondary">
+            <span class="text-success fw-bold">✓</span>
+            <span>Priority access to limited drops</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
     }
 
-</ng-template>
+  </div>
+
+  <!-- DRAWER FOOTER -->
+  <div class="drawer-footer">
+
+    <div class="footer-user">
+
+      <div class="footer-avatar">
+        {{ isUserLoggedIn ? userDetail.userName[0] : 'G' }}
+      </div>
+
+      <div>
+        <p>
+          {{ isUserLoggedIn ? userDetail.userName : 'Guest User' }}
+        </p>
+
+        <small>
+          {{ isUserLoggedIn ? 'Customer Account' : 'Guest Account' }}
+        </small>
+      </div>
+
+    </div>
+
+    <button
+      class="signout-button"
+      (click)="userLogOute(isUserLoggedIn)">
+
+      <i class="fa-solid"
+        [class.fa-right-from-bracket]="isUserLoggedIn"
+        [class.fa-right-to-bracket]="!isUserLoggedIn">
+      </i>
+
+      {{ isUserLoggedIn ? 'Sign Out' : 'Sign In' }}
+    </button>
+  </div>
+
+</aside>
