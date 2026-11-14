@@ -58,28 +58,28 @@ export class HeaderComponent implements OnInit {
   {
     title: 'My Account',
     items: [
-      { name: 'Personal Profile', icon: 'fa-regular fa-user' },
-      { name: 'My Orders', icon: 'fa-solid fa-bag-shopping', badge: '3 Active' },
-      { name: 'Wishlist', icon: 'fa-regular fa-heart', badge: '12' },
-      { name: 'Saved Addresses', icon: 'fa-solid fa-location-dot' },
-      { name: 'Payment Methods', icon: 'fa-regular fa-credit-card' }
+      { name: 'Personal Profile',routerLink:'profile', icon: 'fa-regular fa-user' },
+      { name: 'My Orders', routerLink:'my-oorders', icon: 'fa-solid fa-bag-shopping', badge: '3 Active' },
+      { name: 'Wishlist', routerLink:'wishlist', icon: 'fa-regular fa-heart', badge: '12' },
+      { name: 'Saved Addresses', routerLink:'saved-addresses', icon: 'fa-solid fa-location-dot' },
+      { name: 'Payment Methods', routerLink:'payment', icon: 'fa-regular fa-credit-card' }
     ]
   },
   {
     title: 'Shopping & Orders',
     items: [
-      { name: 'My Shopping Cart', icon: 'fa-solid fa-cart-shopping', badge: '4 items' },
-      { name: 'Track Active Order', icon: 'fa-solid fa-truck-fast' },
-      { name: 'Returns & Refunds', icon: 'fa-solid fa-rotate-left' },
-      { name: 'Coupons & Special Promos', icon: 'fa-solid fa-tags', badge: '2 New!' }
+      { name: 'My Shopping Cart', routerLink:'my-shopping', icon: 'fa-solid fa-cart-shopping', badge: '4 items' },
+      { name: 'Track Active Order', routerLink:'order', icon: 'fa-solid fa-truck-fast' },
+      { name: 'Returns & Refunds', routerLink:'return-refunds', icon: 'fa-solid fa-rotate-left' },
+      { name: 'Coupons & Special Promos', routerLink:'offers', icon: 'fa-solid fa-tags', badge: '2 New!' }
     ]
   },
   {
     title: 'Preferences & Support',
     items: [
-      { name: 'Notifications', icon: 'fa-regular fa-bell' },
-      { name: '24/7 Customer Care', icon: 'fa-solid fa-headset' },
-      { name: 'Security & Preferences', icon: 'fa-solid fa-gear' }
+      { name: 'Notifications', routerLink:'notifications', icon: 'fa-regular fa-bell' },
+      { name: '24/7 Customer Care', routerLink:' customer-care', icon: 'fa-solid fa-headset' },
+      { name: 'Security & Preferences', routerLink:'security', icon: 'fa-solid fa-gear' }
     ]
   }
 ];
@@ -153,8 +153,10 @@ export class HeaderComponent implements OnInit {
   toggleProfileDetail() {
     this.isProfileModelOpen = !this.isProfileModelOpen;
   }
-   selectMenu(menu: string): void {
+   selectMenu(menu: string,routerLink:String): void {
+    debugger
     this.activeMenu = menu;
+    this.routes.navigate(['my-account',routerLink])
   }
 }
 
@@ -172,6 +174,7 @@ interface Category {
 }
 
 interface MenuItem {
+  routerLink:string;
   name: string;
   icon: string;
   badge?: string;

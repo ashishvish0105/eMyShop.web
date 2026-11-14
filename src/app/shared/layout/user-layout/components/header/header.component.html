@@ -143,33 +143,33 @@
 
     </div>
     <!-- MEMBERSHIP -->
-          <div class="membership-card">
+    <div class="membership-card">
 
-            <div class="membership-heading">
+      <div class="membership-heading">
 
-              <span>
-                <i class="bi bi-star-fill"></i>
-                Gold VIP Member
-              </span>
+        <span>
+          <i class="bi bi-star-fill"></i>
+          Gold VIP Member
+        </span>
 
-              <span>540 / 750 pts</span>
+        <span>540 / 750 pts</span>
 
-            </div>
+      </div>
 
-            <div class="progress membership-progress">
-              <div
-                class="progress-bar"
-                role="progressbar"
-                style="width: 72%">
-              </div>
-            </div>
+      <div class="progress membership-progress">
+        <div
+          class="progress-bar"
+          role="progressbar"
+          style="width: 72%">
+        </div>
+      </div>
 
-            <div class="membership-footer">
-              <span>Next Reward: $15 Discount</span>
-              <a href="#">View Perks</a>
-            </div>
+      <div class="membership-footer">
+        <span>Next Reward: $15 Discount</span>
+        <a href="#">View Perks</a>
+      </div>
 
-          </div>
+    </div>
 
     <!-- PROFILE MENU -->
     <!-- <div class="menu-section">
@@ -233,7 +233,7 @@
       <button
         class="menu-item"
         [class.active]="activeMenu === item.name"
-        (click)="selectMenu(item.name)">
+        (click)="selectMenu(item.name,item.routerLink)">
 
         <span class="menu-item-left">
 
@@ -258,6 +258,38 @@
     </div>
 
     }
+
+    <div class="bg-dark text-white rounded-3 p-3">
+
+      <!-- Header -->
+      <div
+        class="d-flex align-items-center gap-2 text-warning fw-semibold text-uppercase mb-2"
+        style="font-size: 10px; letter-spacing: 1px;">
+
+        <i class="ph-bold ph-shield-check fs-6"></i>
+        <span>Zero Friction Return</span>
+
+      </div>
+
+      <!-- Description -->
+      <p class="text-secondary mb-2"
+        style="font-size: 11px; line-height: 1.6;">
+        Hassle-Free 30-Day Returns with complimentary door pickup
+        service across the US.
+      </p>
+
+      <!-- Action Link -->
+      <a href="#"
+        class="d-inline-flex align-items-center gap-1 text-decoration-none fw-semibold pt-1"
+        style="color: #a5b4fc; font-size: 12px;">
+
+        Start a Quick Exchange
+        <i class="ph ph-arrow-right" style="font-size: 10px;"></i>
+
+      </a>
+
+    </div>
+
     } @else {
 
     <!-- GUEST VIEW -->

@@ -6,6 +6,7 @@ import { AdminLayoutComponent } from './shared/layout/admin-layout/admin-layout.
 import { UserLayoutComponent } from './shared/layout/user-layout/user-layout.component';
 import { DashboardComponent } from './features/admin/dashboard/dashboard.component';
 import { ProductOutletComponent } from './features/admin/product-management/product-outlet/product-outlet.component';
+import { MyAccountComponent } from './modules/my-account/my-account.component';
 
 export const routes: Routes = [
   {
@@ -57,9 +58,18 @@ export const routes: Routes = [
         path: 'Product',
         component:ProductPageComponent,
         data: { staticInfo: 'Some Config Data' } // Static route data
-      }
+      },
+      {
+          path:'my-account',
+          component:MyAccountComponent,
+          loadChildren:()=>import('./modules/my-account/my-account.router').then(x=>x.myAccountRouter)
+          // children for small nested routes.
+          // loadChildren for feature modules such as my-account, admin, reports, and settings.
+          // loadComponent for lazy-loading individual standalone components.
+        }
     ]
   },
+
   {
     path: '**',
     component: PageNotFoundComponent,

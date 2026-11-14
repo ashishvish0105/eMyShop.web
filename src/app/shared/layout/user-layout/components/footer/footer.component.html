@@ -1,286 +1,312 @@
-<footer class="eMy-footer">
-
-  <div class="eMy-footer__container">
-
-    <!-- Main Footer -->
-    <div class="eMy-footer__main">
-
-      <!-- Brand -->
-      <div class="eMy-footer__brand">
-
-        <a routerLink="/" class="eMy-footer__logo">
-          <span class="eMy-footer__logo-text">eMy</span>
-          <span class="eMy-footer__logo-accent">Shop</span>
-        </a>
-
-        <p class="eMy-footer__description">
-          Discover your neighborhood favorites.
-          Shop smarter, order easily, and enjoy
-          a seamless shopping experience.
-        </p>
-
-        <!-- Social Links -->
-        <div class="eMy-footer__social">
-
-          <a href="https://facebook.com"
-             target="_blank"
-             rel="noopener noreferrer"
-             aria-label="Facebook">
-            f
-          </a>
-
-          <a href="https://instagram.com"
-             target="_blank"
-             rel="noopener noreferrer"
-             aria-label="Instagram">
-            ig
-          </a>
-
-          <a href="https://linkedin.com"
-             target="_blank"
-             rel="noopener noreferrer"
-             aria-label="LinkedIn">
-            in
-          </a>
-
-          <a href="https://youtube.com"
-             target="_blank"
-             rel="noopener noreferrer"
-             aria-label="YouTube">
-            ▶
-          </a>
-
-        </div>
-
-      </div>
-
-      <!-- Navigation -->
-      <div class="eMy-footer__column">
-
-        <h3>Explore</h3>
-
-        <ul>
-          <li><a routerLink="/">Home</a></li>
-          <li><a routerLink="/products">Products</a></li>
-          <li><a routerLink="/news-feed">News Feed</a></li>
-          <li><a routerLink="/offers">Special Offers</a></li>
-        </ul>
-
-      </div>
-
-      <!-- Account -->
-      <div class="eMy-footer__column">
-
-        <h3>My Account</h3>
-
-        <ul>
-          <li><a routerLink="/profile">My Profile</a></li>
-          <li><a routerLink="/orders">My Orders</a></li>
-          <li><a routerLink="/wishlist">My Wishlist</a></li>
-          <li><a routerLink="/cart">Shopping Cart</a></li>
-        </ul>
-
-      </div>
-
-      <!-- Customer Support -->
-      <div class="eMy-footer__column">
-
-        <h3>Customer Support</h3>
-
-        <ul>
-          <li><a routerLink="/contact">Contact Us</a></li>
-          <li><a routerLink="/help">Help Center</a></li>
-          <li><a routerLink="/faq">FAQs</a></li>
-          <li><a routerLink="/support">Support</a></li>
-        </ul>
-
-      </div>
-
-      <!-- Legal -->
-      <div class="eMy-footer__column">
-
-        <h3>Information</h3>
-
-        <ul>
-          <li><a routerLink="/about">About Us</a></li>
-          <li><a routerLink="/privacy-policy">Privacy Policy</a></li>
-          <li><a routerLink="/terms">Terms & Conditions</a></li>
-          <li><a routerLink="/refund-policy">Refund Policy</a></li>
-        </ul>
-
-      </div>
-
-    </div>
-
-    <!-- Footer Divider -->
-    <div class="eMy-footer__divider"></div>
-
-    <!-- Bottom Footer -->
-    <div class="eMy-footer__bottom">
-
-      <p>
-        © {{ currentYear }} eMyShop.
-        All rights reserved.
-      </p>
-
-      <p class="eMy-footer__tagline">
-        Made with <span>♥</span> for better shopping.
-      </p>
-
-    </div>
-
-  </div>
-
-</footer>
-
-<footer class="footer">
-  <div class="footer-top section">
+<footer class="emy-footer" id="footer-root" role="contentinfo">
+  <!-- Brand introduction -->
+  <section class="emy-footer__brand">
     <div class="container">
-
-      <div class="footer-brand">
-        <a href="#" class="logo">
-          <img src="https://i.postimg.cc/MpCNLjgy/logo.png"
-            alt="Footcap logo" width="160" height="50">
-        </a>
-
-        <ul class="social-list">
-          <li><a href="#" class="social-link">
-            <i class="fa-brands fa-facebook-f"></i>
-          </a></li>
-
-          <li><a href="#" class="social-link">
-            <i class="fa-brands fa-tiktok"></i>
-          </a></li>
-
-          <li><a href="#" class="social-link">
-            <i class="fa-brands fa-pinterest-p"></i>
-          </a></li>
-
-          <li><a href="#" class="social-link">
-            <i class="fa-brands fa-instagram"></i>
-          </a></li>
-        </ul>
-      </div>
-
-      <div class="footer-link-box">
-
-        <ul class="footer-list">
-          <li><p class="footer-list-title">Contact Us</p></li>
-
-          <li>
-            <address class="footer-link">
-              <i class="fa-solid fa-location-dot"></i>
-              <span class="footer-link-text">
-                2751 S Parker Rd, CO 80014, United States
-              </span>
-            </address>
-          </li>
-
-          <li>
-            <a href="tel:+557343673257" class="footer-link">
-              <i class="fa-solid fa-phone"></i>
-              <span class="footer-link-text">(+55) (734) 367-3257</span>
+      <div class="row align-items-center gy-4">
+        <div class="col-lg-7">
+          <div class="d-flex align-items-center flex-wrap gap-3 mb-3">
+            <a class="emy-footer__logo" routerLink="/" aria-label="eMyShop home">
+              <span>eMy</span><span>Shop</span>
             </a>
-          </li>
+            <span class="emy-footer__platform">
+              <span class="emy-footer__live-dot"></span>
+              Neighborhood Platform
+            </span>
+          </div>
 
-          <li>
-            <a href="{{ 'mailto:footcap@help.com' }}" class="footer-link">
-              <i class="fa-solid fa-envelope"></i>
-              <span class="footer-link-text">{{ 'footcap@help.com' }}</span>
-            </a>
-          </li>
-        </ul>
-
-        <ul class="footer-list">
-          <li><p class="footer-list-title">My Account</p></li>
-
-          <li><a href="#" class="footer-link">
-            <i class="fa-solid fa-chevron-right"></i>
-            <span class="footer-link-text">My Account</span>
-          </a></li>
-
-          <li><a href="#" class="footer-link">
-            <i class="fa-solid fa-chevron-right"></i>
-            <span class="footer-link-text">View Cart</span>
-          </a></li>
-
-          <li><a href="#" class="footer-link">
-            <i class="fa-solid fa-chevron-right"></i>
-            <span class="footer-link-text">Wishlist</span>
-          </a></li>
-
-          <li><a href="#" class="footer-link">
-            <i class="fa-solid fa-chevron-right"></i>
-            <span class="footer-link-text">Compare</span>
-          </a></li>
-
-          <li><a href="#" class="footer-link">
-            <i class="fa-solid fa-chevron-right"></i>
-            <span class="footer-link-text">New Products</span>
-          </a></li>
-        </ul>
-
-        <div class="footer-list">
-          <p class="footer-list-title">Opening Time</p>
-
-          <table class="footer-table">
-            <tbody>
-              <tr class="table-row">
-                <th class="table-head" scope="row">Mon - Tue:</th>
-                <td class="table-data">8AM - 10PM</td>
-              </tr>
-
-              <tr class="table-row">
-                <th class="table-head" scope="row">Wed:</th>
-                <td class="table-data">8AM - 7PM</td>
-              </tr>
-
-              <tr class="table-row">
-                <th class="table-head" scope="row">Fri:</th>
-                <td class="table-data">7AM - 12PM</td>
-              </tr>
-
-              <tr class="table-row">
-                <th class="table-head" scope="row">Sat:</th>
-                <td class="table-data">9AM - 8PM</td>
-              </tr>
-
-              <tr class="table-row">
-                <th class="table-head" scope="row">Sun:</th>
-                <td class="table-data">Closed</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="footer-list">
-          <p class="footer-list-title">Newsletter</p>
-
-          <p class="newsletter-text">
-            Your trusted source for stylish and comfortable footwear
+          <p class="emy-footer__description mb-3">
+            Discover your neighborhood favorites. Shop smarter, order easily,
+            and enjoy a seamless shopping experience.
           </p>
 
-          <form action="#" class="newsletter-form">
-            <input type="email" name="email" required
-              placeholder="Email address" class="newsletter-input">
-
-            <button type="submit" class="btn btn-primary">
-              Subscribe
-            </button>
-          </form>
+          <div class="emy-footer__social">
+            <span class="emy-footer__eyebrow">Connect With eMyshop</span>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
+                 aria-label="Follow eMyshop on Facebook" class="emy-footer__social-link">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073C24 5.446 18.627.073 12 .073S0 5.446 0 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073Z"/></svg>
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
+                 aria-label="Follow eMyshop on Instagram" class="emy-footer__social-link">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle class="emy-footer__icon-fill" cx="17.5" cy="6.5" r="1"/></svg>
+              </a>
+              <a href="https://x.com" target="_blank" rel="noopener noreferrer"
+                 aria-label="Follow eMyshop on X" class="emy-footer__social-link">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.78 7.75L23.2 22h-6.25l-4.9-7.4L5.6 22H2.45l7.25-8.3L1.8 2h6.4l4.43 6.75L18.9 2Zm-1.1 18h1.73L7.28 3.9H5.43L17.8 20Z"/></svg>
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
+                 aria-label="Follow eMyshop on LinkedIn" class="emy-footer__social-link">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0H5C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5ZM7 19H4V9h3v10ZM5.5 7.7a1.75 1.75 0 1 1 0-3.5 1.75 1.75 0 0 1 0 3.5ZM20 19h-3v-5.6c0-3.37-4-3.11-4 0V19h-3V9h3v1.77c1.4-2.59 7-2.78 7 2.47V19Z"/></svg>
+              </a>
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer"
+                 aria-label="Follow eMyshop on YouTube" class="emy-footer__social-link">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.51A3 3 0 0 0 .5 6.2C0 8.07 0 12 0 12s0 3.93.5 5.81a3 3 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3 3 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.8ZM9.55 15.57V8.43L15.82 12l-6.27 3.57Z"/></svg>
+              </a>
+              <a href="https://pinterest.com" target="_blank" rel="noopener noreferrer"
+                 aria-label="Follow eMyshop on Pinterest" class="emy-footer__social-link">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0a12 12 0 0 0-4.37 23.18c-.06-.99-.1-2.52.02-3.6.11-.99.74-6.32.74-6.32s-.19-.38-.19-.94c0-.88.51-1.54 1.15-1.54.54 0 .8.41.8.9 0 .55-.35 1.37-.53 2.13-.15.64.32 1.15.95 1.15 1.14 0 2.02-1.2 2.02-2.94 0-1.54-1.1-2.61-2.69-2.61-1.96 0-3.11 1.47-3.11 2.99 0 .59.23 1.23.51 1.57.07.07.07.13.05.2-.06.24-.19.77-.22.88-.04.14-.17.17-.28.1-1.04-.48-1.69-2-1.69-3.21 0-2.62 1.9-5.02 5.49-5.02 2.88 0 5.12 2.05 5.12 4.8 0 2.86-1.8 5.16-4.3 5.16-.84 0-1.63-.44-1.9-.96l-.52 1.97c-.19.72-.7 1.63-1.04 2.18A12 12 0 1 0 12 0Z"/></svg>
+              </a>
+            </div>
+          </div>
         </div>
 
+        <div class="col-lg-5">
+          <div class="emy-footer__local-card">
+            <h3 class="emy-footer__local-title">
+              <span class="emy-footer__accent-icon" aria-hidden="true">⌖</span>
+              Your neighborhood shopping destination
+            </h3>
+            <p class="mb-3">
+              Discover products, explore local favorites, and enjoy a seamless
+              shopping experience.
+            </p>
+            <div class="d-flex flex-wrap gap-3 emy-footer__local-points">
+              <span><i class="emy-footer__status-dot emy-footer__status-dot--success"></i> Verified Local Merchants</span>
+              <span><i class="emy-footer__status-dot emy-footer__status-dot--info"></i> Express Local Dispatch</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="footer-bottom">
+  <!-- Desktop navigation and newsletter -->
+  <section class="emy-footer__main">
     <div class="container">
-      <p class="copyright">
-        &copy; 2025
-        <a href="#" class="copyright-link">ULTRA CODE</a>.
-        All rights reserved
-      </p>
+      <div class="row g-4 g-xl-5">
+        <div class="col-md-6 col-lg-3">
+          <nav aria-labelledby="footer-explore-heading">
+            <h2 class="emy-footer__heading" id="footer-explore-heading">Explore eMyshop</h2>
+            <ul class="emy-footer__links">
+              <li><a routerLink="/">Home</a></li>
+              <li><a routerLink="/products">All Products</a></li>
+              <li><a routerLink="/new-arrivals" class="emy-footer__highlight-link">New Arrivals <span class="emy-footer__tag emy-footer__tag--pink">Fresh</span></a></li>
+              <li><a routerLink="/news">News Feed</a></li>
+              <li><a routerLink="/offers">Special Offers <span class="emy-footer__tag emy-footer__tag--amber">Deals</span></a></li>
+              <li><a routerLink="/trending">Trending Products</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <nav aria-labelledby="footer-account-heading">
+            <h2 class="emy-footer__heading" id="footer-account-heading">My Account</h2>
+            <ul class="emy-footer__links emy-footer__links--chevron">
+              <li><a routerLink="/account/profile">My Profile</a></li>
+              <li><a routerLink="/account/orders">My Orders <span class="emy-footer__tag emy-footer__tag--green">3 Active</span></a></li>
+              <li><a routerLink="/account/wishlist">My Wishlist <span class="emy-footer__tag emy-footer__tag--muted">12</span></a></li>
+              <li><a routerLink="/cart">Shopping Cart</a></li>
+              <li><a routerLink="/account/orders/tracking">Order Tracking</a></li>
+              <li><a routerLink="/account/addresses">Saved Addresses</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <nav aria-labelledby="footer-support-heading">
+            <h2 class="emy-footer__heading" id="footer-support-heading">Customer Support</h2>
+            <ul class="emy-footer__links emy-footer__links--chevron">
+              <li><a routerLink="/contact">Contact Us</a></li>
+              <li><a routerLink="/help">Help Center</a></li>
+              <li><a routerLink="/faqs">FAQs</a></li>
+              <li><a routerLink="/shipping">Shipping Information</a></li>
+              <li><a routerLink="/returns">Returns &amp; Refunds</a></li>
+              <li><a routerLink="/privacy">Privacy &amp; Security</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="emy-footer__newsletter">
+            <h2 class="emy-footer__heading">Stay Updated With eMyshop</h2>
+            <p class="emy-footer__newsletter-copy">
+              Get updates about new arrivals, exclusive deals, and neighborhood favorites.
+            </p>
+
+            <form class="emy-footer__form" (submit)="onNewsletterSubmit($event, desktopEmail.value, 'desktop')">
+              <label class="visually-hidden" for="desktop-email">Email address</label>
+              <div class="input-group">
+                <span class="input-group-text emy-footer__input-icon" aria-hidden="true">✉</span>
+                <input #desktopEmail id="desktop-email" class="form-control emy-footer__input"
+                       type="email" name="desktopEmail" placeholder="Enter your email"
+                       autocomplete="email" required email>
+                <button class="btn emy-footer__subscribe-btn" type="submit">Subscribe <span aria-hidden="true">→</span></button>
+              </div>
+              <p class="emy-footer__privacy-note">♢ We respect your privacy. Unsubscribe anytime.</p>
+              @if (desktopFeedback) {
+
+              <p *class="emy-footer__feedback"
+                 [class.emy-footer__feedback--success]="desktopFeedbackType === 'success'"
+                 [class.emy-footer__feedback--error]="desktopFeedbackType === 'error'"
+                 role="status" aria-live="polite">{{ desktopFeedback }}</p>
+              }
+
+            </form>
+
+            <div class="emy-footer__hotline">
+              <div class="emy-footer__hotline-icon" aria-hidden="true">☏</div>
+              <div>
+                <p class="mb-1 text-white fw-semibold">Need immediate assistance?</p>
+                <p class="mb-0">Call toll-free: <a href="tel:18003697467">1-800-EMY-SHOP</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile accordion navigation -->
+      <div class="emy-footer__mobile-nav">
+        <div class="accordion emy-footer__accordion" id="footerAccordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button"
+                      [class.collapsed]="activeAccordion !== 'explore'"
+                      [attr.aria-expanded]="activeAccordion === 'explore'"
+                      (click)="toggleAccordion('explore')">
+                <span class="emy-footer__accordion-marker"></span>Explore eMyshop
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" [class.show]="activeAccordion === 'explore'">
+              <div class="accordion-body">
+                <ul class="emy-footer__mobile-links">
+                  <li><a routerLink="/">Home</a></li>
+                  <li><a routerLink="/products">All Products</a></li>
+                  <li><a routerLink="/new-arrivals">New Arrivals</a></li>
+                  <li><a routerLink="/news">News Feed</a></li>
+                  <li><a routerLink="/offers">Special Offers</a></li>
+                  <li><a routerLink="/trending">Trending Products</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button"
+                      [class.collapsed]="activeAccordion !== 'account'"
+                      [attr.aria-expanded]="activeAccordion === 'account'"
+                      (click)="toggleAccordion('account')">
+                <span class="emy-footer__accordion-marker"></span>My Account
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" [class.show]="activeAccordion === 'account'">
+              <div class="accordion-body">
+                <ul class="emy-footer__mobile-links">
+                  <li><a routerLink="/account/profile">My Profile</a></li>
+                  <li><a routerLink="/account/orders">My Orders (3 Active)</a></li>
+                  <li><a routerLink="/account/wishlist">My Wishlist (12 items)</a></li>
+                  <li><a routerLink="/cart">Shopping Cart</a></li>
+                  <li><a routerLink="/account/orders/tracking">Order Tracking</a></li>
+                  <li><a routerLink="/account/addresses">Saved Addresses</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button"
+                      [class.collapsed]="activeAccordion !== 'support'"
+                      [attr.aria-expanded]="activeAccordion === 'support'"
+                      (click)="toggleAccordion('support')">
+                <span class="emy-footer__accordion-marker"></span>Customer Support
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" [class.show]="activeAccordion === 'support'">
+              <div class="accordion-body">
+                <ul class="emy-footer__mobile-links">
+                  <li><a routerLink="/contact">Contact Us</a></li>
+                  <li><a routerLink="/help">Help Center</a></li>
+                  <li><a routerLink="/faqs">FAQs</a></li>
+                  <li><a routerLink="/shipping">Shipping Information</a></li>
+                  <li><a routerLink="/returns">Returns &amp; Refunds</a></li>
+                  <li><a routerLink="/privacy">Privacy &amp; Security</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile newsletter -->
+        <div class="emy-footer__mobile-newsletter">
+          <h2 class="emy-footer__heading">✉ Stay Updated With eMyshop</h2>
+          <p>Get updates about new arrivals, exclusive deals, and neighborhood favorites.</p>
+          <form (submit)="onNewsletterSubmit($event, mobileEmail.value, 'mobile')">
+            <label class="visually-hidden" for="mobile-email">Email address</label>
+            <input #mobileEmail id="mobile-email" class="form-control emy-footer__input"
+                   type="email" name="mobileEmail" placeholder="Enter your email address"
+                   autocomplete="email" required email>
+            <button class="btn emy-footer__subscribe-btn w-100 mt-2" type="submit">
+              Subscribe to Updates <span aria-hidden="true">→</span>
+            </button>
+            <p class="emy-footer__privacy-note text-center">We respect your privacy. Unsubscribe anytime.</p>
+            @if(mobileFeedback){
+    <p *class="emy-footer__feedback"
+               [class.emy-footer__feedback--success]="mobileFeedbackType === 'success'"
+               [class.emy-footer__feedback--error]="mobileFeedbackType === 'error'"
+               role="status" aria-live="polite">{{ mobileFeedback }}</p>
+            }
+
+          </form>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
+
+  <!-- Customer trust benefits -->
+  <section class="emy-footer__trust">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-md-4">
+          <div class="emy-footer__trust-item">
+            <div class="emy-footer__trust-icon" aria-hidden="true">▣</div>
+            <div>
+              <h3>Easy Shopping</h3>
+              <p>Simple and convenient shopping experience.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="emy-footer__trust-item">
+            <div class="emy-footer__trust-icon" aria-hidden="true">♧</div>
+            <div>
+              <h3>Customer Support</h3>
+              <p>We're here whenever you need assistance.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="emy-footer__trust-item">
+            <div class="emy-footer__trust-icon" aria-hidden="true">◇</div>
+            <div>
+              <h3>Exclusive Offers</h3>
+              <p>Discover exciting deals and special offers.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Legal and copyright -->
+  <section class="emy-footer__bottom">
+    <div class="container">
+      <div class="row align-items-center gy-3 text-center text-md-start">
+        <div class="col-md-4">
+          <p class="mb-0">© {{ currentYear }} <strong>eMyshop</strong>. All rights reserved.</p>
+        </div>
+        <div class="col-md-5">
+          <nav class="emy-footer__legal" aria-label="Legal and policies">
+            <a routerLink="/privacy-policy">Privacy Policy</a>
+            <a routerLink="/terms">Terms &amp; Conditions</a>
+            <a routerLink="/refund-policy">Refund Policy</a>
+            <span class="emy-footer__secure">✓ PCI-DSS Secured</span>
+          </nav>
+        </div>
+        <div class="col-md-3 text-md-end">
+          <p class="mb-0 emy-footer__made-with">Made with <span aria-label="love">♥</span> for better shopping.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 </footer>
