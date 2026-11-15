@@ -1,45 +1,66 @@
 @switch(breadcumbType) { @case ("traditional"){
 <section class="breadcumb-section traditional" [class]="className">
-    <ul class="breadcumb-group">
-        <!-- <li class="group-item" routerLink="/dashboard">
+  <ul class="breadcumb-group">
+    <!-- <li class="group-item" routerLink="/dashboard">
               <span class="item-icon"><i class="fa fa-home"></i></span> dashboard
           </li> -->
-        @for (item of urlList; track $index) {
-        <li class="group-item" (click)="breadCumbMethod(item)">
-            <!-- [routerLink]="'/'+item" -->
-            {{ item }}
-        </li>
-        }
-    </ul>
-    <h2 class="breadcumb-title">{{ CurrentPathTitle }}</h2>
+    @for (item of urlList; track $index) {
+    <li class="group-item"  (click)="breadCumbMethod(item, $index)">
+      <!-- [routerLink]="'/'+item" -->
+      {{ item }}
+    </li>
+    }
+  </ul>
+  <h2 class="breadcumb-title">{{ CurrentPathTitle }}</h2>
 </section>
 } @case ("withoutTitle") {
 <section class="breadcumb-section traditional" [class]="className">
-    <ul class="breadcumb-group">
-        <!-- <li class="group-item" routerLink="/dashboard">
+  <ul class="breadcumb-group">
+    <!-- <li class="group-item" routerLink="/dashboard">
               <span class="item-icon"><i class="fa fa-home"></i></span> dashboard
           </li> -->
-        @for (item of urlList; track $index) {
-        <li class="group-item" (click)="breadCumbMethod(item)">
-            <!-- [routerLink]="'/'+item" -->
-            {{ item }}
-        </li>
-        }
-    </ul>
+    @for (item of urlList; track $index) {
+    <li class="group-item"  (click)="breadCumbMethod(item, $index)">
+      <!-- [routerLink]="'/'+item" -->
+      {{ item }}
+    </li>
+    }
+  </ul>
 </section>
 } @case ("morden"){
 <section class="breadcumb-section" [class]="className">
-    <h2 class="breadcumb-title">{{ CurrentPathTitle }}</h2>
-    <ul class="breadcumb-group">
-        <!-- <li class="group-item" routerLink="/dashboard">
+  <h2 class="breadcumb-title">{{ CurrentPathTitle }}</h2>
+  <ul class="breadcumb-group">
+    <!-- <li class="group-item" routerLink="/dashboard">
               <span class="item-icon"><i class="fa fa-home"></i></span> dashboard
           </li> -->
-        @for (item of urlList; track $index) {
-        <li class="group-item" (click)="breadCumbMethod(item)">
-            <!-- [routerLink]="'/'+item" -->
-            {{ item }}
-        </li>
-        }
-    </ul>
+    @for (item of urlList; track $index) {
+    <li class="group-item"  (click)="breadCumbMethod(item, $index)">
+      <!-- [routerLink]="'/'+item" -->
+      {{ item }}
+    </li>
+    }
+  </ul>
 </section>
-} }
+}
+@case ("mordenWithoutTitle"){
+<section class="breadcumb-section eShop-box-radiaus" [class]="className">
+
+    <ul class="breadcumb-group">
+
+      @for (item of urlList; track $index) {
+        <li
+          class="group-item"
+          [class.active]="$last"
+          [attr.aria-current]="$last ? 'page' : null"
+          (click)="breadCumbMethod(item, $index)"
+        >
+          {{ item }}
+        </li>
+      }
+
+    </ul>
+
+  </section>
+}
+}

@@ -63,6 +63,8 @@ body {
     color: $paragraph-color;
     // font-family: ;
     // font-weight: 400;
+    background: radial-gradient(#cbd5e1 1px, transparent 1px), linear-gradient( 135deg, #f1f5f9, #f8fafc, #eff6ff);
+    background-size: 24px 24px, cover;
     header {
         background-color: $white-Color;
         nav {
@@ -330,6 +332,14 @@ h6 {
     .form-label {
         color: #384959;
     }
+}
+
+.eShop-box-radiaus{
+      border: 1px solid #e2e8f0;
+    border-radius: 1rem;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.035);
+    padding: 15px 30px;
 }
 
 ::-webkit-scrollbar {

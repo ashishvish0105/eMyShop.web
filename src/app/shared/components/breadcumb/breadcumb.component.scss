@@ -1,7 +1,7 @@
-.breadcumb-section {
+.breadcumb-section,
+.eShop-box-radiaus {
     background-color: #fff;
-    padding: 50px;
-    border-radius: 20px;
+    padding: 15px 30px;
     // margin: 50px 0;
     .breadcumb-title {
         font-size: 60px;
@@ -24,8 +24,8 @@
                 padding-left: 30px;
                 position: relative;
                 &::after {
-                    content: "\f105";
-                    font-family: 'FontAwesome';
+                    content: "/";
+                    // font-family: 'FontAwesome';
                     position: absolute;
                     left: 8px;
                     top: 50%;
@@ -57,6 +57,8 @@
         }
     }
 }
+
+
 
 @media screen and (max-width:991.98px) {
     .breadcumb-section {
