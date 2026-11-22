@@ -1,0 +1,133 @@
+// Brand colors
+$brand-navy: #0f294a;
+$brand-blue: #2563eb;
+$brand-green: #10b981;
+
+$primary: #0051d5;
+$secondary: #2563eb;
+$success: #00885d;
+
+$light-background: #f7fafe;
+$light-surface: #ffffff;
+$light-surface-low: #f1f4f8;
+
+$text-primary: #00142f;
+$text-secondary: #44474e;
+$text-muted: #74777f;
+
+$border-color: #c4c6cf;
+
+// Typography
+$font-display: 'Mulish', sans-serif;
+$font-body: 'Instrument Sans', sans-serif;
+
+// Border radius
+$radius-sm: 6px;
+$radius-md: 12px;
+$radius-lg: 16px;
+$radius-xl: 24px;
+
+// Shadows
+$shadow-sm: 0 2px 8px rgba(15, 41, 74, 0.06);
+$shadow-md: 0 8px 24px rgba(15, 41, 74, 0.10);
+$shadow-lg: 0 20px 50px rgba(15, 41, 74, 0.15);
+
+// Section spacing
+$section-spacing: 96px;
+
+
+.registration-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(15, 41, 74, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  overflow-y: auto;
+}
+
+.registration-modal {
+  width: 100%;
+  max-width: 520px;
+  max-height: 95vh;
+  overflow-y: auto;
+  background: white;
+  padding: 30px;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-lg;
+  animation: modalEnter 0.25s ease;
+
+  .modal-header-custom {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 25px;
+
+    h3 {
+      font-size: 24px;
+    }
+
+    p {
+      color: $text-muted;
+      font-size: 13px;
+    }
+  }
+
+  .close-btn {
+    width: 38px;
+    height: 38px;
+    border: 0;
+    border-radius: 50%;
+    background: #f1f4f8;
+    flex-shrink: 0;
+  }
+
+  .form-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: $brand-navy;
+  }
+
+  .form-control,
+  .form-select {
+    padding: 12px;
+    border-color: $border-color;
+    border-radius: 8px;
+
+    &:focus {
+      border-color: $primary;
+      box-shadow: 0 0 0 3px rgba($primary, 0.12);
+    }
+  }
+}
+
+.success-content {
+  text-align: center;
+  padding: 35px 10px;
+
+  .success-icon {
+    color: $success;
+    font-size: 55px;
+    margin-bottom: 20px;
+  }
+
+  p {
+    color: $text-muted;
+    font-size: 14px;
+    margin: 15px 0 25px;
+  }
+}
+
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

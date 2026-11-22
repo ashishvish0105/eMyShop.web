@@ -1,0 +1,281 @@
+
+// ======================================
+// NearShop How It Works Section
+// ======================================
+
+$primary-color: #142b49;
+$secondary-color: #2563eb;
+$success-color: #10b981;
+
+$text-color: #526174;
+$border-color: #e5e9ef;
+$section-bg: #ffffff;
+$icon-bg: #eaf0fa;
+$success-bg: #d9f5e8;
+
+
+// Main Section
+.nearshop-how-it-works {
+  padding: 80px 0;
+  background: $section-bg;
+  border-top: 1px solid rgba($border-color, 0.7);
+  border-bottom: 1px solid rgba($border-color, 0.7);
+
+  // Section Heading
+  .how-it-works-heading {
+    max-width: 720px;
+    margin-bottom: 55px !important;
+
+    h2 {
+      color: $primary-color;
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.8px;
+      margin-bottom: 18px;
+    }
+
+    p {
+      color: $text-color;
+      font-size: 18px;
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
+  }
+
+  // Steps Container
+  .how-it-works-steps {
+    position: relative;
+    align-items: stretch;
+  }
+
+  // Connecting Line
+  .steps-connecting-line {
+    position: absolute;
+    top: 46px;
+    left: 18%;
+    width: 64%;
+    height: 24px;
+    z-index: 1;
+    pointer-events: none;
+    overflow: visible;
+  }
+
+  // Step Card
+  .how-step-card {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    padding: 28px;
+    height: 100%;
+    background: #ffffff;
+    border: 1px solid rgba($border-color, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(20, 43, 73, 0.05);
+    transition: all 0.25s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(20, 43, 73, 0.10);
+      border-color: rgba($secondary-color, 0.3);
+    }
+
+    h3 {
+      color: $primary-color;
+      font-size: 21px;
+      font-weight: 700;
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    p {
+      color: $text-color;
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 0;
+    }
+  }
+
+  // Step Icon
+  .step-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+
+    .material-symbols-outlined {
+      font-size: 27px;
+      line-height: 1;
+    }
+  }
+
+  .step-icon-primary {
+    background: $icon-bg;
+    color: $secondary-color;
+  }
+
+  .step-icon-success {
+    background: $success-bg;
+    color: $success-color;
+  }
+
+  // Step Badge
+  .step-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 13px;
+    border-radius: 50px;
+    background: #f1f4f8;
+    color: $primary-color;
+    font-size: 13px;
+    font-family: monospace;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .step-badge-success {
+    background: $success-bg;
+    color: #087c52;
+  }
+
+  // Animated Connecting Line
+  .animate-dash-flow {
+    stroke-dasharray: 8 8;
+    animation: dashFlow 20s linear infinite;
+  }
+}
+
+
+// ======================================
+// Dash Animation
+// ======================================
+
+@keyframes dashFlow {
+  from {
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    stroke-dashoffset: -160;
+  }
+}
+
+
+// ======================================
+// Responsive Styling
+// ======================================
+
+@media (max-width: 991.98px) {
+
+  .nearshop-how-it-works {
+    padding: 65px 0;
+
+    .how-it-works-heading {
+      h2 {
+        font-size: 30px;
+      }
+
+      p {
+        font-size: 16px;
+      }
+    }
+
+    .how-step-card {
+      padding: 22px;
+      gap: 18px;
+
+      h3 {
+        font-size: 19px;
+      }
+    }
+  }
+
+}
+
+@media (max-width: 767.98px) {
+
+  .nearshop-how-it-works {
+    padding: 55px 0;
+
+    .how-it-works-heading {
+      margin-bottom: 35px !important;
+
+      h2 {
+        font-size: 28px;
+      }
+    }
+
+    .how-it-works-steps {
+      row-gap: 20px;
+    }
+
+    .how-step-card {
+      padding: 24px;
+    }
+
+  }
+
+}
+
+@media (max-width: 575.98px) {
+
+  .nearshop-how-it-works {
+    padding: 45px 0;
+
+    .how-it-works-heading {
+
+      h2 {
+        font-size: 25px;
+        line-height: 1.35;
+      }
+
+      p {
+        font-size: 15px;
+      }
+    }
+
+    .how-step-card {
+      padding: 22px;
+      gap: 18px;
+
+      h3 {
+        font-size: 18px;
+      }
+
+      p {
+        font-size: 15px;
+      }
+    }
+  }
+
+}
+
+
+// ======================================
+// Accessibility: Reduced Motion
+// ======================================
+
+@media (prefers-reduced-motion: reduce) {
+
+  .nearshop-how-it-works {
+
+    .animate-dash-flow {
+      animation: none;
+    }
+
+    .how-step-card {
+      transition: none;
+
+      &:hover {
+        transform: none;
+      }
+    }
+
+  }
+
+}

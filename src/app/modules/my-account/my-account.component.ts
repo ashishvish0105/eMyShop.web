@@ -1,13 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { RouterModule, RouterOutlet } from '@angular/router';
 import { SnackbarService } from '../../shared/services/snackbar.service';
-import { BreadcumbComponent } from '../../shared/components/breadcumb/breadcumb.component';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-my-account',
   standalone: true,
-  imports: [RouterModule, RouterOutlet, BreadcumbComponent],
+  imports: [RouterOutlet,RouterLink],
   templateUrl: './my-account.component.html',
   styleUrl: './my-account.component.scss'
 })
@@ -168,6 +167,7 @@ export class MyAccountComponent {
     showConfirmPassword = false;
     showDeleteConfirmation = false;
     private snackbarService = inject(SnackbarService);
+    private router = inject(Router)
 
     private originalProfile: CustomerProfile | null = null;
 
@@ -345,6 +345,10 @@ export class MyAccountComponent {
     signOut(): void {
       // TODO: Call your authentication service to sign the customer out.
       this.showToast('Connect this button to your authentication sign-out method.');
+    }
+
+    createStoreEvent(){
+      this.router.navigate(['/store']);;
     }
 
     private isValidEmail(email: string): boolean {

@@ -1,0 +1,159 @@
+
+// NearShop Header Variables
+$nearshop-navy: #142b49;
+$nearshop-secondary: #2563eb;
+$nearshop-secondary-hover: #1d4ed8;
+$nearshop-text: #526174;
+$nearshop-border: #e5e9ef;
+$nearshop-background: #ffffff;
+$nearshop-mobile-bg: #f8fafc;
+$nearshop-green: #10b981;
+
+// Header
+.nearshop-header {
+  position: sticky;
+  top: 0;
+  z-index: 1040;
+  width: 100%;
+  background: rgba($nearshop-background, 0.96);
+  border-bottom: 1px solid rgba($nearshop-border, 0.8);
+  backdrop-filter: blur(12px);
+}
+
+// Container
+.nearshop-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 14px 24px;
+}
+
+// Brand
+.nearshop-brand {
+  flex-shrink: 0;
+}
+
+.nearshop-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background: $nearshop-navy;
+  color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+
+  svg {
+    display: block;
+  }
+}
+
+.nearshop-brand-name {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: $nearshop-navy;
+}
+
+// Desktop Navigation
+.nearshop-nav {
+  a {
+    color: $nearshop-text;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $nearshop-navy;
+    }
+  }
+}
+
+// Register Button
+.nearshop-register-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 6px;
+  background: $nearshop-secondary;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: $nearshop-secondary-hover;
+    color: #fff;
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $nearshop-secondary;
+    outline-offset: 3px;
+  }
+}
+
+// Mobile Toggle
+.nearshop-mobile-toggle {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: $nearshop-mobile-bg;
+  color: $nearshop-navy;
+
+  &:hover {
+    background: #edf1f6;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $nearshop-secondary;
+    outline-offset: 2px;
+  }
+}
+
+// Mobile Menu
+.nearshop-mobile-menu {
+  padding-top: 16px;
+  padding-bottom: 8px;
+  border-top: 1px solid rgba($nearshop-border, 0.8);
+
+  nav {
+    a {
+      padding: 5px 0;
+      color: $nearshop-text;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: $nearshop-navy;
+      }
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 575.98px) {
+  .nearshop-container {
+    padding: 12px 16px;
+  }
+
+  .nearshop-brand-name {
+    font-size: 20px;
+  }
+
+  .nearshop-mobile-menu {
+    padding-top: 14px;
+  }
+}

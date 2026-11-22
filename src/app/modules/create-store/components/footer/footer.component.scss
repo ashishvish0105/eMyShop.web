@@ -1,0 +1,190 @@
+
+.nearshop-footer {
+  background: #102f43;
+  color: #ffffff;
+  border-top: 1px solid #345366;
+  padding: 55px 0 25px;
+}
+
+// Main Footer
+.footer-main {
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+// Brand Section
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+// Logo
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  span {
+    font-size: 25px;
+    font-weight: 700;
+    color: #ffffff;
+  }
+}
+
+.footer-logo-icon {
+  width: 36px;
+  height: 36px;
+  background: #d9a85c;
+  color: #173d35;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  i {
+    font-size: 18px;
+  }
+}
+
+// Description
+.footer-description {
+  max-width: 390px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #c1d0d8;
+  margin-bottom: 0;
+}
+
+// Social Links
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 5px;
+
+  a {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #284b60;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 15px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: #d9a85c;
+      color: #173d35;
+      transform: translateY(-3px);
+    }
+  }
+}
+
+// Footer Links
+.footer-links-wrapper {
+  row-gap: 30px;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+
+  h5 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 5px;
+  }
+
+  a,
+  .footer-link-button {
+    width: fit-content;
+    font-size: 13px;
+    color: #c1d0d8;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  a:hover,
+  .footer-link-button:hover {
+    color: #ffffff;
+  }
+}
+
+// Register Button
+.footer-link-button {
+  padding: 0;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+// Footer Bottom
+.footer-bottom {
+  padding-top: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  p {
+    font-size: 12px;
+    color: #c1d0d8;
+    margin-bottom: 0;
+  }
+}
+
+// Tablet
+@media (max-width: 991px) {
+  .nearshop-footer {
+    padding-top: 45px;
+  }
+
+  .footer-brand {
+    margin-bottom: 35px;
+  }
+
+  .footer-description {
+    max-width: 450px;
+  }
+}
+
+// Mobile
+@media (max-width: 575px) {
+  .nearshop-footer {
+    padding: 40px 0 20px;
+  }
+
+  .footer-main {
+    padding-bottom: 30px;
+  }
+
+  .footer-logo span {
+    font-size: 22px;
+  }
+
+  .footer-description {
+    font-size: 13px;
+  }
+
+  .footer-links-wrapper {
+    row-gap: 30px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+
+    p {
+      font-size: 11px;
+      line-height: 1.6;
+    }
+  }
+}

@@ -1,0 +1,765 @@
+  <div class="min-h-[1024px] flex flex-col" data-stitch-vh="min-h-[1024px]===min-h-screen">
+
+    <!-- Sticky Header Navigation -->
+    <header class="sticky top-0 z-40 bg-light-surface-container-lowest/95 border-b border-light-outline-variant/50">
+      <div class="max-w-7xl mx-auto px-gutter-lg py-gutter-md flex items-center justify-between gap-gutter-md">
+        <a href="#top" class="flex items-center gap-gutter-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-secondary rounded-sm">
+          <div class="w-9 h-9 rounded-md bg-brand-navy text-light-on-primary flex items-center justify-center shadow-sm">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 9.5L6.5 4.5H17.5L20 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M4 9.5C4 11.1569 5.34315 12.5 7 12.5C8.65685 12.5 10 11.1569 10 9.5C10 11.1569 11.3431 12.5 13 12.5C14.6569 12.5 16 11.1569 16 9.5C16 11.1569 17.3431 12.5 19 12.5C19.5523 12.5 20 12.0523 20 11.5V9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+              <path d="M6 12.5V19.5H18V12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              <circle cx="17" cy="17" r="2.5" fill="#10B981"></circle>
+            </svg>
+          </div>
+          <span class="font-headline text-headline-sm text-light-primary tracking-tight">NearShop</span>
+        </a>
+
+        <nav aria-label="Primary navigation" class="hidden lg:flex items-center gap-gutter-xl">
+          <a href="#how-it-works" class="font-label text-label-lg text-light-on-surface-variant hover:text-light-primary transition-colors duration-state-change">How It Works</a>
+          <a href="#benefits" class="font-label text-label-lg text-light-on-surface-variant hover:text-light-primary transition-colors duration-state-change">Benefits</a>
+          <a href="#dashboard" class="font-label text-label-lg text-light-on-surface-variant hover:text-light-primary transition-colors duration-state-change">Dashboard</a>
+          <a href="#trust" class="font-label text-label-lg text-light-on-surface-variant hover:text-light-primary transition-colors duration-state-change">Local Impact</a>
+        </nav>
+
+        <div class="flex items-center gap-gutter-sm">
+          <button data-open-register type="button" class="hidden sm:inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-md bg-light-secondary text-light-on-secondary shadow-sm hover:bg-light-secondary-container active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-secondary focus-visible:ring-offset-2 transition-transform duration-state-change ease-state-change">
+            <span data-design-text-token="label-lg" class="font-label text-label-lg">Register Your Shop</span>
+          </button>
+
+          <button id="mobile-menu-btn" type="button" aria-label="Open navigation menu" aria-expanded="false" class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-md bg-light-surface-container-low text-light-primary hover:bg-light-surface-container focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-secondary">
+            <span class="material-symbols-outlined text-title-lg" aria-hidden="true">menu</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Dropdown Menu -->
+      <div id="mobile-menu" class="hidden lg:hidden border-t border-light-outline-variant/40 bg-light-surface-container-lowest px-gutter-lg py-gutter-md">
+        <nav aria-label="Mobile navigation" class="flex flex-col gap-gutter-md">
+          <a href="#how-it-works" class="font-label text-label-lg text-light-on-surface-variant hover:text-light-primary py-1">How It Works</a>
+          <a href="#benefits" class="font-label text-label-lg text-light-on-surface-variant hover:text-light-primary py-1">Benefits</a>
+          <a href="#dashboard" class="font-label text-label-lg text-light-on-surface-variant hover:text-light-primary py-1">Dashboard</a>
+          <a href="#trust" class="font-label text-label-lg text-light-on-surface-variant hover:text-light-primary py-1">Local Impact</a>
+          <button data-open-register type="button" class="mt-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-md bg-light-secondary text-light-on-secondary font-label text-label-lg">
+            Register Your Shop
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top" class="flex-1">
+
+      <!-- 3. HERO SECTION -->
+      <section class="relative overflow-hidden bg-gradient-to-b from-light-surface-container-lowest via-light-surface to-light-surface-container-low pt-gutter-xl pb-section-md lg:pt-section-sm lg:pb-section-lg">
+        <!-- Subtle ambient background accents -->
+        <div aria-hidden="true" class="pointer-events-none absolute -top-24 -right-24 w-96 h-96 rounded-full bg-navy-tint opacity-70 blur-3xl"></div>
+        <div aria-hidden="true" class="pointer-events-none absolute bottom-0 -left-24 w-80 h-80 rounded-full bg-success-container opacity-35 blur-3xl"></div>
+
+        <div class="max-w-7xl mx-auto px-gutter-lg relative z-10">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-xl lg:gap-gutter-xl items-center">
+
+            <!-- Left Copy Column -->
+            <div class="lg:col-span-6 flex flex-col items-start gap-gutter-lg">
+              <!-- Trust Indicator Pill -->
+              <div class="animate-hero-enter inline-flex items-center gap-gutter-sm px-3.5 py-1.5 rounded-full bg-navy-tint border border-light-outline-variant/50 text-light-primary">
+                <span class="w-2 h-2 rounded-full bg-brand-green" aria-hidden="true"></span>
+                <span data-design-text-token="label-md" class="font-label text-label-md">Built for Local Businesses. Designed for Growth.</span>
+              </div>
+
+              <!-- Main Headline -->
+              <h1 class="animate-hero-enter-delay-1 font-display text-display-lg-mobile md:text-display-lg text-light-primary text-balance">
+                Your Shop Deserves to Be Online.
+              </h1>
+
+              <!-- Supporting Text -->
+              <p class="animate-hero-enter-delay-2 font-body text-body-lg text-light-on-surface-variant max-w-prose text-pretty">
+                Bring your local business online, reach more customers, and grow your sales. Create your digital shop with us and let customers discover your products from anywhere.
+              </p>
+
+              <!-- Primary & Secondary CTAs -->
+              <div class="animate-hero-enter-delay-2 flex flex-wrap items-center gap-gutter-md pt-gutter-xs">
+                <!-- COMPONENT: button-primary -->
+                <button data-component-id="button-primary" data-component-type="button" data-component-variant="primary" data-open-register type="button" class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-md bg-light-secondary text-light-on-secondary shadow-md hover:bg-light-secondary-container active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-secondary focus-visible:ring-offset-2 transition-transform duration-state-change ease-state-change">
+                  <span data-design-text-token="label-lg" class="font-label text-label-lg">Register Your Shop</span>
+                  <span class="material-symbols-outlined text-title-md" aria-hidden="true">arrow_forward</span>
+                </button>
+
+                <!-- COMPONENT: button-secondary -->
+                <a href="#how-it-works" data-component-id="button-secondary" data-component-type="button" data-component-variant="secondary" class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-md bg-light-surface-container-lowest text-light-primary border border-light-outline-variant hover:bg-navy-tint active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-secondary focus-visible:ring-offset-2 transition-transform duration-state-change ease-state-change">
+                  <span data-design-text-token="label-lg" class="font-label text-label-lg">Explore How It Works</span>
+                </a>
+              </div>
+
+              <!-- Subtle neighborhood commerce proof strip -->
+              <div class="animate-hero-enter-delay-2 pt-gutter-md flex flex-wrap items-center gap-gutter-lg border-t border-light-outline-variant/40 w-full">
+                <div class="flex items-center gap-gutter-sm">
+                  <span class="material-symbols-outlined text-success text-title-lg" aria-hidden="true">verified</span>
+                  <span class="font-body text-body-sm text-light-on-surface-variant">5-minute shop onboarding</span>
+                </div>
+                <div class="flex items-center gap-gutter-sm">
+                  <span class="material-symbols-outlined text-light-secondary text-title-lg" aria-hidden="true">local_shipping</span>
+                  <span class="font-body text-body-sm text-light-on-surface-variant">Delivery &amp; in-store pickup ready</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Visual Scene: Realistic Handshake + Smartphone Storefront + Floating Products + Connection Lines -->
+            <div class="lg:col-span-6 relative animate-hero-enter-delay-1">
+              <div id="hero-parallax-stage" class="relative mx-auto max-w-xl lg:max-w-none pt-4 pb-8 px-2 sm:px-6">
+
+                <!-- Animated SVG Connection Lines bridging physical shop & digital marketplace -->
+                <svg aria-hidden="true" class="hidden sm:block pointer-events-none absolute inset-0 w-full h-full z-20" viewBox="0 0 600 480" fill="none">
+                  <path d="M 165 105 C 245 75, 315 110, 385 160" stroke="#2563EB" stroke-width="2" stroke-linecap="round" class="animate-dash-flow opacity-70" style="transform-box: fill-box; transform-origin: center;"></path>
+                  <path d="M 435 320 C 370 375, 275 390, 210 355" stroke="#10B981" stroke-width="2" stroke-linecap="round" class="animate-dash-flow opacity-75" style="transform-box: fill-box; transform-origin: center;"></path>
+                  <circle cx="165" cy="105" r="5" fill="#2563EB"></circle>
+                  <circle cx="385" cy="160" r="5" fill="#2563EB"></circle>
+                  <circle cx="435" cy="320" r="5" fill="#10B981"></circle>
+                  <circle cx="210" cy="355" r="5" fill="#10B981"></circle>
+                </svg>
+
+                <!-- Main Realistic Handshake Photo Card -->
+                <div class="relative rounded-xl overflow-hidden shadow-2xl border border-light-surface-container-lowest bg-light-surface-container-lowest">
+                  <img src="https://lh3.googleusercontent.com/aida/ALJJyrCg_7ngNrDNUGe7eZfiTYaEB9_ZYbXfVIKyTRoTmX4ZcRpcg-546d694uNXSDDLAlMxwGoEUzYeVwb8TEUeYkpoCYLg50T1heaTAko2RpD6kPjGHYuPCniNcXD6lQW_76XdB4hFRoZy4sNieeSlzeQFbQCRFgT0wTcm4Myl8cogp9hpmVePOyqptAlvRDdMg_Ltskbi8WHArrP9x17guUYk0jNfAxFiAvZYF13NnHrS9WmSIE4nmAX7IhXZAnJ83-paA4U" alt="Local shopkeeper smiling and shaking hands with a customer inside a modern neighborhood shop" class="w-full h-80 sm:h-96 object-cover object-center">
+                  <div class="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-brand-navy/90 via-brand-navy/50 to-transparent pointer-events-none"></div>
+                  <div class="absolute bottom-4 left-4 right-4 sm:right-48 flex flex-wrap items-center gap-gutter-sm">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-success-container text-on-success-container font-label text-label-sm shadow-sm">
+                      <span class="w-1.5 h-1.5 rounded-full bg-success" aria-hidden="true"></span>
+                      Live Neighborhood Store
+                    </span>
+                    <span class="px-2.5 py-1 rounded-md bg-brand-navy font-body text-body-sm text-light-on-primary">Oakwood Provisions</span>
+                  </div>
+                </div>
+
+                <!-- Floating Product Card 1 (Top Left) -->
+                <div class="animate-float-slow hidden sm:flex items-center gap-gutter-sm bg-light-surface-container-lowest rounded-lg p-3 shadow-xl border border-light-outline-variant/50 absolute -top-2 -left-2 z-30 max-w-[230px]">
+                  <img src="https://lh3.googleusercontent.com/aida/ALJJyrDUCn0d2XnqwgDfMeuzbeSRVKvEhq7ngHYWbFuplJrs6kYMSBfg7s1gCDHeFY_v0jZDGPjKH9D_DBT9q66N9JuCNZFkFGjI5yczmwYNwGHOIURmJtjG3vcxE6UpFp7hKrayUHOh0lOEgkBmLc6YZyDAC-srdDiccXPfQPjqGyOyHDqiDYQsKJC4iAB4TCAud_3RIzjTnuLkdC8GLz0-hYt_J09PHbrfIVPveNXamkfVxjL23vRW06r-NpL6lzZZ" alt="Artisan roasted coffee beans" class="w-12 h-12 rounded-md object-cover shrink-0 bg-light-surface-container-low">
+                  <div class="min-w-0">
+                    <p class="font-title text-label-md text-light-primary truncate">Single Origin Roast</p>
+                    <div class="flex items-center gap-2 mt-0.5">
+                      <span class="font-mono text-mono-sm text-light-primary tabular-nums">$16.50</span>
+                      <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-success-container text-on-success-container font-label text-label-sm">Added</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Floating Product Card 2 (Bottom Left) -->
+                <div class="animate-float-delayed hidden sm:flex items-center gap-gutter-sm bg-light-surface-container-lowest rounded-lg p-3 shadow-xl border border-light-outline-variant/50 absolute bottom-2 left-4 z-30 max-w-[240px]">
+                  <img src="https://lh3.googleusercontent.com/aida/ALJJyrBRB1PoqA3kQq-byyP7NjpPmiuXGzMwtPm637xA6Nm6c0hzZYvW1vjyl_zFYcBFwZXLuSezKVCNrQ1dxmtMRXNNHVWK21kLs-pF5tvx9wUE0LyK9bXmUwdMsJDfdUlWPUiMXEK8GALBnAyq-fBz4rVv6IHPgX2xZLSAbwwhd-Ip9oKQsqgDHYv06vSXnfOfWonlCG6HVChicO2QQJxhu9MF5qyIkWloK-Gff0ImdY1r32grEwCAea9vc0ua" alt="Fresh artisan sourdough loaf" class="w-12 h-12 rounded-md object-cover shrink-0 bg-light-surface-container-low">
+                  <div class="min-w-0">
+                    <p class="font-title text-label-md text-light-primary truncate">Country Sourdough</p>
+                    <div class="flex items-center gap-2 mt-0.5">
+                      <span class="font-mono text-mono-sm text-light-primary tabular-nums">$8.50</span>
+                      <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-navy-tint text-light-secondary font-label text-label-sm">Pickup Ready</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Realistic Smartphone Mockup Overlay (Bottom Right) -->
+                <div class="animate-float-delayed relative sm:absolute sm:-bottom-4 sm:right-0 z-30 mt-4 sm:mt-0 w-full sm:w-56 bg-brand-navy rounded-xl p-2 shadow-2xl border border-light-primary-container">
+                  <div class="bg-light-surface-container-lowest rounded-lg p-3 flex flex-col gap-2.5">
+                    <div class="flex items-center justify-between border-b border-light-surface-container pb-2">
+                      <div class="flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-brand-green" aria-hidden="true"></span>
+                        <span class="font-label text-label-sm text-light-primary">Oakwood Online</span>
+                      </div>
+                      <span class="material-symbols-outlined text-light-secondary text-title-md" aria-hidden="true">shopping_bag</span>
+                    </div>
+
+                    <div class="rounded-md bg-light-surface-container-low p-2.5 flex items-center justify-between">
+                      <div>
+                        <p class="font-label text-label-sm text-light-on-surface-variant">New Order #4821</p>
+                        <p class="font-mono text-mono-md text-light-primary tabular-nums">$42.80</p>
+                      </div>
+                      <span class="px-2 py-0.5 rounded-full bg-success-container text-on-success-container font-label text-label-sm">Paid</span>
+                    </div>
+
+                    <div class="flex items-center justify-between text-label-sm font-label">
+                      <span class="inline-flex items-center gap-1 text-light-secondary">
+                        <span class="material-symbols-outlined text-body-md" aria-hidden="true">local_shipping</span>
+                        Delivery
+                      </span>
+                      <span class="text-light-on-surface-variant">18 mins away</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. HOW IT WORKS SECTION -->
+      <section id="how-it-works" class="py-section-md lg:py-section-lg bg-light-surface-container-lowest border-y border-light-outline-variant/40">
+        <div class="max-w-7xl mx-auto px-gutter-lg">
+          <div class="max-w-2xl mx-auto text-center mb-gutter-xl lg:mb-section-sm reveal-on-scroll">
+            <h2 class="font-headline text-headline-lg-mobile md:text-headline-lg text-light-primary text-balance">
+              Take Your Local Shop Online in 3 Simple Steps
+            </h2>
+            <p class="mt-gutter-md font-body text-body-lg text-light-on-surface-variant text-pretty">
+              Launch your neighborhood storefront without technical complexity or upfront setup fees.
+            </p>
+          </div>
+
+          <div class="relative grid grid-cols-1 md:grid-cols-3 gap-gutter-lg items-stretch">
+            <!-- Animated Connecting Line (Desktop) -->
+            <svg aria-hidden="true" class="hidden md:block pointer-events-none absolute top-14 left-[18%] right-[18%] w-[64%] h-6 z-0" viewBox="0 0 600 24" fill="none">
+              <path d="M 0 12 L 600 12" stroke="#C4C6CF" stroke-width="2"></path>
+              <path d="M 0 12 L 600 12" stroke="#2563EB" stroke-width="2" class="animate-dash-flow" style="transform-box: fill-box; transform-origin: center;"></path>
+            </svg>
+
+            <!-- Step 1 -->
+            <article data-component-id="card-elevated" data-component-type="card" data-component-variant="elevated" class="reveal-on-scroll relative z-10 bg-light-surface-container-lowest rounded-lg p-gutter-lg border border-light-outline-variant/60 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-state-change flex flex-col gap-gutter-md h-full">
+              <div class="flex items-center justify-between">
+                <div class="w-12 h-12 rounded-md bg-navy-tint text-light-secondary flex items-center justify-center">
+                  <span class="material-symbols-outlined text-headline-md" aria-hidden="true">app_registration</span>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-light-surface-container-low text-light-primary font-mono text-mono-sm">Step 1</span>
+              </div>
+              <h3 data-design-text-token="headline-sm" class="font-headline text-headline-sm text-light-primary">
+                Register Your Shop
+              </h3>
+              <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant text-pretty">
+                Enter your shop details and create your business account.
+              </p>
+            </article>
+
+            <!-- Step 2 -->
+            <article data-component-id="card-elevated" data-component-type="card" data-component-variant="elevated" class="reveal-on-scroll relative z-10 bg-light-surface-container-lowest rounded-lg p-gutter-lg border border-light-outline-variant/60 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-state-change flex flex-col gap-gutter-md h-full">
+              <div class="flex items-center justify-between">
+                <div class="w-12 h-12 rounded-md bg-navy-tint text-light-secondary flex items-center justify-center">
+                  <span class="material-symbols-outlined text-headline-md" aria-hidden="true">inventory_2</span>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-light-surface-container-low text-light-primary font-mono text-mono-sm">Step 2</span>
+              </div>
+              <h3 data-design-text-token="headline-sm" class="font-headline text-headline-sm text-light-primary">
+                Build Your Online Store
+              </h3>
+              <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant text-pretty">
+                Upload your products, add prices, and customize your digital storefront.
+              </p>
+            </article>
+
+            <!-- Step 3 -->
+            <article data-component-id="card-elevated" data-component-type="card" data-component-variant="elevated" class="reveal-on-scroll relative z-10 bg-light-surface-container-lowest rounded-lg p-gutter-lg border border-light-outline-variant/60 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-state-change flex flex-col gap-gutter-md h-full">
+              <div class="flex items-center justify-between">
+                <div class="w-12 h-12 rounded-md bg-success-container text-on-success-container flex items-center justify-center">
+                  <span class="material-symbols-outlined text-headline-md" aria-hidden="true">shopping_cart_checkout</span>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-success-container text-on-success-container font-mono text-mono-sm">Step 3</span>
+              </div>
+              <h3 data-design-text-token="headline-sm" class="font-headline text-headline-sm text-light-primary">
+                Start Receiving Orders
+              </h3>
+              <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant text-pretty">
+                Let customers discover your products, place orders, and choose delivery or store pickup.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. BENEFITS FOR SHOPKEEPERS -->
+      <section id="benefits" class="py-section-md lg:py-section-lg bg-light-surface">
+        <div class="max-w-7xl mx-auto px-gutter-lg">
+          <div class="max-w-2xl mb-gutter-xl lg:mb-section-sm reveal-on-scroll">
+            <h2 class="font-headline text-headline-lg-mobile md:text-headline-lg text-light-primary text-balance">
+              Everything Your Local Business Needs to Grow
+            </h2>
+            <p class="mt-gutter-md font-body text-body-lg text-light-on-surface-variant text-pretty">
+              Built around how neighborhood shopkeepers actually work—from inventory updates to counter pickup.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter-md lg:gap-gutter-lg items-stretch">
+            <!-- Benefit 1 -->
+            <article data-component-id="card-elevated" data-component-type="card" data-component-variant="elevated" class="reveal-on-scroll bg-light-surface-container-lowest rounded-lg p-gutter-lg border border-light-outline-variant/60 shadow-sm hover:border-light-secondary/60 hover:shadow-md transition-all duration-state-change flex flex-col gap-3 h-full">
+              <div class="w-11 h-11 rounded-md bg-navy-tint text-light-secondary flex items-center justify-center">
+                <span class="material-symbols-outlined text-headline-sm" aria-hidden="true">storefront</span>
+              </div>
+              <h3 data-design-text-token="title-lg" class="font-title text-title-lg text-light-primary">Online Store</h3>
+              <p data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">Create your own digital shop.</p>
+            </article>
+
+            <!-- Benefit 2 -->
+            <article data-component-id="card-elevated" data-component-type="card" data-component-variant="elevated" class="reveal-on-scroll bg-light-surface-container-lowest rounded-lg p-gutter-lg border border-light-outline-variant/60 shadow-sm hover:border-light-secondary/60 hover:shadow-md transition-all duration-state-change flex flex-col gap-3 h-full">
+              <div class="w-11 h-11 rounded-md bg-navy-tint text-light-secondary flex items-center justify-center">
+                <span class="material-symbols-outlined text-headline-sm" aria-hidden="true">group_add</span>
+              </div>
+              <h3 data-design-text-token="title-lg" class="font-title text-title-lg text-light-primary">More Customers</h3>
+              <p data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">Reach customers beyond walk-in visitors.</p>
+            </article>
+
+            <!-- Benefit 3 -->
+            <article data-component-id="card-elevated" data-component-type="card" data-component-variant="elevated" class="reveal-on-scroll bg-light-surface-container-lowest rounded-lg p-gutter-lg border border-light-outline-variant/60 shadow-sm hover:border-light-secondary/60 hover:shadow-md transition-all duration-state-change flex flex-col gap-3 h-full">
+              <div class="w-11 h-11 rounded-md bg-navy-tint text-light-secondary flex items-center justify-center">
+                <span class="material-symbols-outlined text-headline-sm" aria-hidden="true">edit_note</span>
+              </div>
+              <h3 data-design-text-token="title-lg" class="font-title text-title-lg text-light-primary">Easy Product Management</h3>
+              <p data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">Add and manage products easily.</p>
+            </article>
+
+            <!-- Benefit 4 -->
+            <article data-component-id="card-elevated" data-component-type="card" data-component-variant="elevated" class="reveal-on-scroll bg-light-surface-container-lowest rounded-lg p-gutter-lg border border-light-outline-variant/60 shadow-sm hover:border-light-secondary/60 hover:shadow-md transition-all duration-state-change flex flex-col gap-3 h-full">
+              <div class="w-11 h-11 rounded-md bg-success-container text-on-success-container flex items-center justify-center">
+                <span class="material-symbols-outlined text-headline-sm" aria-hidden="true">verified_user</span>
+              </div>
+              <h3 data-design-text-token="title-lg" class="font-title text-title-lg text-light-primary">Online Payments</h3>
+              <p data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">Receive payments through secure online payment options.</p>
+            </article>
+
+            <!-- Benefit 5 -->
+            <article data-component-id="card-elevated" data-component-type="card" data-component-variant="elevated" class="reveal-on-scroll bg-light-surface-container-lowest rounded-lg p-gutter-lg border border-light-outline-variant/60 shadow-sm hover:border-light-secondary/60 hover:shadow-md transition-all duration-state-change flex flex-col gap-3 h-full">
+              <div class="w-11 h-11 rounded-md bg-navy-tint text-light-secondary flex items-center justify-center">
+                <span class="material-symbols-outlined text-headline-sm" aria-hidden="true">local_shipping</span>
+              </div>
+              <h3 data-design-text-token="title-lg" class="font-title text-title-lg text-light-primary">Home Delivery</h3>
+              <p data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">Deliver orders to customers when available.</p>
+            </article>
+
+            <!-- Benefit 6 -->
+            <article data-component-id="card-elevated" data-component-type="card" data-component-variant="elevated" class="reveal-on-scroll bg-light-surface-container-lowest rounded-lg p-gutter-lg border border-light-outline-variant/60 shadow-sm hover:border-light-secondary/60 hover:shadow-md transition-all duration-state-change flex flex-col gap-3 h-full">
+              <div class="w-11 h-11 rounded-md bg-navy-tint text-light-secondary flex items-center justify-center">
+                <span class="material-symbols-outlined text-headline-sm" aria-hidden="true">store_mall_directory</span>
+              </div>
+              <h3 data-design-text-token="title-lg" class="font-title text-title-lg text-light-primary">Store Pickup</h3>
+              <p data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">Allow customers to collect their orders directly.</p>
+            </article>
+
+            <!-- Benefit 7 -->
+            <article data-component-id="card-elevated" data-component-type="card" data-component-variant="elevated" class="reveal-on-scroll bg-light-surface-container-lowest rounded-lg p-gutter-lg border border-light-outline-variant/60 shadow-sm hover:border-light-secondary/60 hover:shadow-md transition-all duration-state-change flex flex-col gap-3 h-full">
+              <div class="w-11 h-11 rounded-md bg-navy-tint text-light-secondary flex items-center justify-center">
+                <span class="material-symbols-outlined text-headline-sm" aria-hidden="true">receipt_long</span>
+              </div>
+              <h3 data-design-text-token="title-lg" class="font-title text-title-lg text-light-primary">Order Management</h3>
+              <p data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">Manage incoming orders from one dashboard.</p>
+            </article>
+
+            <!-- Benefit 8 -->
+            <article data-component-id="card-elevated" data-component-type="card" data-component-variant="elevated" class="reveal-on-scroll bg-light-surface-container-lowest rounded-lg p-gutter-lg border border-light-outline-variant/60 shadow-sm hover:border-light-secondary/60 hover:shadow-md transition-all duration-state-change flex flex-col gap-3 h-full">
+              <div class="w-11 h-11 rounded-md bg-success-container text-on-success-container flex items-center justify-center">
+                <span class="material-symbols-outlined text-headline-sm" aria-hidden="true">trending_up</span>
+              </div>
+              <h3 data-design-text-token="title-lg" class="font-title text-title-lg text-light-primary">Business Growth</h3>
+              <p data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">Build your online presence and grow your business.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. REALISTIC DASHBOARD PREVIEW -->
+      <section id="dashboard" class="py-section-md lg:py-section-lg bg-light-surface-container-low border-y border-light-outline-variant/40">
+        <div class="max-w-7xl mx-auto px-gutter-lg">
+          <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-gutter-md mb-gutter-xl reveal-on-scroll">
+            <div class="max-w-2xl">
+              <h2 class="font-headline text-headline-lg-mobile md:text-headline-lg text-light-primary text-balance">
+                Run Your Entire Online Shop From One Clear Dashboard
+              </h2>
+              <p class="mt-gutter-sm font-body text-body-lg text-light-on-surface-variant text-pretty">
+                Track incoming orders, update product availability, and coordinate home delivery or counter pickup in real time.
+              </p>
+            </div>
+            <div class="flex items-center gap-2 bg-light-surface-container-lowest p-1.5 rounded-md border border-light-outline-variant/60 self-start lg:self-auto" role="tablist" aria-label="Dashboard preview views">
+              <button type="button" role="tab" aria-selected="true" data-dash-tab="orders" class="dash-tab-btn px-4 py-2 rounded-sm font-label text-label-md bg-light-secondary text-light-on-secondary transition-colors duration-state-change">Recent Orders</button>
+              <button type="button" role="tab" aria-selected="false" data-dash-tab="products" class="dash-tab-btn px-4 py-2 rounded-sm font-label text-label-md text-light-on-surface-variant hover:text-light-primary transition-colors duration-state-change">Products</button>
+              <button type="button" role="tab" aria-selected="false" data-dash-tab="fulfillment" class="dash-tab-btn px-4 py-2 rounded-sm font-label text-label-md text-light-on-surface-variant hover:text-light-primary transition-colors duration-state-change">Delivery &amp; Pickup</button>
+            </div>
+          </div>
+
+          <!-- Realistic Application Frame -->
+          <div class="reveal-on-scroll bg-light-surface-container-lowest rounded-xl shadow-2xl border border-light-outline-variant/60 overflow-hidden">
+            <!-- App Top Bar / Shop Profile -->
+            <div class="bg-brand-navy text-light-on-primary px-gutter-lg py-gutter-md flex flex-wrap items-center justify-between gap-gutter-md">
+              <div class="flex items-center gap-gutter-md">
+                <div class="w-10 h-10 rounded-md bg-light-secondary text-light-on-secondary flex items-center justify-center font-headline text-title-lg">OM</div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <h3 class="font-title text-title-md text-light-on-primary">Oakwood Corner Market</h3>
+                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-brand-green/20 text-brand-green font-label text-label-sm">
+                      <span class="w-1.5 h-1.5 rounded-full bg-brand-green" aria-hidden="true"></span>
+                      Store Open
+                    </span>
+                  </div>
+                  <p class="font-body text-body-sm text-light-on-primary-container">742 Maple Avenue • Home Delivery &amp; Counter Pickup Active</p>
+                </div>
+              </div>
+              <button data-open-register type="button" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-light-secondary text-light-on-secondary font-label text-label-md hover:bg-light-secondary-container transition-colors duration-state-change">
+                <span class="material-symbols-outlined text-title-md" aria-hidden="true">add</span>
+                <span>Add Product</span>
+              </button>
+            </div>
+
+            <!-- KPI Metrics Row -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-gutter-md p-gutter-lg bg-light-surface-container-low/60 border-b border-light-outline-variant/40">
+              <div class="bg-light-surface-container-lowest rounded-lg p-5 border border-light-outline-variant/50">
+                <div class="flex items-center justify-between">
+                  <span class="font-label text-label-md text-light-on-surface-variant">Total Orders</span>
+                  <span class="material-symbols-outlined text-light-secondary" aria-hidden="true">shopping_bag</span>
+                </div>
+                <p class="mt-2 font-display text-headline-lg text-light-primary tabular-nums" data-counter="1284">1,284</p>
+                <p class="mt-1 font-label text-label-sm text-success flex items-center gap-1">
+                  <span class="material-symbols-outlined text-body-md" aria-hidden="true">arrow_upward</span>
+                  +18.4% vs last 30 days
+                </p>
+              </div>
+
+              <div class="bg-light-surface-container-lowest rounded-lg p-5 border border-light-outline-variant/50">
+                <div class="flex items-center justify-between">
+                  <span class="font-label text-label-md text-light-on-surface-variant">Total Sales</span>
+                  <span class="material-symbols-outlined text-success" aria-hidden="true">payments</span>
+                </div>
+                <p class="mt-2 font-display text-headline-lg text-light-primary tabular-nums" data-counter="38490" data-prefix="$">$38,490</p>
+                <p class="mt-1 font-label text-label-sm text-success flex items-center gap-1">
+                  <span class="material-symbols-outlined text-body-md" aria-hidden="true">arrow_upward</span>
+                  +24.1% online revenue
+                </p>
+              </div>
+
+              <div class="bg-light-surface-container-lowest rounded-lg p-5 border border-light-outline-variant/50">
+                <div class="flex items-center justify-between">
+                  <span class="font-label text-label-md text-light-on-surface-variant">Active Products</span>
+                  <span class="material-symbols-outlined text-light-secondary" aria-hidden="true">inventory_2</span>
+                </div>
+                <p class="mt-2 font-display text-headline-lg text-light-primary tabular-nums" data-counter="142">142</p>
+                <p class="mt-1 font-label text-label-sm text-light-on-surface-variant">
+                  12 items added this week
+                </p>
+              </div>
+            </div>
+
+            <!-- Tab Panel 1: Recent Orders -->
+            <div id="panel-orders" class="dash-panel p-gutter-lg">
+              <div class="w-full overflow-x-auto rounded-lg border border-light-outline-variant/60">
+                <!-- COMPONENT: table-standard -->
+                <div data-component-id="table-standard" data-component-type="table" data-component-variant="standard" class="w-full">
+                  <table class="w-full min-w-[720px] text-left border-collapse">
+                    <thead class="bg-light-surface-container-low border-b border-light-outline-variant/60">
+                      <tr>
+                        <th scope="col" class="py-3 px-4"><span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface-variant">Order ID</span></th>
+                        <th scope="col" class="py-3 px-4"><span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface-variant">Customer</span></th>
+                        <th scope="col" class="py-3 px-4"><span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface-variant">Items</span></th>
+                        <th scope="col" class="py-3 px-4"><span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface-variant">Option</span></th>
+                        <th scope="col" class="py-3 px-4"><span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface-variant">Status</span></th>
+                        <th scope="col" class="py-3 px-4 text-right"><span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface-variant">Total</span></th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-light-surface-container">
+                      <tr class="hover:bg-light-surface-container-low/50 transition-colors duration-state-change">
+                        <td class="py-3.5 px-4"><span data-design-text-token="mono-sm" class="font-mono text-mono-sm text-light-primary tabular-nums">#NS-4821</span></td>
+                        <td class="py-3.5 px-4"><span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface">Elena Rostova</span></td>
+                        <td class="py-3.5 px-4"><span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">Single Origin Roast, Olive Oil</span></td>
+                        <td class="py-3.5 px-4"><span data-design-text-token="label-sm" class="font-label text-label-sm text-light-secondary">Home Delivery</span></td>
+                        <td class="py-3.5 px-4">
+                          <span data-component-id="badge-success" data-component-type="badge" data-component-variant="success" role="status" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-success-container text-on-success-container">
+                            <span class="w-1.5 h-1.5 rounded-full bg-success" aria-hidden="true"></span>
+                            <span data-design-text-token="label-sm" class="font-label text-label-sm">In Transit</span>
+                          </span>
+                        </td>
+                        <td class="py-3.5 px-4 text-right"><span data-design-text-token="mono-md" class="font-mono text-mono-md text-light-primary tabular-nums">$42.80</span></td>
+                      </tr>
+                      <tr class="hover:bg-light-surface-container-low/50 transition-colors duration-state-change">
+                        <td class="py-3.5 px-4"><span data-design-text-token="mono-sm" class="font-mono text-mono-sm text-light-primary tabular-nums">#NS-4820</span></td>
+                        <td class="py-3.5 px-4"><span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface">Marcus Vance</span></td>
+                        <td class="py-3.5 px-4"><span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">Country Sourdough (x2)</span></td>
+                        <td class="py-3.5 px-4"><span data-design-text-token="label-sm" class="font-label text-label-sm text-light-primary">Store Pickup</span></td>
+                        <td class="py-3.5 px-4">
+                          <span data-component-id="badge-status" data-component-type="badge" data-component-variant="status" role="status" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-navy-tint text-light-primary">
+                            <span data-design-text-token="label-sm" class="font-label text-label-sm">Pickup Ready</span>
+                          </span>
+                        </td>
+                        <td class="py-3.5 px-4 text-right"><span data-design-text-token="mono-md" class="font-mono text-mono-md text-light-primary tabular-nums">$17.00</span></td>
+                      </tr>
+                      <tr class="hover:bg-light-surface-container-low/50 transition-colors duration-state-change">
+                        <td class="py-3.5 px-4"><span data-design-text-token="mono-sm" class="font-mono text-mono-sm text-light-primary tabular-nums">#NS-4819</span></td>
+                        <td class="py-3.5 px-4"><span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface">Priya Nair</span></td>
+                        <td class="py-3.5 px-4"><span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">Stoneware Mug, Coffee Beans</span></td>
+                        <td class="py-3.5 px-4"><span data-design-text-token="label-sm" class="font-label text-label-sm text-light-secondary">Home Delivery</span></td>
+                        <td class="py-3.5 px-4">
+                          <span data-component-id="badge-success" data-component-type="badge" data-component-variant="success" role="status" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-success-container text-on-success-container">
+                            <span class="w-1.5 h-1.5 rounded-full bg-success" aria-hidden="true"></span>
+                            <span data-design-text-token="label-sm" class="font-label text-label-sm">Delivered</span>
+                          </span>
+                        </td>
+                        <td class="py-3.5 px-4 text-right"><span data-design-text-token="mono-md" class="font-mono text-mono-md text-light-primary tabular-nums">$38.50</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab Panel 2: Product Management -->
+            <div id="panel-products" class="dash-panel hidden p-gutter-lg">
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter-md">
+                <div class="rounded-lg border border-light-outline-variant/60 p-4 flex flex-col gap-3">
+                  <img src="https://lh3.googleusercontent.com/aida/ALJJyrDUCn0d2XnqwgDfMeuzbeSRVKvEhq7ngHYWbFuplJrs6kYMSBfg7s1gCDHeFY_v0jZDGPjKH9D_DBT9q66N9JuCNZFkFGjI5yczmwYNwGHOIURmJtjG3vcxE6UpFp7hKrayUHOh0lOEgkBmLc6YZyDAC-srdDiccXPfQPjqGyOyHDqiDYQsKJC4iAB4TCAud_3RIzjTnuLkdC8GLz0-hYt_J09PHbrfIVPveNXamkfVxjL23vRW06r-NpL6lzZZ" alt="Single Origin Roast" class="w-full h-36 object-cover rounded-md bg-light-surface-container-low">
+                  <div>
+                    <p class="font-title text-title-md text-light-primary">Single Origin Roast</p>
+                    <p class="font-body text-body-sm text-light-on-surface-variant">24 bags in stock</p>
+                  </div>
+                  <div class="flex items-center justify-between pt-2 border-t border-light-surface-container">
+                    <span class="font-mono text-mono-md text-light-primary tabular-nums">$16.50</span>
+                    <span class="px-2.5 py-0.5 rounded-full bg-success-container text-on-success-container font-label text-label-sm">Live</span>
+                  </div>
+                </div>
+
+                <div class="rounded-lg border border-light-outline-variant/60 p-4 flex flex-col gap-3">
+                  <img src="https://lh3.googleusercontent.com/aida/ALJJyrDGG9iW5FqwaoAm_IGIJJ6w-ZZ8LwEqV0k0vTUjyeg1FpwqgmV4KenIqAWGB2liP_0KDrhRuO1HM86JEt9bzZBhTgGk7WuCb23myot9ZZmU34jzzdLZMxEc6F8lMBl4FWDm11vEKMgpBWOtqmSmH7GDRe6lJkgkNHmk1nWDDJF3fUmGcFM6CR-gO0-pWlqgnkjpZXpwcRvLz_My2zpVbKp06qtEnPiD29f4cnsfOHSCfUxfu7mK-1fzPHsChWc" alt="Speckled Stoneware Mug" class="w-full h-36 object-cover rounded-md bg-light-surface-container-low">
+                  <div>
+                    <p class="font-title text-title-md text-light-primary">Speckled Stoneware Mug</p>
+                    <p class="font-body text-body-sm text-light-on-surface-variant">9 pieces in stock</p>
+                  </div>
+                  <div class="flex items-center justify-between pt-2 border-t border-light-surface-container">
+                    <span class="font-mono text-mono-md text-light-primary tabular-nums">$22.00</span>
+                    <span class="px-2.5 py-0.5 rounded-full bg-success-container text-on-success-container font-label text-label-sm">Live</span>
+                  </div>
+                </div>
+                <div class="rounded-lg border border-light-outline-variant/60 p-4 flex flex-col gap-3">
+                  <img src="https://lh3.googleusercontent.com/aida/ALJJyrBRB1PoqA3kQq-byyP7NjpPmiuXGzMwtPm637xA6Nm6c0hzZYvW1vjyl_zFYcBFwZXLuSezKVCNrQ1dxmtMRXNNHVWK21kLs-pF5tvx9wUE0LyK9bXmUwdMsJDfdUlWPUiMXEK8GALBnAyq-fBz4rVv6IHPgX2xZLSAbwwhd-Ip9oKQsqgDHYv06vSXnfOfWonlCG6HVChicO2QQJxhu9MF5qyIkWloK-Gff0ImdY1r32grEwCAea9vc0ua" alt="Country Sourdough Loaf" class="w-full h-36 object-cover rounded-md bg-light-surface-container-low">
+                  <div>
+                    <p class="font-title text-title-md text-light-primary">Country Sourdough Loaf</p>
+                    <p class="font-body text-body-sm text-light-on-surface-variant">Baked fresh daily</p>
+                  </div>
+                  <div class="flex items-center justify-between pt-2 border-t border-light-surface-container">
+                    <span class="font-mono text-mono-md text-light-primary tabular-nums">$8.50</span>
+                    <span class="px-2.5 py-0.5 rounded-full bg-success-container text-on-success-container font-label text-label-sm">Live</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab Panel 3: Delivery & Pickup -->
+            <div id="panel-fulfillment" class="dash-panel hidden p-gutter-lg">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter-lg">
+                <div class="rounded-lg border border-light-outline-variant/60 p-gutter-lg flex items-start gap-gutter-md">
+                  <div class="w-12 h-12 rounded-md bg-navy-tint text-light-secondary flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-headline-sm" aria-hidden="true">local_shipping</span>
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-2">
+                      <h4 class="font-title text-title-lg text-light-primary">Local Home Delivery</h4>
+                      <span class="px-2.5 py-0.5 rounded-full bg-success-container text-on-success-container font-label text-label-sm">Enabled</span>
+                    </div>
+                    <p class="mt-1 font-body text-body-md text-light-on-surface-variant">Serving neighborhoods within 3.5 miles of your shop. Same-day delivery window: 2:00 PM – 6:00 PM.</p>
+                  </div>
+                </div>
+                <div class="rounded-lg border border-light-outline-variant/60 p-gutter-lg flex items-start gap-gutter-md">
+                  <div class="w-12 h-12 rounded-md bg-success-container text-on-success-container flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-headline-sm" aria-hidden="true">store_mall_directory</span>
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-2">
+                      <h4 class="font-title text-title-lg text-light-primary">In-Store Counter Pickup</h4>
+                      <span class="px-2.5 py-0.5 rounded-full bg-success-container text-on-success-container font-label text-label-sm">Enabled</span>
+                    </div>
+                    <p class="mt-1 font-body text-body-md text-light-on-surface-variant">Customers receive an instant SMS when their order is packed and ready at your front counter (avg. 15 mins).</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. TRUST AND PARTNERSHIP SECTION -->
+      <section id="trust" class="py-section-md lg:py-section-lg bg-light-surface-container-lowest">
+        <div class="max-w-7xl mx-auto px-gutter-lg">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-xl items-center">
+            <div class="lg:col-span-6 reveal-on-scroll">
+              <div class="rounded-xl overflow-hidden shadow-xl border border-light-outline-variant/50">
+                <img src="https://lh3.googleusercontent.com/aida/ALJJyrCjSblKpNzbCFgiZ5DTg18p2mP_ls_k6UkjATQXyopqNORV9CVdyEVi8AfHr8otzwlObbLBDJjkwrJTaIgYQZHwJIjTOo2AYY6nSJoWVm-n8zd9oJLU8NKh24Nw3lF0icTLtnZNgz6a6L7iKR6ruMLk57y9P5bJSXGZyRtAzdOKNU7oSVqqkz2X1PVk4HPWnlMynfzGO4nhcS5PmensocHVqah2m22uLEY1zg-2OtF0amoufBVAOGzGp5wLvkpZoT4VNAs6GA" alt="Local shopkeepers using a smartphone together to manage their online storefront" class="w-full h-80 sm:h-96 object-cover">
+              </div>
+            </div>
+
+            <div class="lg:col-span-6 flex flex-col gap-gutter-lg reveal-on-scroll">
+              <h2 class="font-headline text-headline-lg-mobile md:text-headline-lg text-light-primary text-balance">
+                Your Local Business. A Bigger Digital Future.
+              </h2>
+              <p class="font-body text-body-lg text-light-on-surface-variant text-pretty">
+                Traditional neighborhood shops are the heart of every community. NearShop gives independent merchants the same modern digital tools as major retailers—without losing the personal relationships that make your store special.
+              </p>
+
+              <ul class="flex flex-col gap-gutter-md">
+                <li class="flex items-start gap-3">
+                  <span class="material-symbols-outlined text-success mt-0.5" aria-hidden="true">check_circle</span>
+                  <div>
+                    <p class="font-title text-title-md text-light-primary">Designed for everyday shopkeepers</p>
+                    <p class="font-body text-body-sm text-light-on-surface-variant">Manage products, prices, and orders directly from your phone or counter tablet.</p>
+                  </div>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="material-symbols-outlined text-success mt-0.5" aria-hidden="true">check_circle</span>
+                  <div>
+                    <p class="font-title text-title-md text-light-primary">Direct, transparent payouts</p>
+                    <p class="font-body text-body-sm text-light-on-surface-variant">Accept secure online payments with fast settlements straight to your business account.</p>
+                  </div>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="material-symbols-outlined text-success mt-0.5" aria-hidden="true">check_circle</span>
+                  <div>
+                    <p class="font-title text-title-md text-light-primary">Your customers, your brand</p>
+                    <p class="font-body text-body-sm text-light-on-surface-variant">Turn local foot traffic into loyal online regulars who can order anytime.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. FINAL CTA SECTION -->
+      <section class="py-section-md lg:py-section-lg px-gutter-lg bg-light-surface">
+        <div class="max-w-7xl mx-auto rounded-xl bg-gradient-to-br from-brand-navy via-light-primary to-light-secondary text-light-on-primary px-gutter-lg py-section-sm lg:p-section-md shadow-2xl relative overflow-hidden reveal-on-scroll">
+          <div aria-hidden="true" class="pointer-events-none absolute -top-24 -right-24 w-80 h-80 rounded-full bg-brand-blue/30 blur-3xl"></div>
+          <div class="relative z-10 max-w-3xl mx-auto text-center flex flex-col items-center gap-gutter-md">
+            <h2 class="font-display text-display-md-mobile md:text-display-md text-light-on-primary text-balance">
+              Ready to Take Your Shop Online?
+            </h2>
+            <p class="font-body text-body-lg text-navy-tint max-w-2xl text-pretty">
+              Join our growing local business community and give your shop the digital presence it deserves.
+            </p>
+            <div class="pt-gutter-sm flex flex-col items-center gap-gutter-sm">
+              <!-- COMPONENT: button-with-icon -->
+              <button data-component-id="button-with-icon" data-component-type="button" data-component-variant="with-icon" data-open-register type="button" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-md bg-light-surface-container-lowest text-light-primary shadow-lg hover:bg-navy-tint active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-on-primary focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy transition-transform duration-state-change ease-state-change">
+                <span class="material-symbols-outlined text-title-md text-light-secondary" aria-hidden="true">storefront</span>
+                <span data-design-text-token="label-lg" class="font-label text-label-lg">Create Your Shop Today</span>
+              </button>
+              <p class="font-body text-body-sm text-light-on-primary-container">
+                Start your digital journey with us.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 9. FOOTER -->
+    <footer class="bg-brand-navy text-light-on-primary border-t border-light-primary-container">
+      <div class="max-w-7xl mx-auto px-gutter-lg py-section-sm">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter-xl pb-gutter-xl border-b border-light-primary-container">
+          <div class="md:col-span-5 flex flex-col gap-gutter-md">
+            <div class="flex items-center gap-gutter-sm">
+              <div class="w-8 h-8 rounded-md bg-light-secondary text-light-on-secondary flex items-center justify-center">
+                <span class="material-symbols-outlined text-title-md" aria-hidden="true">storefront</span>
+              </div>
+              <span class="font-headline text-headline-sm text-light-on-primary">NearShop</span>
+            </div>
+            <p class="font-body text-body-sm text-light-on-primary-container max-w-sm">
+              Empowering local shopkeepers to build online stores, accept secure payments, and serve neighborhood customers with delivery and pickup.
+            </p>
+            <div class="flex items-center gap-gutter-sm pt-1">
+              <a href="#top" aria-label="NearShop on X" class="w-9 h-9 rounded-full bg-light-primary-container text-light-on-primary flex items-center justify-center hover:bg-light-secondary transition-colors duration-state-change">
+                <span class="font-label text-label-sm">X</span>
+              </a>
+              <a href="#top" aria-label="NearShop on LinkedIn" class="w-9 h-9 rounded-full bg-light-primary-container text-light-on-primary flex items-center justify-center hover:bg-light-secondary transition-colors duration-state-change">
+                <span class="font-label text-label-sm">in</span>
+              </a>
+              <a href="#top" aria-label="NearShop on Instagram" class="w-9 h-9 rounded-full bg-light-primary-container text-light-on-primary flex items-center justify-center hover:bg-light-secondary transition-colors duration-state-change">
+                <span class="font-label text-label-sm">IG</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="md:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-gutter-lg">
+            <div class="flex flex-col gap-2.5">
+              <h3 class="font-label text-label-md text-light-on-primary">Platform</h3>
+              <a href="#trust" class="font-body text-body-sm text-light-on-primary-container hover:text-light-on-primary">About Us</a>
+              <a href="#how-it-works" class="font-body text-body-sm text-light-on-primary-container hover:text-light-on-primary">How It Works</a>
+              <button type="button" data-open-register class="text-left font-body text-body-sm text-light-on-primary-container hover:text-light-on-primary">Register Your Shop</button>
+            </div>
+            <div class="flex flex-col gap-2.5">
+              <h3 class="font-label text-label-md text-light-on-primary">Support</h3>
+              <a href="#dashboard" class="font-body text-body-sm text-light-on-primary-container hover:text-light-on-primary">Customer Support</a>
+              <a href="#top" class="font-body text-body-sm text-light-on-primary-container hover:text-light-on-primary">Contact Us</a>
+            </div>
+            <div class="flex flex-col gap-2.5">
+              <h3 class="font-label text-label-md text-light-on-primary">Legal</h3>
+              <a href="#top" class="font-body text-body-sm text-light-on-primary-container hover:text-light-on-primary">Privacy Policy</a>
+              <a href="#top" class="font-body text-body-sm text-light-on-primary-container hover:text-light-on-primary">Terms &amp; Conditions</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-gutter-lg flex flex-col sm:flex-row items-center justify-between gap-gutter-sm text-body-sm text-light-on-primary-container">
+          <p>© 2026 NearShop Local Commerce Inc. All rights reserved.</p>
+          <p>Built for Local Businesses. Designed for Growth.</p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Interactive Shop Registration Modal -->
+  <div id="register-modal" role="dialog" aria-modal="true" aria-labelledby="register-modal-title" class="hidden fixed inset-0 z-50 items-center justify-center p-4 bg-brand-navy/60">
+    <div class="bg-light-surface-container-lowest rounded-xl max-w-lg w-full p-gutter-lg sm:p-gutter-xl shadow-2xl border border-light-outline-variant/60 relative">
+      <div class="flex items-start justify-between gap-4 mb-gutter-lg">
+        <div>
+          <h2 id="register-modal-title" class="font-headline text-headline-md text-light-primary">Register Your Shop</h2>
+          <p class="font-body text-body-sm text-light-on-surface-variant mt-1">Create your business account and launch your digital storefront.</p>
+        </div>
+        <!-- COMPONENT: button-icon -->
+        <button id="close-register-modal" data-component-id="button-icon" data-component-type="button" data-component-variant="icon" type="button" aria-label="Close registration modal" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-light-surface-container-low text-light-primary hover:bg-light-surface-container-high focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-secondary transition-colors duration-state-change">
+          <span class="material-symbols-outlined text-title-lg" aria-hidden="true">close</span>
+        </button>
+      </div>
+
+      <form id="shop-register-form" class="flex flex-col gap-gutter-md">
+        <!-- COMPONENT: input-field-text -->
+        <label data-component-id="input-field-text" data-component-type="input-field" data-component-variant="text" class="flex flex-col gap-1.5">
+          <span data-design-text-token="label-md" class="font-label text-label-md text-light-primary">Shop Name</span>
+          <input type="text" required placeholder="e.g. Oakwood Corner Bakery" class="w-full px-4 py-3 rounded-md bg-light-surface-container-lowest border border-light-outline-variant text-body-md text-light-on-surface placeholder:text-light-outline focus:border-light-secondary focus:ring-2 focus:ring-light-secondary/20 focus:outline-none">
+        </label>
+
+        <label data-component-id="input-field-icon" data-component-type="input-field" data-component-variant="with-icon" class="flex flex-col gap-1.5">
+          <span data-design-text-token="label-md" class="font-label text-label-md text-light-primary">Business Email</span>
+          <div class="relative flex items-center">
+            <span aria-hidden="true" class="material-symbols-outlined absolute left-3.5 text-light-outline text-title-md">mail</span>
+            <input type="email" required placeholder="owner@oakwoodbakery.com" inputmode="email" class="w-full pl-11 pr-4 py-3 rounded-md bg-light-surface-container-lowest border border-light-outline-variant text-body-md text-light-on-surface placeholder:text-light-outline focus:border-light-secondary focus:ring-2 focus:ring-light-secondary/20 focus:outline-none">
+          </div>
+        </label>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-gutter-md">
+          <label class="flex flex-col gap-1.5">
+            <span class="font-label text-label-md text-light-primary">Shop Category</span>
+            <select class="w-full px-4 py-3 rounded-md bg-light-surface-container-lowest border border-light-outline-variant text-body-md text-light-on-surface focus:border-light-secondary focus:ring-2 focus:ring-light-secondary/20 focus:outline-none">
+              <option>Grocery &amp; Specialty Food</option>
+              <option>Bakery &amp; Cafe</option>
+              <option>Boutique &amp; Home Goods</option>
+              <option>Pharmacy &amp; Wellness</option>
+              <option>Hardware &amp; Local Services</option>
+            </select>
+          </label>
+
+          <label class="flex flex-col gap-1.5">
+            <span class="font-label text-label-md text-light-primary">Fulfillment</span>
+            <select class="w-full px-4 py-3 rounded-md bg-light-surface-container-lowest border border-light-outline-variant text-body-md text-light-on-surface focus:border-light-secondary focus:ring-2 focus:ring-light-secondary/20 focus:outline-none">
+              <option>Delivery &amp; Store Pickup</option>
+              <option>Store Pickup Only</option>
+              <option>Home Delivery Only</option>
+            </select>
+          </label>
+        </div>
+
+        <button type="submit" class="mt-2 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-md bg-light-secondary text-light-on-secondary shadow-md hover:bg-light-secondary-container active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-secondary transition-transform duration-state-change">
+          <span class="font-label text-label-lg">Create Business Account</span>
+          <span class="material-symbols-outlined text-title-md" aria-hidden="true">arrow_forward</span>
+        </button>
+      </form>
+
+      <!-- Registration Confirmation State -->
+      <div id="register-success" class="hidden flex-col items-center text-center py-6 gap-gutter-md">
+        <div class="w-14 h-14 rounded-full bg-success-container text-on-success-container flex items-center justify-center">
+          <span class="material-symbols-outlined text-headline-lg" aria-hidden="true">check_circle</span>
+        </div>
+        <h3 class="font-headline text-headline-md text-light-primary">Your Shop Account Is Ready</h3>
+        <p class="font-body text-body-md text-light-on-surface-variant">
+          We sent a verification link to your business email. You can now start uploading products and setting up delivery or pickup hours.
+        </p>
+        <button id="done-register-btn" type="button" class="px-6 py-3 rounded-md bg-light-secondary text-light-on-secondary font-label text-label-lg hover:bg-light-secondary-container">
+          Return to NearShop
+        </button>
+      </div>
+    </div>
+  </div>

@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { authGuardChildGuard } from './core/guards/auth-guard.guard';
 import { ProductPageComponent } from './features/storefront/product-page/product-page.component';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 import { AdminLayoutComponent } from './shared/layout/admin-layout/admin-layout.component';
@@ -69,7 +68,10 @@ export const routes: Routes = [
         }
     ]
   },
-
+  {
+    path:'store',
+    loadChildren:()=>import('./modules/create-store/create-store.routes').then(x=>x.createStoreRoutes)
+  },
   {
     path: '**',
     component: PageNotFoundComponent,

@@ -1,0 +1,32 @@
+<app-header
+  (registerClick)="showRegister.set(true)">
+</app-header>
+
+<main>
+  <app-hero
+    (registerClick)="showRegister.set(true)">
+  </app-hero>
+
+  <app-how-it-works></app-how-it-works>
+
+  <app-benefits></app-benefits>
+
+  <app-dashboard
+    (registerClick)="showRegister.set(true)">
+  </app-dashboard>
+
+  <app-trust></app-trust>
+
+  <app-cta
+    (registerClick)="showRegister.set(true)">
+  </app-cta>
+</main>
+
+<app-footer
+  (registerClick)="showRegister.set(true)">
+</app-footer>
+
+@if (showRegister()) {
+<app-registration-modal
+  (closed)="showRegister.set(false)"></app-registration-modal>
+}
