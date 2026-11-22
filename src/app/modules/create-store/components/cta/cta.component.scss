@@ -6,18 +6,14 @@
 
 // CTA Wrapper
 .cta-wrapper {
-  position: relative;
-  overflow: hidden;
-  border-radius: 18px;
-  padding: 70px 40px;
-  background: linear-gradient(
-    135deg,
-    #102f43 0%,
-    #173d55 50%,
-    #356d78 100%
-  );
-  color: #ffffff;
-  box-shadow: 0 20px 45px rgba(16, 47, 67, 0.18);
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    padding: 70px 40px;
+    background: linear-gradient(to bottom right, #0F294A , #00142F , #0051D5 );
+    color: #ffffff;
+    opacity: 1;
+    box-shadow: 0 20px 45px rgba(16, 47, 67, 0.18);
 }
 
 // Decorative Circle

@@ -10,8 +10,12 @@ import { Component, EventEmitter, output, Output } from '@angular/core';
 export class HeroComponent {
   egisterClick = output<void>();
   @Output() registerClick = new EventEmitter<void>();
-
+  isRegistrationModalOpen:boolean=false;
   getStarted(): void {
     this.registerClick.emit();
   }
+
+  openRegistration(): void {
+  this.isRegistrationModalOpen = true;
+}
 }

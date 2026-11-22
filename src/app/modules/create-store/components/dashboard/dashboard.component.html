@@ -1,8 +1,6 @@
-
-<section id="dashboard" class="section-padding dashboard-section">
+<section class="section-padding dashboard-section" id="dashboard">
   <div class="container">
 
-    <!-- Section Heading -->
     <div class="row align-items-end mb-5">
       <div class="col-lg-7">
         <h2 class="section-title">
@@ -10,19 +8,17 @@
         </h2>
 
         <p class="section-description">
-          Track incoming orders, update product availability, and coordinate
-          home delivery or counter pickup in real time.
+          Track incoming orders, update product availability, and
+          coordinate home delivery or counter pickup in real time.
         </p>
       </div>
     </div>
 
-    <!-- Dashboard Wrapper -->
     <div class="dashboard-wrapper">
 
       <!-- Dashboard Header -->
       <div class="dashboard-header">
         <div class="d-flex align-items-center gap-3">
-
           <div class="shop-avatar">OM</div>
 
           <div>
@@ -31,26 +27,25 @@
             </h5>
 
             <small>
-              742 Maple Avenue • Home Delivery &amp; Counter Pickup Active
+              742 Maple Avenue • Home Delivery & Counter Pickup Active
             </small>
           </div>
-
         </div>
 
-        <button class="btn btn-primary-custom">
+        <button class="btn btn-primary-custom"
+                (click)="registerClick.emit()">
           <i class="bi bi-plus-lg me-1"></i>
           Add Product
         </button>
       </div>
 
-      <!-- Dashboard Stats -->
+      <!-- Statistics -->
       <div class="row g-3 p-4 dashboard-stats">
 
         <div class="col-md-4">
           <div class="stat-card">
             <span>Total Orders</span>
             <h2>1,284</h2>
-
             <small class="text-success">
               <i class="bi bi-arrow-up"></i>
               +18.4% vs last 30 days
@@ -62,7 +57,6 @@
           <div class="stat-card">
             <span>Total Sales</span>
             <h2>$38,490</h2>
-
             <small class="text-success">
               <i class="bi bi-arrow-up"></i>
               +24.1% online revenue
@@ -74,105 +68,160 @@
           <div class="stat-card">
             <span>Active Products</span>
             <h2>142</h2>
-
             <small>12 items added this week</small>
           </div>
         </div>
 
       </div>
 
-      <!-- Dashboard Content -->
+      <!-- Dashboard Tabs -->
       <div class="dashboard-content">
 
-        <!-- Dashboard Tabs -->
         <ul class="nav nav-pills dashboard-tabs mb-4">
 
           <li class="nav-item">
-            <button class="nav-link active" type="button">
+            <button class="nav-link"
+              [class.active]="activeTab() === 'orders'"
+              (click)="selectTab('orders')">
               Recent Orders
             </button>
           </li>
 
           <li class="nav-item">
-            <button class="nav-link" type="button">
+            <button class="nav-link"
+              [class.active]="activeTab() === 'products'"
+              (click)="selectTab('products')">
               Products
             </button>
           </li>
 
           <li class="nav-item">
-            <button class="nav-link" type="button">
-              Delivery &amp; Pickup
+            <button class="nav-link" [class.active]="activeTab() === 'fulfillment'"
+              (click)="selectTab('fulfillment')">
+              Delivery & Pickup
             </button>
           </li>
 
         </ul>
 
-        <!-- Orders Table -->
-        <div class="table-responsive">
+        <!-- Orders -->
+        @if (activeTab() === 'orders') {
 
-          <table class="table align-middle dashboard-table">
+          <div class="table-responsive">
+            <table class="table align-middle">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Items</th>
+                  <th>Option</th>
+                  <th>Status</th>
+                  <th class="text-end">Total</th>
+                </tr>
+              </thead>
 
-            <thead>
-              <tr>
-                <th>Order ID</th>
-                <th>Customer</th>
-                <th>Items</th>
-                <th>Option</th>
-                <th>Status</th>
-                <th class="text-end">Total</th>
-              </tr>
-            </thead>
+              <tbody>
+                @for (order of orders; track order.id) {
+                  <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.customer }}</td>
+                    <td>{{ order.items }}</td>
+                    <td>{{ order.option }}</td>
 
-            <tbody>
+                    <td>
+                      <span class="status-badge"
+                        [class.success]="order.status === 'Delivered'"
+                        [class.primary]="order.status !== 'Delivered'">
+                        {{ order.status }}
+                      </span>
+                    </td>
 
-              <tr>
-                <td>#NS-4821</td>
-                <td>Elena Rostova</td>
-                <td>Single Origin Roast, Olive Oil</td>
-                <td>Home Delivery</td>
-                <td>
-                  <span class="status-badge primary">
-                    In Transit
+                    <td class="text-end fw-bold">
+                      {{ order.total }}
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+
+        }
+
+        <!-- Products -->
+        @if (activeTab() === 'products') {
+
+          <div class="row g-4">
+
+            @for (product of products; track product.name) {
+              <div class="col-md-4">
+                <div class="product-card">
+
+                  <img [src]="product.image" [alt]="product.name">
+
+                  <h6>{{ product.name }}</h6>
+                  <p>{{ product.stock }}</p>
+
+                  <div class="d-flex justify-content-between align-items-center">
+                    <strong>{{ product.price }}</strong>
+                    <span class="badge bg-success-subtle text-success">
+                      Live
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            }
+
+          </div>
+
+        }
+
+        <!-- Delivery & Pickup -->
+        @if (activeTab() === 'fulfillment') {
+
+          <div class="row g-4">
+
+            <div class="col-md-6">
+              <div class="fulfillment-card">
+                <i class="bi bi-truck"></i>
+
+                <div>
+                  <h5>Local Home Delivery</h5>
+                  <span class="badge bg-success-subtle text-success">
+                    Enabled
                   </span>
-                </td>
-                <td class="text-end fw-bold">$42.80</td>
-              </tr>
 
-              <tr>
-                <td>#NS-4820</td>
-                <td>Marcus Vance</td>
-                <td>Country Sourdough (x2)</td>
-                <td>Store Pickup</td>
-                <td>
-                  <span class="status-badge primary">
-                    Pickup Ready
+                  <p>
+                    Serving neighborhoods within 3.5 miles of your shop.
+                    Same-day delivery window: 2:00 PM – 6:00 PM.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="fulfillment-card">
+                <i class="bi bi-shop-window"></i>
+
+                <div>
+                  <h5>In-Store Counter Pickup</h5>
+                  <span class="badge bg-success-subtle text-success">
+                    Enabled
                   </span>
-                </td>
-                <td class="text-end fw-bold">$17.00</td>
-              </tr>
 
-              <tr>
-                <td>#NS-4819</td>
-                <td>Priya Nair</td>
-                <td>Stoneware Mug, Coffee Beans</td>
-                <td>Home Delivery</td>
-                <td>
-                  <span class="status-badge success">
-                    Delivered
-                  </span>
-                </td>
-                <td class="text-end fw-bold">$38.50</td>
-              </tr>
+                  <p>
+                    Customers receive an instant SMS when their order
+                    is packed and ready at your front counter (avg. 15 mins).
+                  </p>
+                </div>
+              </div>
+            </div>
 
-            </tbody>
+          </div>
 
-          </table>
-
-        </div>
+        }
 
       </div>
-
     </div>
-
   </div>
 </section>
