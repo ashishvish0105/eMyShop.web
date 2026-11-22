@@ -45,9 +45,9 @@ export const myAccountRouter:Routes=[
         .then(m => m.WishlistComponent),
   },
     {
-    path: 'payment',
+    path: 'payments',
       loadComponent: () =>
-      import('./components/wishlist/wishlist.component')
-        .then(m => m.WishlistComponent),
+      import('./components/payment/payment.component')
+        .then(m => m.PaymentComponent),
   },
 ]

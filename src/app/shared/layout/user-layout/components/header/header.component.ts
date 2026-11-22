@@ -87,7 +87,6 @@ export class HeaderComponent implements OnInit {
   constructor(private _LocalStarageService:LocalStarageService) {}
 
   ngOnInit() {
-    debugger
     const userRoles: unknown = this._LocalStarageService.getObjLocalStorage(
       localStorageObjName.userRoles,
     );
@@ -154,9 +153,8 @@ export class HeaderComponent implements OnInit {
     this.isProfileModelOpen = !this.isProfileModelOpen;
   }
    selectMenu(menu: string,routerLink:String): void {
-    debugger
     this.activeMenu = menu;
-    this.routes.navigate(['my-account',routerLink])
+    this.routes.navigate(['/','account',routerLink])
   }
 }
 

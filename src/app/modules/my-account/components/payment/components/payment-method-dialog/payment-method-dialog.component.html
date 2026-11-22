@@ -1,0 +1,104 @@
+<div
+  class="fixed inset-0 z-[70] flex items-center justify-center bg-slate-950/55 backdrop-blur-sm p-4"
+  role="presentation"
+  (click)="onBackdropClick($event)"
+>
+  <section
+    class="dialog-panel bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="payment-dialog-title"
+  >
+    <header class="flex items-center justify-between px-6 py-4 border-b border-slate-100">
+      <div>
+        <h2 id="payment-dialog-title" class="text-lg font-bold text-slate-900">Add Payment Method</h2>
+        <p class="text-xs text-slate-500 mt-0.5">Add a payment method to your demo account.</p>
+      </div>
+      <button type="button" class="text-slate-400 hover:text-slate-700 text-2xl leading-none" aria-label="Close dialog" (click)="close()">×</button>
+    </header>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="p-6 space-y-4">
+      <div>
+        <label for="payment-type" class="field-label">Payment type</label>
+        <select id="payment-type" formControlName="type" class="field-control">
+          <option value="card">Credit / Debit Card</option>
+          <option value="upi">UPI / VPA</option>
+          <option value="wallet">Digital Wallet</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="holder-name" class="field-label">Account holder name</label>
+        <input id="holder-name" formControlName="holderName" class="field-control" placeholder="Enter account holder name" autocomplete="name">
+        @if (form.controls.holderName.touched && form.controls.holderName.invalid) {
+          <p class="field-error">Please enter a valid account holder name.</p>
+        }
+      </div>
+
+      <div>
+        <label for="nickname" class="field-label">Payment method nickname</label>
+        <input id="nickname" formControlName="nickname" class="field-control" placeholder="e.g. Personal card">
+        @if (form.controls.nickname.touched && form.controls.nickname.invalid) {
+          <p class="field-error">Nickname is required (maximum 40 characters).</p>
+        }
+      </div>
+
+      @switch (form.controls.type.value) {
+        @case ('card') {
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label for="last4" class="field-label">Last 4 digits</label>
+              <input id="last4" formControlName="last4" class="field-control" inputmode="numeric" maxlength="4" placeholder="4242">
+              @if (form.controls.last4.touched && form.controls.last4.invalid) {
+                <p class="field-error">Enter exactly 4 digits.</p>
+              }
+            </div>
+            <div>
+              <label for="expiry" class="field-label">Expiry (MM / YY)</label>
+              <input id="expiry" formControlName="expiry" class="field-control" placeholder="08 / 28">
+              @if (form.controls.expiry.touched && form.controls.expiry.invalid) {
+                <p class="field-error">Use MM / YY format.</p>
+              }
+            </div>
+          </div>
+        }
+        @case ('upi') {
+          <div>
+            <label for="upi-id" class="field-label">UPI ID / VPA</label>
+            <input id="upi-id" formControlName="upiId" class="field-control" placeholder="name@bank" autocomplete="off">
+            @if (form.controls.upiId.touched && form.controls.upiId.invalid) {
+              <p class="field-error" ngNonBindable>Enter a valid UPI ID, such as {{ 'name@bank' }}.</p>
+            }
+          </div>
+        }
+        @case ('wallet') {
+          <div>
+            <label for="wallet-provider" class="field-label">Wallet provider</label>
+            <select id="wallet-provider" formControlName="walletProvider" class="field-control">
+              <option value="PayPal">PayPal</option>
+              <option value="Apple Pay">Apple Pay</option>
+              <option value="Google Pay">Google Pay</option>
+              <option value="Other Wallet">Other Wallet</option>
+            </select>
+          </div>
+          <div>
+            <label for="wallet-email" class="field-label">Wallet email (optional)</label>
+            <input id="wallet-email" formControlName="walletEmail" class="field-control" type="email" placeholder="name@example.com" autocomplete="email">
+            @if (form.controls.walletEmail.touched && form.controls.walletEmail.invalid) {
+              <p class="field-error">Enter a valid email address.</p>
+            }
+          </div>
+        }
+      }
+
+      <p class="rounded-xl bg-amber-50 border border-amber-100 p-3 text-[11px] leading-relaxed text-amber-800">
+        Demo only: this form stores masked/sample details in local feature state. Do not collect or store full card numbers or CVV in your application. Use your payment gateway's tokenization/hosted checkout flow.
+      </p>
+
+      <footer class="flex justify-end gap-2 pt-2">
+        <button type="button" class="secondary-button" (click)="close()">Cancel</button>
+        <button type="submit" class="primary-button">Save Payment Method</button>
+      </footer>
+    </form>
+  </section>
+</div>

@@ -60,7 +60,7 @@ export const routes: Routes = [
         data: { staticInfo: 'Some Config Data' } // Static route data
       },
       {
-          path:'my-account',
+          path:'account',
           component:MyAccountComponent,
           loadChildren:()=>import('./modules/my-account/my-account.router').then(x=>x.myAccountRouter)
           // children for small nested routes.
