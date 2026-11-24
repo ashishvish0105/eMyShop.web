@@ -1,0 +1,619 @@
+
+<div class="verification-page">
+
+  <!-- Verification Header -->
+  <header class="verification-header">
+
+    <div class="container">
+
+      <div class="header-content">
+
+        <a
+          routerLink="/shop-registration"
+          class="back-button">
+
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Back</span>
+
+        </a>
+
+        <div class="brand-section">
+
+          <div class="brand-icon">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+
+          <span>NearShop Verification</span>
+
+        </div>
+
+        <span class="status-pill">
+          {{ statusText }}
+        </span>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- Main Content -->
+  <main class="container verification-container">
+
+    <!-- Page Heading -->
+    <div class="page-heading">
+
+      <h1>
+        Verify Your Shop &amp; Enable Payouts
+      </h1>
+
+      <p>
+        Confirm your business identity and connect your bank account
+        so you can accept online payments securely.
+      </p>
+
+    </div>
+
+
+    <!-- Verification Form -->
+    <form
+      [formGroup]="verificationForm"
+      (ngSubmit)="submitVerification()"
+      novalidate>
+
+      <div class="row g-4 align-items-start">
+
+        <!-- Left Column -->
+        <div class="col-lg-7">
+
+          <!-- 1. Business Details -->
+          <section class="verification-card mb-4">
+
+            <div class="card-heading">
+
+              <h2>1. Business Details</h2>
+
+              <span class="saved-badge">
+                <i class="fa-solid fa-check-circle"></i>
+                Details
+              </span>
+
+            </div>
+
+            <div class="row g-3">
+
+              <!-- Legal Business Name -->
+              <div class="col-md-6">
+
+                <label
+                  for="legalBusinessName"
+                  class="form-label">
+
+                  Legal Business Name
+                  <span class="required">*</span>
+
+                </label>
+
+                <input
+                  id="legalBusinessName"
+                  type="text"
+                  class="form-control"
+                  formControlName="legalBusinessName"
+                  placeholder="Enter legal business name"
+                  [class.is-invalid]="
+                    getControl('legalBusinessName')?.invalid &&
+                    getControl('legalBusinessName')?.touched
+                  ">
+
+                @if (
+                  getControl('legalBusinessName')?.hasError('required') &&
+                  getControl('legalBusinessName')?.touched
+                ) {
+                  <div class="invalid-feedback">
+                    Business name is required.
+                  </div>
+                }
+
+                @if (
+                  getControl('legalBusinessName')?.hasError('minlength') &&
+                  getControl('legalBusinessName')?.touched
+                ) {
+                  <div class="invalid-feedback">
+                    Enter at least 3 characters.
+                  </div>
+                }
+
+              </div>
+
+
+              <!-- Tax ID -->
+              <div class="col-md-6">
+
+                <label for="taxId" class="form-label">
+
+                  Business Tax ID / EIN
+                  <span class="required">*</span>
+
+                </label>
+
+                <input
+                  id="taxId"
+                  type="text"
+                  class="form-control"
+                  formControlName="taxId"
+                  placeholder="XX-XXXXXXX"
+                  [class.is-invalid]="
+                    getControl('taxId')?.invalid &&
+                    getControl('taxId')?.touched
+                  ">
+
+                @if (
+                  getControl('taxId')?.invalid &&
+                  getControl('taxId')?.touched
+                ) {
+                  <div class="invalid-feedback">
+                    Enter a valid 9-digit Tax ID / EIN.
+                  </div>
+                }
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- 2. Documents Upload -->
+          <section class="verification-card mb-4">
+
+            <div class="card-heading">
+
+              <h2>2. Storefront &amp; ID</h2>
+
+              @if (documentsComplete) {
+                <span class="saved-badge">
+                  <i class="fa-solid fa-check-circle"></i>
+                  Completed
+                </span>
+              }
+
+            </div>
+
+            <div class="row g-3">
+
+              <!-- Business License -->
+              <div class="col-md-6">
+
+                <input
+                  #licenseInput
+                  type="file"
+                  accept=".pdf,.jpg,.jpeg,.png"
+                  class="d-none"
+                  (change)="onFileSelected($event, 'licenseFile')">
+
+                <div
+                  class="upload-box"
+                  [class.upload-complete]="licenseFileName()">
+
+                  <i class="fa-solid fa-file-arrow-up upload-icon"></i>
+
+                  <h5>Business License</h5>
+
+                  <p>
+                    Upload your business registration document.
+                  </p>
+
+                  @if (licenseFileName()) {
+
+                    <div class="uploaded-file">
+
+                      <i class="fa-solid fa-circle-check"></i>
+
+                      <span>{{ licenseFileName() }}</span>
+
+                      <button
+                        type="button"
+                        class="remove-file"
+                        aria-label="Remove business license"
+                        (click)="removeFile('licenseFile')">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                      </button>
+
+                    </div>
+
+                  } @else {
+
+                    <button
+                      type="button"
+                      class="btn btn-outline-primary upload-btn"
+                      (click)="licenseInput.click()">
+
+                      <i class="fa-solid fa-upload me-2"></i>
+                      Choose File
+
+                    </button>
+
+                    <small>PDF, JPG or PNG · Max 5 MB</small>
+
+                  }
+
+                  @if (
+                    getControl('licenseFile')?.invalid &&
+                    getControl('licenseFile')?.touched
+                  ) {
+                    <span class="upload-error">
+                      Business license is required.
+                    </span>
+                  }
+
+                </div>
+
+              </div>
+
+
+              <!-- Storefront Photo -->
+              <div class="col-md-6">
+
+                <input
+                  #storefrontInput
+                  type="file"
+                  accept=".jpg,.jpeg,.png"
+                  class="d-none"
+                  (change)="onFileSelected($event, 'storefrontFile')">
+
+                <div
+                  class="upload-box"
+                  [class.upload-complete]="storefrontFileName()">
+
+                  <i class="fa-solid fa-camera upload-icon"></i>
+
+                  <h5>Storefront Photo</h5>
+
+                  <p>
+                    Visible street sign and entrance.
+                  </p>
+
+                  @if (storefrontFileName()) {
+
+                    <div class="uploaded-file">
+
+                      <i class="fa-solid fa-circle-check"></i>
+
+                      <span>{{ storefrontFileName() }}</span>
+
+                      <button
+                        type="button"
+                        class="remove-file"
+                        aria-label="Remove storefront photo"
+                        (click)="removeFile('storefrontFile')">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                      </button>
+
+                    </div>
+
+                  } @else {
+
+                    <button
+                      type="button"
+                      class="btn btn-outline-primary upload-btn"
+                      (click)="storefrontInput.click()">
+
+                      <i class="fa-solid fa-upload me-2"></i>
+                      Choose Photo
+
+                    </button>
+
+                    <small>JPG or PNG · Max 5 MB</small>
+
+                  }
+
+                  @if (
+                    getControl('storefrontFile')?.invalid &&
+                    getControl('storefrontFile')?.touched
+                  ) {
+                    <span class="upload-error">
+                      Storefront photo is required.
+                    </span>
+                  }
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- 3. Payout Bank Account -->
+          <section class="verification-card">
+
+            <div class="card-heading">
+
+              <h2>3. Payout Bank Account</h2>
+
+              @if (bankComplete) {
+                <span class="saved-badge">
+                  <i class="fa-solid fa-check-circle"></i>
+                  Completed
+                </span>
+              }
+
+            </div>
+
+            <div class="row g-3">
+
+              <!-- Account Holder -->
+              <div class="col-12">
+
+                <label
+                  for="accountHolderName"
+                  class="form-label">
+
+                  Account Holder Name
+                  <span class="required">*</span>
+
+                </label>
+
+                <input
+                  id="accountHolderName"
+                  type="text"
+                  class="form-control"
+                  formControlName="accountHolderName"
+                  placeholder="Enter account holder name"
+                  [class.is-invalid]="
+                    getControl('accountHolderName')?.invalid &&
+                    getControl('accountHolderName')?.touched
+                  ">
+
+                @if (
+                  getControl('accountHolderName')?.invalid &&
+                  getControl('accountHolderName')?.touched
+                ) {
+                  <div class="invalid-feedback">
+                    Enter a valid account holder name.
+                  </div>
+                }
+
+              </div>
+
+
+              <!-- Routing Number -->
+              <div class="col-md-6">
+
+                <label
+                  for="routingNumber"
+                  class="form-label">
+
+                  Routing Number
+                  <span class="required">*</span>
+
+                </label>
+
+                <input
+                  id="routingNumber"
+                  type="text"
+                  inputmode="numeric"
+                  maxlength="9"
+                  class="form-control"
+                  formControlName="routingNumber"
+                  placeholder="Enter 9-digit routing number"
+                  [class.is-invalid]="
+                    getControl('routingNumber')?.invalid &&
+                    getControl('routingNumber')?.touched
+                  ">
+
+                @if (
+                  getControl('routingNumber')?.invalid &&
+                  getControl('routingNumber')?.touched
+                ) {
+                  <div class="invalid-feedback">
+                    Routing number must contain 9 digits.
+                  </div>
+                }
+
+              </div>
+
+
+              <!-- Account Number -->
+              <div class="col-md-6">
+
+                <label
+                  for="accountNumber"
+                  class="form-label">
+
+                  Account Number
+                  <span class="required">*</span>
+
+                </label>
+
+                <input
+                  id="accountNumber"
+                  type="password"
+                  inputmode="numeric"
+                  maxlength="17"
+                  class="form-control"
+                  formControlName="accountNumber"
+                  placeholder="Enter account number"
+                  [class.is-invalid]="
+                    getControl('accountNumber')?.invalid &&
+                    getControl('accountNumber')?.touched
+                  ">
+
+                @if (
+                  getControl('accountNumber')?.invalid &&
+                  getControl('accountNumber')?.touched
+                ) {
+                  <div class="invalid-feedback">
+                    Enter a valid account number (4–17 digits).
+                  </div>
+                }
+
+              </div>
+
+            </div>
+
+
+            <!-- Security Information -->
+            <div class="security-note mt-4">
+
+              <i class="fa-solid fa-lock"></i>
+
+              <span>
+                Your banking information should be transmitted securely
+                and handled only by your payment provider.
+              </span>
+
+            </div>
+
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              class="btn btn-primary submit-btn w-100 mt-4"
+              [disabled]="isSubmitted">
+
+              @if (isSubmitted) {
+
+                <i class="fa-solid fa-check-circle me-2"></i>
+                Verification Submitted
+
+              } @else {
+
+                Submit Verification
+                <i class="fa-solid fa-arrow-right ms-2"></i>
+
+              }
+
+            </button>
+
+          </section>
+
+        </div>
+
+
+        <!-- Right Column -->
+        <aside class="col-lg-5">
+
+          <!-- Verification Checklist -->
+          <section class="verification-card checklist-card">
+
+            <h2>Verification Checklist</h2>
+
+            <ul class="checklist">
+
+              <!-- Shop Address -->
+              <li class="checklist-item completed">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <span>
+                  Shop address &amp; contact confirmed
+                </span>
+
+              </li>
+
+
+              <!-- Documents -->
+              <li
+                class="checklist-item"
+                [class.completed]="documentsComplete">
+
+                @if (documentsComplete) {
+                  <i class="fa-solid fa-circle-check"></i>
+                } @else {
+                  <i class="fa-regular fa-circle"></i>
+                }
+
+                <span>
+                  Business license &amp; storefront photo
+                </span>
+
+              </li>
+
+
+              <!-- Bank Account -->
+              <li
+                class="checklist-item"
+                [class.completed]="bankComplete">
+
+                @if (bankComplete) {
+                  <i class="fa-solid fa-circle-check"></i>
+                } @else {
+                  <i class="fa-regular fa-circle"></i>
+                }
+
+                <span>
+                  Bank account linked for payouts
+                </span>
+
+              </li>
+
+            </ul>
+
+          </section>
+
+
+          <!-- Security Information -->
+          <section class="security-card mt-4">
+
+            <div class="security-icon">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <h3>Your Information Is Protected</h3>
+
+            <p>
+              Your business and payout details should be processed
+              through secure, authorized verification services.
+            </p>
+
+          </section>
+
+
+          <!-- Success Screen -->
+          @if (isSubmitted) {
+
+            <section class="success-card mt-4">
+
+              <div class="success-heading">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <h3>Verification Submitted!</h3>
+
+              </div>
+
+              <p>
+                Your documents have been submitted for review.
+                You can continue to product upload.
+              </p>
+
+              <a
+                routerLink="/product-upload"
+                class="btn continue-btn w-100">
+
+                Continue to Product Upload
+
+                <i class="fa-solid fa-arrow-right ms-2"></i>
+
+              </a>
+
+            </section>
+
+          }
+
+        </aside>
+
+      </div>
+
+    </form>
+
+  </main>
+
+</div>

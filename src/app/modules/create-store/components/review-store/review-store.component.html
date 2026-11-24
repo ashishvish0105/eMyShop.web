@@ -1,0 +1,355 @@
+
+<div class="store-page">
+
+  <!-- Header -->
+  <header class="store-header sticky-top">
+
+    <div class="container main-container">
+
+      <div class="header-content">
+
+        <div class="header-left">
+
+          <a
+            href="../product-upload/ProductUpload.html"
+            class="back-button"
+            aria-label="Back to Product Catalog Upload">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            <span>Back</span>
+
+          </a>
+
+          <div class="brand-wrapper">
+
+            <div class="brand-icon">
+              <i class="fa-solid fa-store"></i>
+            </div>
+
+            <span class="brand-name">
+              NearShop Launch
+            </span>
+
+          </div>
+
+        </div>
+
+        <span
+          class="status-pill"
+          [class.status-live]="isLive()"
+          [class.status-preview]="!isLive()">
+
+          {{ statusText() }}
+
+        </span>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- Main Content -->
+  <main class="container main-container main-content">
+
+
+    <!-- Confirmation Hero -->
+    <section class="confirmation-card">
+
+      <div class="confirmation-content">
+
+        <div class="success-icon">
+
+          <i class="fa-solid fa-circle-check"></i>
+
+        </div>
+
+        <div class="confirmation-text">
+
+          <h1>
+            Everything Is Ready to Preview
+          </h1>
+
+          <p>
+            Oakwood Corner Market is verified, payouts are connected,
+            and 4 products are loaded. Preview your customer storefront
+            view before sharing your link.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="hero-actions">
+
+        <button
+          type="button"
+          class="btn-copy"
+          (click)="copyStoreLink()">
+
+          <i
+            class="fa-solid"
+            [class.fa-copy]="!copied()"
+            [class.fa-check]="copied()">
+          </i>
+
+          {{ copied() ? 'Copied Link' : 'Copy Link' }}
+
+        </button>
+
+
+        <a
+          href="../storefront-preview/StorefrontPreview.html"
+          class="btn-primary-custom">
+
+          Preview Store View
+
+          <i class="fa-solid fa-eye"></i>
+
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- Main Grid -->
+    <div class="row main-grid g-4">
+
+
+      <!-- Left Column -->
+      <div class="col-lg-7">
+
+
+        <!-- Launch Checklist -->
+        <section class="content-card checklist-card">
+
+          <div class="section-heading">
+
+            <h2>
+              Launch Checklist
+            </h2>
+
+            <span class="check-count">
+              4 / 4
+            </span>
+
+          </div>
+
+
+          <div class="checklist">
+
+            @for (item of launchItems; track item.title) {
+
+              <div class="checklist-item">
+
+                <div class="checklist-left">
+
+                  <div class="check-icon">
+
+                    <i class="fa-solid fa-check"></i>
+
+                  </div>
+
+                  <div class="checklist-info">
+
+                    <h3>
+                      {{ item.title }}
+                    </h3>
+
+                    <p>
+                      {{ item.description }}
+                    </p>
+
+                  </div>
+
+                </div>
+
+
+                <a
+                  [href]="item.editLink"
+                  class="edit-link">
+
+                  Edit
+
+                </a>
+
+              </div>
+
+            }
+
+          </div>
+
+        </section>
+
+
+        <!-- Storefront Snapshot -->
+        <section class="content-card snapshot-card">
+
+          <div class="snapshot-heading">
+
+            <div>
+
+              <h2>
+                Storefront Snapshot
+              </h2>
+
+              <p class="store-url">
+                {{ storePath }}
+              </p>
+
+            </div>
+
+
+            <span class="distance-pill">
+              0.4 mi away
+            </span>
+
+          </div>
+
+
+          <div class="row g-3 product-grid">
+
+            @for (product of products; track product.name) {
+
+              <div class="col-sm-6">
+
+                <div class="product-card">
+
+                  <img
+                    [src]="product.image"
+                    [alt]="product.alt"
+                    class="product-image"
+                    loading="lazy">
+
+                  <div class="product-info">
+
+                    <h3>
+                      {{ product.name }}
+                    </h3>
+
+                    <p>
+                      {{ product.price }}
+                    </p>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            }
+
+          </div>
+
+        </section>
+
+      </div>
+
+
+      <!-- Right Column -->
+      <div class="col-lg-5">
+
+        <aside class="content-card visibility-card">
+
+
+          <!-- Visibility Heading -->
+          <div class="visibility-heading">
+
+            <h2>
+              Store Visibility
+            </h2>
+
+            <p>
+              Control whether nearby customers can place orders
+              right now or browse in preview mode first.
+            </p>
+
+          </div>
+
+
+          <!-- Visibility Toggle -->
+          <div class="visibility-toggle-wrapper">
+
+            <div class="visibility-description">
+
+              <h3>
+                Accept Online Orders
+              </h3>
+
+              <p>
+                {{ visibilityHint() }}
+              </p>
+
+            </div>
+
+
+            <form [formGroup]="visibilityForm">
+
+              <div class="form-check form-switch custom-switch">
+
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="live-toggle"
+                  formControlName="acceptOrders"
+                  role="switch"
+                  aria-label="Accept online orders">
+
+              </div>
+
+            </form>
+
+          </div>
+
+
+          <!-- Navigation Actions -->
+          <div class="visibility-actions">
+
+            <a
+              href="../storefront-preview/StorefrontPreview.html"
+              class="action-button action-primary">
+
+              Preview Store View
+
+              <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+
+            <a
+              href="../shopkeeper-dashboard/ShopkeeperDashboard.html"
+              class="action-button action-secondary">
+
+              <i class="fa-solid fa-table-columns"></i>
+
+              Open Shop Dashboard
+
+            </a>
+
+
+            <a
+              href="../storefront-customizer/StorefrontCustomizer.html"
+              class="action-button action-outline">
+
+              <i class="fa-solid fa-palette"></i>
+
+              Customize Storefront
+
+            </a>
+
+          </div>
+
+
+        </aside>
+
+      </div>
+
+    </div>
+
+  </main>
+
+</div>

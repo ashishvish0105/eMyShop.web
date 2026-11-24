@@ -1,130 +1,359 @@
-@if (visible()) {
 
-  <div class="registration-overlay" (click)="close()">
+<main class="registration-page">
+  <div class="container">
+    <div class="row align-items-start g-5">
 
-    <div
-      class="registration-modal"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="register-title"
-      (click)="$event.stopPropagation()">
+      <!-- LEFT CONTENT -->
+      <div class="col-lg-5">
+        <div class="registration-intro">
 
-      @if (!submitted) {
-        <div class="modal-header-custom">
-          <div>
-            <h3 id="register-title">Register Your Shop</h3>
-            <p>
-              Create your business account and launch your digital storefront.
-            </p>
+          <div class="intro-badge">
+            <span class="status-dot"></span>
+            Built for Local Businesses. Designed for Growth.
           </div>
 
-          <button type="button"
-                  class="close-btn"
-                  aria-label="Close"
-                  (click)="close()">
-            <i class="bi bi-x-lg"></i>
-          </button>
+          <h1>
+            Bring Your Local Shop Online Today
+          </h1>
 
-        </div>
-
-       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-          <div class="mb-3">
-            <label class="form-label">Shop Name</label>
-
-            <input
-              type="text"
-              class="form-control"
-              placeholder="e.g. Oakwood Corner Bakery"
-              formControlName="shopName">
-
-            <!-- @if (registerForm.controls.shopName.touched &&
-                 registerForm.controls.shopName.invalid) {
-              <small class="text-danger">
-                Shop name is required.
-              </small>
-            } -->
-
-          </div>
-
-          <div class="mb-3">
-
-            <label class="form-label">Business Email</label>
-
-            <input
-              type="email"
-              class="form-control"
-              placeholder="owner@example.com"
-              formControlName="email">
-
-            <!-- @if (registerForm.controls.email.touched &&
-                 registerForm.controls) {
-              <small class="text-danger">
-                Please enter a valid business email.
-              </small>
-            } -->
-
-          </div>
-
-          <div class="row">
-
-            <div class="col-sm-6 mb-3">
-
-              <label class="form-label">Shop Category</label>
-
-              <select class="form-select"
-                      formControlName="category">
-
-                <option>Grocery & Specialty Food</option>
-                <option>Bakery & Cafe</option>
-                <option>Boutique & Home Goods</option>
-                <option>Pharmacy & Wellness</option>
-                <option>Hardware & Local Services</option>
-
-              </select>
-
-            </div>
-
-            <div class="col-sm-6 mb-3">
-
-              <label class="form-label">Fulfillment</label>
-
-              <select class="form-select"
-                      formControlName="fulfillment">
-
-                <option>Delivery & Store Pickup</option>
-                <option>Store Pickup Only</option>
-                <option>Home Delivery Only</option>
-
-              </select>
-
-            </div>
-
-          </div>
-
-          <button type="submit"
-                  class="btn btn-primary-custom w-100 mt-3">
-
-            Create Business Account
-            <i class="bi bi-arrow-right ms-2"></i>
-          </button>
-        </form>
-      } @else {
-        <div class="success-content">
-          <div class="success-icon">
-            <i class="bi bi-check-circle-fill"></i>
-          </div>
-          <h3>Your Shop Details Are Ready!</h3>
-          <p>
-            Your registration details have been submitted in this demo.
-            Connect the registration API and email verification service
-            to complete the actual account creation process.
+          <p class="intro-description">
+            Create your digital storefront in minutes and let
+            neighborhood customers browse your products, pay
+            securely, and choose home delivery or store pickup.
           </p>
-          <button class="btn btn-primary-custom" (click)="close()">
-            Return to NearShop
-          </button>
+
+          <!-- BENEFITS -->
+          <ul class="benefits-list">
+
+            <li>
+              <span class="check-icon">✓</span>
+              <div>
+                <h6>No technical setup required</h6>
+                <p>
+                  Add products, prices, and photos right from
+                  your phone or counter computer.
+                </p>
+              </div>
+            </li>
+
+            <li>
+              <span class="check-icon">✓</span>
+              <div>
+                <h6>Flexible delivery &amp; pickup</h6>
+                <p>
+                  Serve nearby homes with local delivery or
+                  offer 15-minute counter pickup.
+                </p>
+              </div>
+            </li>
+
+            <li>
+              <span class="check-icon">✓</span>
+              <div>
+                <h6>Secure online payments</h6>
+                <p>
+                  Receive fast, automatic payouts directly
+                  to your business bank account.
+                </p>
+              </div>
+            </li>
+
+          </ul>
+
+          <!-- SHOPKEEPER IMAGE -->
+          <div class="shopkeeper-image">
+            <img src="/create-store/Images/cta-right.png"
+              alt="Local shopkeepers managing their online store"
+            >
+          </div>
+
         </div>
-      }
+      </div>
+
+      <!-- RIGHT CONTENT -->
+      <div class="col-lg-7">
+
+        <section class="registration-card">
+
+          <!-- FORM HEADER -->
+          <div class="form-header">
+            <div>
+              <h2>Shop Registration Form</h2>
+              <p>
+                Enter your business details to create your NearShop account.
+              </p>
+            </div>
+
+            <a
+              routerLink="/shop-registration"
+              class="wizard-link"
+            >
+              Use Guided 4-Step Wizard →
+            </a>
+          </div>
+
+          <!-- REGISTRATION FORM -->
+          @if (!isSubmitted) {
+
+            <form
+              [formGroup]="registrationForm"
+              (ngSubmit)="onSubmit()"
+              novalidate
+            >
+
+              <div class="row g-3">
+
+                <!-- SHOP NAME -->
+                <div class="col-12">
+                  <label for="shopName" class="form-label">
+                    Shop Name
+                  </label>
+
+                  <input
+                    id="shopName"
+                    type="text"
+                    class="form-control"
+                    placeholder="e.g. Oakwood Corner Market"
+                    formControlName="shopName"
+                    [class.is-invalid]="f.shopName.touched && f.shopName.invalid"
+                  >
+
+                  @if (f.shopName.touched && f.shopName.invalid) {
+                    <div class="invalid-feedback">
+                      Shop name is required.
+                    </div>
+                  }
+                </div>
+
+                <!-- OWNER NAME -->
+                <div class="col-md-6">
+                  <label for="ownerName" class="form-label">
+                    Owner Full Name
+                  </label>
+
+                  <input
+                    id="ownerName"
+                    type="text"
+                    class="form-control"
+                    placeholder="e.g. Hannah Brooks"
+                    formControlName="ownerName"
+                    [class.is-invalid]="f.ownerName.touched && f.ownerName.invalid"
+                  >
+
+                  @if (f.ownerName.touched && f.ownerName.invalid) {
+                    <div class="invalid-feedback">
+                      Owner name is required.
+                    </div>
+                  }
+                </div>
+
+                <!-- CATEGORY -->
+                <div class="col-md-6">
+                  <label for="category" class="form-label">
+                    Shop Category
+                  </label>
+
+                  <select
+                    id="category"
+                    class="form-select"
+                    formControlName="category"
+                  >
+                    @for (category of categories; track category) {
+                      <option [value]="category">
+                        {{ category }}
+                      </option>
+                    }
+                  </select>
+                </div>
+
+                <!-- EMAIL -->
+                <div class="col-md-6">
+                  <label for="email" class="form-label">
+                    Business Email
+                  </label>
+
+                  <div class="input-icon">
+                    <span aria-hidden="true">✉</span>
+
+                    <input
+                      id="email"
+                      type="email"
+                      class="form-control"
+                      placeholder="owner@yourshop.com"
+                      formControlName="email"
+                      [class.is-invalid]="f.email.touched && f.email.invalid"
+                    >
+                  </div>
+
+                  @if (f.email.touched && f.email.errors) {
+                    <div class="validation-message">
+                      @if (f.email.errors['required']) {
+                        Email is required.
+                      }
+
+                      @if (f.email.errors['email']) {
+                        Enter a valid email address.
+                      }
+                    </div>
+                  }
+                </div>
+
+                <!-- PHONE -->
+                <div class="col-md-6">
+                  <label for="phone" class="form-label">
+                    Phone Number
+                  </label>
+
+                  <div class="input-icon">
+                    <span aria-hidden="true">☎</span>
+
+                    <input
+                      id="phone"
+                      type="tel"
+                      class="form-control"
+                      placeholder="(555) 234-8910"
+                      formControlName="phone"
+                      [class.is-invalid]="f.phone.touched && f.phone.invalid"
+                    >
+                  </div>
+
+                  @if (f.phone.touched && f.phone.errors) {
+                    <div class="validation-message">
+                      @if (f.phone.errors['required']) {
+                        Phone number is required.
+                      }
+
+                      @if (f.phone.errors['pattern']) {
+                        Enter a valid phone number.
+                      }
+                    </div>
+                  }
+                </div>
+
+                <!-- SHOP ADDRESS -->
+                <div class="col-12">
+                  <label for="address" class="form-label">
+                    Shop Street Address
+                  </label>
+
+                  <input
+                    id="address"
+                    type="text"
+                    class="form-control"
+                    placeholder="742 Maple Avenue, Brookside"
+                    formControlName="address"
+                    [class.is-invalid]="f.address.touched && f.address.invalid"
+                  >
+
+                  @if (f.address.touched && f.address.invalid) {
+                    <div class="invalid-feedback">
+                      Shop address is required.
+                    </div>
+                  }
+                </div>
+
+              </div>
+
+              <!-- FULFILLMENT OPTIONS -->
+              <div class="fulfillment-section">
+
+                <label class="form-label">
+                  Fulfillment Options
+                </label>
+
+                <div class="row g-2">
+
+                  <div class="col-sm-6">
+                    <label class="fulfillment-option">
+
+                      <input
+                        type="checkbox"
+                        formControlName="homeDelivery"
+                      >
+
+                      <span>Home Delivery</span>
+
+                    </label>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <label class="fulfillment-option">
+
+                      <input
+                        type="checkbox"
+                        formControlName="storePickup"
+                      >
+
+                      <span>In-Store Pickup</span>
+
+                    </label>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <!-- SUBMIT BUTTON -->
+              <button
+                type="submit"
+                class="btn btn-register w-100"
+              >
+                Create Business Account
+                <span aria-hidden="true">→</span>
+              </button>
+
+            </form>
+
+          }
+
+          <!-- SUCCESS SCREEN -->
+          @if (isSubmitted) {
+
+            <div class="registration-success">
+
+              <div class="success-icon">
+                ✓
+              </div>
+
+              <h3>Your Shop Is Registered!</h3>
+
+              <p>
+                <strong>{{ registeredShopName }}</strong>
+                is now ready to customize and publish.
+              </p>
+
+              <div class="success-actions">
+
+                <button
+                  routerLink="/add-product"
+                  class="btn btn-primary"
+                >
+                  Arrage product in shop
+                </button>
+
+                <a
+                  routerLink="/shopkeeper-dashboard"
+                  class="btn btn-outline-primary"
+                >
+                  Open Dashboard
+                </a>
+
+              </div>
+
+              <button
+                type="button"
+                class="btn btn-link mt-3"
+                (click)="resetForm()"
+              >
+                Register Another Shop
+              </button>
+
+            </div>
+
+          }
+
+        </section>
+      </div>
     </div>
   </div>
-
-}
+</main>

@@ -1,0 +1,461 @@
+
+<main class="storefront">
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="row align-items-center g-4">
+
+        <div class="col-lg-7">
+
+          <div class="mb-3">
+            <span class="status-badge">Open Now</span>
+            <span class="rating-badge">
+              4.9 ★ (128 local reviews)
+            </span>
+          </div>
+
+          <h1>
+            Freshly Roasted Coffee &amp;
+            Neighborhood Pantry
+          </h1>
+
+          <p class="hero-description">
+            Order directly from Oakwood Corner Market.
+            Choose same-day neighborhood delivery or
+            15-minute counter pickup.
+          </p>
+
+          <!-- Fulfillment Options -->
+          <div class="fulfillment-options">
+
+            <button
+              type="button"
+              class="btn"
+              [class.active]="fulfillmentMode() === 'delivery'"
+              (click)="selectFulfillment('delivery')">
+
+              <i class="bi bi-truck me-2"></i>
+              Home Delivery (3.5 mi)
+
+            </button>
+
+            <button
+              type="button"
+              class="btn"
+              [class.active]="fulfillmentMode() === 'pickup'"
+              (click)="selectFulfillment('pickup')">
+
+              <i class="bi bi-shop me-2"></i>
+              Store Pickup (15 mins)
+
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="col-lg-5">
+
+          <div class="hero-image-wrapper">
+            <img
+              src="/create-store/Images/hiro-image.png"
+              alt="Oakwood Corner Market shopkeeper welcoming a customer"
+              class="img-fluid hero-image">
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Product Catalog Section -->
+  <section class="container product-section">
+
+    <!-- Category Filter and Search -->
+    <div class="row align-items-center g-3 mb-4">
+
+      <div class="col-lg-8">
+
+        <div class="category-list">
+
+          @for (category of categories; track category.value) {
+
+            <button
+              type="button"
+              class="btn category-btn"
+              [class.active]="activeCategory() === category.value"
+              (click)="selectCategory(category.value)">
+
+              {{ category.label }}
+
+            </button>
+
+          }
+
+        </div>
+
+      </div>
+
+      <div class="col-lg-4">
+
+        <div class="search-wrapper">
+
+          <i class="bi bi-search"></i>
+
+          <input
+            type="search"
+            class="form-control search-input"
+            placeholder="Search products..."
+            [ngModel]="searchTerm()"
+            (ngModelChange)="searchTerm.set($event)">
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Product Count -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+
+      <p class="text-muted mb-0">
+        Showing {{ filteredProducts().length }}
+        {{ filteredProducts().length === 1 ? 'product' : 'products' }}
+      </p>
+
+    </div>
+
+
+    <!-- Product Grid -->
+    <div class="row g-4">
+
+      @for (product of filteredProducts(); track product.id) {
+
+        <div class="col-12 col-sm-6 col-lg-3">
+
+          <article class="product-card h-100">
+
+            <!-- Product Image -->
+            <div class="product-image-wrapper">
+
+              <img
+                [src]="product.image"
+                [alt]="product.name"
+                class="product-image">
+
+            </div>
+
+            <!-- Product Information -->
+            <div class="product-content">
+
+              <div class="d-flex justify-content-between align-items-center mb-2">
+
+                <span class="product-category">
+                  {{ product.category }}
+                </span>
+
+                @if (product.inStock) {
+                  <span class="stock-badge">
+                    In Stock
+                  </span>
+                } @else {
+                  <span class="out-stock-badge">
+                    Out of Stock
+                  </span>
+                }
+
+              </div>
+
+              <h5 class="product-title">
+                {{ product.name }}
+              </h5>
+
+              <p class="product-description">
+                {{ product.description }}
+              </p>
+
+              <!-- Product Price and Add Button -->
+              <div class="product-footer">
+
+                <span class="product-price">
+                  ${{ product.price.toFixed(2) }}
+                </span>
+
+                <button
+                  type="button"
+                  class="btn btn-primary btn-sm"
+                  [disabled]="!product.inStock"
+                  (click)="addToCart(product)">
+
+                  <i class="bi bi-plus-lg me-1"></i>
+                  Add
+
+                </button>
+
+              </div>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      } @empty {
+
+        <div class="col-12">
+
+          <div class="empty-products text-center py-5">
+
+            <i class="bi bi-search empty-icon"></i>
+
+            <h5>No products found</h5>
+
+            <p class="text-muted">
+              Try another category or search term.
+            </p>
+
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              (click)="selectCategory('all'); searchTerm.set('')">
+
+              Clear Filters
+
+            </button>
+
+          </div>
+
+        </div>
+
+      }
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- Floating Shopping Bag Button -->
+<button
+  type="button"
+  class="bag-floating-btn"
+  aria-label="Open shopping bag"
+  (click)="openBag()">
+
+  <i class="bi bi-bag me-2"></i>
+
+  Bag
+
+  <span class="bag-count">
+    {{ cartCount() }}
+  </span>
+
+</button>
+
+
+<!-- Shopping Bag Overlay -->
+@if (showBag()) {
+
+  <div
+    class="bag-overlay"
+    (click)="closeBag()">
+
+    <div
+      class="bag-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="bag-title"
+      (click)="$event.stopPropagation()">
+
+      <!-- Bag Header -->
+      <div class="bag-header">
+
+        <h4 id="bag-title">
+          Your Order Bag
+        </h4>
+
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close bag"
+          (click)="closeBag()">
+        </button>
+
+      </div>
+
+
+      <!-- Order Success Message -->
+      @if (orderPlaced()) {
+
+        <div class="alert alert-success">
+
+          <i class="bi bi-check-circle-fill me-2"></i>
+
+          Order placed with Oakwood Corner Market!
+
+          <p class="mb-0 mt-2">
+            Thank you for shopping locally.
+          </p>
+
+        </div>
+
+      }
+
+
+      <!-- Empty Cart -->
+      @if (cart().length === 0 && !orderPlaced()) {
+
+        <div class="empty-bag text-center">
+
+          <i class="bi bi-bag-x empty-icon"></i>
+
+          <h5>Your bag is empty</h5>
+
+          <p>
+            Add items from the storefront to start an order.
+          </p>
+
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="closeBag()">
+
+            Continue Shopping
+
+          </button>
+
+        </div>
+
+      }
+
+
+      <!-- Cart Items -->
+      @if (cart().length > 0) {
+
+        <div class="cart-items">
+
+          @for (item of cart(); track item.id) {
+
+            <div class="cart-item">
+
+              <div class="cart-item-info">
+
+                <h6>{{ item.name }}</h6>
+
+                <span class="cart-item-price">
+                  ${{ item.price.toFixed(2) }}
+                </span>
+
+              </div>
+
+              <!-- Quantity Controls -->
+              <div class="quantity-controls">
+
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary btn-sm"
+                  aria-label="Decrease quantity"
+                  (click)="updateQuantity(item.id, item.quantity - 1)">
+
+                  <i class="bi bi-dash"></i>
+
+                </button>
+
+                <span class="quantity">
+                  {{ item.quantity }}
+                </span>
+
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary btn-sm"
+                  aria-label="Increase quantity"
+                  (click)="updateQuantity(item.id, item.quantity + 1)">
+
+                  <i class="bi bi-plus"></i>
+
+                </button>
+
+              </div>
+
+              <!-- Remove Item -->
+              <button
+                type="button"
+                class="btn btn-link text-danger remove-btn"
+                (click)="removeFromCart(item.id)">
+
+                <i class="bi bi-trash"></i>
+                Remove
+
+              </button>
+
+              <!-- Item Total -->
+              <strong class="item-total">
+                ${{ (item.price * item.quantity).toFixed(2) }}
+              </strong>
+
+            </div>
+
+          }
+
+        </div>
+
+      }
+
+
+      <!-- Cart Footer -->
+      @if (cart().length > 0) {
+
+        <div class="bag-footer">
+
+          <div class="d-flex justify-content-between align-items-center mb-3">
+
+            <span class="subtotal-label">
+              Subtotal
+            </span>
+
+            <strong class="subtotal-price">
+              ${{ subtotal().toFixed(2) }}
+            </strong>
+
+          </div>
+
+          <div class="fulfillment-summary mb-3">
+
+            <span class="text-muted">
+              Fulfillment:
+            </span>
+
+            <strong>
+              @if (fulfillmentMode() === 'delivery') {
+                Home Delivery
+              } @else {
+                Store Pickup
+              }
+            </strong>
+
+          </div>
+
+          <button
+            type="button"
+            class="btn btn-primary checkout-btn w-100"
+            (click)="placeOrder()">
+
+            <i class="bi bi-check-circle me-2"></i>
+            Place Local Order
+
+          </button>
+
+        </div>
+
+      }
+
+    </div>
+
+  </div>
+
+}

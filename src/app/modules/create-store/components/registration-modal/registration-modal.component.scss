@@ -1,133 +1,372 @@
-// Brand colors
-$brand-navy: #0f294a;
-$brand-blue: #2563eb;
-$brand-green: #10b981;
 
-$primary: #0051d5;
-$secondary: #2563eb;
-$success: #00885d;
+$brand-navy: #0F294A;
+$brand-blue: #0051D5;
+$brand-green: #10B981;
 
-$light-background: #f7fafe;
-$light-surface: #ffffff;
-$light-surface-low: #f1f4f8;
+$background: #F7FAFE;
+$surface: #FFFFFF;
+$text-primary: #00142F;
+$text-secondary: #44474E;
+$border-color: #C4C6CF;
 
-$text-primary: #00142f;
-$text-secondary: #44474e;
-$text-muted: #74777f;
+.registration-page {
+  min-height: 100vh;
+  padding: 72px 0;
+  background: linear-gradient(
+    180deg,
+    #FFFFFF 0%,
+    #F7FAFE 55%,
+    #F1F4F8 100%
+  );
 
-$border-color: #c4c6cf;
-
-// Typography
-$font-display: 'Mulish', sans-serif;
-$font-body: 'Instrument Sans', sans-serif;
-
-// Border radius
-$radius-sm: 6px;
-$radius-md: 12px;
-$radius-lg: 16px;
-$radius-xl: 24px;
-
-// Shadows
-$shadow-sm: 0 2px 8px rgba(15, 41, 74, 0.06);
-$shadow-md: 0 8px 24px rgba(15, 41, 74, 0.10);
-$shadow-lg: 0 20px 50px rgba(15, 41, 74, 0.15);
-
-// Section spacing
-$section-spacing: 96px;
-
-
-.registration-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 2000;
-  background: rgba(15, 41, 74, 0.65);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 15px;
-  overflow-y: auto;
+  color: $text-primary;
+  font-family: 'Instrument Sans', sans-serif;
 }
 
-.registration-modal {
-  width: 100%;
-  max-width: 520px;
-  max-height: 95vh;
-  overflow-y: auto;
-  background: white;
-  padding: 30px;
-  border-radius: $radius-xl;
-  box-shadow: $shadow-lg;
-  animation: modalEnter 0.25s ease;
+.registration-intro {
 
-  .modal-header-custom {
-    display: flex;
-    justify-content: space-between;
-    gap: 15px;
-    margin-bottom: 25px;
-
-    h3 {
-      font-size: 24px;
-    }
-
-    p {
-      color: $text-muted;
-      font-size: 13px;
-    }
-  }
-
-  .close-btn {
-    width: 38px;
-    height: 38px;
-    border: 0;
-    border-radius: 50%;
-    background: #f1f4f8;
-    flex-shrink: 0;
-  }
-
-  .form-label {
+  .intro-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 9px 14px;
+    border-radius: 50px;
+    background: #EBF1FF;
+    border: 1px solid #C4C6CF;
+    color: $brand-navy;
     font-size: 13px;
     font-weight: 600;
+    margin-bottom: 28px;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: $brand-green;
+  }
+
+  h1 {
+    font-family: 'Mulish', sans-serif;
+    font-size: 44px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.8px;
+    margin-bottom: 20px;
     color: $brand-navy;
   }
 
-  .form-control,
-  .form-select {
-    padding: 12px;
-    border-color: $border-color;
-    border-radius: 8px;
+  .intro-description {
+    font-size: 18px;
+    line-height: 28px;
+    color: $text-secondary;
+    margin-bottom: 28px;
+  }
+}
 
-    &:focus {
-      border-color: $primary;
-      box-shadow: 0 0 0 3px rgba($primary, 0.12);
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 22px;
+
+    .check-icon {
+      color: #00885D;
+      font-size: 23px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    h6 {
+      font-size: 16px;
+      font-weight: 600;
+      color: $brand-navy;
+      margin-bottom: 5px;
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 21px;
+      color: $text-secondary;
+      margin: 0;
     }
   }
 }
 
-.success-content {
-  text-align: center;
-  padding: 35px 10px;
+.shopkeeper-image {
+  width: 100%;
+  height: 230px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid $border-color;
+  box-shadow: 0 8px 24px rgba(15, 41, 74, 0.10);
 
-  .success-icon {
-    color: $success;
-    font-size: 55px;
-    margin-bottom: 20px;
-  }
-
-  p {
-    color: $text-muted;
-    font-size: 14px;
-    margin: 15px 0 25px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 
-@keyframes modalEnter {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+.registration-card {
+  background: $surface;
+  padding: 32px;
+  border: 1px solid rgba(196, 198, 207, 0.7);
+  border-radius: 16px;
+  box-shadow: 0 12px 35px rgba(15, 41, 74, 0.09);
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-bottom: 20px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #EBEEF2;
+
+  h2 {
+    font-family: 'Mulish', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: $brand-navy;
+    margin-bottom: 6px;
   }
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  p {
+    color: $text-secondary;
+    font-size: 14px;
+    margin: 0;
+  }
+
+  .wizard-link {
+    color: $brand-blue;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.form-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: $brand-navy;
+  margin-bottom: 7px;
+}
+
+.form-control,
+.form-select {
+  min-height: 48px;
+  padding: 11px 14px;
+  border: 1px solid $border-color;
+  border-radius: 9px;
+  color: #181C1F;
+  font-size: 15px;
+  box-shadow: none;
+
+  &:focus {
+    border-color: $brand-blue;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+  }
+
+  &::placeholder {
+    color: #9299A5;
+  }
+}
+
+.input-icon {
+  position: relative;
+
+  span {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #74777F;
+    z-index: 2;
+  }
+
+  .form-control {
+    padding-left: 42px;
+  }
+}
+
+.validation-message {
+  color: #BA1A1A;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.fulfillment-section {
+  margin-top: 24px;
+
+  .fulfillment-option {
+    min-height: 55px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: #F1F4F8;
+    border: 1px solid $border-color;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 150ms ease;
+
+    &:hover {
+      border-color: $brand-blue;
+      background: #EBF1FF;
+    }
+
+    input {
+      width: 17px;
+      height: 17px;
+      accent-color: $brand-blue;
+    }
+
+    span {
+      font-size: 13px;
+      font-weight: 600;
+      color: $brand-navy;
+    }
+  }
+}
+
+.btn-register {
+  min-height: 56px;
+  margin-top: 26px;
+  padding: 14px 24px;
+  background: $brand-blue;
+  border: none;
+  border-radius: 9px;
+  color: #FFFFFF;
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.18);
+  transition: 150ms ease;
+
+  span {
+    margin-left: 8px;
+    font-size: 20px;
+  }
+
+  &:hover {
+    background: #316BF3;
+    color: #FFFFFF;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.registration-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 35px 10px;
+  gap: 15px;
+
+  .success-icon {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #BEFFDB;
+    color: #003824;
+    border-radius: 50%;
+    font-size: 38px;
+    font-weight: 700;
+  }
+
+  h3 {
+    font-family: 'Mulish', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: $brand-navy;
+  }
+
+  p {
+    font-size: 15px;
+    color: $text-secondary;
+  }
+
+  .success-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+
+    .btn {
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+}
+
+// Responsive design
+
+@media (max-width: 991px) {
+  .registration-page {
+    padding: 45px 0;
+  }
+
+  .registration-intro {
+    h1 {
+      font-size: 36px;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .registration-page {
+    padding: 28px 0;
+  }
+
+  .registration-intro {
+    h1 {
+      font-size: 30px;
+    }
+
+    .intro-description {
+      font-size: 16px;
+      line-height: 25px;
+    }
+  }
+
+  .registration-card {
+    padding: 20px 16px;
+  }
+
+  .form-header {
+    h2 {
+      font-size: 21px;
+    }
+  }
+
+  .shopkeeper-image {
+    height: 190px;
+  }
+
+  .success-actions {
+    flex-direction: column;
+    width: 100%;
+
+    .btn {
+      width: 100%;
+    }
   }
 }

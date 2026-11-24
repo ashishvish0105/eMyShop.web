@@ -2,7 +2,8 @@ import {
   Component,
   input,
   output,
-  effect
+  effect,
+  inject
 } from '@angular/core';
 
 import {
@@ -11,6 +12,7 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
+import { Router, Routes } from '@angular/router';
 
 @Component({
   selector: 'app-registration-modal',
@@ -20,49 +22,64 @@ import {
   styleUrl: './registration-modal.component.scss'
 })
 export class RegistrationModalComponent {
+  private fb = inject(FormBuilder);
 
-  visible = input<boolean>(false);
-  closed = output<void>();
+  isSubmitted = false;
+  registeredShopName = '';
 
-  submitted = false;
-  registerForm: FormGroup;
+  categories = [
+    'Grocery & Specialty Food',
+    'Bakery & Cafe',
+    'Boutique & Home Goods',
+    'Pharmacy & Wellness',
+    'Hardware & Local Services'
+  ];
 
-  constructor(private fb: FormBuilder) {
+  registrationForm = this.fb.group({
+    shopName: ['', Validators.required],
+    ownerName: ['', Validators.required],
+    category: ['Grocery & Specialty Food', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    phone: ['', [
+      Validators.required,
+      Validators.pattern(/^[0-9+\-\s()]{7,20}$/)
+    ]],
+    address: ['', Validators.required],
+    homeDelivery: [true],
+    storePickup: [true]
+  });
 
-    this.registerForm = this.fb.group({
-      shopName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      category: ['Grocery & Specialty Food', Validators.required],
-      fulfillment: ['Delivery & Store Pickup', Validators.required]
-    });
-
-    effect(() => {
-      if (this.visible()) {
-        this.submitted = false;
-
-        this.registerForm.reset({
-          shopName: '',
-          email: '',
-          category: 'Grocery & Specialty Food',
-          fulfillment: 'Delivery & Store Pickup'
-        });
-      }
-    });
+  get f() {
+    return this.registrationForm.controls;
   }
 
   onSubmit(): void {
 
-    if (this.registerForm.invalid) {
-      this.registerForm.markAllAsTouched();
+    if (this.registrationForm.invalid) {
+      this.registrationForm.markAllAsTouched();
       return;
     }
 
-    console.log('Shop Registration:', this.registerForm.value);
+    this.registeredShopName =
+      this.registrationForm.controls.shopName.value?.trim() ?? '';
 
-    this.submitted = true;
+    // TODO: Call your backend registration API.
+
+    this.isSubmitted = true;
   }
 
-  close(): void {
-    this.closed.emit();
+  resetForm(): void {
+    this.registrationForm.reset({
+      shopName: '',
+      ownerName: '',
+      category: 'Grocery & Specialty Food',
+      email: '',
+      phone: '',
+      address: '',
+      homeDelivery: true,
+      storePickup: true
+    });
+
+    this.isSubmitted = false;
   }
 }

@@ -1,0 +1,488 @@
+
+<div class="store-preview-page">
+
+  <!-- Shopkeeper Preview Control Bar -->
+  <header class="preview-toolbar">
+    <div class="container-fluid toolbar-container">
+
+      <div class="toolbar-left">
+        <button
+          type="button"
+          class="btn exit-preview-btn"
+          (click)="exitPreview()">
+
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Exit Preview</span>
+        </button>
+
+        <span class="customer-badge">
+          Customer View
+        </span>
+      </div>
+
+      <!-- Viewport Switcher -->
+      <div
+        class="viewport-switcher d-none d-sm-flex"
+        role="group"
+        aria-label="Preview viewport">
+
+        <button
+          type="button"
+          class="viewport-btn"
+          [class.active]="viewport() === 'desktop'"
+          [attr.aria-pressed]="viewport() === 'desktop'"
+          (click)="setViewport('desktop')">
+
+          <i class="fa-solid fa-desktop"></i>
+          Desktop
+        </button>
+
+        <button
+          type="button"
+          class="viewport-btn"
+          [class.active]="viewport() === 'mobile'"
+          [attr.aria-pressed]="viewport() === 'mobile'"
+          (click)="setViewport('mobile')">
+
+          <i class="fa-solid fa-mobile-screen-button"></i>
+          Mobile
+        </button>
+
+      </div>
+
+      <!-- Toolbar Actions -->
+      <div class="toolbar-actions">
+
+        <button
+          type="button"
+          class="btn edit-style-btn d-none d-md-inline-flex"
+          (click)="editStyle()">
+
+          <i class="fa-solid fa-palette"></i>
+          Edit Style
+        </button>
+
+        <button
+          type="button"
+          class="btn publish-btn"
+          [disabled]="isPublished()"
+          (click)="publishStore()">
+
+          @if (isPublished()) {
+            <i class="fa-solid fa-check"></i>
+            <span>Store Published</span>
+          } @else {
+            <i class="fa-solid fa-rocket"></i>
+            <span>Publish Store</span>
+          }
+
+        </button>
+
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Preview Stage -->
+  <main class="preview-stage">
+
+    <div
+      class="preview-frame"
+      [class.mobile-preview]="viewport() === 'mobile'"
+      [class.desktop-preview]="viewport() === 'desktop'">
+
+      <!-- Simulated Browser Bar -->
+      <div class="browser-bar">
+
+        <div class="browser-address">
+          <i class="fa-solid fa-lock"></i>
+
+          <span>
+            nearshop.local/oakwood-corner-market
+          </span>
+        </div>
+
+        <div class="verified-badge">
+          <i class="fa-solid fa-circle-check"></i>
+          <span>Verified</span>
+        </div>
+
+      </div>
+
+      <!-- Customer Storefront Header -->
+      <section class="store-header">
+
+        <div class="store-information">
+          <h1>{{ storeName }}</h1>
+
+          <p>
+            {{ storeAddress }}
+            <span class="separator">•</span>
+            {{ storeHours }}
+          </p>
+        </div>
+
+        <div class="store-header-actions">
+
+          <span class="distance-badge">
+            {{ storeDistance }}
+          </span>
+
+          <button
+            type="button"
+            class="btn bag-button"
+            [attr.aria-expanded]="isBagOpen()"
+            (click)="toggleBag()">
+
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span>Bag</span>
+
+            <span class="bag-count">
+              {{ bagCount() }}
+            </span>
+
+          </button>
+
+        </div>
+
+      </section>
+
+      <!-- Shopping Bag Panel -->
+      @if (isBagOpen()) {
+
+        <section
+          class="shopping-bag-panel"
+          aria-label="Shopping bag">
+
+          <div class="bag-panel-header">
+
+            <div>
+              <h3>Your Shopping Bag</h3>
+
+              <p>
+                {{ bagCount() }} items
+              </p>
+            </div>
+
+            <button
+              type="button"
+              class="bag-close-btn"
+              aria-label="Close shopping bag"
+              (click)="closeBag()">
+
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+
+          </div>
+
+          @if (bagItems().length > 0) {
+
+            <div class="bag-items">
+
+              @for (
+                item of bagItems();
+                track item.product.id
+              ) {
+
+                <div class="bag-item">
+
+                  <img
+                    [src]="item.product.image"
+                    [alt]="item.product.imageAlt">
+
+                  <div class="bag-item-details">
+
+                    <h4>
+                      {{ item.product.name }}
+                    </h4>
+
+                    <p>
+                      {{ formatPrice(item.product.price) }}
+                    </p>
+
+                    <div class="quantity-controls">
+
+                      <button
+                        type="button"
+                        aria-label="Decrease quantity"
+                        (click)="decreaseQuantity(item.product.id)">
+
+                        <i class="fa-solid fa-minus"></i>
+                      </button>
+
+                      <span>
+                        {{ item.quantity }}
+                      </span>
+
+                      <button
+                        type="button"
+                        aria-label="Increase quantity"
+                        (click)="increaseQuantity(item.product.id)">
+
+                        <i class="fa-solid fa-plus"></i>
+                      </button>
+
+                    </div>
+
+                  </div>
+
+                  <button
+                    type="button"
+                    class="remove-item-btn"
+                    aria-label="Remove product"
+                    (click)="removeFromBag(item.product.id)">
+
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+
+                </div>
+
+              }
+
+            </div>
+
+            <div class="bag-total">
+
+              <span>Subtotal</span>
+
+              <strong>
+                {{ formatPrice(bagTotal()) }}
+              </strong>
+
+            </div>
+
+            <p class="bag-demo-note">
+              Preview only. Checkout is not connected.
+            </p>
+
+          } @else {
+
+            <div class="empty-bag">
+
+              <i class="fa-solid fa-bag-shopping"></i>
+
+              <h4>Your bag is empty</h4>
+
+              <p>Add products to get started.</p>
+
+            </div>
+
+          }
+
+        </section>
+
+      }
+
+      <!-- Customer Hero Banner -->
+      <section class="store-hero">
+
+        <div class="hero-content">
+
+          <span class="open-status-badge">
+            Open for Orders
+          </span>
+
+          <h2>
+            Freshly Roasted Coffee &
+            Neighborhood Pantry
+          </h2>
+
+          <p>
+            Same-day home delivery within 3 miles or
+            20-minute counter pickup at Oakwood Corner Market.
+          </p>
+
+          <!-- Fulfillment Reactive Form -->
+          <form
+            [formGroup]="fulfillmentForm"
+            class="fulfillment-options"
+            aria-label="Choose fulfillment method">
+
+            <label
+              class="fulfillment-option"
+              [class.active]="selectedFulfillment() === 'delivery'">
+
+              <input
+                type="radio"
+                class="visually-hidden"
+                formControlName="fulfillment"
+                value="delivery"
+                (change)="selectFulfillment('delivery')">
+
+              <i class="fa-solid fa-truck"></i>
+
+              <span>Home Delivery</span>
+
+            </label>
+
+            <label
+              class="fulfillment-option"
+              [class.active]="selectedFulfillment() === 'pickup'">
+
+              <input
+                type="radio"
+                class="visually-hidden"
+                formControlName="fulfillment"
+                value="pickup"
+                (change)="selectFulfillment('pickup')">
+
+              <i class="fa-solid fa-store"></i>
+
+              <span>In-Store Pickup</span>
+
+            </label>
+
+          </form>
+
+        </div>
+
+        <div class="hero-image-wrapper">
+
+          <img
+            src="https://lh3.googleusercontent.com/aida/ALJJyrBrHvFskVa-zmTGPMYIqX5yN6iCj00KUDdl1MNnYteSowVvoFoZIc352Y1PAQe_uK9VJn8SMuKxBN-0jhmFA8RG3gf0Evor0GiG30ZTeMgwp0fk4z72uOcQdLD66bjE2c5TN_CGMVTdDipLUd8qSzkXU0ClYNw_lE7qFPYo11AH3K9OC2hgBeM4H9Go7DT9PO7sMOS2UWQmhHigAUg66XJG4qmxnuS-c_ga-DlzBWyV5k03QEDgso8zKVmL7GXGsVHmogA"
+            alt="Oakwood Corner Market counter">
+
+        </div>
+
+      </section>
+
+      <!-- Product Catalog -->
+      <section class="product-section">
+
+        <div class="catalog-header">
+
+          <h3>Featured Products</h3>
+
+          <!-- Category Filters -->
+          <div
+            class="category-filters"
+            role="group"
+            aria-label="Filter products">
+
+            <button
+              type="button"
+              class="category-btn"
+              [class.active]="selectedCategory() === 'all'"
+              (click)="selectCategory('all')">
+
+              All ({{ categoryCounts()['all'] }})
+
+            </button>
+
+            @for (
+              category of categories;
+              track category
+            ) {
+
+              <button
+                type="button"
+                class="category-btn"
+                [class.active]="selectedCategory() === category"
+                (click)="selectCategory(category)">
+
+                {{ category }}
+
+              </button>
+
+            }
+
+          </div>
+
+        </div>
+
+        <!-- Product Grid -->
+        <div class="product-grid">
+
+          @for (
+            product of filteredProducts();
+            track product.id
+          ) {
+
+            <article class="product-card">
+
+              <div class="product-image-wrapper">
+
+                <img
+                  [src]="product.image"
+                  [alt]="product.imageAlt"
+                  loading="lazy">
+
+              </div>
+
+              <div class="product-information">
+
+                <span class="product-category">
+                  {{ product.category }}
+                </span>
+
+                <h4>
+                  {{ product.name }}
+                </h4>
+
+                <p>
+                  {{ product.description }}
+                </p>
+
+              </div>
+
+              <div class="product-footer">
+
+                <span class="product-price">
+                  {{ formatPrice(product.price) }}
+                </span>
+
+                <button
+                  type="button"
+                  class="btn add-product-btn"
+                  (click)="addToBag(product)">
+
+                  @if (lastAddedProduct() === product.id) {
+
+                    <i class="fa-solid fa-check"></i>
+                    Added
+
+                  } @else {
+
+                    <i class="fa-solid fa-plus"></i>
+                    Add
+
+                  }
+
+                </button>
+
+              </div>
+
+            </article>
+
+          } @empty {
+
+            <div class="empty-products">
+
+              <h4>No products found</h4>
+
+              <p>
+                There are no products in this category.
+              </p>
+
+              <button
+                type="button"
+                class="btn add-product-btn"
+                (click)="selectCategory('all')">
+
+                View All Products
+
+              </button>
+
+            </div>
+
+          }
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+</div>

@@ -8,14 +8,19 @@ import {
   inject
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { gsap } from 'gsap';
+import { TrustComponent } from '../trust/trust.component';
+import { CtaComponent } from '../cta/cta.component';
+import { DashboardComponent } from '../dashboard/dashboard.component';
+import { HowItWorksComponent } from '../how-it-works/how-it-works.component';
+import { BenefitsComponent } from '../benefits/benefits.component';
+import { HeroComponent } from '../hero/hero.component';
 
 
 @Component({
   selector: 'app-create-store-leading',
   standalone: true,
-  imports: [],
+  imports: [TrustComponent, CtaComponent, DashboardComponent, HowItWorksComponent, BenefitsComponent, HeroComponent],
   templateUrl: './create-store-leading.component.html',
   styleUrl: './create-store-leading.component.scss'
 })
